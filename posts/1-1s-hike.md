@@ -4,8 +4,6 @@
 .. category: Uncategorized
 .. comments: enabled
 
-#1-on-1s can take a hike!
-
 Are you a people manager? Do you enjoy doing 1-1s with your reports? No? Then you're doing them wrong!
 
 1-1s are a valuable and important part of both managing your team and becoming a better manager. You should see them as as much for your benefit as for your reports - arguably more so! Not only are you getting the opportunity to keep your reports on track and on a growth path, but it's a great opportunity to get feedback yourself. Unless you're the kind of manager who thinks managing is all about giving orders and having them carried out, in which case this post isn't for you; go enlist or something.
@@ -25,9 +23,7 @@ As for topics for discussion, this is a good reason to have your reports keep a 
 
 As far as a lack of personal rapport - how do you think this will ever develop if you don't take the time to try to develop it? You should use some of the time to get a sense of your report's interests and life outside of work. Like it or not, people bring their emotional baggage with them to work and if you want to have physically and mentally healthy people on your time you should take an interest in people's lives.  Much the same goes for a lack of social skills (I assume your report has this problem, else why are you a manager?). Make your reports comfortable and this will not be an issue.
 
-Outside of performance issues uncomfortable 1-1s are more likely environmental in nature. Are you sitting behind a desk and having a conversation in a way in which there is an obvious imbalance of power? At the very least get on the same side of the desk as your report. But there is a much better way.
-
-The best thing to do is to get out of the office. Go take a walk. It's a much better way to conduct 1-1s; it is refreshing, you don't need to make eye contact much (immediately eliminating much of the social discomfort), and it has a calming influence on all involved. If you are lucky enough to work in a nice area, the walk itself could be enough to make everyone look forward to their 1-1s. And that is a real measure of success.
+Outside of performance issues uncomfortable 1-1s are more likely environmental in nature. Are you sitting behind a desk and having a conversation in a way in which there is an obvious imbalance of power? At the very least get on the same side of the desk as your report. But much better than that - get out of the office. Go take a walk. It's a great way to conduct 1-1s; it is refreshing, you don't need to make eye contact much (immediately eliminating much of the social discomfort), and it has a calming influence on all involved. If you are lucky enough to work in a nice area, the walk itself could be enough to make everyone look forward to their 1-1s. And that is a real measure of success.
 
 
 > Written with [StackEdit](https://stackedit.io/).

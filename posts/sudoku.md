@@ -4,8 +4,6 @@
 .. category: Uncategorized
 .. comments: enabled
 
-#Simply Solving Sudoku
-
 It's been a long time since I last blogged. I've been meaning to for oh so long but you know what they say about the road to hell.
 
 Fortunately, I stumbled upon Peter Norvig's [article](http://norvig.com/sudoku.html) about solving Sudoku, and that has provided the impetus. His approach is probably the most sensible I have seen for a while; there seem to be some really bad solvers out there. I was unimpressed with the one by Skiena in the  [Algorithm Design Manual](http://www.algorist.com/),  although the truly ridiculous one has to be the so-overblown-I-took-a-whole-book approach in [Programming Sudoku](http://www.amazon.com/Programming-Sudoku-Technology-Action-Wei-Meng/dp/1590596625);  the mind simply boggles at how complex some people make trivial things.
@@ -39,14 +37,14 @@ But still some people [make a big deal out of it all](https://gigaom.com/2012/10
             return fill(pos + 1)
         r = pos // 9
         c = pos % 9
-        m = rows[r] & cols[c]
-        if m:
+        allowed = rows[r] & cols[c]
+        if allowed:
             rg = (r // 3) * 3 + (c // 3)
-            m &= rgns[rg]
-            if m:
+            allowed &= rgns[rg]
+            if allowed:
                 for i in range(1, 10):
                     tm = 1 << i
-                    if m & tm:
+                    if allowed & tm:
                         im = ~tm
                         rows[r] &= im
                         cols[c] &= im
