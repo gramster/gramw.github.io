@@ -1,7 +1,7 @@
 .. title: Simply Solving Sudoku
 .. date: 2015-09-10 22:03
 .. author: Graham Wheeler
-.. category: Uncategorized
+.. category: Programming
 .. comments: enabled
 
 It's been a long time since I last blogged. I've been meaning to for oh so long but you know what they say about the road to hell.
