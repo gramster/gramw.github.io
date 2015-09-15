@@ -1,3 +1,9 @@
+.. title: Simply Solving Sudoku
+.. date: 2015-09-10 22:03
+.. author: Graham Wheeler
+.. category: Uncategorized
+.. comments: enabled
+
 #Simply Solving Sudoku
 
 It's been a long time since I last blogged. I've been meaning to for oh so long but you know what they say about the road to hell.
