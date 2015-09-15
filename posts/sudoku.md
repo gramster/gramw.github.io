@@ -10,7 +10,7 @@ Fortunately, I stumbled upon Peter Norvig's [article](http://norvig.com/sudoku.h
 
 Because solving Sudoku is indeed trivial. There is nothing to it. All you need is a very simple backtracking search. I wrote the solver below originally more than 10 years ago in Javascript and it was used as a generator running on extremely low-powered Microsoft SPOT smart watches. For fun I dug it out, turned it into Python, and tested it on ["the world's hardest Sudoku puzzle"](https://www.kristanix.com/sudokuepic/worlds-hardest-sudoku.php). How fast can you blink?
 
-But still some people [make a big deal out of it all](https://gigaom.com/2012/10/12/meet-the-algorithm-thats-way-better-than-you-at-sudoku/). Maybe I can get another Ph.D. for this?
+But still some people [make a big deal out of it all](https://gigaom.com/2012/10/12/meet-the-algorithm-thats-way-better-than-you-at-sudoku/)...
 
     rows = [0xffff] * 9
     cols = [0xffff] * 9

@@ -1,7 +1,7 @@
 .. title: 1-on-1s can take a hike!
 .. date: 2015-09-12 21:09
 .. author: Graham Wheeler
-.. category: Uncategorized
+.. category: Management
 .. comments: enabled
 
 Are you a people manager? Do you enjoy doing 1-1s with your reports? No? Then you're doing them wrong!
