@@ -4,7 +4,7 @@
 .. category: Programming
 .. comments: enabled
 
-It's been a long time since I last blogged. I've been meaning to for oh so long but you know what they say about the road to hell.
+It's been a long time since I last blogged. I've been meaning to for oh so long but you know what they say about the road to hell. For a while I maintained my [math blog](http://www.magimathics.com) but even that has been fallow for some time.
 
 Fortunately, I stumbled upon Peter Norvig's [article](http://norvig.com/sudoku.html) about solving Sudoku, and that has provided the impetus. His approach is probably the most sensible I have seen for a while; there seem to be some really bad solvers out there. I was unimpressed with the one by Skiena in the  [Algorithm Design Manual](http://www.algorist.com/),  although the truly ridiculous one has to be the so-overblown-I-took-a-whole-book approach in [Programming Sudoku](http://www.amazon.com/Programming-Sudoku-Technology-Action-Wei-Meng/dp/1590596625);  the mind simply boggles at how complex some people make trivial things.
 
