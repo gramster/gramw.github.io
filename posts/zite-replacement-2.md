@@ -145,7 +145,6 @@ And we're basically done! Let's see how well it worked. We can try it out on the
 
 	import operator
 	
-	total = 0
 	articles = get_feed_with_tf_idf('http://www.huffingtonpost.com/feeds/index.xml')
 	for article in articles:
 	    rank = sorted(article['tf_idf'].items(), key=operator.itemgetter(1), reverse=True)
