@@ -19,7 +19,19 @@ None of these should be real issues if 1-1s are done correctly.
 
 Regarding the first point, "there isn't enough to talk about" - this is typically because you are meeting too often or not planning the content of your meetings. Unless there is a serious HR or performance issue being addressed, you don't need weekly 1-1s. In most cases every two weeks is just fine, and in some cases (where teams work closely and have daily stand up, etc, so everyone knows what others are doing) once a month may be enough. Twenty minutes to half an hour should be plenty of time.
 
-As for topics for discussion, this is a good reason to have your reports keep a log of their work. If you are keeping track of what people are doing through daily standup, the 1-1 is more of a retrospective. It's a time to discuss recent achievements, perhaps to celebrate them, or to do a post-mortem and figure out how they could have gone better. It's also a time for you to get feedback from your report on how you are doing as a manager, and what you can do to help make your reports more productive, happy and motivated (I'll discuss some of this more in a future post in relation to Maslow's [Hierarchy of Needs](https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs)).
+As for topics for discussion, this is a good reason to have your reports keep a log of their work. If you are
+keeping track of what people are doing through daily standup, the 1-1 is more of a retrospective. It's a time
+to discuss recent achievements, perhaps to celebrate them, or to do a post-mortem and figure out how they
+could have gone better. It's also a time for you to get feedback from your report on how you are doing as
+a manager, and what you can do to help make your reports more productive, happy and motivated (I'll discuss
+some of this more in a future post in relation to Maslow's [Hierarchy of Needs](https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs)). In other words, 1-1s are best suited as ways to keep a regular review/feedback 
+loop going, not for goal setting/tracking. The excepttion is career development discussions, which are forward
+looking. A key part of this is that there should be no surprises if when you come to annual or bi-annual 
+performace reviews; these should be perfunctory if the 1-1s are bing done right. The worst managers I have 
+had have always been ones in which there was a total disconnect between what was being said in 1-1s and what
+happened in the performance review (admittedly, some toxic cultural approaches to performce reviews can force
+these surprises on people regardless but if they happen its likely your manager has been a poor advocate for 
+you).
 
 As far as a lack of personal rapport - how do you think this will ever develop if you don't take the time to try to develop it? You should use some of the time to get a sense of your report's interests and life outside of work. Like it or not, people bring their emotional baggage with them to work and if you want to have physically and mentally healthy people on your time you should take an interest in people's lives.  Much the same goes for a lack of social skills (I assume your report has this problem, else why are you a manager?). Make your reports comfortable and this will not be an issue.
 
