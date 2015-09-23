@@ -95,7 +95,13 @@ Calculating the Jacard similarity of all the pairwise combinations of nearly 40,
 	upper_triangle = numpy.fromiter(similarity_generator, dtype=numpy.float64)
 
 
-This computes the upper triangle, and we would need to make a reflection around the diagonal to complete a square matrix. Note how we leverage Python sets for efficient calculation of union and intersection, and use itertools instead of explicit loops.
+This computes the upper triangle, and we would need to make a reflection around the diagonal to complete a square matrix. Note how we leverage Python sets for efficient calculation of union and intersection, and use itertools instead of explicit loops. To complete the matrix we can do this:
+
+
+    import scipy.spatial
+    # Expand to a square
+    distance_matrix = scipy.spatial.distance.squareform(upper_triangle)
+
 
 Once we have this matrix we can use it for our clustering. The approach I am interested in trying is [affinity propagation](https://en.wikipedia.org/wiki/Affinity_propagation). The implementation in SciKit can use a precomputed similarity matrix and apparently its a very good algorithm for finding optimal clusters, but it is quadratic so it will be interesting to see how long it takes. Watch this space.
 
