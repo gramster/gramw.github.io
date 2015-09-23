@@ -79,7 +79,7 @@ Calculating the Jacard similarity of all the pairwise combinations of nearly 40,
                               'terms': set(d['terms'])})
 
 
-	def jaccard_similarity(row1, row2):
+	def jacard_similarity(row1, row2):
 	    """ Jacard similarity is the size of the intersection divided by the union.
 	    """
 	    set1 = row1['terms']
@@ -90,7 +90,7 @@ Calculating the Jacard similarity of all the pairwise combinations of nearly 40,
 	    return intersection_len / union_len
 	
 	# Compute the pairwise distance matrix. We do the upper triangle.
-	similarity_generator = (jaccard_similarity(row1, row2) \
+	similarity_generator = (jacard_similarity(row1, row2) \
             for row1, row2 in itertools.combinations(items, r=2))
 	upper_triangle = numpy.fromiter(similarity_generator, dtype=numpy.float64)
 
