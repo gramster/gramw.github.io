@@ -46,6 +46,26 @@ The next step is classification. I was disappointed to find that the category el
 
 In order to get my corpus, I need to gather a large number of URLs for RSS feeds. I have a list of about 40 tech feeds I used to follow back in the days when Google Reader was a thing. I've also pulled all the URLs out of my Pocket booksmarks - over 3000 - but these are article links, not feed URLs. So I am going to write a script that takes a bunch of article links and scrapes the pages to try find RSS feed URLs. Unfortunately, my interests are very skewed toward tech, with a bit of cooking, math and fitness thrown in. If you have collections of URLs or RSS feeds covering other topics I would be very happy to add them to my collection.
 
-I'll post my script a bit later. If possible I may try write one that can be run against Pocket, and try get people to use that to send me already curated lists with possible tags. Watch this space.
+A first cut at such a script is:
 
+
+    def get_feed_URL(site):
+        f = urllib.urlopen(site)
+        content = f.read()
+        m = re.search("<link[^>]*application/rss\+xml[^>]*href=[\"']([^\"']+)[\"']", content)
+        if not m:
+            m = re.search("<a [^>]*class=\"rss\"[^>]*href=[\"']([^\"']+)[\"']", content)
+        if not m:
+            m = re.search("<a [^>]*href=[\"']([^\"']+)[\"'][^>]*class=\"rss\"", content)        
+        if m:
+            feed = m.group(1)
+            if feed[0] == '/':
+                feed = site + feed
+            return feed
+        return None
+
+
+I'll post any updates later. If possible I may try write one that can be run against Pocket, and try get people to use that to send me already curated lists with possible tags. Watch this space.
+
+*Update:* Gotta love Python. A web search gave me ([feedfinder](http://www.aaronsw.com/2002/feedfinder/feedfinder.py)).
 

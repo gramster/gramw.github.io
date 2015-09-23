@@ -9,6 +9,7 @@ In the [previous post](http://www.grahamwheeler.com/posts/zite-replacement-1.htm
 
 Another thing we're going to want is to strip HTML tags from the articles. I did a Google for "HTML element stripper Python" and found [this StackOverflow post](http://stackoverflow.com/questions/753052/strip-html-from-strings-in-python) with the code below that works great:
 
+
     from HTMLParser import HTMLParser
 
     class MLStripper(HTMLParser):
@@ -25,11 +26,13 @@ Another thing we're going to want is to strip HTML tags from the articles. I did
         s.feed(html)
         return s.get_data()
 
+
 With that, let's begin. One of the things we will want to do is normalize capitalization of words. In particular, the first word in a sentence is capitalized and we want to in most cases undo that so we don't see two forms of the same word. One solution is to lower-case everything but that is throwing the baby out with the bathwater. A better solution is to look up each word in a dictionary. If we fail to find a match we can try the lower-case form.
 
 There are probably libraries already to do this (NLTK?) but I did some early prototyping of the code in this post using the top 5000 words from [this list](http://www.wordfrequency.info/free.asp). So for now I'll just use that as a dictionary to normalize words. There are much more comprehensive lists out there without frequency information and I expect I'll replace this but due to my early experiments I had the word list loaded already.
 
 If you're interested in using that list, you can copy/paste it into a spreadsheet and save it as a CSV once you have agreed to the terms. I used the code below to load that CSV file. I also put the top 198 words in a separate list that I was going to use to remove [stop words](https://en.wikipedia.org/wiki/Stop_words), but I ended up not needing that.
+
 
     import csv
 
@@ -51,7 +54,9 @@ If you're interested in using that list, you can copy/paste it into a spreadshee
         words5000[word] = v
         total += v
 
+
 Next we will use a function that gets a dictionary with the words and counts from an article, and returns that plus the total number of words in the dictionary. It will do all the necessary work to strip tags, punctuation, and so on before computing the counts.
+
 
     import re
     import string 
@@ -88,9 +93,11 @@ Next we will use a function that gets a dictionary with the words and counts fro
 
         return terms, total
 
+
 The method we will use to get topics is something called [Term Frequency-Inverse Document Frequency](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) (TF-IDF). It essentially works by taking the frequency of a term in a document, and multiplying it by the log of the inverse of the number of documents the term occurs in. The idea is that the key terms will be words that occur frequently in *this* document relative to how frequently they occur in *all* the documents. Obviously words like 'the', 'and', etc have a high frequency in most documents, so they aren't interesting. But if a word that is uncommon in all the documents, like, say, 'pneumonia', occur relatively higher in a specific document, then that word is likely important.
 
 A key part of this is that we need to count how many documents a word occurs in, not just how often it occurs in each document. So our next function is going to look at all the articles in a feed. Ideally we would compute the IDFs from a bigger corpus of documents, so that can be refined later (in fact, I used the top 5000 words as an alternative and they worked quite well too, but if every article in a feed include some boiler plate text, using the top 5000 words may not filter that out, but computing IDF just from the articles will).
+
 
 	import collections
 	import feedparser
@@ -125,7 +132,9 @@ A key part of this is that we need to count how many documents a word occurs in,
 	                        'date': entry.get('published_parsed', None)})
 	    return articles, doc_terms
 
+
 Now we can use this function to compute the TF-IDFs for all the articles in a feed:
+
 
 	import math
 	
@@ -140,8 +149,10 @@ Now we can use this function to compute the TF-IDFs for all the articles in a fe
 	            tf_idf[term] = (count / article_count) * math.log(len(articles) / float(doc_terms[term]))
 	        article['tf_idf'] = tf_idf
 	    return articles
+
     
 And we're basically done! Let's see how well it worked. We can try it out on the HuffPost and print out the top ten terms for each article:
+
 
 	import operator
 	
@@ -151,7 +162,9 @@ And we're basically done! Let's see how well it worked. We can try it out on the
 	    print '%s\n%s\n%s\n' % (article['title'], article['leader'], 
 	                            '\n'.join(x[0] for x in rank[:10]))
 
+
 Running this right  now gives the results below. Not bad for a first attempt! Note that the titles that are printed out were not included in the term counts and so are a good test (although in practice it would make sense to include these so they can help rank the terms).
+
 
 	iPhone Shopping? Beware: Madness Ahead!
 	If you're thinking of upgrading your aging iPhone - I've just gone through all the pain and sufferin
