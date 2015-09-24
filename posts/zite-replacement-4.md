@@ -103,5 +103,30 @@ This computes the upper triangle, and we would need to make a reflection around 
     distance_matrix = scipy.spatial.distance.squareform(upper_triangle)
 
 
-Once we have this matrix we can use it for our clustering. The approach I am interested in trying is [affinity propagation](https://en.wikipedia.org/wiki/Affinity_propagation). The implementation in SciKit can use a precomputed similarity matrix and apparently its a very good algorithm for finding optimal clusters, but it is quadratic so it will be interesting to see how long it takes. Watch this space.
+Once we have this matrix we can use it for our clustering. The approach I am interested in trying is [affinity propagation](https://en.wikipedia.org/wiki/Affinity_propagation). The implementation in SciKit can use a precomputed similarity matrix and apparently its a very good algorithm for finding optimal clusters, but it is quadratic so computing clusters will be slow.
+
+The code to compute the clusters is below:
+
+    from sklearn.cluster import AffinityPropagation
+
+    af = AffinityPropagation(affinity='precomputed').fit(distance_matrix)
+
+    cluster_centers_indices = af.cluster_centers_indices_
+    labels = af.labels_
+
+    n_clusters_ = len(cluster_centers_indices)
+
+    for k in range(n_clusters_):
+        print("Cluster %d\n" % k)
+        for n in xrange(len(items)):
+            if labels[n] == k:
+                print(items[n])
+
+
+Starting with smaller samples, for 1000 articles I got about 160 clusters; for 2000 about 290, and for 3000, 410.
+Some of the clusters make sense (e.g. I see some recipes being clustered) but a lot don't. I expect there are three reasons for this: the small sample across diverse topics mean lots of articles have no common terms, possibly I need more terms, the algorithm is running with all defaults and hasn't been tuned, and of course it is possible I have bugs; I have not validated the Jacard values. So I will need to go deeper. Amongst other things I think I should drop any terms that only occur in single documents as they add cost but no benefit; I found that there are only about 20% of the terms that actually occur in two or more documents.
+
+Watch this space!
+
+
 
