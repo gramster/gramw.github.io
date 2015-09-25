@@ -18,7 +18,7 @@ import time
 
 # Data about this site
 BLOG_AUTHOR = "Graham Wheeler"  # (translatable)
-BLOG_TITLE = "Random Forest"  # (translatable)
+BLOG_TITLE = "Graham Wheeler's Random Forest"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link
 SITE_URL = "https://grahamwheeler.com/"
