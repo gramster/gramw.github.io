@@ -1,5 +1,5 @@
 .. title: Building a Zite Replacement (Part 6)
-.. date: 2015-09-23 20:31
+.. date: 2015-09-24 20:31
 .. author: Graham Wheeler
 .. category: Programming
 .. comments: enabled
