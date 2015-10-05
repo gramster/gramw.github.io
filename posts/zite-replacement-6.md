@@ -21,16 +21,17 @@ I then modified the code that reads in the articles file and calculates the TF-I
 
 I then sorted each item by similarity with each of these category items, and printed out the top 20, with:
 
-	import operator
-	
-	for category in xrange(0, 4):
-	    print "===\n%s" % items[category]['title'].upper()
-	    
-	    metrics = [[distance_matrix[category, i], i] for i in xrange(0, len(items))]
-	    ranked = sorted(metrics, key=operator.itemgetter(0), reverse=True)
-	 
-	    for r in ranked[0:20]:
-	        print items[r[1]]['title']
+    #!python
+    import operator
+    
+    for category in xrange(0, 4):
+        print "===\n%s" % items[category]['title'].upper()
+        
+        metrics = [[distance_matrix[category, i], i] for i in xrange(0, len(items))]
+        ranked = sorted(metrics, key=operator.itemgetter(0), reverse=True)
+     
+        for r in ranked[0:20]:
+            print items[r[1]]['title']
 
 The results are show below although I shortened it to 10 for brevity. As you can see we have good category classification. Obviously though there is a long way to go in adding more category records. One benefit of this approach is that unlike clustering, an item can occur in the top n list for multiple categories, which is desirable.
 

@@ -10,34 +10,34 @@ Following my [last post](http://www.grahamwheeler.com/posts/zite-replacement-3.h
 
 At that point I ran the code below to fetch and categorize the articles.
 
-        #!python
-	import datetime
-	import json
-
-	with open('feeds.txt') as f:
-	    feeds = f.readlines()
-	    
-	with open('articles.txt', 'w') as f:
-	    for feed in feeds:
-	        feed = feed.strip()
-	        if len(feed) == 0:
-	            continue
-	        print feed
-	        when = datetime.datetime.utcnow()
-	        articles = get_feed_with_tf_idf(feed)
-	        print '%d articles processed from feed %s' % (len(articles), feed)
-	        for article in articles:
-	            record = {'feed': feed, 
-	                      'fetched': str(when),
-	                      'category': article['category'],
-	                      'link': article['link'], 
-	                      'date': article['date'],
-	                      'terms': article['terms'],
-	                      'title': article['title'],
-	                      'thumbnail': article['media_thumbnail']
-	            }
-	            f.write(json.dumps(record))
-	            f.write('\n')
+    #!python
+    import datetime
+    import json
+    
+    with open('feeds.txt') as f:
+        feeds = f.readlines()
+        
+    with open('articles.txt', 'w') as f:
+        for feed in feeds:
+            feed = feed.strip()
+            if len(feed) == 0:
+                continue
+            print feed
+            when = datetime.datetime.utcnow()
+            articles = get_feed_with_tf_idf(feed)
+            print '%d articles processed from feed %s' % (len(articles), feed)
+            for article in articles:
+                record = {'feed': feed, 
+                          'fetched': str(when),
+                          'category': article['category'],
+                          'link': article['link'], 
+                          'date': article['date'],
+                          'terms': article['terms'],
+                          'title': article['title'],
+                          'thumbnail': article['media_thumbnail']
+                }
+                f.write(json.dumps(record))
+                f.write('\n')
 
 
 It ran surprisingly fast; it actually took a lot longer to find the feed URLs than it did to fetch the articles and do term extraction. A number of sites returned 0 articles and I need to do  prune of those from the feed list as they are probably either dead or uninteresting.
@@ -53,47 +53,47 @@ of our list of terms divided by the size of the union. For example, if one docum
 Calculating the Jacard similarity of all the pairwise combinations of nearly 40,000 items is no mean feat, and to make this tractable in an interpreted language like Python you have to leverage libraries that have efficient native implementations under the hood very effectively. I found the code below not too bad; it took about 20 minutes on my MacBook Pro:
 
 
-        #!python
-	import itertools
-	import numpy
-	
-	import json
+    #!python
+    import itertools
+    import numpy
+    
+    import json
+    
+    items = []
+    
+    # Load the articles back in.
+    with open('articles.txt') as f:
+        # We will add line number info in for easy cross reference.
+        linenum = 0
+        for line in f.readlines():
+            linenum += 1
+            try:
+                d = json.loads(line.strip())
+            except ValueError as ve:
+                print "Failed to parse line %d: %s: %s" % (linenum, line, ve)
+            # Drop any that have no terms.
+            if len(d['terms']) == 0:
+                continue
+            items.append({'feed': d['feed'], 
+                         'line': linenum,
+                         'title': d['title'],
+                         'terms': set(d['terms'])})
 
-	items = []
-	
-	# Load the articles back in.
-	with open('articles.txt') as f:
-	    # We will add line number info in for easy cross reference.
-	    linenum = 0
-	    for line in f.readlines():
-	        linenum += 1
-	        try:
-	            d = json.loads(line.strip())
-	        except ValueError as ve:
-	            print "Failed to parse line %d: %s: %s" % (linenum, line, ve)
-	        # Drop any that have no terms.
-	        if len(d['terms']) == 0:
-	            continue
-	        items.append({'feed': d['feed'], 
-                              'line': linenum,
-                              'title': d['title'],
-                              'terms': set(d['terms'])})
 
-
-	def jacard_similarity(row1, row2):
-	    """ Jacard similarity is the size of the intersection divided by the union.
-	    """
-	    set1 = row1['terms']
-	    set2 = row2['terms']
-	    intersection_len = float(len(set1.intersection(set2)))
-	    union_len = float(len(set1) + len(set2) - intersection_len)
-	    
-	    return intersection_len / union_len
+    def jacard_similarity(row1, row2):
+        """ Jacard similarity is the size of the intersection divided by the union.
+        """
+        set1 = row1['terms']
+        set2 = row2['terms']
+        intersection_len = float(len(set1.intersection(set2)))
+        union_len = float(len(set1) + len(set2) - intersection_len)
+        
+        return intersection_len / union_len
 	
-	# Compute the pairwise distance matrix. We do the upper triangle.
-	similarity_generator = (jacard_similarity(row1, row2) \
-            for row1, row2 in itertools.combinations(items, r=2))
-	upper_triangle = numpy.fromiter(similarity_generator, dtype=numpy.float64)
+    # Compute the pairwise distance matrix. We do the upper triangle.
+    similarity_generator = (jacard_similarity(row1, row2) \
+        for row1, row2 in itertools.combinations(items, r=2))
+    upper_triangle = numpy.fromiter(similarity_generator, dtype=numpy.float64)
 
 
 This computes the upper triangle, and we would need to make a reflection around the diagonal to complete a square matrix. Note how we leverage Python sets for efficient calculation of union and intersection, and use itertools instead of explicit loops. To complete the matrix we can do this:

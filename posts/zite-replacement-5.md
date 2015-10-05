@@ -17,7 +17,7 @@ In order to do this, it is a reasonable idea to take the full set of terms that 
 
 Below is the code I am now using to get the articles:
 
-     #!python
+    #!python
     import datetime
     import json
     import math
