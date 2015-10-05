@@ -19,37 +19,39 @@ This is meant just for my use so its functional rather than polished.
 
 The TextBlob library is worth investigating if you are considering doing anything like this. In the end I abandoned it because the code I have written for parsing sentences and words is almost as good and about an order of magnitude faster. But I will show the code I experimented with so you can see how easy it is to use. Below is the code for getting the term counts for an article downloaded with feedparser. Note that I still handle correcting the capitalization of initial words in sentences, and I use my own logic for extracting noun phrases; TextBlob has code for that but it is seemingly not very good. The key thing is to note that I don't have to do much at all to get at sentences and then at words within sentences:
 
-	from textblob import TextBlob
+    #!python
+    from textblob import TextBlob
 	
-	def get_article_terms(title, article, dictionary, stop_words):
-	    blob = TextBlob(title +'. ' + strip_tags(article))
-	    terms = []
-	    for sentence in blob.sentences:
-	        first = True
-	        noun_phrase = []
-	        for word in sentence.words:
-	            if first:
-	                first = False
-	                if word not in dictionary and \
-	                    word.lower() in dictionary:
-	                    word = word.lower()
-	            if word[0].isupper():
-	                noun_phrase.append(word)
-	            else:
-	                if len(noun_phrase):
-	                    terms.append(' '.join(noun_phrase))
-	                    noun_phrase = []
-	                if word not in stop_words:
-	                    terms.append(word)
-	        if len(noun_phrase):
-	            terms.append(' '.join(noun_phrase))
-	    term_counts = collections.Counter()
-	    term_counts.update(terms)
-	    return term_counts, len(terms)
+    def get_article_terms(title, article, dictionary, stop_words):
+        blob = TextBlob(title +'. ' + strip_tags(article))
+        terms = []
+        for sentence in blob.sentences:
+            first = True
+            noun_phrase = []
+            for word in sentence.words:
+                if first:
+                    first = False
+                    if word not in dictionary and \
+                        word.lower() in dictionary:
+                        word = word.lower()
+                if word[0].isupper():
+                    noun_phrase.append(word)
+                else:
+                    if len(noun_phrase):
+                        terms.append(' '.join(noun_phrase))
+                        noun_phrase = []
+                    if word not in stop_words:
+                        terms.append(word)
+            if len(noun_phrase):
+                terms.append(' '.join(noun_phrase))
+        term_counts = collections.Counter()
+        term_counts.update(terms)
+        return term_counts, len(terms)
 
 
 Anyway, as I say, this works but it is slow and I have a much faster version:
 
+    #!python
     def get_article_terms(title, article, dictionary, stop_words):
         """ Get the terms and counts from an article. Strip HTML tags and
         non-essential punctuation, whitespace, and single

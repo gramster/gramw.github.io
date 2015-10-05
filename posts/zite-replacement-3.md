@@ -49,6 +49,7 @@ In order to get my corpus, I need to gather a large number of URLs for RSS feeds
 A first cut at such a script is:
 
 
+    #!python
     def get_feed_URL(site):
         f = urllib.urlopen(site)
         content = f.read()

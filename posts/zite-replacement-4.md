@@ -10,7 +10,7 @@ Following my [last post](http://www.grahamwheeler.com/posts/zite-replacement-3.h
 
 At that point I ran the code below to fetch and categorize the articles.
 
-
+        #!python
 	import datetime
 	import json
 
@@ -53,6 +53,7 @@ of our list of terms divided by the size of the union. For example, if one docum
 Calculating the Jacard similarity of all the pairwise combinations of nearly 40,000 items is no mean feat, and to make this tractable in an interpreted language like Python you have to leverage libraries that have efficient native implementations under the hood very effectively. I found the code below not too bad; it took about 20 minutes on my MacBook Pro:
 
 
+        #!python
 	import itertools
 	import numpy
 	
@@ -98,6 +99,7 @@ Calculating the Jacard similarity of all the pairwise combinations of nearly 40,
 This computes the upper triangle, and we would need to make a reflection around the diagonal to complete a square matrix. Note how we leverage Python sets for efficient calculation of union and intersection, and use itertools instead of explicit loops. To complete the matrix we can do this:
 
 
+    #!python
     import scipy.spatial
     # Expand to a square
     distance_matrix = scipy.spatial.distance.squareform(upper_triangle)
@@ -107,6 +109,7 @@ Once we have this matrix we can use it for our clustering. The approach I am int
 
 The code to compute the clusters is below:
 
+    #!python
     from sklearn.cluster import AffinityPropagation
 
     af = AffinityPropagation(affinity='precomputed').fit(distance_matrix)
