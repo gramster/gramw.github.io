@@ -7,10 +7,13 @@
 
 Following on from last episode, I took some of the clusters that had clear cohesion and made some initial category exemplars. Here are the first few:
 
-	{"title": "Art", "terms": ["canvas", "painting", "pastels", "sculpture", "gallery", "photography", "landscape", "portrait", "still-life", "exhibition", "sketch"]}
+	{"title": "Art", "terms": ["canvas", "painting", "pastels", "sculpture", "gallery", "photography",
+            "landscape", "portrait", "still-life", "exhibition", "sketch"]}
 	{"title": "Literature", "terms": ["novel", "writer", "plot", "character", "author"]}
-	{"title": "Religion", "terms": ["Jesus", "Christianity", "Allah", "Islam", "Judaism", "Sufi", "Hindu", "karma", "sprituality", "faith", "belief", "priest", "pastor", "prayer"]}
-	{"title": "Cooking", "terms": ["ingredients", "bake", "roast", "fry", "stir", "cook", "cooking", "recipe", "flour", "sugar", "butter", "cups", "cup", "teaspoon", "tablespoons", "vanilla"]}
+	{"title": "Religion", "terms": ["Jesus", "Christianity", "Allah", "Islam", "Judaism", "Sufi",
+            "Hindu", "karma", "sprituality", "faith", "belief", "priest", "pastor", "prayer"]}
+	{"title": "Cooking", "terms": ["ingredients", "bake", "roast", "fry", "stir", "cook", "cooking",
+            "recipe", "flour", "sugar", "butter", "cups", "cup", "teaspoon", "tablespoons", "vanilla"]}
 
 Note that these are deliberately in the same format as the articles in articles.txt, although without as many fields.
 
