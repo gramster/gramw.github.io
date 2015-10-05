@@ -1,4 +1,4 @@
-.. title: Building a Zite Replacement (Part 6)
+.. title: Building a Zite Replacement (Part 7)
 .. date: 2015-10-04 21:31
 .. author: Graham Wheeler
 .. category: Programming
@@ -14,6 +14,8 @@ It's been a while since the last post but I haven't been idle. Here are some of 
 You can see a screenshot of the GUI below to get an idea of what it looks like:
 
 [![feedme app screenshot](/images/feedme_screenshot.png "feedme app screenshot")](/images/feedme_screenshot.png)
+
+This is meant just for my use so its functional rather than polished.
 
 The TextBlob library is worth investigating if you are considering doing anything like this. In the end I abandoned it because the code I have written for parsing sentences and words is almost as good and about an order of magnitude faster. But I will show the code I experimented with so you can see how easy it is to use. Below is the code for getting the term counts for an article downloaded with feedparser. Note that I still handle correcting the capitalization of initial words in sentences, and I use my own logic for extracting noun phrases; TextBlob has code for that but it is seemingly not very good. The key thing is to note that I don't have to do much at all to get at sentences and then at words within sentences:
 
