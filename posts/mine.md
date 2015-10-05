@@ -22,6 +22,7 @@ your move with a '-'.
 At some point I might look at using PyQt or something to turn it into a mouse-driven more attractive looking
 game. But the interesting stuff is the recursive traversal of the board.
 
+    #!python
     import random
     
     DIMENSION = 8

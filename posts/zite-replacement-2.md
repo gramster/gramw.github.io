@@ -142,7 +142,7 @@ Now we can use this function to compute the TF-IDFs for all the articles in a fe
 
     #!python
     import math
-	
+    
     def get_feed_with_tf_idf(feed_url):
         """ Calculate TF-IDFs for each article in a feed and add to metadata """
         articles, doc_terms = get_article_data(feed_url)

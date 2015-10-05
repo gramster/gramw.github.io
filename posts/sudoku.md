@@ -12,6 +12,7 @@ Because solving Sudoku is indeed trivial. There is nothing to it. All you need i
 
 But still some people [make a big deal out of it all](https://gigaom.com/2012/10/12/meet-the-algorithm-thats-way-better-than-you-at-sudoku/)...
 
+    #!python
     rows = [0xffff] * 9
     cols = [0xffff] * 9
     rgns = [0xffff] * 9
