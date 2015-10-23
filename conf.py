@@ -828,7 +828,7 @@ MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite', 'extra']
 
 # By default, Nikola generates RSS files for the website and for tags, and
 # links to it.  Set this to False to disable everything RSS-related.
-# GENERATE_RSS = True
+GENERATE_RSS = False
 
 # By default, Nikola does not generates Atom files for indexes and links to
 # them. Generate Atom for tags by setting TAG_PAGES_ARE_INDEXES to True.
@@ -843,6 +843,9 @@ MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite', 'extra']
 # the base.tmpl will use the feed Nikola generates. However, you may want to
 # change it for a FeedBurner feed or something else.
 # RSS_LINK = None
+RSS_LINK="""
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
+"""
 
 # Show only teasers in the RSS and Atom feeds? Default to True
 # RSS_TEASERS = True
