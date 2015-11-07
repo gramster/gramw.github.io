@@ -58,7 +58,7 @@ server can verify that to make sure that you did the subscribe request and
 not someone else.
 
 The other part of this is the callback server. In my case I want to just fold
-this in to my node server, so I added this code in my route/index.js file. For
+this in to my node server, so I added this code in my routes/index.js file. For
 now I'm just writing the updates to a file. My callback URL is hostname/pubsub:
 
     router.get('/pubsub', function(req, res) {
