@@ -17,11 +17,11 @@ mining more of the web to find useful sites.
 Currently doing a pull of the ~4000 sites takes several minutes on my 
 low-power server. If I want to scale to 10x or more polling is not ideal.
 So another change I have needed is to move to a push model. Thankfully
-that's possible, through the use of the [https://en.wikipedia.org/wiki/PubSubHubbub](PubSubHubbub) (aka PuSH). This is a Google-designed 
+that's possible, through the use of the [PubSubHubbub](https://en.wikipedia.org/wiki/PubSubHubbub) (aka PuSH). This is a Google-designed 
 system whereby publishers can 
 push notifications of updates to central servers that in turn support
 subscriptions on clients for receiving notifications. There are commercial 
-services for this [http://superfeedr.com](Superfeedr) seem's to be the main
+services for this ([Superfeedr](http://superfeedr.com) seem's to be the main
 player here) but there is also a publicly accessible server run by Google.
 
 Using this is fairly straightforward. Here is a simple Python script for
@@ -53,7 +53,7 @@ notifications to:
         except Exception as e:
           print '%s failed: %s" % (command, str(e))
 
-You can include a verification token too in tha params, and your callback
+You can include a verification token too in the params, and your callback
 server can verify that to make sure that you did the subscribe request and 
 not someone else.
 
@@ -75,5 +75,5 @@ now I'm just writing the updates to a file. My callback URL is hostname/pubsub:
       }
     });
 
-You can find full details of the PuSH spec [https://pubsubhubbub.googlecode.com/git/pubsubhubbub-core-0.4.html](here).
+You can find full details of the PuSH spec [here](https://pubsubhubbub.googlecode.com/git/pubsubhubbub-core-0.4.html).
 

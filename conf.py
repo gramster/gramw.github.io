@@ -21,10 +21,10 @@ BLOG_AUTHOR = "Graham Wheeler"  # (translatable)
 BLOG_TITLE = "Graham Wheeler's Random Forest"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link
-SITE_URL = "https://grahamwheeler.com/"
+SITE_URL = "https://www.grahamwheeler.com/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
-# BASE_URL = "https://grahamwheeler.com/"
+# BASE_URL = "https://www.grahamwheeler.com/"
 BLOG_EMAIL = "gram@geekraver.com"
 BLOG_DESCRIPTION = "Stuff about stuff"  # (translatable)
 
@@ -125,6 +125,11 @@ TRANSLATIONS_PATTERN = "{path}.{lang}.{ext}"
 #          else they won’t be highlighted when active.
 
 NAVIGATION_LINKS = {
+#     DEFAULT_LANG: (
+#        ("/archive.html", "Archives"),
+#        ("/categories/index.html", "Tags"),
+#        ("/rss.xml", "RSS feed"),
+#    ),
     DEFAULT_LANG: (
         ('/index.html', 'Home', 'icon-home'),
         ('/archive.html', 'Archives', 'icon-folder-open-alt'),
@@ -215,11 +220,13 @@ POSTS = (
     ("posts/*.md", "posts", "post.tmpl"),
     ("posts/*.rst", "posts", "post.tmpl"),
     ("posts/*.txt", "posts", "post.tmpl"),
+    ("posts/*.ipynb", "posts", "post.tmpl"),
 )
 PAGES = (
     ("stories/*.md", "stories", "story.tmpl"),
     ("stories/*.rst", "stories", "story.tmpl"),
     ("stories/*.txt", "stories", "story.tmpl"),
+    ("stories/*.ipynb", "stories", "story.tmpl"),
 )
 
 # One or more folders containing files to be copied as-is into the output.

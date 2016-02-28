@@ -68,5 +68,5 @@ A first cut at such a script is:
 
 I'll post any updates later. If possible I may try write one that can be run against Pocket, and try get people to use that to send me already curated lists with possible tags. Watch this space.
 
-*Update:* Gotta love Python. A web search gave me ([feedfinder](http://www.aaronsw.com/2002/feedfinder/feedfinder.py)).
+*Update:* Gotta love Python. A web search gave me [feedfinder](http://www.aaronsw.com/2002/feedfinder/feedfinder.py).
 
