@@ -21,7 +21,8 @@ but hopefully it will scale better and make up for things when I have ad-hoc
 queries to do.
 
 I hadn't used MongoDB before so it was a learning opportunity. Mongo is a 
-no-SQL database that stores documents rather than records, so it is well suited
+no-SQL database that stores *collections* of *documents* in its databases,
+rather than tables of records, so it is well suited
 to storing the JSON RSS feed objects. It's very easy to use too. I modified
 my exitisting code to take two callbacks, one to create an ID from an article, 
 and the other to save the article give the ID. For the old code, the ID just
@@ -29,8 +30,26 @@ corresponds to the pathname of the file, and saving just saves the JSON as a
 string to that file. The ID creator has a secondary role of checking if we have
 already fetched that object before, in which case we don't need to save it.
 
-MongoDB has the concept of databases just like a SQL system, but instead of 
-tables it has 'collections'. So I now have an articles collection, and my
+Each document has a special unique key '_id', and can have secondary keys. The
+document itself is an ordered set of keys with associated values (which can
+themselves be documents), so this maps reasonably well to Javascript objects.
+Keys are any UTF-8 strings but should avoid '$' and '.' which have special 
+usage, and NUL which is used as a key terminator. Keys must be unique, and are case sensitive.
+
+Collections (groups of documents) can store different types of documents; they do
+not have a fixed schema. That said, it is generally more sensible and efficient
+to keep similar documents in the same collection, and make use of multiple 
+collections, rather than putting everything in one collection. Collection names
+are non-empty UTF-8 strings that don't include NUL or '$' and don't start with 
+'system.' (the latter two constraints are for implementation-specific reasons).
+
+Database names should be non-empty alphanumeric ASCII strings of 64 bytes or less 
+(not actually quite that restrictive but that's a good guideline). 'admin' is a
+special root database, and 'config' is a special database that stores sharding 
+information. 'local' is a database that can be used to store collections that should
+not be replicated.
+
+I now have an articles collection, and my
 callbacks to use Mongo just look like this:
 
     #!python
