@@ -21,10 +21,12 @@ easily install node for your platform. We're going to generate a scaffold
 Express app with a generator, so we need to install that along with its
 dependencies:
 
+    #!bash
     npm install -g express-generator
 
 and then generate the skeleton in a 'server' subdirectory:
 
+    #!bash
     express server
     cd server
 
@@ -32,11 +34,13 @@ This skeleton will include a package.json file; we need to edit that and
 add these to the end of the dependencies section (make sure to add a comma
 on the previous last line in the dependencies):
 
+    #!javascript
     "mongodb": "~2.0.33",
     "monk": "~1.0.1"
 
 Then install the dependencies:
 
+    #!bash
     cd server
     npm install
 
@@ -45,10 +49,12 @@ Although we'll be adding some more and need to rerun this again later.
 We need to tell node to use our database. To do that, we edit app.js
 and before the line that says:
 
+    #!javascript
     var routes = require('./routes/index');
 
 we add:
 
+    #!javascript
     var mongo = require('mongodb');
     var monk = require('monk');
     var db = monk('localhost:27017/feed_database');
@@ -58,10 +64,12 @@ for a different database).
 
 To make the database accessible to our page handler, before the line that says:
 
+    #!javascript
     app.use('/', routes);
 
 we add:
 
+    #!javascript
     app.use(function(req,res,next){
         req.db = db;
         next();
@@ -77,6 +85,7 @@ category, and link back to the source. To set up the routes we need to edit
 routes/index.js, and add our additions (before the modules.exports
 line at the end):
 
+    #!javascript
     /* GET categories page. */
     router.get('/categories', function(req, res) {
         var db = req.db;
@@ -112,6 +121,7 @@ template engine is Jade which Express uses by default.
 We'll look at the /article page route in a moment; first look at the 
 template for the categories page which we create in file views/categories.jade:
 
+    #!text
     extends layout
 
     block content
@@ -131,6 +141,7 @@ classification as was specified in the category query parameter in the request
 URL, and render the page using the article template, passing that template
 the article list and category name. That template looks like:
 
+    #!text
     extends layout
 
     block content
@@ -147,6 +158,7 @@ take us to the web page for that article. Pretty simple!
 
 Now we can run this:
 
+    #!bash
     npm start
 
 and navigate to http://localhost:3000/categories to see what we might want to

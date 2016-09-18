@@ -30,6 +30,7 @@ RSS feed URL you want notfications for, and a callback URL that the PuSH
 server will call back to, both to confirm the subscription and to send
 notifications to:
 
+    #!python
     import sys
     import urllib
     import urllib2
@@ -61,6 +62,7 @@ The other part of this is the callback server. In my case I want to just fold
 this in to my node server, so I added this code in my routes/index.js file. For
 now I'm just writing the updates to a file. My callback URL is hostname/pubsub:
 
+    #!javascript
     router.get('/pubsub', function(req, res) {
       if (req.query['hub.challenge']) {
         // Subscription verification request; send back challenge
