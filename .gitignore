@@ -1,3 +1,6 @@
 .doit.db.db
+.ipynb_checkpoints
+*.pyc
+trace.*
 output
 cache
