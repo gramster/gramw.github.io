@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html prefix="
+og: http://ogp.me/ns#
+article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>The Art of Assert | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/the-art-of-assert.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="geekraver">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="The Art of Assert">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/the-art-of-assert.html">
+<meta property="og:description" content='"Assertions are the only reliable form of program documentation"
+(Charles Hoare)
+While I wait for the next release of Live Search for Mobile, I will fill
+in the time with some posts on tricks I have u'>
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2008-05-02T05:28:00-07:00">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="https://github.com/gramster" title="My Github"><i class="icon-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/grahamwheeler" title="My LinkedIn"><i class="icon-linkedin"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">The Art of Assert</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2008-05-02T05:28:00-07:00">2008-05-02 05:28</time>
+            
+                      |  
+        <a href="the-art-of-assert.md" id="sourcelink">Source</a>
+
+            </div>
+            
+        </div>
+        <div class="body">
+            <div>
+<p><em>"Assertions are the only reliable form of program documentation"</em>
+(Charles Hoare)</p>
+<p>While I wait for the next release of Live Search for Mobile, I will fill
+in the time with some posts on tricks I have used in the dim and distant
+past, before I became a mostly C# programmer. I love C#, but I really
+don't like the way the C/C++ preprocessor was not included. While
+preprocessors can be abused, they are also extremely useful (think of
+__FILE__ and __LINE__, just for starters).</p>
+<p>In particular, the preprocessor in C and C++ provides a very flexible
+assertion mechanism that is much more useful then System.Diagnostics.
+I'd like to cover some useful ways of using assertions in C and C++. Of
+course if you're an Eiffel programmer, you can probably stop reading ;-)</p>
+<p>In the code below, I will assume the existence of a library function
+<strong>HandleAssert(char* message</strong>), which does appropriate assertion
+handling (for example, in a GUI app it might pop up a message box,
+display the message, and give a Continue/Abort/Debug choice).</p>
+<p>Obviously, the first thing we need is a basic ASSERT macro:</p>
+<pre class="code literal-block"><span></span><span class="cp">#ifdef DEBUG</span>
+<span class="cp">#define ASSERT(condition, message)     do { if (!(condition)) HandleAssert(message); } while (0)</span>
+<span class="cp">#else</span>
+<span class="cp">#define ASSERT(condition, message)</span>
+<span class="cp">#endif</span>
+</pre>
+
+
+<p>The first rule of asserts is, of course, never put them in production
+code, hence the DEBUG conditional. The use of a do/while above
+eliminates any possible dangling else issues that might otherwise crop
+up if for some weird reason you put your ASSERTs in if statements.</p>
+<p>The above is often the only form of ASSERT that most C/C++ programmers
+encounter. But there are quite a few useful variants on the idea.
+Sometimes, just an alias is already a useful distinction:</p>
+<pre class="code literal-block"><span></span>#define PRECONDITION(condition, message)     ASSERT(condition, message)
+#define POSTCONDITION(condition, message)    ASSERT(condition, message)
+</pre>
+
+
+<p>It can be useful to be able to define code that only exists in
+assertional builds:</p>
+<pre class="code literal-block"><span></span>#if DEBUG
+#define ASSERTIONAL(code)      code
+#else
+#define ASSERTIONAL(code)
+#endif
+</pre>
+
+
+<p>Putting all of the above in an example:</p>
+<pre class="code literal-block"><span></span>int AdvanceIndex(int index)
+{
+    ASSERTIONAL(int save_index = index);
+    PRECONDITION(index &gt;= 0, "Index can't be negative");
+    ....
+
+    POSTCONDITION(index &gt; save_index, "Index must advance");
+    return index;
+}
+</pre>
+
+
+<p>If we have class invariants, it is useful to define these as methods in
+the class that we can call from our asserts:</p>
+<pre class="code literal-block"><span></span><span class="k">class</span> <span class="n">foo</span>
+{
+<span class="c c-Singleline">#if DEBUG</span>
+   <span class="nb">bool</span> <span class="n">invariant</span>() { ... }
+<span class="c c-Singleline">#endif</span>
+}
+</pre>
+
+
+<p>During early development, we could confine ourselves to DEBUG builds. In
+this case we may want to skip over handling of bad input, etc. We can do
+this safely using simplifying assumptions:</p>
+<pre class="code literal-block"><span></span>#if DEBUG&lt;/font&gt;
+#define SIMPLIFYING_ASSUMPTION(condition,  explanation)      ASSERT(condition, explanation)
+#else
+#error SIMPLIFYING_ASSUMPTION not allowed in&gt; release code
+#endif
+</pre>
+
+
+<p>For example:</p>
+<pre class="code literal-block"><span></span>void Insert(node* n)
+{
+    PRECONDITION(n != 0 &amp;&amp; invariant(), "Can't insert null");
+    SIMPLIFYING_ASSUMPTION(find(n) == 0, "Not handling re-insertion of existing node yet");
+    ...
+    POSTCONDITION(find(n) != 0 &amp;&amp; invariant(), "Node must be inserted");
+}
+</pre>
+
+
+<p>Note, when writing unit tests for code that has pre- and
+post-conditions, you should be striving to write tests that pass the
+precondition but fail the postcondition. Thus assertions can provide
+very useful test case selection guidance. Pre- and post-conditions also
+tend to be more stable than the code inside methods, reduce the need to
+examine the internal code, and, for the hard-core, support proving
+correctness.</p>
+<p>Sometimes we may find it useful to always fire the assert:</p>
+<pre class="code literal-block"><span></span>#define UNREACHABLE(why)      ASSERT(0, why)
+</pre>
+
+
+<p>We can have compile-time assertions on simple expressions:</p>
+<pre class="code literal-block"><span></span>#define COMPILE_TIME_CHECK(b)    extern int dummy[(b) ? 1: -1]
+</pre>
+
+
+<p>As you can see from all of this, the lowly ASSERT can be quite flexible!</p>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="last-day-on-live-search-for-mobile.html" rel="prev" title="Last Day on Live Search for Mobile">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="cute-math-curiosity.html" rel="next" title="Cute Math Curiosity">Next post</a>
+            </li>
+        </ul>
+<div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/the-art-of-assert.html",
+        disqus_title="The Art of Assert",
+        disqus_identifier="cache/posts/the-art-of-assert.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+                    <footer id="footer"><p>Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+    </section><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67535606-1', 'auto');
+  ga('send', 'pageview');
+
+</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+    </script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html prefix="
+og: http://ogp.me/ns#
+article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Building a Zite Replacement (Part 11) | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/zite-replacement-11.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Graham Wheeler">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="Building a Zite Replacement (Part 11)">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/zite-replacement-11.html">
+<meta property="og:description" content="It's been a while since I worked on this but it is still on my mind a lot. I've been mulling over ways to improve categorization without the semi-supervised tweaking I've had to do.
+Just to recap, cur">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-04-23T09:15:00-07:00">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="https://github.com/gramster" title="My Github"><i class="icon-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/grahamwheeler" title="My LinkedIn"><i class="icon-linkedin"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">Building a Zite Replacement (Part 11)</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2016-04-23T09:15:00-07:00">2016-04-23 09:15</time>
+            
+                      |  
+        <a href="zite-replacement-11.md" id="sourcelink">Source</a>
+
+            </div>
+            
+        </div>
+        <div class="body">
+            <div>
+<p>It's been a while since I worked on this but it is still on my mind a lot. I've been mulling over ways to improve categorization without the semi-supervised tweaking I've had to do.</p>
+<p>Just to recap, currently this is what I am doing:</p>
+<ul>
+<li>I have a bunch of 'category exemplars', which are sets of key terms associated with a category. These are the things which currently require some manual work;</li>
+<li>for each article, I extract the plain text, normalize capitalization, remove <a href="https://en.wikipedia.org/wiki/Stop_words">stop words</a>, then use <a href="https://en.wikipedia.org/wiki/Tf-idf">tf-idf</a> to extract the set of most significant terms (I'm not yet doing <a href="https://en.wikipedia.org/wiki/Stemming">stemming</a> although I'll probably start);</li>
+<li>I then use a <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">distance metric</a> from the exemplars to assign category scores to the articles. Provided the score exceeds a threshold the article will be considered to be in the category.</li>
+</ul>
+<p>The manual work right now comes in when I notice <a href="https://en.wikipedia.org/wiki/False_positives_and_false_negatives">false positives and negatives</a>. My basic web app has the ability to show me all the common terms that led to a categorization and/or missed terms leading to a missed categorization. I can use these to tweak the category exemplars to improve classification. Its not ideal; I would far prefer to make this all be automated. The plan is to make use of Wikipedia to help with generating category exemplars. I don't think that this will solve the problem entirely but I am hoping to add one level of abstraction here to potentially reduce the amount of tweaking required.</p>
+<p>My initial plan is:</p>
+<ul>
+<li>take each Wikipedia article, extract the plain text (and probably add stemming), remove stop words, generate term counts, and keep track of outgoing links to other articles</li>
+<li>reduce the set of articles to a manageable set. Keep only articles that have a reasonable length (after stop word removal), and at least a certain number of incoming links. The values to use here will be determined empirically once I have these values for the articles</li>
+<li>for each article, generate tf-idf scores for terms and keep the top terms (i.e. treat them much as my current category exemplars)</li>
+</ul>
+<p>The good news is that this can all be automated. The bad news is I'm likely to have many thousands of 'categories'. But here is where a second level of abstraction comes in. For each article from the web I want to classify:</p>
+<ul>
+<li>generate the set of Wikipedia categories for the article (using cosine distance from the Wikipedia exemplars);</li>
+<li>use the Wikipedia categories as the new term sets for the articles when categorizing them</li>
+</ul>
+<p>I.e. instead of categorizing an article based on the significant terms in the article, do so based on the significant Wikipedia categories for the article.</p>
+<p>This may seem like a lot of work to come almost full circle but the hope is that these second level exemplars will be more stable and require less tweaking. As for generating the second-order exemplars, I can make use of all the articles I have categorized so far as a training set for supervized learning.</p>
+<p>The next problem is dealing wth the Wikipedia dump. Uncompressed it is close to 60GB. The first task is to split it up into separate articles, which I pan to do with <a href="https://github.com/attardi/wikiextractor">WikiExtractor</a>. After that I may try use my little 4-node ODroid cluster to do the work, which will be a nice intro to my next couple of posts about that! </p>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="using-jupyter-as-a-music-notebook.html" rel="prev" title="Using Jupyter as a Music Notebook">Previous post</a>
+            </li>
+        </ul>
+<div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/zite-replacement-11.html",
+        disqus_title="Building a Zite Replacement (Part 11)",
+        disqus_identifier="cache/posts/zite-replacement-11.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+                    <footer id="footer"><p>Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+    </section><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67535606-1', 'auto');
+  ga('send', 'pageview');
+
+</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+    </script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+</body>
+</html>

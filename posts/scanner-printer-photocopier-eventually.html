@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html prefix="
+og: http://ogp.me/ns#
+article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Scanner + Printer == Photocopier (eventually) | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/scanner-printer-photocopier-eventually.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="geekraver">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="Scanner + Printer == Photocopier (eventually)">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/scanner-printer-photocopier-eventually.html">
+<meta property="og:description" content="My wife has been bugging me to make it easier for her to use our scanner
+and printer to make copies. I could buy a cheap all-in-one but she
+actually needs laser copies, not inkjet, for her hobby of st">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2008-02-01T05:35:00-08:00">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="https://github.com/gramster" title="My Github"><i class="icon-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/grahamwheeler" title="My LinkedIn"><i class="icon-linkedin"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">Scanner + Printer == Photocopier (eventually)</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2008-02-01T05:35:00-08:00">2008-02-01 05:35</time>
+            
+                      |  
+        <a href="scanner-printer-photocopier-eventually.md" id="sourcelink">Source</a>
+
+            </div>
+            
+        </div>
+        <div class="body">
+            <div>
+<p>My wife has been bugging me to make it easier for her to use our scanner
+and printer to make copies. I could buy a cheap all-in-one but she
+actually needs laser copies, not inkjet, for her hobby of stamp carving
+(she can iron a laser-printed image to make a basic transfer). The
+scanner and printer are attached to my PC but she wants to make copies
+without having to log on to my PC or bother me.</p>
+<p>I believe that HP scanners can do this, but I have an Epson Perfection
+4490, and if you press the 'Scan to Printer' button on the front it pops
+up UI on the PC. It's definitely not a one-step process and the buttons
+are a bit of a joke. So I thought I'd write my own app using Window
+Image Acquisition to do this. My original plan was to write something
+that hooked the button event and then slept in the notification tray,
+waking up when the button gets pressed.</p>
+<p>Of course, things are never that easy. I wrote the initial code, but the
+events never came to me (I've since discovered that the Epson sends a
+<strong>wiaEventScanImage2</strong> event instead of a wiaEventScanPrintImage event,
+so its possible that was the problem and I may revisit my original code
+at some point). Whenever I pressed the button Epson's UI would pop up.
+Even more annoying, the first UI was a choice dialog asking me to choose
+between Epson Creativity Suite and Epson Scan, even though I had
+explicitly configured the scanner software to always use the copy
+utility in the creativity suite.</p>
+<p>I started mucking about with registry settings but that quickly started
+getting ugly and wasn't really helping. So I hacked it. The first thing
+I did was to uninstall all the Epson Creativity Suite software, which
+was pretty useless anyway. That got rid of the choice dialog so pressing
+the button launched Epson Scan. Then I looked at the process that was
+running and found it was C:\Windows\twain_32\escndv\escndv.exe
+(which itself was confusing as the same app is also installed in
+c:\Program Files\Epson). I renamed that app escndv-orig.exe. I then
+made my own app in that directory and named it escndv.exe - so now
+pressing the button launched my app at last.</p>
+<p>Next I had to write the code to scan and print with no UI. That proved a
+bit odd too, but eventually I figured it out. The code is shown below.
+It's really rough, but it works. I built it as a C# Windows console
+project, adding references to the WIA COM DLL and System.Drawing and
+System.Drawing.Printing. The app will pop open a dialog on first run to
+ask what scanner to use (even if there is only one); after that the
+scanner ID is persisted in the app settings. It prints to the default
+printer.</p>
+<p>This is not completely UI-less - it does pop up a console window briefly
+while the scan is in progress - but at least no interaction on the PC is
+required.</p>
+<p>I plan to extend this later to have one button do an autocrop and scale
+to fit. Currently pressing any of the other buttons will launch the
+original Epson Scan software.</p>
+<pre class="code literal-block"><span></span><span class="n">using</span> <span class="n">System</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Generic</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">PrintScan</span><span class="p">.</span><span class="n">Properties</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="p">.</span><span class="n">Drawing</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="p">.</span><span class="n">Drawing</span><span class="p">.</span><span class="n">Printing</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">WIA</span><span class="p">;</span>
+
+<span class="n">namespace</span> <span class="n">PrintScan</span>
+<span class="p">{</span>
+    <span class="k">class</span> <span class="n">Program</span>
+    <span class="p">{</span>
+        <span class="k">static</span> <span class="kt">void</span> <span class="n">Main</span><span class="p">(</span><span class="n">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">new</span> <span class="n">Program</span><span class="p">().</span><span class="n">Run</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">Settings</span> <span class="n">settings</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Settings</span><span class="p">();</span>
+
+        <span class="kt">void</span> <span class="nf">Configure</span><span class="p">()</span> <span class="c1">// Get the scanner to use via Choose Scanner dialog</span>
+        <span class="p">{</span>
+            <span class="n">CommonDialogClass</span> <span class="n">class1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">CommonDialogClass</span><span class="p">();</span>
+            <span class="n">Device</span> <span class="n">d</span> <span class="o">=</span> <span class="n">class1</span><span class="p">.</span><span class="n">ShowSelectDevice</span><span class="p">(</span><span class="n">WiaDeviceType</span><span class="p">.</span><span class="n">ScannerDeviceType</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">d</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">settings</span><span class="p">.</span><span class="n">DeviceID</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">DeviceID</span><span class="p">;</span>
+                <span class="n">settings</span><span class="p">.</span><span class="n">Save</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="kt">bool</span> <span class="nf">RunProcess</span><span class="p">(</span><span class="n">string</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">string</span> <span class="n">args</span><span class="p">)</span> <span class="o">//</span> <span class="n">Run</span> <span class="n">some</span> <span class="n">other</span> <span class="n">exe</span><span class="p">;</span> <span class="n">used</span> <span class="n">to</span> <span class="n">fall</span> <span class="n">back</span> <span class="n">to</span> <span class="n">Epson</span> <span class="n">Scan</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="n">Diagnostics</span><span class="p">.</span><span class="n">Process</span> <span class="n">proc</span> <span class="o">=</span> <span class="n">new</span> <span class="n">System</span><span class="p">.</span><span class="n">Diagnostics</span><span class="p">.</span><span class="n">Process</span><span class="p">();</span>
+            <span class="n">proc</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">FileName</span> <span class="o">=</span> <span class="n">cmd</span><span class="p">;</span>
+            <span class="n">proc</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">Arguments</span> <span class="o">=</span> <span class="n">args</span><span class="p">;</span>
+            <span class="n">proc</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">UseShellExecute</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="k">return</span> <span class="n">proc</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">const</span> <span class="n">string</span> <span class="n">tempFile</span> <span class="o">=</span> <span class="s">@"c:</span><span class="se">\\</span><span class="s">temp</span><span class="se">\\</span><span class="s">page.bmp"</span><span class="p">;</span>
+
+        <span class="kt">void</span> <span class="nf">Run</span><span class="p">(</span><span class="n">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">settings</span><span class="p">.</span><span class="n">DeviceID</span> <span class="o">==</span> <span class="n">null</span> <span class="o">||</span> <span class="n">settings</span><span class="p">.</span><span class="n">DeviceID</span><span class="p">.</span><span class="n">Length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">Configure</span><span class="p">();</span>
+
+            <span class="n">DeviceManager</span> <span class="n">manager</span> <span class="o">=</span> <span class="n">new</span> <span class="n">DeviceManagerClass</span><span class="p">();</span>
+            <span class="n">Device</span> <span class="n">d</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="s">"/StiEvent:"</span><span class="o">+</span><span class="n">EventID</span><span class="p">.</span><span class="n">wiaEventScanImage2</span><span class="p">))</span> <span class="c1">// I'm surprised it's not EventID.wiaEventScanPrintImage</span>
+            <span class="p">{</span>
+
+                <span class="c1">// Find our scanner</span>
+                <span class="n">foreach</span> <span class="p">(</span><span class="n">DeviceInfo</span> <span class="n">info</span> <span class="k">in</span> <span class="n">manager</span><span class="p">.</span><span class="n">DeviceInfos</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">DeviceID</span> <span class="o">==</span> <span class="n">settings</span><span class="p">.</span><span class="n">DeviceID</span><span class="p">)</span>
+                    <span class="p">{</span>
+                        <span class="n">d</span> <span class="o">=</span> <span class="n">info</span><span class="p">.</span><span class="n">Connect</span><span class="p">();</span>
+
+                        <span class="c1">// Do the scan and save it to a temp file</span>
+
+                        <span class="n">ImageFile</span> <span class="n">page</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">Items</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Transfer</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">Items</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Formats</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="n">as</span> <span class="n">ImageFile</span><span class="p">;</span>
+
+                        <span class="k">if</span> <span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">tempFile</span><span class="p">))</span>
+                            <span class="n">File</span><span class="p">.</span><span class="n">Delete</span><span class="p">(</span><span class="n">tempFile</span><span class="p">);</span>
+
+                        <span class="n">page</span><span class="p">.</span><span class="n">SaveFile</span><span class="p">(</span><span class="n">tempFile</span><span class="p">);</span>
+
+                        <span class="c1">// print it to the default printer</span>
+
+                        <span class="n">PrintDocument</span> <span class="n">pd</span> <span class="o">=</span> <span class="n">new</span> <span class="n">PrintDocument</span><span class="p">();</span>
+                        <span class="n">pd</span><span class="p">.</span><span class="n">PrintPage</span> <span class="o">+=</span> <span class="n">new</span> <span class="n">PrintPageEventHandler</span><span class="p">(</span><span class="n">pd_PrintPage</span><span class="p">);</span>
+                        <span class="n">pd</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+                        <span class="k">break</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">RunProcess</span><span class="p">(</span><span class="s">@"C:</span><span class="se">\\</span><span class="s">Windows</span><span class="se">\\</span><span class="s">twain\_32</span><span class="se">\\</span><span class="s">escndv</span><span class="se">\\</span><span class="s">escndv-orig.exe"</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s">" "</span><span class="o">+</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="kt">void</span> <span class="nf">pd_PrintPage</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">PrintPageEventArgs</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">Bitmap</span> <span class="n">bmp</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Bitmap</span><span class="p">(</span><span class="n">tempFile</span><span class="p">);</span>
+            <span class="n">GraphicsUnit</span> <span class="n">gu</span> <span class="o">=</span> <span class="n">GraphicsUnit</span><span class="p">.</span><span class="n">Document</span><span class="p">;</span>
+            <span class="n">RectangleF</span> <span class="n">bounds</span> <span class="o">=</span> <span class="n">bmp</span><span class="p">.</span><span class="n">GetBounds</span><span class="p">(</span><span class="n">ref</span> <span class="n">gu</span><span class="p">);</span>
+            <span class="n">e</span><span class="p">.</span><span class="n">Graphics</span><span class="p">.</span><span class="n">DrawImage</span><span class="p">(</span><span class="n">bmp</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">gu</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="why-there-is-no-integration-with-outlook-mobile-contacts.html" rel="prev" title="Why There Is No Integration With Outlook Mobile Contacts">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="webkinz-are-evil.html" rel="next" title="Webkinz Are Evil">Next post</a>
+            </li>
+        </ul>
+<div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/scanner-printer-photocopier-eventually.html",
+        disqus_title="Scanner + Printer == Photocopier (eventually)",
+        disqus_identifier="cache/posts/scanner-printer-photocopier-eventually.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+                    <footer id="footer"><p>Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+    </section><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67535606-1', 'auto');
+  ga('send', 'pageview');
+
+</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+    </script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+</body>
+</html>

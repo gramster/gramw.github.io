@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html prefix="
+og: http://ogp.me/ns#
+article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>GeoRSS and Live Search for Mobile | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/georss-and-live-search-for-mobile.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="geekraver">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="GeoRSS and Live Search for Mobile">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/georss-and-live-search-for-mobile.html">
+<meta property="og:description" content="Hopefully by now you all have v3.0 of the Live Search client, and are
+enjoying the new features (web search, weather, and collections). I'd
+like to talk about collections in this post, but first it is">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2008-06-06T05:26:00-07:00">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="https://github.com/gramster" title="My Github"><i class="icon-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/grahamwheeler" title="My LinkedIn"><i class="icon-linkedin"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">GeoRSS and Live Search for Mobile</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2008-06-06T05:26:00-07:00">2008-06-06 05:26</time>
+            
+                      |  
+        <a href="georss-and-live-search-for-mobile.md" id="sourcelink">Source</a>
+
+            </div>
+            
+        </div>
+        <div class="body">
+            <div>
+<p>Hopefully by now you all have v3.0 of the Live Search client, and are
+enjoying the new features (web search, weather, and collections). I'd
+like to talk about collections in this post, but first it is worth
+mentioning a couple of changes in this version that are less obvious,
+and overcome limitations I have blogged about in the past:</p>
+<ul>
+<li>we now have Outlook contact integration. From Outlook contacts you
+    can select the "Show on Map" menu option to map a contact. <a href="http://geekraver.spaces.live.com/blog/cns!3690236EA2D48605!203.entry">Google
+    Maps contacts integration is still
+    broken</a>,
+    but we can't let that hold us back any longer; we gave them nearly a
+    year as well as explicit instructions on what their bug was; if they
+    can't get their house in order with all that then too bad for them.
+    If you do want to use both GMM and Live Search, then install GMM
+    last. Their bug will cause problems with any other software that
+    installs menu extensions that is installed after them; if the other
+    apps are well-behaved then you can install them before GMM and you
+    should be okay.</li>
+<li>
+<a href="http://geekraver.spaces.live.com/blog/cns!3690236EA2D48605!181.entry">we have put back the ability to enter addresses in the search
+    box</a>.
+    We have a better geocoder now on the back end and are more confident
+    that you will get the results you want when doing this.</li>
+</ul>
+<p>Okay, on to GeoRSS. This was my pet feature that I originally built in
+September 2006 and it finally got shipped (and if you say 'about time!'
+then I have the names of the two people who kept trying to kill this to
+give to you; go blame them ;-))</p>
+<p><a href="http://apecoder.files.wordpress.com/2011/06/image.png"><img alt="image" src="http://apecoder.files.wordpress.com/2011/06/image_thumb.png"></a></p>
+<p>The Collections feature is built around Virtual Earth collections, to
+make it easier for people who don't know/care about GeoRSS to use the
+feature and get some value out of it. For the more hard-core, you can
+enter GeoRSS URLs directly:</p>
+<p><a href="http://apecoder.files.wordpress.com/2011/06/image1.png"><img alt="image" src="http://apecoder.files.wordpress.com/2011/06/image_thumb1.png"></a></p>
+<p>The actual collections/feeds are stored in the application directory in
+a file called feeds.xml. You may find it instructive to look at that
+file.</p>
+<p>The cool thing about the URLs is that they can contain metatokens, which
+will expand to location-specific values:</p>
+<p><a href="http://apecoder.files.wordpress.com/2011/06/image2.png"><img alt="image" src="http://apecoder.files.wordpress.com/2011/06/image_thumb2.png"></a></p>
+<p>For example, the URL above:</p>
+<p><a href="http://www.homethinking.com/georss/@StateAbbrev@/@City@">http://www.homethinking.com/georss/@StateAbbrev@/@City@</a></p>
+<p>has two such metatokens, namely @StateAbbrev@ and @City@. These will get
+converted into appropriate values based on your search location before
+the feed is fetched.</p>
+<p>The supported metatokens are:</p>
+<ul>
+<li>@StateName@ - state name, e.g. "Washington"</li>
+<li>@StateAbbrev@ - state name abbrevaited form e.g. "WA" (outside the
+    USA this will be the same as @StateName@)</li>
+<li>@City@ - city name</li>
+<li>@Zip@ - zip or postal code</li>
+<li>@Location@ - the full text shown in the main view for the current
+    location</li>
+<li>@Latitude@, @Longitude@</li>
+<li>@StartLocation@, @StartLatitude@, @StartLongitude@, @EndLocation@,
+    @EndLatitude@, @EndLongitude@ - similar to @Location@ etc but for
+    the start and end points of the last route you calculated. The idea
+    being you could pass these up to a transit service to get, for
+    example, a bus schedule</li>
+<li>@MyLatitude@, @MyLongitude@, @MyLocationTime@ - the location and
+    time (in UTC) of the last GPS fix</li>
+</ul>
+<p>In a later post I'll describe the GeoRSS schema that the client
+understands (it is a hybrid of GeoRSS, some Yahoo extensions, some KML
+and some OASIS xADR address stuff). For now I'll just mention one
+interesting extension, namely pushpinurl, which can point to a .ico
+file. This file will be used as the pushpin icon on the map for that
+result. This can allow you to make custom pushpins.</p>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="cute-math-curiosity.html" rel="prev" title="Cute Math Curiosity">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="fixing-grub-after-installing-windows-7.html" rel="next" title="Fixing Grub after installing Windows 7">Next post</a>
+            </li>
+        </ul>
+<div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/georss-and-live-search-for-mobile.html",
+        disqus_title="GeoRSS and Live Search for Mobile",
+        disqus_identifier="cache/posts/georss-and-live-search-for-mobile.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+                    <footer id="footer"><p>Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+    </section><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67535606-1', 'auto');
+  ga('send', 'pageview');
+
+</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+    </script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+</body>
+</html>

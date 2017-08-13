@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html prefix="
+og: http://ogp.me/ns#
+article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Building a Zite Replacement (Part 8) | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/zite-replacement-8.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Graham Wheeler">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="Building a Zite Replacement (Part 8)">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/zite-replacement-8.html">
+<meta property="og:description" content="Happy Halloween, all!
+I'm sitting here handing out candy and glow necklaces to all comers so its a
+good time to write a new post.
+It's been a while since much happened as I've been really busy with th">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2015-10-31T20:21:00-07:00">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="https://github.com/gramster" title="My Github"><i class="icon-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/grahamwheeler" title="My LinkedIn"><i class="icon-linkedin"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">Building a Zite Replacement (Part 8)</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2015-10-31T20:21:00-07:00">2015-10-31 20:21</time>
+            
+                      |  
+        <a href="zite-replacement-8.md" id="sourcelink">Source</a>
+
+            </div>
+            
+        </div>
+        <div class="body">
+            <div>
+<p>Happy Halloween, all!</p>
+<p>I'm sitting here handing out candy and glow necklaces to all comers so its a
+good time to write a new post.</p>
+<p>It's been a while since much happened as I've been really busy with the beta 
+release of Google Cloud Datalab, which is my day job. But now that is out and
+it's the weekend and lousy weather here in the Pacific Northwest it's been a 
+good day t get back to things.</p>
+<p>Today I did something I've been meaning to do for a while, which is to change
+the code to populate a MongoDB database rather than writing files to the file 
+system. Interestingly it seems to be quite a bit slower than the file system 
+but hopefully it will scale better and make up for things when I have ad-hoc
+queries to do.</p>
+<p>I hadn't used MongoDB before so it was a learning opportunity. Mongo is a 
+no-SQL database that stores <em>collections</em> of <em>documents</em> in its databases,
+rather than tables of records, so it is well suited
+to storing the JSON RSS feed objects. It's very easy to use too. I modified
+my exitisting code to take two callbacks, one to create an ID from an article, 
+and the other to save the article give the ID. For the old code, the ID just
+corresponds to the pathname of the file, and saving just saves the JSON as a
+string to that file. The ID creator has a secondary role of checking if we have
+already fetched that object before, in which case we don't need to save it.</p>
+<p>Each document has a special unique key '_id', and can have secondary keys. The
+document itself is an ordered set of keys with associated values (which can
+themselves be documents), so this maps reasonably well to Javascript objects.
+Keys are any UTF-8 strings but should avoid '$' and '.' which have special 
+usage, and NUL which is used as a key terminator. Keys must be unique, and are case sensitive.</p>
+<p>Collections (groups of documents) can store different types of documents; they do
+not have a fixed schema. That said, it is generally more sensible and efficient
+to keep similar documents in the same collection, and make use of multiple 
+collections, rather than putting everything in one collection. Collection names
+are non-empty UTF-8 strings that don't include NUL or '$' and don't start with 
+'system.' (the latter two constraints are for implementation-specific reasons).</p>
+<p>Database names should be non-empty alphanumeric ASCII strings of 64 bytes or less 
+(not actually quite that restrictive but that's a good guideline). 'admin' is a
+special root database, and 'config' is a special database that stores sharding 
+information. 'local' is a database that can be used to store collections that should
+not be replicated.</p>
+<p>I now have an articles collection, and my
+callbacks to use Mongo just look like this:</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">pymongo</span>
+
+<span class="k">def</span> <span class="nf">make_id</span><span class="p">(</span><span class="n">metadata</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">'guid'</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">articles</span><span class="o">.</span><span class="n">find_one</span><span class="p">({</span><span class="s1">'guid'</span><span class="p">:</span> <span class="nb">id</span><span class="p">}):</span>
+        <span class="c1"># We already have this article so no need to save it...</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="nb">id</span>
+
+<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">metadata</span><span class="p">):</span>
+    <span class="n">articles</span><span class="o">.</span><span class="n">insert_one</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+</pre>
+</td>
+</tr></table>
+<p>Very simple, no? But I'm getting a bit ahead of myself; it's worth mentioning 
+how I installed Mongo. You can download it from mongodb.org. I went for 
+version 2.6 rather than 3 as there is a nice free GUI tool for inspecting 
+and querying the database called RoboMongo and it doesn't work yet with Mongo 3.</p>
+<p>If you download the Mac version of Mongo you get compiled binaries, not an
+installer. These need to be put in your path somewhere. I use Homebrew for 
+some software on the Mac so I already have a /usr/local/bin directory in
+my path, and just put the Mongo files there. I know, this is polluting the
+Homebrew install somewhat, but it seemed the most practical anyway. You then
+need to create a directory for the databases, which by default on the Mac should
+be /data/db. Make sure you have write permission, or at least the user account
+that is going to run the mongo server does. You can then start Mongo by running
+'mongod' at the command line.</p>
+<p>Mongo creates databases and collections when they are accessed which makes 
+things very simple. The initial code in my fetcher looks like this:</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pymongo</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">con</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">()</span>
+    <span class="c1"># Creates DB if needed</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">feed_database</span>
+    <span class="c1"># Creates collection if needed</span>
+    <span class="n">articles</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">articles</span>
+    <span class="n">feedlist</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="s1">'feeds.txt'</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="c1"># Do the fetch.</span>
+</pre>
+</td>
+</tr></table>
+<p>I mentioned before how I changed the fetcher to use parallel fetches. That 
+uses the Python thread library, so the code continues:</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span>    <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">feedlib</span><span class="o">.</span><span class="n">load_list</span><span class="p">(</span><span class="s1">'dictionary.txt'</span><span class="p">))</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">feedlib</span><span class="o">.</span><span class="n">load_list</span><span class="p">(</span><span class="s1">'stopwords.txt'</span><span class="p">))</span>
+
+    <span class="c1"># Spawn 20 fetchers</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">Fetcher</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">articles</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">,</span> <span class="n">stop_words</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="c1"># Queue up the feeds and wait until done.</span>
+    <span class="n">feed_list</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="s1">'feeds.txt'</span>
+    <span class="k">for</span> <span class="n">feed</span> <span class="ow">in</span> <span class="n">feedlib</span><span class="o">.</span><span class="n">load_list</span><span class="p">(</span><span class="n">feed_list</span><span class="p">):</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre>
+</td>
+</tr></table>
+<p>Each thread is handled by an instance of the Fetcher class:</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="k">class</span> <span class="nc">Fetcher</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">articles</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">,</span> <span class="n">stop_words</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Fetcher</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="n">queue</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_articles</span> <span class="o">=</span> <span class="n">articles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dictionary</span> <span class="o">=</span> <span class="n">dictionary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stop_words</span> <span class="o">=</span> <span class="n">stop_words</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">feed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">feedlib</span><span class="o">.</span><span class="n">process_feed</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dictionary</span><span class="p">,</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">_stop_words</span><span class="p">,</span>
+                                     <span class="n">start_date</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_start</span><span class="p">,</span>
+                                     <span class="n">idmaker</span><span class="o">=</span><span class="n">idmaker</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="n">handler</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">"Failed to process </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                <span class="k">print</span> <span class="n">msg</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">getlogger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+</pre>
+</td>
+</tr></table>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="node-npm-express.html" rel="prev" title="Node, npm and Express">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="zite-replacement-9.html" rel="next" title="Building a Zite Replacement (Part 9)">Next post</a>
+            </li>
+        </ul>
+<div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/zite-replacement-8.html",
+        disqus_title="Building a Zite Replacement (Part 8)",
+        disqus_identifier="cache/posts/zite-replacement-8.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+                    <footer id="footer"><p>Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+    </section><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67535606-1', 'auto');
+  ga('send', 'pageview');
+
+</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+    </script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+</body>
+</html>

@@ -1,9 +1,0 @@
-README
-cache/*
-output
-themes/*
-*.pyc
-*.db
-__pycache__
-.ipynb_checkpoints
-

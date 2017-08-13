@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html prefix="
+og: http://ogp.me/ns#
+article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Fixing Grub after installing Windows 7 | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/fixing-grub-after-installing-windows-7.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="geekraver">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="Fixing Grub after installing Windows 7">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/fixing-grub-after-installing-windows-7.html">
+<meta property="og:description" content="I have an MSI Wind on which I run both Windows 7 and Ubuntu. I rarely
+use the latter but I like to keep it around and with a 320GB hard drive
+its affordable. I have used both the Windows BCD loader an">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2009-05-16T05:25:00-07:00">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="https://github.com/gramster" title="My Github"><i class="icon-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/grahamwheeler" title="My LinkedIn"><i class="icon-linkedin"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">Fixing Grub after installing Windows 7</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2009-05-16T05:25:00-07:00">2009-05-16 05:25</time>
+            
+                      |  
+        <a href="fixing-grub-after-installing-windows-7.md" id="sourcelink">Source</a>
+
+            </div>
+            
+        </div>
+        <div class="body">
+            <div>
+<p>I have an MSI Wind on which I run both Windows 7 and Ubuntu. I rarely
+use the latter but I like to keep it around and with a 320GB hard drive
+its affordable. I have used both the Windows BCD loader and GRUB as my
+bootloader at various times (and for those using BCD I highly recommend
+<a href="http://neosmart.net/dl.php?id=1">EasyBCD</a> as the way to configure it).
+Most recently I've been using GRUB.</p>
+<p>Yesterday I installed Windows 7 RC and my boot sector got clobbered by
+BCD. I had a bit of a had time getting things working again. I first
+tried using EasyBCD but this time when trying to boot Ubuntu I ended up
+at a GRUB prompt, and I could not access my Ubuntu partition (more
+precisely, while "root (hd0,2)" worked, "kernel /vmlinuz" threw errrors
+and I could not boot).</p>
+<p>In the end I got things working using the Ubuntu live CD and
+reinstalling GRUB. However, it required more than just doing a
+grub-install - for some reason the BIOS drive mappings seem to have been
+messed up. I did a web search and I found a lot of people have had this
+problem and very few found the solution so I thought it was worth
+mentioning what I did to make mine work in the hope it is useful to
+others.</p>
+<p>In my case my primary Ubuntu partition is the 3rd partition; i.e.
+/dev/sda3. After booting the live CD and opening the terminal, here is
+the set of commands I used to get things working again:</p>
+<pre class="code literal-block"><span></span>sudo mount /dev/sda3 /mnt
+sudo mount -t proc /proc /mnt/proc
+sudo mount --bind /dev /mnt/dev
+sudo chroot /mnt
+grub-install --recheck /dev/sda
+update-grub
+</pre>
+
+
+<p>Without the mounts of /proc and /dev, /dev/sda won't be found after the
+chroot. The --recheck option is necessary because somehow the BIOS drive
+mappings have gotten confused. It's possible the update-grub step is not
+necessary but I think it is safest to rebuild the grub config; I read at
+one web posting where someone omitted this step and after rebooting was
+left at the GRUB prompt again.</p>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="georss-and-live-search-for-mobile.html" rel="prev" title="GeoRSS and Live Search for Mobile">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="sudoku.html" rel="next" title="Simply Solving Sudoku">Next post</a>
+            </li>
+        </ul>
+<div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/fixing-grub-after-installing-windows-7.html",
+        disqus_title="Fixing Grub after installing Windows 7",
+        disqus_identifier="cache/posts/fixing-grub-after-installing-windows-7.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+                    <footer id="footer"><p>Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+    </section><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67535606-1', 'auto');
+  ga('send', 'pageview');
+
+</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+    </script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+Sitemap: https://www.grahamwheeler.com/sitemapindex.xml
+
+User-Agent: *
+Host: www.grahamwheeler.com

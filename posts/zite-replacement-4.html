@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html prefix="
+og: http://ogp.me/ns#
+article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Building a Zite Replacement (Part 4) | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/zite-replacement-4.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Graham Wheeler">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="Building a Zite Replacement (Part 4)">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/zite-replacement-4.html">
+<meta property="og:description" content="Following my last post, I started gathering URLs of feeds to use for sample data. First I scraped the links that I had saved in Pocket (a scarily large number). It didn't seem like Pocket had an easy ">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2015-09-22T21:01:00-07:00">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="https://github.com/gramster" title="My Github"><i class="icon-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/grahamwheeler" title="My LinkedIn"><i class="icon-linkedin"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">Building a Zite Replacement (Part 4)</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2015-09-22T21:01:00-07:00">2015-09-22 21:01</time>
+            
+                      |  
+        <a href="zite-replacement-4.md" id="sourcelink">Source</a>
+
+            </div>
+            
+        </div>
+        <div class="body">
+            <div>
+<p>Following my <a href="http://www.grahamwheeler.com/posts/zite-replacement-3.html">last post</a>, I started gathering URLs of feeds to use for sample data. First I scraped the links that I had saved in Pocket (a scarily large number). It didn't seem like Pocket had an easy way to export this, so I loaded up Pocket in Chrome, scrolled and scrolled and scrolled until I could scroll no more, then saved the resulting web page once it was done loading. It was pretty easy to then scrape that to get the links. After sorting and uniq-ing those, and running them through <a href="http://www.aaronsw.com/2002/feedfinder/">feedfinder</a>, I had somewhere north of 1000 feeds. However, these were very skewed to my interests and I wanted diversity so I pressed on and scraped a bunch of blog rolls and other link collections covering many other areas. In the end I got about 2,500 feed URLs to start with, in a file named 'feeds.txt'.</p>
+<p>At that point I ran the code below to fetch and categorize the articles.</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'feeds.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">feeds</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'articles.txt'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">feed</span> <span class="ow">in</span> <span class="n">feeds</span><span class="p">:</span>
+        <span class="n">feed</span> <span class="o">=</span> <span class="n">feed</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">print</span> <span class="n">feed</span>
+        <span class="n">when</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+        <span class="n">articles</span> <span class="o">=</span> <span class="n">get_feed_with_tf_idf</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s1">'</span><span class="si">%d</span><span class="s1"> articles processed from feed </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">articles</span><span class="p">),</span> <span class="n">feed</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
+            <span class="n">record</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'feed'</span><span class="p">:</span> <span class="n">feed</span><span class="p">,</span> 
+                      <span class="s1">'fetched'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">when</span><span class="p">),</span>
+                      <span class="s1">'category'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'category'</span><span class="p">],</span>
+                      <span class="s1">'link'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'link'</span><span class="p">],</span> 
+                      <span class="s1">'date'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'date'</span><span class="p">],</span>
+                      <span class="s1">'terms'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">],</span>
+                      <span class="s1">'title'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span>
+                      <span class="s1">'thumbnail'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'media_thumbnail'</span><span class="p">]</span>
+            <span class="p">}</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">record</span><span class="p">))</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+</pre>
+</td>
+</tr></table>
+<p>It ran surprisingly fast; it actually took a lot longer to find the feed URLs than it did to fetch the articles and do term extraction. A number of sites returned 0 articles and I need to do  prune of those from the feed list as they are probably either dead or uninteresting.</p>
+<p>Once that was done I had close to 40,000 articles to work with. A simple approach is to not even bother going further and just use the extracted terms for deciding what articles to show. I could probably get pretty good results this way; for example, where Zite would typically give me about ten articles on Clojure, I already have over 200!  But I'd like to press on and do some clustering and use that for higher-level tagging and eventually supervised learning.</p>
+<p>For clustering we need some way of measuring <a href="https://en.wikipedia.org/wiki/Similarity_measure">similarity</a>
+between articles (or conversely, distance). For <a href="https://en.wikipedia.org/wiki/Categorical_variable">categorical data</a>
+(as opposed to quantitative data), like our lists of terms, a simple but highly effective measure is
+<a href="https://en.wikipedia.org/wiki/Jaccard_index">Jacard similarity</a>, which is the size of the intersection 
+of our list of terms divided by the size of the union. For example, if one document had the terms 'Obama', 'president', 'visit', and the other had the terms 'Trump', 'president', 'campaign', 'Fiorina', then the Jacard similarity of these documents would be 2/6. The Jacard distance is just 1 - the similarity. Some algorithms work with similarities and some with distances so it is useful to know how to compute both. For points in n-dimensional space, for example, distance is usually Euclidean distance (the square root of the sum of the squares of the distances on each axis), while similarity would be 1/distance,  or some other value that increases as distance decreases; we want to avoid division by zero so 1 / (1 + distance) is more common.</p>
+<p>Calculating the Jacard similarity of all the pairwise combinations of nearly 40,000 items is no mean feat, and to make this tractable in an interpreted language like Python you have to leverage libraries that have efficient native implementations under the hood very effectively. I found the code below not too bad; it took about 20 minutes on my MacBook Pro:</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Load the articles back in.</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'articles.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># We will add line number info in for easy cross reference.</span>
+    <span class="n">linenum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="n">linenum</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">ve</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s2">"Failed to parse line </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">linenum</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">ve</span><span class="p">)</span>
+        <span class="c1"># Drop any that have no terms.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'feed'</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="s1">'feed'</span><span class="p">],</span> 
+                     <span class="s1">'line'</span><span class="p">:</span> <span class="n">linenum</span><span class="p">,</span>
+                     <span class="s1">'title'</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span>
+                     <span class="s1">'terms'</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">])})</span>
+
+
+<span class="k">def</span> <span class="nf">jacard_similarity</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">):</span>
+    <span class="sd">""" Jacard similarity is the size of the intersection divided by the union.</span>
+<span class="sd">    """</span>
+    <span class="n">set1</span> <span class="o">=</span> <span class="n">row1</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">]</span>
+    <span class="n">set2</span> <span class="o">=</span> <span class="n">row2</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">]</span>
+    <span class="n">intersection_len</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">)))</span>
+    <span class="n">union_len</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span> <span class="o">-</span> <span class="n">intersection_len</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">intersection_len</span> <span class="o">/</span> <span class="n">union_len</span>
+
+<span class="c1"># Compute the pairwise distance matrix. We do the upper triangle.</span>
+<span class="n">similarity_generator</span> <span class="o">=</span> <span class="p">(</span><span class="n">jacard_similarity</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">)</span> \
+    <span class="k">for</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">upper_triangle</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">fromiter</span><span class="p">(</span><span class="n">similarity_generator</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+</pre>
+</td>
+</tr></table>
+<p>This computes the upper triangle, and we would need to make a reflection around the diagonal to complete a square matrix. Note how we leverage Python sets for efficient calculation of union and intersection, and use itertools instead of explicit loops. To complete the matrix we can do this:</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">scipy.spatial</span>
+<span class="c1"># Expand to a square</span>
+<span class="n">distance_matrix</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">squareform</span><span class="p">(</span><span class="n">upper_triangle</span><span class="p">)</span>
+</pre>
+</td>
+</tr></table>
+<p>Once we have this matrix we can use it for our clustering. The approach I am interested in trying is <a href="https://en.wikipedia.org/wiki/Affinity_propagation">affinity propagation</a>. The implementation in SciKit can use a precomputed similarity matrix and apparently its a very good algorithm for finding optimal clusters, but it is quadratic so computing clusters will be slow.</p>
+<p>The code to compute the clusters is below:</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">AffinityPropagation</span>
+
+<span class="n">af</span> <span class="o">=</span> <span class="n">AffinityPropagation</span><span class="p">(</span><span class="n">affinity</span><span class="o">=</span><span class="s1">'precomputed'</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">distance_matrix</span><span class="p">)</span>
+
+<span class="n">cluster_centers_indices</span> <span class="o">=</span> <span class="n">af</span><span class="o">.</span><span class="n">cluster_centers_indices_</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">af</span><span class="o">.</span><span class="n">labels_</span>
+
+<span class="n">n_clusters_</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cluster_centers_indices</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_clusters_</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"Cluster </span><span class="si">%d</span><span class="se">\n</span><span class="s2">"</span> <span class="o">%</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">labels</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+</pre>
+</td>
+</tr></table>
+<p>Starting with smaller samples, for 1000 articles I got about 160 clusters; for 2000 about 290, and for 3000, 410.
+Some of the clusters make sense (e.g. I see some recipes being clustered) but a lot don't. I expect there are three reasons for this: the small sample across diverse topics mean lots of articles have no common terms, possibly I need more terms, the algorithm is running with all defaults and hasn't been tuned, and of course it is possible I have bugs; I have not validated the Jacard values. So I will need to go deeper. Amongst other things I think I should drop any terms that only occur in single documents as they add cost but no benefit; I found that there are only about 20% of the terms that actually occur in two or more documents.</p>
+<p>Watch this space!</p>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="zite-replacement-3.html" rel="prev" title="Building a Zite Replacement (Part 3)">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="zite-replacement-5.html" rel="next" title="Building a Zite Replacement (Part 5)">Next post</a>
+            </li>
+        </ul>
+<div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/zite-replacement-4.html",
+        disqus_title="Building a Zite Replacement (Part 4)",
+        disqus_identifier="cache/posts/zite-replacement-4.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+                    <footer id="footer"><p>Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+    </section><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67535606-1', 'auto');
+  ga('send', 'pageview');
+
+</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+    </script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+</body>
+</html>

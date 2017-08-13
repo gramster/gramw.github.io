@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html prefix="
+og: http://ogp.me/ns#
+article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Using Jupyter as a Music Notebook | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/using-jupyter-as-a-music-notebook.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Graham Wheeler">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="Using Jupyter as a Music Notebook">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/using-jupyter-as-a-music-notebook.html">
+<meta property="og:description" content="I recently started playing guitar again after a long absence and wanted to start making some notes in a digital form. Unfortunately, I didn't find any good tools. There is TeX of course, which can do ">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-02-27T20:00:00Z">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="https://github.com/gramster" title="My Github"><i class="icon-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/grahamwheeler" title="My LinkedIn"><i class="icon-linkedin"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">Using Jupyter as a Music Notebook</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2016-02-27T20:00:00+00:00">2016-02-27 20:00</time>
+            
+                      |  
+        <a href="using-jupyter-as-a-music-notebook.ipynb" id="sourcelink">Source</a>
+
+            </div>
+            
+        </div>
+        <div class="body">
+            <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I recently started playing guitar again after a long absence and wanted to start making some notes in a digital form. Unfortunately, I didn't find any good tools. There is TeX of course, which can do anything, but I was hoping for something a bit more WYSIWYGy. There are some very good tools availabe for musical scores (MuseScore, Frescobaldi), but I want something that is more like a traditional notebook with lots of notes interspersed with occasional musical notation (in both traditional and tablature forms).</p>
+<p>So an obvious potential candidate is Jupyter (nee IPython), but it has no support for musical notation out of the box. But it is doable and in this post I'll walk through how I got it to work on my Mac. This is also my first attempt at using a Jupyter notebook as my blog post in Nikola so I'm kiling two birds with one stone.</p>
+<p>I want something that is fairly easy to write the music in. MusicXML isn't too bad, except XML. What little I've seen of Liyponds markup looked pretty unfriendly for the simple use cases I have. A few days ago I stumbled across a Python library called abjad which looked just the ticket. As I write this I have it working for music on the staff but not tablature (I'm not sure it supports that) but I hope by the end of this post I'll have that figured out too!</p>
+<p>Abjad relies on Lilypond, so first that has to be installed. It can be downloaded from <a href="http://lilypond.org/macos-x.html">http://lilypond.org/macos-x.html</a>, and then the tarball needs to be uncompressed and the Lilypond.app folder dragged to /Applications. You need to follow the instructions at that link to set up a command line version too. I created a file /usr/local/bin/lilypond for that; my Homebrew install uses that folder so it is already in my path.</p>
+<p>Next we need to install Abjad. You should ideally do this in a virtual environment. I use Anaconda and already have one set up, so can do the installation as follows; you may need to prefix this with <code>sudo</code> depending on your setup.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span>%%bash
+pip install abjad<span class="o">[</span>development,ipython<span class="o">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Collecting abjad[development,ipython]
+  Downloading Abjad-2.16.tar.gz (27.2MB)
+Collecting Sphinx&gt;=1.0.7 (from abjad[development,ipython])
+  Downloading Sphinx-1.3.5-py2.py3-none-any.whl (1.5MB)
+Collecting configobj&gt;=4.7.2 (from abjad[development,ipython])
+  Downloading configobj-5.0.6.tar.gz
+Collecting ply&gt;=3.4 (from abjad[development,ipython])
+  Downloading ply-3.8.tar.gz (157kB)
+Collecting pytest&gt;=2.1 (from abjad[development,ipython])
+  Downloading pytest-2.8.7-py2.py3-none-any.whl (151kB)
+Requirement already satisfied (use --upgrade to upgrade): Pygments&gt;=2.0 in /Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages (from Sphinx&gt;=1.0.7-&gt;abjad[development,ipython])
+Requirement already satisfied (use --upgrade to upgrade): six&gt;=1.4 in /Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages (from Sphinx&gt;=1.0.7-&gt;abjad[development,ipython])
+Collecting alabaster&lt;0.8,&gt;=0.7 (from Sphinx&gt;=1.0.7-&gt;abjad[development,ipython])
+  Downloading alabaster-0.7.7-py2.py3-none-any.whl
+Collecting babel!=2.0,&gt;=1.3 (from Sphinx&gt;=1.0.7-&gt;abjad[development,ipython])
+  Downloading Babel-2.2.0-py2.py3-none-any.whl (6.5MB)
+Collecting snowballstemmer&gt;=1.1 (from Sphinx&gt;=1.0.7-&gt;abjad[development,ipython])
+  Downloading snowballstemmer-1.2.1-py2.py3-none-any.whl (64kB)
+Collecting sphinx-rtd-theme&lt;2.0,&gt;=0.1 (from Sphinx&gt;=1.0.7-&gt;abjad[development,ipython])
+  Downloading sphinx_rtd_theme-0.1.9-py3-none-any.whl (693kB)
+Requirement already satisfied (use --upgrade to upgrade): Jinja2&gt;=2.3 in /Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages (from Sphinx&gt;=1.0.7-&gt;abjad[development,ipython])
+Requirement already satisfied (use --upgrade to upgrade): docutils&gt;=0.11 in /Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages (from Sphinx&gt;=1.0.7-&gt;abjad[development,ipython])
+Collecting py&gt;=1.4.29 (from pytest&gt;=2.1-&gt;abjad[development,ipython])
+  Downloading py-1.4.31-py2.py3-none-any.whl (81kB)
+Collecting pytz&gt;=0a (from babel!=2.0,&gt;=1.3-&gt;Sphinx&gt;=1.0.7-&gt;abjad[development,ipython])
+  Downloading pytz-2015.7-py2.py3-none-any.whl (476kB)
+Requirement already satisfied (use --upgrade to upgrade): MarkupSafe in /Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages (from Jinja2&gt;=2.3-&gt;Sphinx&gt;=1.0.7-&gt;abjad[development,ipython])
+Building wheels for collected packages: abjad, configobj, ply
+  Running setup.py bdist_wheel for abjad: started
+  Running setup.py bdist_wheel for abjad: finished with status 'done'
+  Stored in directory: /Users/gram/Library/Caches/pip/wheels/9c/61/2d/e0a56fe03a96b4603c07e7135aa8f125f277582d32f93f3607
+  Running setup.py bdist_wheel for configobj: started
+  Running setup.py bdist_wheel for configobj: finished with status 'done'
+  Stored in directory: /Users/gram/Library/Caches/pip/wheels/d0/18/3a/88a9e8e07940560496c247872870978bf9b6cd5d914c0eac3e
+  Running setup.py bdist_wheel for ply: started
+  Running setup.py bdist_wheel for ply: finished with status 'done'
+  Stored in directory: /Users/gram/Library/Caches/pip/wheels/d9/34/fe/b9f5d00d8690911944b0c24811ed7f5fb2c5d89f9c4d6053c7
+Successfully built abjad configobj ply
+Installing collected packages: alabaster, pytz, babel, snowballstemmer, sphinx-rtd-theme, Sphinx, configobj, ply, py, pytest, abjad
+Successfully installed Sphinx-1.3.5 abjad-2.16 alabaster-0.7.7 babel-2.2.0 configobj-5.0.6 ply-3.8 py-1.4.31 pytest-2.8.7 pytz-2015.7 snowballstemmer-1.2.1 sphinx-rtd-theme-0.1.9
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>  Abjad 2.16 does not provide the extra 'development'
+  Abjad 2.16 does not provide the extra 'ipython'
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note how there are no spaces in the argument to <code>pip install</code>. The Abjad documentation shows spaces at the time I write this but that is incorrect; I have reported the issue and it should be corrected.</p>
+<p>It's also possible that the <code>development</code> and <code>ipython</code> extensions are irrelevant. The error message above suggests they may be. However, I'm including them as that is what the documentation states.</p>
+<p>To have MIDI output recorded in the notebook, fluidsynth is needed. This requires Homebrew or MacPorts on a Mac. I have Homebrew so I do the installation with:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span>%%bash
+
+brew install fluidsynth --with-libsndfile
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>==&gt; Installing dependencies for fluid-synth: flac, libogg, libvorbis, libsndfile
+==&gt; Installing fluid-synth dependency: flac
+==&gt; Downloading https://homebrew.bintray.com/bottles/flac-1.3.1.el_capitan.bottle.tar.gz
+==&gt; Pouring flac-1.3.1.el_capitan.bottle.tar.gz
+🍺  /usr/local/Cellar/flac/1.3.1: 50 files, 2.3M
+==&gt; Installing fluid-synth dependency: libogg
+==&gt; Downloading https://homebrew.bintray.com/bottles/libogg-1.3.2.el_capitan.bottle.tar.gz
+==&gt; Pouring libogg-1.3.2.el_capitan.bottle.tar.gz
+🍺  /usr/local/Cellar/libogg/1.3.2: 95 files, 668K
+==&gt; Installing fluid-synth dependency: libvorbis
+==&gt; Downloading https://homebrew.bintray.com/bottles/libvorbis-1.3.5.el_capitan.bottle.tar.gz
+==&gt; Pouring libvorbis-1.3.5.el_capitan.bottle.tar.gz
+🍺  /usr/local/Cellar/libvorbis/1.3.5: 155 files, 2.6M
+==&gt; Installing fluid-synth dependency: libsndfile
+==&gt; Downloading https://homebrew.bintray.com/bottles/libsndfile-1.0.25.el_capitan.bottle.1.tar.gz
+==&gt; Pouring libsndfile-1.0.25.el_capitan.bottle.1.tar.gz
+🍺  /usr/local/Cellar/libsndfile/1.0.25: 47 files, 1.8M
+==&gt; Installing fluid-synth
+==&gt; Downloading https://downloads.sourceforge.net/project/fluidsynth/fluidsynth-1.1.6/fluidsynth-1.1.6.tar.gz
+==&gt; Downloading from http://iweb.dl.sourceforge.net/project/fluidsynth/fluidsynth-1.1.6/fluidsynth-1.1.6.tar.gz
+==&gt; cmake .. -DCMAKE_C_FLAGS_RELEASE= -DCMAKE_CXX_FLAGS_RELEASE= -DCMAKE_INSTALL_PREFIX=/usr/local/Cellar/fluid-synth/1.1.6 -DCMAKE_BUILD_TYPE=Release -DCMAKE_FIND_FRAMEWORK=LAST -DCMAKE_VERBOSE_MAKEFILE=ON -Wno-dev -Denable-framework=OFF -DLIB_SUFFIX=
+==&gt; make install
+🍺  /usr/local/Cellar/fluid-synth/1.1.6: 29 files, 556K, built in 24 seconds
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we should be able to load Abjad, as follows:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> abjad.ext.ipython
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>and test it:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">abjad</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">duration</span> <span class="o">=</span> <span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Note</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span> <span class="k">for</span> <span class="n">pitch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="n">staff</span> <span class="o">=</span> <span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-3-b2e3fd3821b2&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> notes <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>Note<span class="ansi-blue-fg">(</span>pitch<span class="ansi-blue-fg">,</span> duration<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> pitch <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">8</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> staff <span class="ansi-blue-fg">=</span> Staff<span class="ansi-blue-fg">(</span>notes<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg"> </span>show<span class="ansi-blue-fg">(</span>staff<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages/abjad/tools/ipythontools/Show.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, expr)</span>
+<span class="ansi-green-intense-fg ansi-bold">     23</span>             <span class="ansi-blue-fg">'output.png'</span><span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">     24</span>             )
+<span class="ansi-green-fg">---&gt; 25</span><span class="ansi-red-fg">         </span>result <span class="ansi-blue-fg">=</span> topleveltools<span class="ansi-blue-fg">.</span>persist<span class="ansi-blue-fg">(</span>expr<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>as_png<span class="ansi-blue-fg">(</span>temporary_file_path<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     26</span>         pngs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">     27</span>         <span class="ansi-green-fg">for</span> file_path <span class="ansi-green-fg">in</span> result<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages/abjad/tools/agenttools/PersistenceAgent.py</span> in <span class="ansi-cyan-fg">as_png</span><span class="ansi-blue-fg">(self, png_file_path, remove_ly, illustrate_function, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    340</span>             ly_file_path<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    341</span>             illustrate_function<span class="ansi-blue-fg">=</span>illustrate_function<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 342</span><span class="ansi-red-fg">             </span><span class="ansi-blue-fg">**</span>kwargs
+<span class="ansi-green-intense-fg ansi-bold">    343</span>             )
+<span class="ansi-green-intense-fg ansi-bold">    344</span> 
+
+<span class="ansi-green-fg">/Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages/abjad/tools/agenttools/PersistenceAgent.py</span> in <span class="ansi-cyan-fg">as_ly</span><span class="ansi-blue-fg">(self, ly_file_path, candidacy, illustrate_function, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     86</span>             <span class="ansi-green-fg">assert</span> <span class="ansi-blue-fg">'__illustrate__'</span> <span class="ansi-green-fg">in</span> dir<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_client<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     87</span>             illustrate_function <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_client<span class="ansi-blue-fg">.</span>__illustrate__
+<span class="ansi-green-fg">---&gt; 88</span><span class="ansi-red-fg">         </span>illustration <span class="ansi-blue-fg">=</span> illustrate_function<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     89</span>         <span class="ansi-green-fg">if</span> ly_file_path <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     90</span>             ly_file_name <span class="ansi-blue-fg">=</span> systemtools<span class="ansi-blue-fg">.</span>IOManager<span class="ansi-blue-fg">.</span>get_next_output_file_name<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages/abjad/tools/scoretools/Component.py</span> in <span class="ansi-cyan-fg">__illustrate__</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    115</span>         <span class="ansi-green-fg">from</span> abjad<span class="ansi-blue-fg">.</span>tools <span class="ansi-green-fg">import</span> lilypondfiletools
+<span class="ansi-green-intense-fg ansi-bold">    116</span>         <span class="ansi-green-fg">from</span> abjad<span class="ansi-blue-fg">.</span>tools <span class="ansi-green-fg">import</span> markuptools
+<span class="ansi-green-fg">--&gt; 117</span><span class="ansi-red-fg">         </span>lilypond_file <span class="ansi-blue-fg">=</span> lilypondfiletools<span class="ansi-blue-fg">.</span>make_basic_lilypond_file<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    118</span>         lilypond_file<span class="ansi-blue-fg">.</span>header_block<span class="ansi-blue-fg">.</span>tagline <span class="ansi-blue-fg">=</span> markuptools<span class="ansi-blue-fg">.</span>Markup<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'""'</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    119</span>         <span class="ansi-green-fg">return</span> lilypond_file
+
+<span class="ansi-green-fg">/Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages/abjad/tools/lilypondfiletools/make_basic_lilypond_file.py</span> in <span class="ansi-cyan-fg">make_basic_lilypond_file</span><span class="ansi-blue-fg">(music)</span>
+<span class="ansi-green-intense-fg ansi-bold">     61</span>     <span class="ansi-green-fg">if</span> isinstance<span class="ansi-blue-fg">(</span>music<span class="ansi-blue-fg">,</span> lilypondfiletools<span class="ansi-blue-fg">.</span>LilyPondFile<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     62</span>         <span class="ansi-green-fg">return</span> music
+<span class="ansi-green-fg">---&gt; 63</span><span class="ansi-red-fg">     </span>lilypond_file <span class="ansi-blue-fg">=</span> lilypondfiletools<span class="ansi-blue-fg">.</span>LilyPondFile<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     64</span>     header_block <span class="ansi-blue-fg">=</span> lilypondfiletools<span class="ansi-blue-fg">.</span>Block<span class="ansi-blue-fg">(</span>name<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">'header'</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     65</span>     layout_block <span class="ansi-blue-fg">=</span> lilypondfiletools<span class="ansi-blue-fg">.</span>Block<span class="ansi-blue-fg">(</span>name<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">'layout'</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages/abjad/tools/lilypondfiletools/LilyPondFile.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">     80</span>         self<span class="ansi-blue-fg">.</span>_file_initial_user_comments <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">     81</span>         self<span class="ansi-blue-fg">.</span>_file_initial_system_includes <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">---&gt; 82</span><span class="ansi-red-fg">         </span>token <span class="ansi-blue-fg">=</span> lilypondfiletools<span class="ansi-blue-fg">.</span>LilyPondVersionToken<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     83</span>         self<span class="ansi-blue-fg">.</span>_file_initial_system_includes<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>token<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     84</span>         token <span class="ansi-blue-fg">=</span> lilypondfiletools<span class="ansi-blue-fg">.</span>LilyPondLanguageToken<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages/abjad/tools/lilypondfiletools/LilyPondVersionToken.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, version_string)</span>
+<span class="ansi-green-intense-fg ansi-bold">     27</span>         <span class="ansi-green-fg">assert</span> isinstance<span class="ansi-blue-fg">(</span>version_string<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">(</span>str<span class="ansi-blue-fg">,</span> type<span class="ansi-blue-fg">(</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     28</span>         <span class="ansi-green-fg">if</span> version_string <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 29</span><span class="ansi-red-fg">             </span>version_string <span class="ansi-blue-fg">=</span> abjad_configuration<span class="ansi-blue-fg">.</span>get_lilypond_version_string<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     30</span>         self<span class="ansi-blue-fg">.</span>_version_string <span class="ansi-blue-fg">=</span> version_string
+<span class="ansi-green-intense-fg ansi-bold">     31</span> 
+
+<span class="ansi-green-fg">/Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages/abjad/tools/systemtools/AbjadConfiguration.py</span> in <span class="ansi-cyan-fg">get_lilypond_version_string</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">    211</span>         '''
+<span class="ansi-green-intense-fg ansi-bold">    212</span>         <span class="ansi-green-fg">from</span> abjad <span class="ansi-green-fg">import</span> abjad_configuration
+<span class="ansi-green-fg">--&gt; 213</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">if</span> subprocess<span class="ansi-blue-fg">.</span>mswindows <span class="ansi-green-fg">and</span> <span class="ansi-green-fg">not</span> <span class="ansi-blue-fg">'LilyPond'</span> <span class="ansi-green-fg">in</span> os<span class="ansi-blue-fg">.</span>environ<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'PATH'</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    214</span>             command <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">r'dir "C:\Program Files\*.exe" /s /b | find "lilypond.exe"'</span>
+<span class="ansi-green-intense-fg ansi-bold">    215</span>             proc <span class="ansi-blue-fg">=</span> subprocess<span class="ansi-blue-fg">.</span>Popen<span class="ansi-blue-fg">(</span>command<span class="ansi-blue-fg">,</span> shell<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span> stdout<span class="ansi-blue-fg">=</span>subprocess<span class="ansi-blue-fg">.</span>PIPE<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">AttributeError</span>: module 'subprocess' has no attribute 'mswindows'</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Well, that didn't go so well. It turns out Abjad releases aren't that frequent, and while this issue was fixed over six months ago (<a href="https://github.com/Abjad/abjad/issues/526">https://github.com/Abjad/abjad/issues/526</a>) it hasn't made it into an official release yet (Abjad 2.16 as I write this). If you are using Python 3.4 or earlier this isn't a problem; its a Python 3.5 change.</p>
+<p>So let's try get the bleeding edge version:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span>%%bash
+
+<span class="nb">cd</span> ~
+git clone https://github.com/Abjad/abjad.git
+<span class="nb">cd</span> abjad 
+pip install --upgrade .
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Processing /Users/gram/abjad
+Requirement already up-to-date: ply in /Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages (from Abjad==2.16)
+Requirement already up-to-date: six in /Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages (from Abjad==2.16)
+Installing collected packages: Abjad
+  Found existing installation: Abjad 2.16
+    Uninstalling Abjad-2.16:
+      Successfully uninstalled Abjad-2.16
+  Running setup.py install for Abjad: started
+    Running setup.py install for Abjad: finished with status 'done'
+Successfully installed Abjad-2.16
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Cloning into 'abjad'...
+Checking out files: 100% (2651/2651), done.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once that is done, after a kernel reset in Jupyter we can try again:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> abjad.ext.ipython
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">abjad</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">duration</span> <span class="o">=</span> <span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Note</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span> <span class="k">for</span> <span class="n">pitch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="n">staff</span> <span class="o">=</span> <span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Unfortunately, no output was produced. We can look at the source of the <code>show()</code> methd by executing <code>show??</code> in a cell. I've done that and am going to execute the same code in more detail below. First the part that should generate a PNG in a temporary file:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">abjad.tools</span> <span class="kn">import</span> <span class="n">systemtools</span>
+<span class="kn">from</span> <span class="nn">abjad.tools</span> <span class="kn">import</span> <span class="n">topleveltools</span>
+<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display_png</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+
+<span class="n">expr</span> <span class="o">=</span> <span class="n">staff</span>
+
+<span class="n">temporary_directory</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+<span class="n">temporary_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">temporary_directory</span><span class="p">,</span>
+    <span class="s1">'output.png'</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">topleveltools</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span><span class="o">.</span><span class="n">as_png</span><span class="p">(</span><span class="n">temporary_file_path</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">temporary_file_path</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/var/folders/rf/zdnznzn15_l5q5x64pyd7b7m0000gq/T/tmp4vq93m6l/output.png
+((), 0.006474018096923828, 0.5328137874603271, False)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Looking at that temporary folder, I see a '.ly' file but no .png. So it seems that this line:</p>
+
+<pre><code>result = topleveltools.persist(expr).as_png(temporary_file_path)
+
+</code></pre>
+<p>is not working. Let's break that down:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">topleveltools</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>PersistenceAgent(client=Staff("c'4 cs'4 d'4 ef'4 e'4 f'4 fs'4 g'4"))
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>That looks okay. What about the next step? If we look at that <code>as_png</code> function we see it returns the path, the lapsed formatting and rendering times, and a flag for success. We saw ((), 0.006474018096923828, 0.5328137874603271, False) as the output so success was False. I still have the .ly file around and it looks like what is failing is:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">systemtools</span><span class="o">.</span><span class="n">IOManager</span><span class="o">.</span><span class="n">run_lilypond</span><span class="p">(</span><span class="s1">'/var/folders/rf/zdnznzn15_l5q5x64pyd7b7m0000gq/T/tmp4vq93m6l/output.ly'</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="s1">'--png'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[20]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>False</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So indeed that is the failure. If we look at its source with <code>systemtools.IOManager.run_lilypond??</code>:</p>
+
+<pre><code>@staticmethod
+def run_lilypond(ly_path, flags=None, lilypond_path=None):
+    r'''Runs LilyPond on `ly_path`.
+
+    Writes redirected output of Unix ``date`` to top line of LilyPond log
+    file.
+
+    Then appends redirected output of LilyPond output to the LilyPond log
+    file.
+
+    Returns none.
+    '''
+    from abjad import abjad_configuration
+    from abjad.tools import stringtools
+    from abjad.tools import systemtools
+    if not lilypond_path:
+        lilypond_path = abjad_configuration['lilypond_path']
+        if not lilypond_path:
+            lilypond_path = 'lilypond'
+    lilypond_base, extension = os.path.splitext(ly_path)
+    pdf_path = ly_path.replace('.ly', '.pdf')
+    if flags:
+        command = 'date &gt; {};'
+        command += ' {} {} -dno-point-and-click -o {} {} &gt;&gt; {} 2&gt;&amp;1'
+        command = command.format(
+            abjad_configuration.lilypond_log_file_path,
+            lilypond_path,
+            flags,
+            lilypond_base,
+            ly_path,
+            abjad_configuration.lilypond_log_file_path,
+            )
+    else:
+        command = 'date &gt; {}; {} -dno-point-and-click -o {} {} &gt;&gt; {} 2&gt;&amp;1'
+        command = command.format(
+            abjad_configuration.lilypond_log_file_path,
+            lilypond_path,
+            lilypond_base,
+            ly_path,
+            abjad_configuration.lilypond_log_file_path,
+            )
+    if not os.path.exists(pdf_path):
+        exit_code = IOManager.spawn_subprocess(command)
+        postscript_path = ly_path.replace('.ly', '.ps')
+        try:
+            os.remove(postscript_path)
+        except OSError:
+            pass
+        if exit_code:
+            return False
+        return True
+
+
+</code></pre>
+<p>we can see that it writes to a log file, with a path given by abjad_configuration.lilypond_log_file_path. Let's look at that:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">abjad_configuration</span><span class="o">.</span><span class="n">lilypond_log_file_path</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[22]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'/Users/gram/.abjad/output/lily.log'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span>%%bash
+tail <span class="s1">'/Users/gram/.abjad/output/lily.log'</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Preprocessing graphical objects...
+Finding the ideal number of pages...
+Fitting music on 1 page...
+Drawing systems...
+Layout output to `output.ps'...
+Converting to PNG...dyld: Library not loaded: ./bin/../sobin/libgs.8.70.dylib
+  Referenced from: /Applications/LilyPond.app/Contents/Resources/bin/../bin/gs
+  Reason: image not found
+
+fatal error: GS exited with status: 5
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you do a Google search for that error, you will find its been reported, and there is a workaround, which is:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span>%%bash
+<span class="nb">cd</span> /Applications/LilyPond.app/Contents/Resources/bin
+install_name_tool -change ./bin/../sobin/libgs.8.70.dylib @executable_path/../lib/libgs.8.70.dylib gs
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's try again:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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%0AJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJy%0AAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcA%0AUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABV%0ASg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXk%0AAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4A%0AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACq%0AlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJ%0AAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwA%0AQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBU%0AKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWS%0AAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkA%0AgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCo%0AUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgCol%0ABwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIA%0AAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQ%0ApeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVK%0ADgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQA%0AAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCg%0ASskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqU%0AHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskB%0AAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABA%0AlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQp%0AOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZID%0AAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCA%0AKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhS%0AcgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUH%0AAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAA%0AVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl%0A5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoO%0AAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAA%0AqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBK%0AyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQc%0AAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEA%0AVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECV%0AkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5%0AAIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMA%0AqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAq%0AJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJy%0AAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcA%0AUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABV%0ASg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXk%0AAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4A%0AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACq%0AlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJ%0AAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwA%0AQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBU%0AKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWS%0AAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkA%0AgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCo%0AUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgCol%0ABwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIA%0AAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQ%0ApeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVK%0ADgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQA%0AAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCg%0ASskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqU%0AHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskB%0AAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABA%0AlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQp%0AOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZID%0AAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCA%0AKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhS%0AcgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUH%0AAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAA%0AVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl%0A5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoO%0AAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAA%0AqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBK%0AyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQc%0AAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEA%0AVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECV%0AkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5%0AAIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMA%0AqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAq%0AJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJy%0AAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcA%0AUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABV%0ASg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXk%0AAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4A%0AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACq%0AlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJ%0AAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwA%0AQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBU%0AKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWS%0AAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkA%0AgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCo%0AUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgCol%0ABwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIA%0AAFVKDgCgSskBAFQpOQCAKiUHAFD1P2vx3q3Dmb7zAAAAAElFTkSuQmCC">
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Success! But what about tablature? It turns out that Lilypond uses a variant of Staff called TabStaff for tablature. Abjad does not have a TabStaff class but does allow you to override the tag used for a staff with a <code>context_name</code> argument:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">staff</span> <span class="o">=</span> <span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span> <span class="n">context_name</span><span class="o">=</span><span class="s1">'TabStaff'</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0MAAASdCAIAAAANMRBpAAAACXBIWXMAAA+IAAAPiAEWyKWGAAAA%0AHXRFWHRTb2Z0d2FyZQBHUEwgR2hvc3RzY3JpcHQgOC43MHQ4WKIAAB1SSURBVHic7d2xa5zn4cDx%0Aux+/sYtUKHQLTkO9GGpbQ6e2gw6ydjjR3WC3dC7S3kXXvUMF2cvdP1CwhiZTByseOjQhrYiHkMY0%0AvqGBQDvoN7z4cO3UPtmn6PeNP5/BnO70+n0sBP7yvM/7PuOzs7MRAABB/3PZAwAA4CUpOQCAKiUH%0AAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAA%0AVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiVHw2Kx%0A2NnZmUwmOzs7i8XivIcvl8uDg4PzHnVwcDCZTN58883JZHJycrL+gScnJ8Not7e3d3Z2znUsAKxv%0AfHZ2dtljgBc4Pj6eTCbz+Xw6nS4Wi729vbt37+7u7q557MHBwdBS5/ptPzo6ms1m9+7dWy6Xb775%0A5pUrV/72t7+teezOzs7p6em9e/e2tra2t7e3trYePXq0/qkBYE3m5AiYzWaj0WhIt+l0OhqN1p9g%0A293dvXfv3kucdLlcnp6ezmazra2t4cv1jz08PLx9+/bW1tZw1PA3AMDG/e9lDwBe7Pj4ePSfPfQ1%0AXK/c39+/efPm7u7u0JG3b99e/9jd3d3T09PJZLJcLm/evDmfzy9smAC81lxdXctwde/GjRvb29uX%0APZZvrE8++eTLL7/83ve+9+xHQ8mtflfH4/Ho8RTd8926detnP/vZ6pDhb/j973//zjvvvPDYu3fv%0Ajh6veNvf39/f318ul3fu3Fn/pKPHvzn7+/s/+MEPXnjS+/fv//rXv/7FL37xwlMAwEDJrWX4/3j9%0AtVm8hGE129BPT5lMJsfHx48ePRquV25vb9+8efNc10yfLLn1nZyc3Llz5/DwcHd3d7FYnJycHB4e%0AvvCo09PTnZ2dra2tYV3d+qcej8d+xwA4F+vkCNjf3x89npkb/lynqF7RcHl0NBrNZrPJZHJwcLB+%0AYw0XVUePRzu8BoCNs06OgN3d3fl8PpvNjo6OlsvlfD7/GiauDg4OlsvlSyzIu3Llynw+Pzo6Gp5d%0AMp1OhxIFgI1TcjRMp9PhrtXzOjo6Ojo6Gl7v7Ozcvn17zXsXXuU2hZceLQCci5LjG279dAOAHOvk%0ANmZvb29vb2/8n/aeMHz5Kqd4uY0KLtfR0dFLbMkAAKxDyW3AYrEYj8eLxWKxWEwfW300GI1G8/n8%0ApS/YnZ6e7u3tbW9vD882O5dL3HLq+Pj4zp071vsDwAVxdXUDVjNtqydNrN6ZTqcbeSrssIh+eJ7F%0AuQxTYqstp/b29tbfcurOnTtPbjk1mUzOteXUUJ/D4M87bABgHebkNub/5wr3y9pyarlcDveZnnfA%0AAMD6zMmdwzvvvDM8HuwpV69e/eCDDxaLxU9/+tPvf//7o9Hoz3/+8/DRv//971df2fb222//5Cc/%0AeerNP/7xj3/4wx9eeOzh4eGzW06tM6S333772S2n1j/pbDbb399/8lrwC0/67rvv/v3vf88tBNys%0Ajz76yJOBAVifkjuHGzduXL9+/dn3d3d333vvvffee+/atWs/+tGPRqPRn/70pw8++GA0Gv3yl798%0A9fO+8cYbX/nmmv/l7+7unpycHBwcDFtOnZ6ernPgcNLhxs9hi4ujo6Of//zn6xx7cHCwtbX11Bze%0ACw988ODBv/71r9e5Y2az2Xe/+93LHgUAJUruHK5fv/7fOuOp91cPMLu4LnnjjTe+svCeNWw5NWwD%0Ada4tp7a3t4ctp4Z/xWw2Ozw8XOekx48NX04mk5s3b77wpMfHx//4xz9e55IbjUbf+ta3LnsIAJQo%0AuQsx3Kz6/2Hl3HB59MqVK7PZbDabnZ6e/u53v1vz2OVyOXTVebecWkXbcIvGV26lCgC8Onc8NJyc%0AnAx7gI5Go52dnfUXk622nBomyU5PT9c8cLhbdrlcTiaTvb296XS6fgIOntxZYfUaANig8erBGTzH%0AsFBsuEC5zvcPc1F+tudycHBwcnLyOk/gjcfj9X/HAGBkTm5TnnzS2ytu5AAAsCYltxnT6XQIuNWO%0ADibkAICLpuQ2Y9jIYbWz6urLYRevSx4cAPANpeQ2Zj6fDzuunp2draboRo/vYwUA2DhPITmH+/fv%0AP/8bhh0Uhmd2rALu4cOHX7kzBE958ODBo0ePXvOf1RdffHHZQwCgRMmdw/vvv//555+v850ffvjh%0A6vVnn332mtfJmj7++GMl9+mnn172EAAoUXLncOvWrXM9hWRw7dq1dfZUYHgKyev8s5rNZm+99dZl%0AjwKAEuvkNs9TSACAr4eS2zy3OAAAXw8lt2HDddXpdDo8iAQA4OIouU0arqvKOADg66HkNmZvb+/J%0A66rT6fSpFwAAm+Xe1c0YMm6ItsViMR6PTcsBABdNyb28vb29IddWGfdUvU2n02GWbvjT5BwAsFlK%0A7uUNc2/D669cGzeU3JM7sQIAbND47OzssscQcHx8PJlMbty4sb29/eT7Dx8+/Oyzz65du/bfDnz4%0A8OFoNPrOd75z4UPs++tf//rPf/7z+vXrlz2QS3N8fPyb3/zmV7/61WUPBIAMc3LnMJvNnr/Hw2Kx%0AeOqmB1dU1zfs8XD37t3LHsilGY/Hr3PIAvASlNxmPHXj6mC1PM6lVQDgIngKyQaMx+Nn72lYvX5y%0AOR0AwAYpuVe12mV1Pp+v5t6GeThrEAGAC6XkNuYrl8RZJwcAXBwl96rm8/mQa6trrKP/vLQ68ggS%0AAOBiKLkNGC6kPnstdbUNq5k5AOAiKLmLspqiG+54ePbOVgCAV6TkLsR0Oj07O1tdeB09cWMEAMCm%0AeJ7cOdy/f//53/Db3/52NBr9+Mc/Pj4+Ho1GW1tbV69eXX06vMl/8+DBg0ePHr3mP6UvvvjisocA%0AQImSO4f333//888/f843vPvuu6PR6Ic//OEqRz788MPhxdWrV1/zRnmhjz/+WMl9+umnlz0EAEqU%0A3DncunXrObt1rR4OfHp6OtysulgsZrPZ8Olf/vKXr2eQXcNuXYeHh5c9kEszm83eeuutyx4FACXW%0Ayb2S4W6GvcdGjx84Mh6Ph/dHj9fMXfJAAYBvInNyr2TYy2FVbEPGzefzxWKxmqLzCBIA4IIouVf1%0AlVNuAg4A+Bq4ugoAUKXkAACqlBwAQJWSAwCoUnIAAFXuXT2H/f397e3tyx7FN9Ynn3zy5ZdfTiaT%0Ayx7Ipfn2t7/90UcfPefp0wDwlLGH1gIARLm6CgBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEA%0AVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECV%0AkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5%0AAIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMA%0AqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAq%0AJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJy%0AAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcA%0AUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABV%0ASg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXk%0AAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4A%0AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACq%0AlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJ%0AAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwA%0AQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBU%0AKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWS%0AAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkA%0AgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCo%0AUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgCol%0ABwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIA%0AAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQ%0ApeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVK%0ADgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQA%0AAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCg%0ASskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqU%0AHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskB%0AAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABA%0AlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQp%0AOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZID%0AAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCA%0AKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhS%0AcgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUH%0AAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAA%0AVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl%0A5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoO%0AAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAA%0AqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBK%0AyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQc%0AAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEA%0AVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECV%0AkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5%0AAIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMA%0AqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAq%0AJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJy%0AAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcA%0AUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABV%0ASg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXk%0AAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4A%0AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACq%0AlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJ%0AAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwA%0AQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBU%0AKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWS%0AAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkA%0AgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCo%0AUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgCol%0ABwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIA%0AAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQ%0ApeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVK%0ADgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQA%0AAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCg%0ASskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqU%0AHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskB%0AAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABA%0AlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQp%0AOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZID%0AAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCA%0AKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhS%0AcgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUH%0AAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAA%0AVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl%0A5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoO%0AAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAA%0AqpQcAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBK%0AyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQc%0AAECVkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEA%0AVCk5AIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECV%0AkgMAqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5%0AAIAqJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMA%0AqFJyAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAq%0AJQcAUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJy%0AAABVSg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcA%0AUKXkAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABV%0ASg4AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXk%0AAACqlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4A%0AoErJAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACq%0AlBwAQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJ%0AAQBUKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwA%0AQJWSAwCoUnIAAFVKDgCgSskBAFQpOQCAKiUHAFCl5AAAqpQcAECVkgMAqFJyAABVSg4AoErJAQBU%0AKTkAgColBwBQpeQAAKqUHABAlZIDAKhScgAAVUoOAKBKyQEAVCk5AIAqJQcAUKXkAACqlBwAQJWS%0AAwCoUnIAAFVKDgCgSskBAFQpOQCAqv8Df4XrHF0fW9AAAAAASUVORK5CYII=">
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are a few things left I'd like to do, and I will update this post if I figure them out. First there is a lot of blank space around the output it would be nice to be rid of. Secondly I want to do guitar chord diagrams. My understanding is that these can be done in Lilypond with a tag <code>\fret-diagram-terse</code> but Abjad doesn't seem to support this so I will need to figure out how to extend it to support that. Watch this space.</p>
+
+</div>
+</div>
+</div>
+    </div>
+  </div>
+
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="zite-replacement-10.html" rel="prev" title="Building a Zite Replacement (Part 10)">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="zite-replacement-11.html" rel="next" title="Building a Zite Replacement (Part 11)">Next post</a>
+            </li>
+        </ul>
+<div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/using-jupyter-as-a-music-notebook.html",
+        disqus_title="Using Jupyter as a Music Notebook",
+        disqus_identifier="cache/posts/using-jupyter-as-a-music-notebook.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+                    <footer id="footer"><p>Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+    </section><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67535606-1', 'auto');
+  ga('send', 'pageview');
+
+</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+    </script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+</body>
+</html>
