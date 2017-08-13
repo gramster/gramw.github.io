@@ -1,6 +1,9 @@
-.doit.db.db
-.ipynb_checkpoints
-*.pyc
-trace.*
+README
+cache/*
 output
-cache
+themes/*
+*.pyc
+*.db
+__pycache__
+.ipynb_checkpoints
+
