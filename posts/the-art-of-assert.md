@@ -5,7 +5,6 @@
 .. slug: the-art-of-assert
 
 
-
 *"Assertions are the only reliable form of program documentation"*
 (Charles Hoare)
 
@@ -28,11 +27,13 @@ display the message, and give a Continue/Abort/Debug choice).
 
 Obviously, the first thing we need is a basic ASSERT macro:
 
-    #ifdef DEBUG
-    #define ASSERT(condition, message)     do { if (!(condition)) HandleAssert(message); } while (0)
-    #else
-    #define ASSERT(condition, message)
-    #endif
+```c
+#ifdef DEBUG
+#define ASSERT(condition, message)     do { if (!(condition)) HandleAssert(message); } while (0)
+#else
+#define ASSERT(condition, message)
+#endif
+```
 
 The first rule of asserts is, of course, never put them in production
 code, hence the DEBUG conditional. The use of a do/while above
@@ -43,59 +44,71 @@ The above is often the only form of ASSERT that most C/C++ programmers
 encounter. But there are quite a few useful variants on the idea.
 Sometimes, just an alias is already a useful distinction:
 
-    #define PRECONDITION(condition, message)     ASSERT(condition, message)
-    #define POSTCONDITION(condition, message)    ASSERT(condition, message)
+```c
+#define PRECONDITION(condition, message)     ASSERT(condition, message)
+#define POSTCONDITION(condition, message)    ASSERT(condition, message)
+```
 
 It can be useful to be able to define code that only exists in
 assertional builds:
 
-    #if DEBUG
-    #define ASSERTIONAL(code)      code
-    #else
-    #define ASSERTIONAL(code)
-    #endif
+```c
+#if DEBUG
+#define ASSERTIONAL(code)      code
+#else
+#define ASSERTIONAL(code)
+#endif
+```
 
 Putting all of the above in an example:
 
-    int AdvanceIndex(int index)
-    {
-        ASSERTIONAL(int save_index = index);
-        PRECONDITION(index >= 0, "Index can't be negative");
-        ....
+```c
+int AdvanceIndex(int index)
+{
+    ASSERTIONAL(int save_index = index);
+    PRECONDITION(index >= 0, "Index can't be negative");
+    ....
 
-        POSTCONDITION(index > save_index, "Index must advance");
-        return index;
-    }
+    POSTCONDITION(index > save_index, "Index must advance");
+    return index;
+}
+```
 
 If we have class invariants, it is useful to define these as methods in
 the class that we can call from our asserts:
 
-    class foo
-    {
-    #if DEBUG
-       bool invariant() { ... }
-    #endif
-    }
+```c++
+class foo
+{
+#if DEBUG
+   bool invariant() { ... }
+#endif
+}
+```
 
 During early development, we could confine ourselves to DEBUG builds. In
 this case we may want to skip over handling of bad input, etc. We can do
 this safely using simplifying assumptions:
 
-    #if DEBUG</font>
-    #define SIMPLIFYING_ASSUMPTION(condition,  explanation)      ASSERT(condition, explanation)
-    #else
-    #error SIMPLIFYING_ASSUMPTION not allowed in> release code
-    #endif
+```c
+#if DEBUG</font>
+#define SIMPLIFYING_ASSUMPTION(condition,  explanation)      ASSERT(condition, explanation)
+#else
+#error SIMPLIFYING_ASSUMPTION not allowed in> release code
+#endif
+```
 
 For example:
 
-    void Insert(node* n)
-    {
-        PRECONDITION(n != 0 && invariant(), "Can't insert null");
-        SIMPLIFYING_ASSUMPTION(find(n) == 0, "Not handling re-insertion of existing node yet");
-        ...
-        POSTCONDITION(find(n) != 0 && invariant(), "Node must be inserted");
-    }
+```c
+void Insert(node* n)
+{
+    PRECONDITION(n != 0 && invariant(), "Can't insert null");
+    SIMPLIFYING_ASSUMPTION(find(n) == 0, "Not handling re-insertion of existing node yet");
+    ...
+    POSTCONDITION(find(n) != 0 && invariant(), "Node must be inserted");
+}
+```
 
 Note, when writing unit tests for code that has pre- and
 post-conditions, you should be striving to write tests that pass the
@@ -107,10 +120,14 @@ correctness.
 
 Sometimes we may find it useful to always fire the assert:
 
-    #define UNREACHABLE(why)      ASSERT(0, why)
+```c
+#define UNREACHABLE(why)      ASSERT(0, why)
+```
 
 We can have compile-time assertions on simple expressions:
 
-    #define COMPILE_TIME_CHECK(b)    extern int dummy[(b) ? 1: -1]
+```c
+#define COMPILE_TIME_CHECK(b)    extern int dummy[(b) ? 1: -1]
+```
 
 As you can see from all of this, the lowly ASSERT can be quite flexible!

@@ -78,64 +78,64 @@ up if for some weird reason you put your ASSERTs in if statements.</p>
 <p>The above is often the only form of ASSERT that most C/C++ programmers
 encounter. But there are quite a few useful variants on the idea.
 Sometimes, just an alias is already a useful distinction:</p>
-<pre class="code literal-block"><span></span>#define PRECONDITION(condition, message)     ASSERT(condition, message)
-#define POSTCONDITION(condition, message)    ASSERT(condition, message)
+<pre class="code literal-block"><span></span><span class="cp">#define PRECONDITION(condition, message)     ASSERT(condition, message)</span>
+<span class="cp">#define POSTCONDITION(condition, message)    ASSERT(condition, message)</span>
 </pre>
 
 
 <p>It can be useful to be able to define code that only exists in
 assertional builds:</p>
-<pre class="code literal-block"><span></span>#if DEBUG
-#define ASSERTIONAL(code)      code
-#else
-#define ASSERTIONAL(code)
-#endif
+<pre class="code literal-block"><span></span><span class="cp">#if DEBUG</span>
+<span class="cp">#define ASSERTIONAL(code)      code</span>
+<span class="cp">#else</span>
+<span class="cp">#define ASSERTIONAL(code)</span>
+<span class="cp">#endif</span>
 </pre>
 
 
 <p>Putting all of the above in an example:</p>
-<pre class="code literal-block"><span></span>int AdvanceIndex(int index)
-{
-    ASSERTIONAL(int save_index = index);
-    PRECONDITION(index &gt;= 0, "Index can't be negative");
-    ....
+<pre class="code literal-block"><span></span><span class="kt">int</span> <span class="nf">AdvanceIndex</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ASSERTIONAL</span><span class="p">(</span><span class="kt">int</span> <span class="n">save_index</span> <span class="o">=</span> <span class="n">index</span><span class="p">);</span>
+    <span class="n">PRECONDITION</span><span class="p">(</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"Index can't be negative"</span><span class="p">);</span>
+    <span class="p">....</span>
 
-    POSTCONDITION(index &gt; save_index, "Index must advance");
-    return index;
-}
+    <span class="n">POSTCONDITION</span><span class="p">(</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">save_index</span><span class="p">,</span> <span class="s">"Index must advance"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">index</span><span class="p">;</span>
+<span class="p">}</span>
 </pre>
 
 
 <p>If we have class invariants, it is useful to define these as methods in
 the class that we can call from our asserts:</p>
-<pre class="code literal-block"><span></span><span class="k">class</span> <span class="n">foo</span>
-{
-<span class="c c-Singleline">#if DEBUG</span>
-   <span class="nb">bool</span> <span class="n">invariant</span>() { ... }
-<span class="c c-Singleline">#endif</span>
-}
+<pre class="code literal-block"><span></span><span class="k">class</span> <span class="nc">foo</span>
+<span class="p">{</span>
+<span class="cp">#if DEBUG</span>
+   <span class="kt">bool</span> <span class="n">invariant</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="cp">#endif</span>
+<span class="p">}</span>
 </pre>
 
 
 <p>During early development, we could confine ourselves to DEBUG builds. In
 this case we may want to skip over handling of bad input, etc. We can do
 this safely using simplifying assumptions:</p>
-<pre class="code literal-block"><span></span>#if DEBUG&lt;/font&gt;
-#define SIMPLIFYING_ASSUMPTION(condition,  explanation)      ASSERT(condition, explanation)
-#else
-#error SIMPLIFYING_ASSUMPTION not allowed in&gt; release code
-#endif
+<pre class="code literal-block"><span></span><span class="cp">#if DEBUG&lt;/font&gt;</span>
+<span class="cp">#define SIMPLIFYING_ASSUMPTION(condition,  explanation)      ASSERT(condition, explanation)</span>
+<span class="cp">#else</span>
+<span class="cp">#error SIMPLIFYING_ASSUMPTION not allowed in&gt; release code</span>
+<span class="cp">#endif</span>
 </pre>
 
 
 <p>For example:</p>
-<pre class="code literal-block"><span></span>void Insert(node* n)
-{
-    PRECONDITION(n != 0 &amp;&amp; invariant(), "Can't insert null");
-    SIMPLIFYING_ASSUMPTION(find(n) == 0, "Not handling re-insertion of existing node yet");
-    ...
-    POSTCONDITION(find(n) != 0 &amp;&amp; invariant(), "Node must be inserted");
-}
+<pre class="code literal-block"><span></span><span class="kt">void</span> <span class="nf">Insert</span><span class="p">(</span><span class="n">node</span><span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">PRECONDITION</span><span class="p">(</span><span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">invariant</span><span class="p">(),</span> <span class="s">"Can't insert null"</span><span class="p">);</span>
+    <span class="n">SIMPLIFYING_ASSUMPTION</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"Not handling re-insertion of existing node yet"</span><span class="p">);</span>
+    <span class="p">...</span>
+    <span class="n">POSTCONDITION</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">invariant</span><span class="p">(),</span> <span class="s">"Node must be inserted"</span><span class="p">);</span>
+<span class="p">}</span>
 </pre>
 
 
@@ -147,12 +147,12 @@ tend to be more stable than the code inside methods, reduce the need to
 examine the internal code, and, for the hard-core, support proving
 correctness.</p>
 <p>Sometimes we may find it useful to always fire the assert:</p>
-<pre class="code literal-block"><span></span>#define UNREACHABLE(why)      ASSERT(0, why)
+<pre class="code literal-block"><span></span><span class="cp">#define UNREACHABLE(why)      ASSERT(0, why)</span>
 </pre>
 
 
 <p>We can have compile-time assertions on simple expressions:</p>
-<pre class="code literal-block"><span></span>#define COMPILE_TIME_CHECK(b)    extern int dummy[(b) ? 1: -1]
+<pre class="code literal-block"><span></span><span class="cp">#define COMPILE_TIME_CHECK(b)    extern int dummy[(b) ? 1: -1]</span>
 </pre>
 
 

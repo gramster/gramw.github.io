@@ -45,24 +45,8 @@ article: http://ogp.me/ns/article#
             <div>
 <p>In the <a href="http://www.grahamwheeler.com/posts/zite-replacement-1.html">previous post</a> I gave an overview of what needs to be built for our <a href="http://zite.com/">Zite</a> replacement. In this post we will look at how to load an RSS feed and generate key terms for each article. In order to fetch the feed we will make use of the <a href="https://pypi.python.org/pypi/feedparser">feedparser</a> package, so make sure to install that first with pip, conda, or whatever you use.</p>
 <p>Another thing we're going to want is to strip HTML tags from the articles. I did a Google for "HTML element stripper Python" and found <a href="http://stackoverflow.com/questions/753052/strip-html-from-strings-in-python">this StackOverflow post</a> with the code below that works great:</p>
-<table class="codehilitetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15</pre></div></td>
-<td class="code">
-<pre class="code literal-block"><span></span><span class="kn">from</span> <span class="nn">HTMLParser</span> <span class="kn">import</span> <span class="n">HTMLParser</span>
+<pre class="code literal-block"><span></span><span class="ch">#!python</span>
+<span class="kn">from</span> <span class="nn">HTMLParser</span> <span class="kn">import</span> <span class="n">HTMLParser</span>
 
 <span class="k">class</span> <span class="nc">MLStripper</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -78,33 +62,13 @@ article: http://ogp.me/ns/article#
     <span class="n">s</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 </pre>
-</td>
-</tr></table>
+
+
 <p>With that, let's begin. One of the things we will want to do is normalize capitalization of words. In particular, the first word in a sentence is capitalized and we want to in most cases undo that so we don't see two forms of the same word. One solution is to lower-case everything but that is throwing the baby out with the bathwater. A better solution is to look up each word in a dictionary. If we fail to find a match we can try the lower-case form.</p>
 <p>There are probably libraries already to do this (NLTK?) but I did some early prototyping of the code in this post using the top 5000 words from <a href="http://www.wordfrequency.info/free.asp">this list</a>. So for now I'll just use that as a dictionary to normalize words. There are much more comprehensive lists out there without frequency information and I expect I'll replace this but due to my early experiments I had the word list loaded already.</p>
 <p>If you're interested in using that list, you can copy/paste it into a spreadsheet and save it as a CSV once you have agreed to the terms. I used the code below to load that CSV file. I also put the top 198 words in a separate list that I was going to use to remove <a href="https://en.wikipedia.org/wiki/Stop_words">stop words</a>, but I ended up not needing that.</p>
-<table class="codehilitetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19</pre></div></td>
-<td class="code">
-<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">csv</span>
+<pre class="code literal-block"><span></span><span class="ch">#!python</span>
+<span class="kn">import</span> <span class="nn">csv</span>
 
 <span class="n">words5000</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
@@ -124,47 +88,12 @@ article: http://ogp.me/ns/article#
     <span class="n">words5000</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
     <span class="n">total</span> <span class="o">+=</span> <span class="n">v</span>
 </pre>
-</td>
-</tr></table>
+
+
 <p>Next we will use a function that gets a dictionary with the words and counts from an article, and returns that plus the total number of words in the dictionary. It will do all the necessary work to strip tags, punctuation, and so on before computing the counts.</p>
-<table class="codehilitetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34</pre></div></td>
-<td class="code">
-<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">string</span>
+<pre class="code literal-block"><span></span><span class="ch">#!python</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span> 
 
 <span class="k">def</span> <span class="nf">get_article_terms</span><span class="p">(</span><span class="n">article</span><span class="p">):</span>
     <span class="sd">"""</span>
@@ -198,45 +127,12 @@ article: http://ogp.me/ns/article#
 
     <span class="k">return</span> <span class="n">terms</span><span class="p">,</span> <span class="n">total</span>
 </pre>
-</td>
-</tr></table>
+
+
 <p>The method we will use to get topics is something called <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">Term Frequency-Inverse Document Frequency</a> (TF-IDF). It essentially works by taking the frequency of a term in a document, and multiplying it by the log of the inverse of the number of documents the term occurs in. The idea is that the key terms will be words that occur frequently in <em>this</em> document relative to how frequently they occur in <em>all</em> the documents. Obviously words like 'the', 'and', etc have a high frequency in most documents, so they aren't interesting. But if a word that is uncommon in all the documents, like, say, 'pneumonia', occur relatively higher in a specific document, then that word is likely important.</p>
 <p>A key part of this is that we need to count how many documents a word occurs in, not just how often it occurs in each document. So our next function is going to look at all the articles in a feed. Ideally we would compute the IDFs from a bigger corpus of documents, so that can be refined later (in fact, I used the top 5000 words as an alternative and they worked quite well too, but if every article in a feed include some boiler plate text, using the top 5000 words may not filter that out, but computing IDF just from the articles will).</p>
-<table class="codehilitetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32</pre></div></td>
-<td class="code">
-<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">collections</span>
+<pre class="code literal-block"><span></span><span class="ch">#!python</span>
+<span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">feedparser</span>
 
 <span class="k">def</span> <span class="nf">get_article_data</span><span class="p">(</span><span class="n">feed_url</span><span class="p">):</span>
@@ -269,25 +165,11 @@ article: http://ogp.me/ns/article#
                         <span class="s1">'date'</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'published_parsed'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)})</span>
     <span class="k">return</span> <span class="n">articles</span><span class="p">,</span> <span class="n">doc_terms</span>
 </pre>
-</td>
-</tr></table>
+
+
 <p>Now we can use this function to compute the TF-IDFs for all the articles in a feed:</p>
-<table class="codehilitetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td>
-<td class="code">
-<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">math</span>
+<pre class="code literal-block"><span></span><span class="ch">#!python</span>
+<span class="kn">import</span> <span class="nn">math</span>
 
 <span class="k">def</span> <span class="nf">get_feed_with_tf_idf</span><span class="p">(</span><span class="n">feed_url</span><span class="p">):</span>
     <span class="sd">""" Calculate TF-IDFs for each article in a feed and add to metadata """</span>
@@ -301,19 +183,11 @@ article: http://ogp.me/ns/article#
         <span class="n">article</span><span class="p">[</span><span class="s1">'tf_idf'</span><span class="p">]</span> <span class="o">=</span> <span class="n">tf_idf</span>
     <span class="k">return</span> <span class="n">articles</span>
 </pre>
-</td>
-</tr></table>
+
+
 <p>And we're basically done! Let's see how well it worked. We can try it out on the HuffPost and print out the top ten terms for each article:</p>
-<table class="codehilitetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td>
-<td class="code">
-<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">operator</span>
+<pre class="code literal-block"><span></span><span class="ch">#!python</span>
+<span class="kn">import</span> <span class="nn">operator</span>
 
 <span class="n">articles</span> <span class="o">=</span> <span class="n">get_feed_with_tf_idf</span><span class="p">(</span><span class="s1">'http://www.huffingtonpost.com/feeds/index.xml'</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
@@ -321,8 +195,8 @@ article: http://ogp.me/ns/article#
     <span class="k">print</span> <span class="s1">'</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">article</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span> <span class="n">article</span><span class="p">[</span><span class="s1">'leader'</span><span class="p">],</span> 
                             <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rank</span><span class="p">[:</span><span class="mi">10</span><span class="p">]))</span>
 </pre>
-</td>
-</tr></table>
+
+
 <p>Running this right  now gives the results below. Not bad for a first attempt! Note that the titles that are printed out were not included in the term counts and so are a good test (although in practice it would make sense to include these so they can help rank the terms).</p>
 <pre class="code literal-block"><span></span>iPhone Shopping? Beware: Madness Ahead!
 If you're thinking of upgrading your aging iPhone - I've just gone through all the pain and sufferin

@@ -57,96 +57,97 @@ I plan to extend this later to have one button do an autocrop and scale
 to fit. Currently pressing any of the other buttons will launch the
 original Epson Scan software.
 
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using PrintScan.Properties;
-    using System.Drawing;
-    using System.Drawing.Printing;
-    using System.IO;
-    using WIA;
+```c#
+using System;
+using System.Collections.Generic;
+using System.Text;
+using PrintScan.Properties;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
+using WIA;
 
-    namespace PrintScan
-    {
-        class Program
-        {
-            static void Main(string[] args)
-            {
-                new Program().Run(args);
-            }
+namespace PrintScan
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            new Program().Run(args);
+        }
 
-            Settings settings = new Settings();
+        Settings settings = new Settings();
 
-            void Configure() // Get the scanner to use via Choose Scanner dialog
-            {
-                CommonDialogClass class1 = new CommonDialogClass();
-                Device d = class1.ShowSelectDevice(WiaDeviceType.ScannerDeviceType, true, false);
-                if (d != null)
-                {
-                    settings.DeviceID = d.DeviceID;
-                    settings.Save();
-                }
-            }
+        void Configure() // Get the scanner to use via Choose Scanner dialog
+        {
+            CommonDialogClass class1 = new CommonDialogClass();
+            Device d = class1.ShowSelectDevice(WiaDeviceType.ScannerDeviceType, true, false);
+            if (d != null)
+            {
+                settings.DeviceID = d.DeviceID;
+                settings.Save();
+            }
+        }
 
-            bool RunProcess(string cmd, string args) // Run some other exe; used to fall back to Epson Scan
-            {
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.StartInfo.FileName = cmd;
-                proc.StartInfo.Arguments = args;
-                proc.StartInfo.UseShellExecute = false;
-                return proc.Start();
-            }
+        bool RunProcess(string cmd, string args) // Run some other exe; used to fall back to Epson Scan
+        {
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = cmd;
+            proc.StartInfo.Arguments = args;
+            proc.StartInfo.UseShellExecute = false;
+            return proc.Start();
+        }
 
-            const string tempFile = @"c:\\temp\\page.bmp";
+        const string tempFile = @"c:\\temp\\page.bmp";
 
-            void Run(string[] args)
-            {
-                if (settings.DeviceID == null || settings.DeviceID.Length == 0)
-                    Configure();
+        void Run(string[] args)
+        {
+            if (settings.DeviceID == null || settings.DeviceID.Length == 0)
+                Configure();
 
-                DeviceManager manager = new DeviceManagerClass();
-                Device d = null;
+            DeviceManager manager = new DeviceManagerClass();
+            Device d = null;
 
-                if (args[1] == ("/StiEvent:"+EventID.wiaEventScanImage2)) // I'm surprised it's not EventID.wiaEventScanPrintImage
-                {
+            if (args[1] == ("/StiEvent:"+EventID.wiaEventScanImage2)) // I'm surprised it's not EventID.wiaEventScanPrintImage
+            {
+                // Find our scanner
+                foreach (DeviceInfo info in manager.DeviceInfos)
+                {
+                    if (info.DeviceID == settings.DeviceID)
+                    {
+                        d = info.Connect();
 
-                    // Find our scanner
-                    foreach (DeviceInfo info in manager.DeviceInfos)
-                    {
-                        if (info.DeviceID == settings.DeviceID)
-                        {
-                            d = info.Connect();
+                        // Do the scan and save it to a temp file
 
-                            // Do the scan and save it to a temp file
+                        ImageFile page = d.Items[1].Transfer(d.Items[1].Formats[1]) as ImageFile;
 
-                            ImageFile page = d.Items[1].Transfer(d.Items[1].Formats[1]) as ImageFile;
+                        if (File.Exists(tempFile))
+                            File.Delete(tempFile);
 
-                            if (File.Exists(tempFile))
-                                File.Delete(tempFile);
+                        page.SaveFile(tempFile);
 
-                            page.SaveFile(tempFile);
+                        // print it to the default printer
 
-                            // print it to the default printer
+                        PrintDocument pd = new PrintDocument();
+                        pd.PrintPage += new PrintPageEventHandler(pd_PrintPage);
+                        pd.Print();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                RunProcess(@"C:\\Windows\\twain\_32\\escndv\\escndv-orig.exe", args[0]+" "+args[1]);
+            }
+        }
 
-                            PrintDocument pd = new PrintDocument();
-                            pd.PrintPage += new PrintPageEventHandler(pd_PrintPage);
-                            pd.Print();
-                            break;
-                        }
-                    }
-                }
-                else
-                {
-                    RunProcess(@"C:\\Windows\\twain\_32\\escndv\\escndv-orig.exe", args[0]+" "+args[1]);
-                }
-            }
-
-            void pd_PrintPage(object sender, PrintPageEventArgs e)
-            {
-                Bitmap bmp = new Bitmap(tempFile);
-                GraphicsUnit gu = GraphicsUnit.Document;
-                RectangleF bounds = bmp.GetBounds(ref gu);
-                e.Graphics.DrawImage(bmp, bounds, bounds, gu);
-            }
-        }
-    }
+        void pd_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Bitmap bmp = new Bitmap(tempFile);
+            GraphicsUnit gu = GraphicsUnit.Document;
+            RectangleF bounds = bmp.GetBounds(ref gu);
+            e.Graphics.DrawImage(bmp, bounds, bounds, gu);
+        }
+    }
+}
+```
