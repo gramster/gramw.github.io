@@ -27,7 +27,7 @@ display the message, and give a Continue/Abort/Debug choice).
 
 Obviously, the first thing we need is a basic ASSERT macro:
 
-```c
+```c++
 #ifdef DEBUG
 #define ASSERT(condition, message)     do { if (!(condition)) HandleAssert(message); } while (0)
 #else
@@ -44,7 +44,7 @@ The above is often the only form of ASSERT that most C/C++ programmers
 encounter. But there are quite a few useful variants on the idea.
 Sometimes, just an alias is already a useful distinction:
 
-```c
+```c++
 #define PRECONDITION(condition, message)     ASSERT(condition, message)
 #define POSTCONDITION(condition, message)    ASSERT(condition, message)
 ```
@@ -52,7 +52,7 @@ Sometimes, just an alias is already a useful distinction:
 It can be useful to be able to define code that only exists in
 assertional builds:
 
-```c
+```c++
 #if DEBUG
 #define ASSERTIONAL(code)      code
 #else
@@ -62,7 +62,7 @@ assertional builds:
 
 Putting all of the above in an example:
 
-```c
+```c++
 int AdvanceIndex(int index)
 {
     ASSERTIONAL(int save_index = index);
@@ -90,8 +90,8 @@ During early development, we could confine ourselves to DEBUG builds. In
 this case we may want to skip over handling of bad input, etc. We can do
 this safely using simplifying assumptions:
 
-```c
-#if DEBUG</font>
+```c++
+#if DEBUG
 #define SIMPLIFYING_ASSUMPTION(condition,  explanation)      ASSERT(condition, explanation)
 #else
 #error SIMPLIFYING_ASSUMPTION not allowed in> release code
@@ -100,7 +100,7 @@ this safely using simplifying assumptions:
 
 For example:
 
-```c
+```c++
 void Insert(node* n)
 {
     PRECONDITION(n != 0 && invariant(), "Can't insert null");
@@ -120,13 +120,13 @@ correctness.
 
 Sometimes we may find it useful to always fire the assert:
 
-```c
+```c++
 #define UNREACHABLE(why)      ASSERT(0, why)
 ```
 
 We can have compile-time assertions on simple expressions:
 
-```c
+```c++
 #define COMPILE_TIME_CHECK(b)    extern int dummy[(b) ? 1: -1]
 ```
 
