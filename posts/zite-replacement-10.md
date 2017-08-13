@@ -30,29 +30,31 @@ RSS feed URL you want notfications for, and a callback URL that the PuSH
 server will call back to, both to confirm the subscription and to send
 notifications to:
 
-    #!python
-    import sys
-    import urllib
-    import urllib2
+```python
+#!python
+import sys
+import urllib
+import urllib2
 
-    if __name__ == '__main__':
-      if len(sys.argv) != 4:
-        print "Usage: python pubsub.py (subscribe|unsubscribe) <feed> <callback>" 
-      else:
-        params = {
-            'hub.mode': sys.argv[1],
-            'hub.verify': 'sync',
-            'hub.callback': sys.argv[3],
-            'hub.topic': sys.argv[2],
-        }
+if __name__ == '__main__':
+  if len(sys.argv) != 4:
+    print "Usage: python pubsub.py (subscribe|unsubscribe) <feed> <callback>" 
+  else:
+    params = {
+        'hub.mode': sys.argv[1],
+        'hub.verify': 'sync',
+        'hub.callback': sys.argv[3],
+        'hub.topic': sys.argv[2],
+    }
 
-        try:
-            request = urllib2.Request(
-                "https://pubsubhubbub.appspot.com",  # Google server
-                data=urllib.urlencode(params))
-            urllib2.urlopen(request)
-        except Exception as e:
-          print '%s failed: %s" % (command, str(e))
+    try:
+        request = urllib2.Request(
+            "https://pubsubhubbub.appspot.com",  # Google server
+            data=urllib.urlencode(params))
+        urllib2.urlopen(request)
+    except Exception as e:
+      print '%s failed: %s" % (command, str(e))
+```
 
 You can include a verification token too in the params, and your callback
 server can verify that to make sure that you did the subscribe request and 
