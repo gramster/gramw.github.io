@@ -1153,7 +1153,7 @@ the class that we can call from our asserts:</p>
 <p>During early development, we could confine ourselves to DEBUG builds. In
 this case we may want to skip over handling of bad input, etc. We can do
 this safely using simplifying assumptions:</p>
-<pre class="code literal-block"><span></span><span class="cp">#if DEBUG&lt;/font&gt;</span>
+<pre class="code literal-block"><span></span><span class="cp">#if DEBUG</span>
 <span class="cp">#define SIMPLIFYING_ASSUMPTION(condition,  explanation)      ASSERT(condition, explanation)</span>
 <span class="cp">#else</span>
 <span class="cp">#error SIMPLIFYING_ASSUMPTION not allowed in&gt; release code</span>
