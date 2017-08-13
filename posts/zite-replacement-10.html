@@ -68,31 +68,8 @@ subscribing or unsubscribing. You pass in a command (subscribe/unsubscribe), an
 RSS feed URL you want notfications for, and a callback URL that the PuSH
 server will call back to, both to confirm the subscription and to send
 notifications to:</p>
-<table class="codehilitetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22</pre></div></td>
-<td class="code">
-<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<pre class="code literal-block"><span></span><span class="ch">#!python</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 
@@ -115,8 +92,8 @@ notifications to:</p>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
       <span class="k">print</span> <span class="s1">'</span><span class="si">%s</span><span class="s1"> failed: </span><span class="si">%s</span><span class="s1">" % (command, str(e))</span>
 </pre>
-</td>
-</tr></table>
+
+
 <p>You can include a verification token too in the params, and your callback
 server can verify that to make sure that you did the subscribe request and 
 not someone else.</p>
