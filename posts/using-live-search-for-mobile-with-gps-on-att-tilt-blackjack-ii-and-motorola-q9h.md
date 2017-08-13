@@ -63,7 +63,7 @@ satellite orbits. There are 24 satellites in 6 orbits (4 satellites per
 orbit; each orbit takes 12 hours). The orbits are tilted at 55 degrees
 to the equator but do not go over the poles. Here is a sample orbit:
 
-[![gpsorbit](http://apecoder.files.wordpress.com/2011/06/gpsorbit_thumb.jpg "gpsorbit")](http://apecoder.files.wordpress.com/2011/06/gpsorbit.jpg)
+[![gpsorbit](/images/gpsorbit.jpg "gpsorbit")](/images/gpsorbit.jpg)
 
 The other five orbits are similar but each is offset by 30 degrees
 longitude. You can see from this that if you are in Alaska or Greenland,
@@ -76,9 +76,7 @@ screenshot I took using
 [GPSTest](http://www.chartcross.co.uk/products/WM00002_details.asp)
 outside my office here in Redmond:
 
-[![clip\_image002](http://apecoder.files.wordpress.com/2011/06/clip_image002_thumb.jpg "clip_image002")](http://apecoder.files.wordpress.com/2011/06/clip_image002.jpg)
-
-
+[![satellites](/images/satellites.jpg "satellites")](/images/satellites.jpg)
 
 There is a hack floating around on the 'net in the form of a CAB file
 that makes the GPS accessible via COM ports. On the BJ2 it enabled COM4
