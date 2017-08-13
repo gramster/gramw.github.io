@@ -32,14 +32,14 @@ September 2006 and it finally got shipped (and if you say 'about time!'
 then I have the names of the two people who kept trying to kill this to
 give to you; go blame them ;-))
 
-[![image](http://apecoder.files.wordpress.com/2011/06/image_thumb.png)](http://apecoder.files.wordpress.com/2011/06/image.png)
+[![image](/images/georss-image0.png)](/images/georss-image0.png)
 
 The Collections feature is built around Virtual Earth collections, to
 make it easier for people who don't know/care about GeoRSS to use the
 feature and get some value out of it. For the more hard-core, you can
 enter GeoRSS URLs directly:
 
-[![image](http://apecoder.files.wordpress.com/2011/06/image_thumb1.png)](http://apecoder.files.wordpress.com/2011/06/image1.png)
+[![image](/images/georss-image1.png)](/images/georss-image1.png)
 
 The actual collections/feeds are stored in the application directory in
 a file called feeds.xml. You may find it instructive to look at that
@@ -48,7 +48,7 @@ file.
 The cool thing about the URLs is that they can contain metatokens, which
 will expand to location-specific values:
 
-[![image](http://apecoder.files.wordpress.com/2011/06/image_thumb2.png)](http://apecoder.files.wordpress.com/2011/06/image2.png)
+[![image](/images/georss-image2.png)](/images/georss-image2.png)
 
 For example, the URL above:
 
