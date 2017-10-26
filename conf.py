@@ -130,21 +130,40 @@ NAVIGATION_LINKS = {
 #        ("/categories/index.html", "Tags"),
 #        ("/rss.xml", "RSS feed"),
 #    ),
+
+    # zen version
+    #DEFAULT_LANG: (
+    #    ('/index.html', 'Home', 'icon-home'),
+    #    ('/archive.html', 'Archives', 'icon-folder-open-alt'),
+    #    ('/categories/index.html', 'Tags', 'icon-tags'),
+    #    ('/rss.xml', 'RSS', 'icon-rss'),
+    #    ('https://github.com/gramster', 'My Github', 'icon-github'),
+    #    ('https://www.linkedin.com/in/grahamwheeler', 'My LinkedIn', 'icon-linkedin'),
+    #)
     DEFAULT_LANG: (
-        ('/index.html', 'Home', 'icon-home'),
-        ('/archive.html', 'Archives', 'icon-folder-open-alt'),
-        ('/categories/index.html', 'Tags', 'icon-tags'),
-        ('/rss.xml', 'RSS', 'icon-rss'),
-#        ('http://getnikola.com', 'About me', 'icon-user'),
-#        ('https://twitter.com/', 'My Twitter', 'icon-twitter'),
-        ('https://github.com/gramster', 'My Github', 'icon-github'),
-        ('https://www.linkedin.com/in/grahamwheeler', 'My LinkedIn', 'icon-linkedin'),
+        ('/index.html', 'Home'),
+        ('/archive.html', 'Archives'),
+        ('/categories/index.html', 'Tags'),
+        ('/rss.xml', 'RSS'),
+        ('https://twitter.com/gramnix', 'My Twitter'),
+        ('https://github.com/gramster', 'My Github'),
+        ('https://www.linkedin.com/in/grahamwheeler', 'My LinkedIn'),
     )
 }
 
 # Name of the theme to use.
 #THEME = "bootstrap3"
-THEME = "zen-ipython"
+#THEME = "zen-ipython"
+
+THEME = 'canterville'
+#LOGO_URL = 'https://getnikola.com/assets/img/logo.svg'
+GLOBAL_CONTEXT = {
+    'TWITTER_URL': 'https://twitter.com/gramnix',
+    'GITHUB_URL': 'https://github.com/gramster',
+    'LINKEDIN_URL': 'https://www.linkedin.com/in/grahamwheeler',
+    'BANNER_URL': '/assets/img/IMG_5590.JPG'
+    #'BANNER_URL': '/assets/img/silk_road.jpg'
+}
 
 # Below this point, everything is optional
 
