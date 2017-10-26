@@ -1,47 +1,75 @@
 <!DOCTYPE html>
-<html prefix="
-og: http://ogp.me/ns#
-article: http://ogp.me/ns/article#
-" lang="en">
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="Stuff about stuff">
 <meta name="viewport" content="width=device-width">
-<title>Graham Wheeler's Random Forest | Graham Wheeler's Random Forest</title>
-<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<title>Graham Wheeler's Random Forest</title>
+<link href="assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
+<link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
 <link rel="canonical" href="https://www.grahamwheeler.com/index.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style>
-    div.input_prompt {
-      display: none;
-    }
-    </style>
+<link rel="next" href="index-5.html" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/zite-replacement-11.html" type="text/html">
 </head>
-<body>
-    <section class="social"><ul>
-<li><a href="#" title="Home"><i class="icon-home"></i></a></li>
-            <li><a href="archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
-            <li><a href="categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
-            <li><a href="rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
-            <li><a href="https://github.com/gramster" title="My Github"><i class="icon-github"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/grahamwheeler" title="My LinkedIn"><i class="icon-linkedin"></i></a></li>
+<body class="nav-closed">
 
-        </ul></section><section class="page-content"><div class="content" rel="main">
-        <div class="post">
-            <h1 class="title"><a href="posts/zite-replacement-11.html">Building a Zite Replacement (Part 11)</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2016-04-23T09:15:00-07:00">2016-04-23 09:15</time>
+<div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+<li class="nav-opened nav-current" role="presentation">
+            <a href="#">Home</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="archive.html">Archives</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="categories/index.html">Tags</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="rss.xml">RSS</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://twitter.com/gramnix">My Twitter</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://github.com/gramster">My Github</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://www.linkedin.com/in/grahamwheeler">My LinkedIn</a>
+        </li>
+    
+    
+    </ul>
 </div>
-                <div class="stats">
-                                <a href="posts/zite-replacement-11.html#disqus_thread" data-disqus-identifier="cache/posts/zite-replacement-11.html">Comments</a>
+<span class="nav-cover"></span>
 
-
-                </div>
-            
+<div class="site-wrapper">
+    <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://www.grahamwheeler.com/"><img src="#" alt="Blog Logo"></a>
+            <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
+        </nav><div class="vertical">
+            <div class="main-header-content inner">
+                <h1 class="page-title">Graham Wheeler's Random Forest</h1>
+                <h2 class="page-description">Stuff about stuff</h2>
             </div>
-            <div class="body">
-                <div>
+        </div>
+        <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
+    </header><main id="content" class="content" role="main"><div class="postindex">
+
+
+<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-11.html">Building a Zite Replacement (Part 11)</a></h2>
+    </header><section class="post-excerpt"><div>
 <p>It's been a while since I worked on this but it is still on my mind a lot. I've been mulling over ways to improve categorization without the semi-supervised tweaking I've had to do.</p>
 <p>Just to recap, currently this is what I am doing:</p>
 <ul>
@@ -65,23 +93,14 @@ article: http://ogp.me/ns/article#
 <p>This may seem like a lot of work to come almost full circle but the hope is that these second level exemplars will be more stable and require less tweaking. As for generating the second-order exemplars, I can make use of all the articles I have categorized so far as a training set for supervized learning.</p>
 <p>The next problem is dealing wth the Wikipedia dump. Uncompressed it is close to 60GB. The first task is to split it up into separate articles, which I pan to do with <a href="https://github.com/attardi/wikiextractor">WikiExtractor</a>. After that I may try use my little 4-node ODroid cluster to do the work, which will be a nice intro to my next couple of posts about that! </p>
 </div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/using-jupyter-as-a-music-notebook.html">Using Jupyter as a Music Notebook</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2016-02-27T20:00:00+00:00">2016-02-27 20:00</time>
-</div>
-                <div class="stats">
-                                <a href="posts/using-jupyter-as-a-music-notebook.html#disqus_thread" data-disqus-identifier="cache/posts/using-jupyter-as-a-music-notebook.html">Comments</a>
+    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
+        on
 
-                </div>
-            
-            </div>
-            <div class="body">
-                <div tabindex="-1" id="notebook" class="border-box-sizing">
+        <time class="post-date" datetime="2016-04-23T09:15:00-07:00">
+            2016-04-23 09:15
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/using-jupyter-as-a-music-notebook.html">Using Jupyter as a Music Notebook</a></h2>
+    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
 <div class="cell border-box-sizing text_cell rendered">
@@ -884,23 +903,14 @@ install_name_tool -change ./bin/../sobin/libgs.8.70.dylib @executable_path/../li
     </div>
   </div>
 
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/zite-replacement-10.html">Building a Zite Replacement (Part 10)</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-11-07T08:30:00-08:00">2015-11-07 08:30</time>
-</div>
-                <div class="stats">
-                                <a href="posts/zite-replacement-10.html#disqus_thread" data-disqus-identifier="cache/posts/zite-replacement-10.html">Comments</a>
+    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
+        on
 
-                </div>
-            
-            </div>
-            <div class="body">
-                <div>
+        <time class="post-date" datetime="2016-02-27T20:00:00Z">
+            2016-02-27 20:00
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-10.html">Building a Zite Replacement (Part 10)</a></h2>
+    </header><section class="post-excerpt"><div>
 <p>I've spent the past few days refining the web server, largely for diagnostic
 purposes, so it can replace the old TkInter app. I can seen articles for 
 categories or feeds, their rank, and detailed information on why they 
@@ -989,23 +999,14 @@ now I'm just writing the updates to a file. My callback URL is hostname/pubsub:<
 </tr></table>
 <p>You can find full details of the PuSH spec <a href="https://pubsubhubbub.googlecode.com/git/pubsubhubbub-core-0.4.html">here</a>.</p>
 </div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/zite-replacement-9.html">Building a Zite Replacement (Part 9)</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-11-01T22:07:00-08:00">2015-11-01 22:07</time>
-</div>
-                <div class="stats">
-                                <a href="posts/zite-replacement-9.html#disqus_thread" data-disqus-identifier="cache/posts/zite-replacement-9.html">Comments</a>
+    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
+        on
 
-                </div>
-            
-            </div>
-            <div class="body">
-                <div>
+        <time class="post-date" datetime="2015-11-07T08:30:00-08:00">
+            2015-11-07 08:30
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-9.html">Building a Zite Replacement (Part 9)</a></h2>
+    </header><section class="post-excerpt"><div>
 <p>Well, I hope you've all brushed your teeth after all that Halloween candy.</p>
 <p>Today I'm going to show how I build a simple web server to view my feed
 articles using node.js and Express, along with MongoDB. I have a simple 
@@ -1242,23 +1243,14 @@ take us to the web page for that article. Pretty simple!</p>
 <p>and navigate to http://localhost:3000/categories to see what we might want to
 read!</p>
 </div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/zite-replacement-8.html">Building a Zite Replacement (Part 8)</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-10-31T20:21:00-07:00">2015-10-31 20:21</time>
-</div>
-                <div class="stats">
-                                <a href="posts/zite-replacement-8.html#disqus_thread" data-disqus-identifier="cache/posts/zite-replacement-8.html">Comments</a>
+    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
+        on
 
-                </div>
-            
-            </div>
-            <div class="body">
-                <div>
+        <time class="post-date" datetime="2015-11-01T22:07:00-08:00">
+            2015-11-01 22:07
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-8.html">Building a Zite Replacement (Part 8)</a></h2>
+    </header><section class="post-excerpt"><div>
 <p>Happy Halloween, all!</p>
 <p>I'm sitting here handing out candy and glow necklaces to all comers so its a
 good time to write a new post.</p>
@@ -1463,23 +1455,14 @@ uses the Python thread library, so the code continues:</p>
 </td>
 </tr></table>
 </div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/node-npm-express.html">Node, npm and Express</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-10-26T21:53:00-07:00">2015-10-26 21:53</time>
-</div>
-                <div class="stats">
-                                <a href="posts/node-npm-express.html#disqus_thread" data-disqus-identifier="cache/posts/node-npm-express.html">Comments</a>
+    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
+        on
 
-                </div>
-            
-            </div>
-            <div class="body">
-                <div>
+        <time class="post-date" datetime="2015-10-31T20:21:00-07:00">
+            2015-10-31 20:21
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/node-npm-express.html">Node, npm and Express</a></h2>
+    </header><section class="post-excerpt"><div>
 <p>Things have been slow on the blogging front but there has been progress on the
 Zite replacement. I'll write more about that soon but part of what I have been 
 doing is looking into what server-side technology to use.</p>
@@ -1699,23 +1682,14 @@ Here is the same server as before written using Express:</p>
 etc, while the response objects have methods to set the status code, cookies,
 headers, and do redirects.</p>
 </div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/zite-replacement-7.html">Building a Zite Replacement (Part 7)</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-10-04T21:31:00-07:00">2015-10-04 21:31</time>
-</div>
-                <div class="stats">
-                                <a href="posts/zite-replacement-7.html#disqus_thread" data-disqus-identifier="cache/posts/zite-replacement-7.html">Comments</a>
+    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
+        on
 
-                </div>
-            
-            </div>
-            <div class="body">
-                <div>
+        <time class="post-date" datetime="2015-10-26T21:53:00-07:00">
+            2015-10-26 21:53
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-7.html">Building a Zite Replacement (Part 7)</a></h2>
+    </header><section class="post-excerpt"><div>
 <p>It's been a while since the last post but I haven't been idle. Here are some of the things I've been up to:</p>
 <ul>
 <li>tweaking the code to parse content better </li>
@@ -1886,23 +1860,14 @@ headers, and do redirects.</p>
 </tr></table>
 <p>The next step for me is to start using my category examplars to categorize new articles on a daily basis so I have a manageable quantity I can sanity check. With a bit more tuning I want to build a simple web front end to this so I can open it up for others to try and provide feedback. Watch this space!</p>
 </div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/zite-replacement-6.html">Building a Zite Replacement (Part 6)</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-09-24T20:31:00-07:00">2015-09-24 20:31</time>
-</div>
-                <div class="stats">
-                                <a href="posts/zite-replacement-6.html#disqus_thread" data-disqus-identifier="cache/posts/zite-replacement-6.html">Comments</a>
+    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
+        on
 
-                </div>
-            
-            </div>
-            <div class="body">
-                <div>
+        <time class="post-date" datetime="2015-10-04T21:31:00-07:00">
+            2015-10-04 21:31
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-6.html">Building a Zite Replacement (Part 6)</a></h2>
+    </header><section class="post-excerpt"><div>
 <p>Following on from last episode, I took some of the clusters that had clear cohesion and made some initial category exemplars. Here are the first few:</p>
 <table class="codehilitetable"><tr>
 <td class="linenos"><div class="linenodiv"><pre>1
@@ -2005,23 +1970,14 @@ Comment on Foolproof Yorkshire Pudding Recipe by pearl
 <p>In summary, we can now take articles, extract a set of key terms, and assign them to one or more categories. There is obviously work to be done, tuning the categories over time and adding many more. One way to determine how to adjust the key terms for existing categories is to look at the top terms across all articles assigned to that category, and add them to the category terms if they aren't already present.</p>
 <p>I'll probably be busy with this for a few days but once I have a good working system the next topic will be ranking. Ranking will work best in conjunction with crowdsourcing so I may need to build the system out as far as a simple web front end that can be used as a categorical RSS search engine. Watch this space for future developments!</p>
 </div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/zite-replacement-5.html">Building a Zite Replacement (Part 5)</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-09-23T22:21:00-07:00">2015-09-23 22:21</time>
-</div>
-                <div class="stats">
-                                <a href="posts/zite-replacement-5.html#disqus_thread" data-disqus-identifier="cache/posts/zite-replacement-5.html">Comments</a>
+    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
+        on
 
-                </div>
-            
-            </div>
-            <div class="body">
-                <div>
+        <time class="post-date" datetime="2015-09-24T20:31:00-07:00">
+            2015-09-24 20:31
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-5.html">Building a Zite Replacement (Part 5)</a></h2>
+    </header><section class="post-excerpt"><div>
 <p>My initial experience with clustering was somewhat disappointing. Its clear I need to do some tuning of the approach. The first thing I did was to rerun the article download process, but instead of just keeping the top ten terms and dropping their TF-IDF values, I kept them all. I think there are better ways to select the terms to use for Jacard similarity.</p>
 <p>For starters, using a fixed number of terms could lead to keeping a wildly different range of TF-IDF values for different articles. It makes more sense to have some threshold value and keep all terms that exceed the threshold. That may mean more than ten terms for some articles and less for others.</p>
 <p>Secondly, there is not much point in keeping terms that only appear in a single article. That term may be useful if we search articles based on terms, but it will not help much in computing Jacard distances. Some caution is needed here - dropping these terms does reduce the size of the term set and thus will reduce the union with any other article's term set, thus boosting the similarity that the first article has with all other articles. But as this gets boosted across the board, I don't expect it to be much of an issue.</p>
@@ -2604,23 +2560,14 @@ Comment on Foolproof Yorkshire Pudding Recipe by pearl
 
 <p>gives some for religion. I may need more than 200 clusters but this is a good start. More to come!</p>
 </div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/zite-replacement-4.html">Building a Zite Replacement (Part 4)</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-09-22T21:01:00-07:00">2015-09-22 21:01</time>
-</div>
-                <div class="stats">
-                                <a href="posts/zite-replacement-4.html#disqus_thread" data-disqus-identifier="cache/posts/zite-replacement-4.html">Comments</a>
+    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
+        on
 
-                </div>
-            
-            </div>
-            <div class="body">
-                <div>
+        <time class="post-date" datetime="2015-09-23T22:21:00-07:00">
+            2015-09-23 22:21
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-4.html">Building a Zite Replacement (Part 4)</a></h2>
+    </header><section class="post-excerpt"><div>
 <p>Following my <a href="http://www.grahamwheeler.com/posts/zite-replacement-3.html">last post</a>, I started gathering URLs of feeds to use for sample data. First I scraped the links that I had saved in Pocket (a scarily large number). It didn't seem like Pocket had an easy way to export this, so I loaded up Pocket in Chrome, scrolled and scrolled and scrolled until I could scroll no more, then saved the resulting web page once it was done loading. It was pretty easy to then scrape that to get the links. After sorting and uniq-ing those, and running them through <a href="http://www.aaronsw.com/2002/feedfinder/">feedfinder</a>, I had somewhere north of 1000 feeds. However, these were very skewed to my interests and I wanted diversity so I pressed on and scraped a bunch of blog rolls and other link collections covering many other areas. In the end I got about 2,500 feed URLs to start with, in a file named 'feeds.txt'.</p>
 <p>At that point I ran the code below to fetch and categorize the articles.</p>
 <table class="codehilitetable"><tr>
@@ -2826,17 +2773,25 @@ of our list of terms divided by the size of the union. For example, if one docum
 Some of the clusters make sense (e.g. I see some recipes being clustered) but a lot don't. I expect there are three reasons for this: the small sample across diverse topics mean lots of articles have no common terms, possibly I need more terms, the algorithm is running with all defaults and hasn't been tuned, and of course it is possible I have bugs; I have not validated the Jacard values. So I will need to go deeper. Amongst other things I think I should drop any terms that only occur in single documents as they add cost but no benefit; I found that there are only about 20% of the terms that actually occur in two or more documents.</p>
 <p>Watch this space!</p>
 </div>
-            </div>
-        </div>
-            <nav class="postindexpager"><ul class="pager">
+    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
+
+        on
+
+        <time class="post-date" datetime="2015-09-22T21:01:00-07:00">
+            2015-09-22 21:01
+        </time></footer></article>
+</div>
+
+        <nav class="postindexpager"><ul class="pager">
 <li class="next">
                 <a href="index-5.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
-            
-        </footer>
+        </ul></nav><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
-    </section><script>
+
+    <script type="text/javascript" src="assets/js/jquery.js"></script><script type="text/javascript" src="assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="assets/js/index.js"></script><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -2845,12 +2800,6 @@ Some of the clusters make sense (e.g. I see some recipes being clustered) but a 
   ga('create', 'UA-67535606-1', 'auto');
   ga('send', 'pageview');
 
-</script><script src="assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-    </script><script type="text/javascript">
-            $(function(){
-                $('.timeago').timeago();
-            });
-        </script>
+</script>
 </body>
 </html>

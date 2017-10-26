@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html prefix="
-og: http://ogp.me/ns#
-article: http://ogp.me/ns/article#
-" lang="en">
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>Building a Zite Replacement (Part 5) | Graham Wheeler's Random Forest</title>
-<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
 <link rel="canonical" href="https://www.grahamwheeler.com/posts/zite-replacement-5.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Graham Wheeler">
+<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]--><meta name="author" content="Graham Wheeler">
+<link rel="prev" href="zite-replacement-4.html" title="Building a Zite Replacement (Part 4)" type="text/html">
+<link rel="next" href="zite-replacement-6.html" title="Building a Zite Replacement (Part 6)" type="text/html">
 <meta property="og:site_name" content="Graham Wheeler's Random Forest">
 <meta property="og:title" content="Building a Zite Replacement (Part 5)">
 <meta property="og:url" content="https://www.grahamwheeler.com/posts/zite-replacement-5.html">
@@ -18,31 +26,51 @@ article: http://ogp.me/ns/article#
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2015-09-23T22:21:00-07:00">
 </head>
-<body>
-    <section class="social"><ul>
-<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
-            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
-            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
-            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
-            <li><a href="https://github.com/gramster" title="My Github"><i class="icon-github"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/grahamwheeler" title="My LinkedIn"><i class="icon-linkedin"></i></a></li>
+<body class="nav-closed">
 
-        </ul></section><section class="page-content"><div class="content" rel="main">
-    <div class="post">
-        <h1 class="p-name entry-title" itemprop="headline name">Building a Zite Replacement (Part 5)</h1>
+<div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+<li class="nav-opened" role="presentation">
+            <a href="../index.html">Home</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="../archive.html">Archives</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="../categories/index.html">Tags</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="../rss.xml">RSS</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://twitter.com/gramnix">My Twitter</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://github.com/gramster">My Github</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://www.linkedin.com/in/grahamwheeler">My LinkedIn</a>
+        </li>
+    
+    
+    </ul>
+</div>
+<span class="nav-cover"></span>
 
-        <div class="meta">
-            <div class="authordate">
-                <time class="timeago" datetime="2015-09-23T22:21:00-07:00">2015-09-23 22:21</time>
-            
-                      |  
-        <a href="zite-replacement-5.md" id="sourcelink">Source</a>
-
-            </div>
-            
-        </div>
-        <div class="body">
-            <div>
+<div class="site-wrapper">
+    <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://www.grahamwheeler.com/"><img src="#" alt="Blog Logo"></a>
+            <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
+        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">Building a Zite Replacement (Part 5)</h1>
+        <section class="post-meta"> by
+            <a href="../authors/graham-wheeler.html">Graham Wheeler</a>
+            on
+            <time class="post-date" datetime="2015-09-23T22:21:00-07:00">
+                2015-09-23 22:21
+            </time></section></header><section class="post-content"><div>
 <p>My initial experience with clustering was somewhat disappointing. Its clear I need to do some tuning of the approach. The first thing I did was to rerun the article download process, but instead of just keeping the top ten terms and dropping their TF-IDF values, I kept them all. I think there are better ways to select the terms to use for Jacard similarity.</p>
 <p>For starters, using a fixed number of terms could lead to keeping a wildly different range of TF-IDF values for different articles. It makes more sense to have some threshold value and keep all terms that exceed the threshold. That may mean more than ten terms for some articles and less for others.</p>
 <p>Secondly, there is not much point in keeping terms that only appear in a single article. That term may be useful if we search articles based on terms, but it will not help much in computing Jacard distances. Some caution is needed here - dropping these terms does reduce the size of the term set and thus will reduce the union with any other article's term set, thus boosting the similarity that the first article has with all other articles. But as this gets boosted across the board, I don't expect it to be much of an issue.</p>
@@ -625,16 +653,10 @@ article: http://ogp.me/ns/article#
 
 <p>gives some for religion. I may need more than 200 clusters but this is a good start. More to come!</p>
 </div>
-        </div>
-                <ul class="pager hidden-print">
-<li class="previous">
-                <a href="zite-replacement-4.html" rel="prev" title="Building a Zite Replacement (Part 4)">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="zite-replacement-6.html" rel="next" title="Building a Zite Replacement (Part 6)">Next post</a>
-            </li>
-        </ul>
-<div id="disqus_thread"></div>
+    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="randomforest",
             disqus_url="https://www.grahamwheeler.com/posts/zite-replacement-5.html",
@@ -653,12 +675,10 @@ article: http://ogp.me/ns/article#
     <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-    </div>
-                    <footer id="footer"><p>Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
-            
-        </footer>
+        </section></footer></article><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
-    </section><script>
+
+    <script type="text/javascript" src="../assets/js/jquery.js"></script><script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../assets/js/index.js"></script><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -667,12 +687,6 @@ article: http://ogp.me/ns/article#
   ga('create', 'UA-67535606-1', 'auto');
   ga('send', 'pageview');
 
-</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-    </script><script type="text/javascript">
-            $(function(){
-                $('.timeago').timeago();
-            });
-        </script>
+</script>
 </body>
 </html>
