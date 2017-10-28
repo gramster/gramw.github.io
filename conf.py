@@ -156,7 +156,7 @@ NAVIGATION_LINKS = {
 #THEME = "zen-ipython"
 
 THEME = 'canterville'
-#LOGO_URL = 'https://getnikola.com/assets/img/logo.svg'
+LOGO_URL = 'https://getnikola.com/assets/img/logo.svg'
 GLOBAL_CONTEXT = {
     'TWITTER_URL': 'https://twitter.com/gramnix',
     'GITHUB_URL': 'https://github.com/gramster',
