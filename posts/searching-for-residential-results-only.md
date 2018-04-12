@@ -12,4 +12,4 @@ select "View", you will see checkboxes for business and residential. By
 checking or unchecking these you can restrict results to just business,
 just residential, or both.
 
- [![image](http://blufiles.storage.msn.com/y1pAcgpTMaaCBtS-Yf6VnbZZ3P_sQ0i5Lwu2Y7hquvsQ8uMCLKkl08fOJ_RxGi_f355_pahRXlRDMM?PARTNER=WRITER)](http://blufiles.storage.msn.com/y1pAcgpTMaaCBvgdyDaqejFnLG8IZt5zvsO69vV3gS4Y-AnW6R4rb8eCoJi39LTny4MeMEhKw9NmC8?PARTNER=WRITER)
+ [![image](/images/residential.jpg)](/images/residential.jpg)
