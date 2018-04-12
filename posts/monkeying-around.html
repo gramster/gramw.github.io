@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Monkeying Around | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/monkeying-around.html">
+<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]--><meta name="author" content="geekraver">
+<link rel="prev" href="the-end-of-the-universe.html" title="The End of the Universe" type="text/html">
+<link rel="next" href="babylonian-numbers-in-60-seconds.html" title="Babylonian numbers in 60 seconds" type="text/html">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="Monkeying Around">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/monkeying-around.html">
+<meta property="og:description" content="After a huge storm blew up, the ship foundered. Dawn’s light found just
+six survivors washed up on a desert island – five men and one monkey.
+The men spent the day gathering all the food they could fi">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2009-12-13T19:03:00-08:00">
+<meta property="article:tag" content="mathjax">
+</head>
+<body class="nav-closed">
+
+<div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+<li class="nav-opened" role="presentation">
+            <a href="../index.html">Home</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="../archive.html">Archives</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="../categories/index.html">Tags</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="../rss.xml">RSS</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://twitter.com/gramnix">My Twitter</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://github.com/gramster">My Github</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://www.linkedin.com/in/grahamwheeler">My LinkedIn</a>
+        </li>
+    
+    
+    </ul>
+</div>
+<span class="nav-cover"></span>
+
+<div class="site-wrapper">
+    <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://www.grahamwheeler.com/"><img src="https://getnikola.com/assets/img/logo.svg" alt="Blog Logo"></a>
+            <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
+        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">Monkeying Around</h1>
+        <section class="post-meta"> by
+            <a href="../authors/geekraver.html">geekraver</a>
+            on
+                <a href="../categories/mathjax.html">#mathjax</a>,
+            <time class="post-date" datetime="2009-12-13T19:03:00-08:00">
+                2009-12-13 19:03
+            </time></section></header><section class="post-content"><div>
+<p>After a huge storm blew up, the ship foundered. Dawn’s light found just
+six survivors washed up on a desert island – five men and one monkey.
+The men spent the day gathering all the food they could find – which was
+just a pile of coconuts. After a dinner of coconut milk and flesh, the
+exhausted men decided to they would divide the remaining coconuts up the
+following day, before splitting up and exploring the remainder of the
+island.</p>
+<p>During the night one man woke up and started worrying about whether
+there would be a disagreement in the morning over the coconuts. He
+decided to take his share, and divided the coconuts equally into five.
+There was one left over which he gave to the monkey, then he took his
+share and hid them away, before going back to
+sleep.<a href="../images/image6.png" style="float:right;size:35%;margin:10px"><img alt="image" src="../images/image_thumb6.png" title="image"></a></p>
+<p>A little later the next man woke up, and had the same fear. He too
+divided the coconuts into five, and had one left over that he gave to
+the monkey, before hiding his share and going back to sleep. And so the
+night went on, with each man waking up, dividing the remaining coconuts
+in five, hiding one share and giving the one extra to the monkey.</p>
+<p>In the morning, the men awoke and divided the remaining coconuts, which
+came out to five equal shares. No-one said anything about the missing
+coconuts as each thought he had been the first to hide a share and was
+thus the best off.</p>
+<p>How many coconuts were there in the beginning?</p>
+<p>It is not difficult to express this problem as a set of equations; what
+makes the equations hard to solve is that the solutions must be
+integers. Such equations are called Diophantine equations, after the 3rd
+century AD’s Diophantus of Alexandria, who was the first known
+algebraist to examine equations limited to rational number solutions. We
+know little of Diophantus himself other than the following puzzle left
+after his death:</p>
+<ul>
+<li>his childhood lasted 1/6 of his life</li>
+<li>he grew a beard after another 1/12</li>
+<li>after 1/7 more he married</li>
+<li>5 years later he had a son</li>
+<li>the son lived to half Diophantus’ age</li>
+<li>and Diophantus died 4 years later</li>
+</ul>
+<p>From this we can determine how long Diophantus lived, how long his
+boyhood lasted, what age he grew a beard, what age he got married, when
+he had a son, and how long his son
+lived.<a href="../images/monkey1.png" style="float:right;size:35%;margin:10px"><img alt="image" src="../images/monkey_thumb1.png" title="image"></a></p>
+<p>Diophantus’ great work, The Arithmetica, is a text on computational
+arithmetic rather than theoretical mathematics, closer to the
+mathematics of Egypt, Babylon and India than to Greece. Diophantus
+promised 13 books in his introduction but only ten are known, with four
+only being discovered recently in an Arabic manuscript found in Iran.
+The earliest commentaries on The Arithmetica were written by Hypatia,
+the first known Western female mathematician, who was brutally murdered
+by a mob of Christian fanatics in 415 AD as they burned Alexandria’s
+great library to the ground and destroyed much of the world’s repository
+of classical knowledge.</p>
+<p>Many people are familiar with Fermat’s famous “Last Theorem”; it was in
+the margins of a copy of Diophantus’ Arithmetica (Book 2, problem 8 ),
+in which Diophantus describes how to find solutions to 
+\(x^{2}+y^{2}=z^{2}\) for a given value of \(z\), that Fermat
+wrote his famous note asserting that there are no solutions to equations
+of this form for any powers higher than two, and that “For this I have
+discovered a truly wonderful proof, but the margin is too small to
+contain it.”</p>
+<p>Going back to the coconuts, if we call the initial number of
+coconuts \(x\) and the number hidden away by each man as \(a,
+b, c, d, e\) respectively, and the number of coconuts each sailor got on
+the next day as \(y\), we get this set of equations:</p>
+<p>$$x = 5a + 1$$
+$$4a = 5b + 1$$
+$$4b = 5c + 1$$
+$$4c = 5d + 1$$
+$$4d = 5e + 1$$
+$$4e = 5y$$</p>
+<p>We can use successive substitutions to reduce this to a single equation
+in two unknowns. The first sailor took \(\frac{1}{5}(x-1)\)
+coconuts, and left \(4\frac{1}{5}(x-1) = \frac{4}{5}(x-1)\)
+coconuts. The second sailor then took
+\(\frac{1}{5}(\frac{4}{5}(x-1)-1) = \frac{4x-9}{25}\) coconuts and
+left \(\frac{4x-9}{25} = \frac{16x-36}{25}\) coconuts. Continuing
+in this way we can find that the number of coconuts left by the third,
+fourth and fifth sailors were \(\frac{64x-244}{125}\),
+\(\frac{256x-1476}{625}\), and \(\frac{1024x-8404}{3125}\)
+respectively. Therefore:</p>
+<p>$$\frac{1024x-8404}{3125} = 5y$$</p>
+<p>or:</p>
+<p>$$1024x = 15625y + 8404$$</p>
+<p>Normally, for real numbers, we would need two equations in two unknowns,
+but because we know the solutions must be integers the possible answers
+are more constrained. Equations of the form:</p>
+<p>$$ax + by = c$$</p>
+<p>are known as linear Diophantine equations; in our case
+\(a=1024\), \(b=-15625\) and \(c=8404\), and we have:</p>
+<p>$$1024x - 15625y = 8404$$</p>
+<p>If \(a\) and \(b\) have a common denominator, then clearly for
+the equation to have integer solutions \(c\) must also be a
+multiple of this common denominator.; if it is not, then there are no
+integer solutions. So we can simplify a linear Diophantine equation by
+dividing the coefficients of x and y, and the constant, by their
+greatest common denominator (GCD). The coefficients are then relatively
+prime, the gcd is 1 and no further simplification can be done.</p>
+<p>Assuming we can simplify to the point where we have co-prime
+coefficients and still have an integer constant, we will have solutions
+– in fact, an infinity of them. This is quite easy to show. Assume we do
+have two solutions, \((x_{1},y_{1})\) and
+\((x_{2},y_{2})\). Then:</p>
+<p>$$a x_{1} + b y_{1} = c = a x_{2} + b y_{2}$$</p>
+<p>and so:</p>
+<p>$$a(x_{1}-x_{2}) = b(y_{2}-y_{1})$$</p>
+<p>So the difference between two solutions for \(x\) must satisfy:</p>
+<p>$$x_{1}-x_{2} = \frac{b}{a}(y_{2}-y_{1})$$</p>
+<p>If \(g\) is the GCD of \(a\) and \(b\), then we can
+divide both \(a\) and \(b\) on the right hand side by
+\(g\) to get a coprime numerator and denominator:</p>
+<p>$$x_{1} - x_{2} = \frac{\frac{b}{g}}{\frac{a}{g}} (y_{2} - y_{1})$$</p>
+<p>Because \(\frac{b}{g}\) and \(\frac{a}{g}\) are coprime, the
+smallest \((y_{2}-y_{1})\) that can expand the right hand side
+out to an integer value is:</p>
+<p>$$y_{2}-y_{1} = \frac{a}{g}$$</p>
+<p>And similarly:</p>
+<p>$$x_{1}-x_{2} = \frac{b}{g}$$</p>
+<p>So we have an infinite number of solutions of the form:</p>
+<p>$$x = x_{1} - \frac{b t}{g}$$</p>
+<p>$$y = y_{1} + \frac{a t}{g}$$</p>
+<p>The problem usually comes down to finding the smallest pair of positive
+integers that satisfy the equation.</p>
+<p>To solve a linear Diophantine equation such as the one above, we can
+apply Euclid’s method for finding the GCD of the coefficients (which
+will be 1, as our coefficients are coprime, but we are interested in the
+steps anyway):</p>
+<p>$$15625 = 15 \times 1024 + 265\ 1024 = 3 \times 265 + 229
+\ 265 = 1 \times 229 + 36 \ 229 = 6 \times 36 + 13 \ 36 = 2
+\times 13 + 10 \ 13 = 1 \times 10 + 3 \ 10 = 3 \times 3 + 1$$</p>
+<p>Note how the coefficients on the left of the right hand side match those
+in the continued fraction:</p>
+<p>$$\frac{15625}{1024} = 15 + \frac{265}{1024}\ = 15 +
+\frac{1}{\frac{1024}{265}}\ = 15 + \frac{1}{3 +
+\frac{229}{265}}\ = 15 + \frac{1}{3 +
+\frac{1}{\frac{265}{229}}}\ = 15 + \frac{1}{3 + \frac{1}{1 +
+\frac{36}{229}}}\ = 15 + \frac{1}{3 + \frac{1}{1 +
+\frac{1}{\frac{229}{36}}}} \ = 15 + \frac{1}{3 + \frac{1}{1 +
+\frac{1}{6 + \frac{13}{36}}}} \ \ldots\ = 15 + \frac{1}{3 +
+\frac{1}{1 + \frac{1}{6 + \frac{1}{2 + \frac{1}{1 + \frac{1}{3 +
+\frac{1}{3}}}}}}} \ = \langle 15; 3, 1, 6, 2, 1, 3, 3 \rangle$$</p>
+<p>We can invert the steps to get a solution. Starting at the bottom:</p>
+<p>$$10 = 3 \times 3 + 1 \Rightarrow 1 = 10 - 3 \times 3$$</p>
+<p>We keep expanding this, working backwards, and substituting the
+equations we have derived above for the remainders:</p>
+<p>$$1=10-3\times 3=10-3\times(13-1\times 10)=4\times 10-3\times 13$$</p>
+<p>$$1=4\times 10-3\times 13=4\times(36-2\times 13)-3\times 13=4\times 36-11\times 13$$</p>
+<p>$$1 = 4 \times 36-11 \times 13 = 4 \times 36-11 \times ( 229-6 \times 36 ) = 70 \times 36-11 \times 229$$</p>
+<p>$$1 = 70 \times 36-11 \times 229 = 70 \times ( 265-1 \times 229 )-11 \times 229 = 70 \times 265-81 \times 229$$</p>
+<p>$$1 = 70 \times 265-81 \times 229 = 70 \times 265-81 \times ( 1024-3 \times 265 ) = 313 \times 265-81 \times 1024$$</p>
+<p>$$1 = 313 \times 265-81 \times 1024 = 313 \times ( 15625-15 \times 1024 )-81 \times 1024 = 313 \times 15625-4776 \times 1024$$</p>
+<p>So we have determined that \(x=-4776\) and  \(y=-313\) is a
+solution of \(1024x-15625y=1\). This is all very well but how do we
+adjust this for the fact that the \(c\) value we actually care
+about is 8404, not 1? Simple! We just have to multiply each side by 8404
+to get a solution to our original equation, namely \(x=-4776
+\times 8404 = -40137504\) and  \(y=-313 \times 8404 = -2630452\).</p>
+<p>We know from earlier that the general solution of our equation has the
+form:</p>
+<p>$$x = -40137504 + 15625 t$$</p>
+<p>$$y = -2630452 + 1024 t$$</p>
+<p>It’s easy to see we have our first positive solution at \(t=2569\),
+namely \(x= 3121\) and  \(y=204\). So there were 3121 coconuts
+originally, and on the last division each sailor got 204 coconuts.</p>
+<p>A variant of this problem has there being a single coconut left on the
+final day as well. In this case there is a very clever trick that can be
+used, which uses the fact that if we add four coconuts to the original
+pile it is evenly divisible by 5. If we allow the use of <em>negative</em>
+coconuts it is easy to see that –4 is a solution. In this case, the
+first sailor divides the pile into 5 negative coconuts, gives one
+positive coconut to the monkey, and returns four negative coconuts to
+the pile, so there are once again –4 coconuts! Each sailor repeats the
+same process, always leaving –4 coconuts. To get to the first positive
+solution we just need to observe that since we divide the pile into 5
+six times, each successive solution must be \(5^{6} = 15625\)
+larger than the last, so the first solution is 15621.</p>
+<p>This variant appeared in a short story by Ben Ames Williams that ran in
+the Saturday Evening Post in October 1926. Williams did not include the
+answer, and the Post’s offices were flooded with letters, to the point
+where the editor sent Williams a wire: “For the love of Mike, how many
+coconuts? Hell popping around here”. Williams continued to receive
+letters requesting the answer for the next twenty years!</p>
+<p>Further reading:</p>
+<p>I first heard this problem, and learnt the method of continuous
+fractions, as a high school student when doing an extra-curricular math
+class at the University of the Witwatersrand’s Schmerenbeck Center (so
+long ago Diophantus may still have been alive).  Martin Gardner’s
+<a href="http://www.amazon.com/gp/product/0393020231?ie=UTF8&amp;tag=wishwatcher-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=0393020231">Colossal Book of
+Mathematics</a>
+discusses this problem in the first chapter, along with some unorthodox
+and general solutions. Steven Hawking’s book <a href="http://www.amazon.com/gp/product/0762430044?ie=UTF8&amp;tag=wishwatcher-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=0762430044">God created the
+Integers</a>
+includes annotated excerpts from The Arithmetica, and some biographical
+material. Clifford Pickover’s <a href="http://www.amazon.com/gp/product/1402757964?ie=UTF8&amp;tag=wishwatcher-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=1402757964">The Math
+Book</a>
+includes a chapter on Hypatia.</p>
+</div>
+    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/monkeying-around.html",
+        disqus_title="Monkeying Around",
+        disqus_identifier="cache/posts/monkeying-around.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></footer></article><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+</div>
+
+    <script type="text/javascript" src="../assets/js/jquery.js"></script><script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../assets/js/index.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67535606-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

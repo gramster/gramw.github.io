@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>A Christmas Carroll | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/a-christmas-carroll.html">
+<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]--><meta name="author" content="geekraver">
+<link rel="prev" href="the-gym-locker-paradox.html" title="The Gym Locker Paradox" type="text/html">
+<link rel="next" href="math-magazines.html" title="Some Math Magazines" type="text/html">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="A Christmas Carroll">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/a-christmas-carroll.html">
+<meta property="og:description" content="On Christmas day, 1877, Lewis Carroll, author of the Alice books,
+entertained two bored young girls by inventing a new game that he called
+Word Links: given two words, change one word to the other by ">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2011-03-29T22:11:00-07:00">
+<meta property="article:tag" content="mathjax">
+</head>
+<body class="nav-closed">
+
+<div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+<li class="nav-opened" role="presentation">
+            <a href="../index.html">Home</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="../archive.html">Archives</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="../categories/index.html">Tags</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="../rss.xml">RSS</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://twitter.com/gramnix">My Twitter</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://github.com/gramster">My Github</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://www.linkedin.com/in/grahamwheeler">My LinkedIn</a>
+        </li>
+    
+    
+    </ul>
+</div>
+<span class="nav-cover"></span>
+
+<div class="site-wrapper">
+    <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://www.grahamwheeler.com/"><img src="https://getnikola.com/assets/img/logo.svg" alt="Blog Logo"></a>
+            <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
+        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">A Christmas Carroll</h1>
+        <section class="post-meta"> by
+            <a href="../authors/geekraver.html">geekraver</a>
+            on
+                <a href="../categories/mathjax.html">#mathjax</a>,
+            <time class="post-date" datetime="2011-03-29T22:11:00-07:00">
+                2011-03-29 22:11
+            </time></section></header><section class="post-content"><div>
+<p>On Christmas day, 1877, Lewis Carroll, author of the Alice books,
+entertained two bored young girls by inventing a new game that he called
+Word Links: given two words, change one word to the other by changing a
+single letter at a time with the intermediate steps all being valid
+words themselves. For example, to change "cold" to "warm", one can use
+the steps "cord", "card", "ward". Carroll later popularised this form of
+puzzle in a series of articles in Vanity Fair magazine, changing the
+name to Doublets - from the "double, double, toil and trouble" witches'
+incantation in Shakespeare's Macbeth.</p>
+<p>These puzzles are still popular today (usually called Word Ladders). The
+noted Stanford computer sciencist Don Knuth dedicated several pages of
+his work on graph algorithms (The Stanford Graphbase) to the topic.
+Knuth investigated five-letter words and found that of a set of 5,757
+common English words, there were 14,135 links between words (where a
+link is a single ladder step). Only 671 words had no links - Knuth
+called these words 'aloof' - 'aloof' itself being aloof, along with
+words such as 'earth', 'ocean', 'sugar' and 'laugh'. 103 pairs such as
+'opium' and 'odium' exist. The two biggest connected sets have 25 words
+each. By relaxing the rules - for example by allowing the letters to be
+rearranged at each step - the words become considerably more connected.</p>
+<p>Ted Johnson <a href="//users.rcn.com/ted.johnson/fourletter.htm">conducted an analysis of four letter
+words</a>, with the additional
+rule of allowing the word to be reversed at any step. Starting with an
+online dictionary of 4776 words, he found that there was one huge linked
+component of 4436 words. This is not surprising; in 1960 Paul Erdős and
+Alfred Rényi proved that if the average number of links is sufficiently
+high then<a href="http://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model">the set of words will form one large connected component with
+a few outliers</a>.
+Word ladders are interesting because of their similarity to genetic
+mutation in DNA. Carroll himself came up with the evolutionary chain
+'ape', 'are', 'ere', 'err', 'ear', 'mar', 'man', although he was a
+sceptic of Darwin's theories.</p>
+<p>Consider the subsequence from 'err' to 'man' - can you prove that to
+change one word with a single vowel to another word with a single vowel
+but in a different position, that it is necessary to go through an
+intermediate step of a word with two vowels? For the purpose of this
+problem, consider 'y' to be a vowel.</p>
+</div>
+    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/a-christmas-carroll.html",
+        disqus_title="A Christmas Carroll",
+        disqus_identifier="cache/posts/a-christmas-carroll.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></footer></article><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+</div>
+
+    <script type="text/javascript" src="../assets/js/jquery.js"></script><script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../assets/js/index.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67535606-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

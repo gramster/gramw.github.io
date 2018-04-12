@@ -17,7 +17,7 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
 <link rel="canonical" href="https://www.grahamwheeler.com/index-5.html">
-<link rel="prev" href="index.html" type="text/html">
+<link rel="prev" href="index-6.html" type="text/html">
 <link rel="next" href="index-4.html" type="text/html">
 <!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]-->
 </head>
@@ -77,100 +77,733 @@
     </header><main id="content" class="content" role="main"><div class="postindex">
 
 
-<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-3.html">Building a Zite Replacement (Part 3)</a></h2>
+<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/math-magazines.html">Some Math Magazines</a></h2>
     </header><section class="post-excerpt"><div>
-<p>Since <a href="http://www.grahamwheeler.com/posts/zite-replacement-2.html">yesterdays post on term extraction</a>, I've made a few tweaks. In particular I only adjust capitalization on the first words of sentences, I'm keeping numbers and hyphenation, and if there are consecutive capitalized words I turn them into single terms.</p>
-<p>For example, the terms for the Donald Trump on vaccines article have changed from:</p>
-<pre class="code literal-block"><span></span>vaccines
-Donald
-Trump
-children
-doses
-effective
-vaccinations
-diseases
-Carson
-debate
-</pre>
-
-
-<p>to:</p>
-<pre class="code literal-block"><span></span>vaccines
-children
-Donald Trump
-doses
-effective
-vaccinations
-diseases
-smaller
-vaccination
-debate
-babies
-autism
-cause
-schedule
-studies
-</pre>
-
-
-<p>I'm not sure why 'Carson' was dropped; it's possible that the text of the article changed between the two runs. This shows too that it may be good to deal with plural forms (so 'vaccination' covers 'vaccinations'); on the other hand, having three forms of vaccine appear certainly does strengthen the topic. There is certainly some more tweaking to do but overall I'm pretty happy.</p>
-<p>The next step is classification. I was disappointed to find that the category element is rarely used in RSS (so far I haven't seen it). That is going to make using <a href="https://en.wikipedia.org/wiki/Supervised_learning">supervised learning</a> (where I have a set of training documents with known categories) quite tricky. Fortunately, <a href="https://en.wikipedia.org/wiki/Unsupervised_learning">unsupervised learning</a> can help a lot here! In unsupervised learning you just throw a bunch of data at a learning algorithm and it does useful things like <a href="https://en.wikipedia.org/wiki/Cluster_analysis">clustering</a> for you. Essentially this means I can use an algorithm like <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means</a> to group similar articles together. I can then go through those by hand and tag them much faster with categories, and then once they are tagged I can go back to using supervised learning.</p>
-<p><em>k-means</em> is just one (very common) algorithm for unsupervised learning. There are some other interesting algorithms for topic extraction that may help here too. In the document classification field, a particularly promising one is <a href="https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation">latent Dirichlet allocation</a>,  which is a form of <a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis">latent semantic analysis</a>. It's fairly easy to implement but there is a great Python library for this (<a href="https://radimrehurek.com/gensim/">gensim</a>) that I will explore. But I am getting ahead of myself, because first I need a corpus of documents, and perhaps you can help!</p>
-<p>In order to get my corpus, I need to gather a large number of URLs for RSS feeds. I have a list of about 40 tech feeds I used to follow back in the days when Google Reader was a thing. I've also pulled all the URLs out of my Pocket booksmarks - over 3000 - but these are article links, not feed URLs. So I am going to write a script that takes a bunch of article links and scrapes the pages to try find RSS feed URLs. Unfortunately, my interests are very skewed toward tech, with a bit of cooking, math and fitness thrown in. If you have collections of URLs or RSS feeds covering other topics I would be very happy to add them to my collection.</p>
-<p>A first cut at such a script is:</p>
-<table class="codehilitetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td>
-<td class="code">
-<pre class="code literal-block"><span></span><span class="k">def</span> <span class="nf">get_feed_URL</span><span class="p">(</span><span class="n">site</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">"&lt;link[^&gt;]*application/rss\+xml[^&gt;]*href=[</span><span class="se">\"</span><span class="s2">']([^</span><span class="se">\"</span><span class="s2">']+)[</span><span class="se">\"</span><span class="s2">']"</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">"&lt;a [^&gt;]*class=</span><span class="se">\"</span><span class="s2">rss</span><span class="se">\"</span><span class="s2">[^&gt;]*href=[</span><span class="se">\"</span><span class="s2">']([^</span><span class="se">\"</span><span class="s2">']+)[</span><span class="se">\"</span><span class="s2">']"</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">"&lt;a [^&gt;]*href=[</span><span class="se">\"</span><span class="s2">']([^</span><span class="se">\"</span><span class="s2">']+)[</span><span class="se">\"</span><span class="s2">'][^&gt;]*class=</span><span class="se">\"</span><span class="s2">rss</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>        
-    <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
-        <span class="n">feed</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">feed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'/'</span><span class="p">:</span>
-            <span class="n">feed</span> <span class="o">=</span> <span class="n">site</span> <span class="o">+</span> <span class="n">feed</span>
-        <span class="k">return</span> <span class="n">feed</span>
-    <span class="k">return</span> <span class="bp">None</span>
-</pre>
-</td>
-</tr></table>
-<p>I'll post any updates later. If possible I may try write one that can be run against Pocket, and try get people to use that to send me already curated lists with possible tags. Watch this space.</p>
-<p><em>Update:</em> Gotta love Python. A web search gave me <a href="http://www.aaronsw.com/2002/feedfinder/feedfinder.py">feedfinder</a>.</p>
+<p><a href="https://www.quantamagazine.org/">Quanta</a>
+ is really a science magazine but has good articles of
+interest to math fans.
+<a href="http://www.mth.uct.ac.za/outreach/digest/archive.php">Mathematical Digest</a>
+ is a magazine that
+has been produced for nearly 50 years now by Professor John
+Webb of the University of Cape Town. I grew up on these in high
+school and along with Martin Gardner's columns they fuelled my
+love of math. I was privileged to be instructed by Prof. Webb
+as an undergraduate math student as well; he was regularly
+awarded honors as a distinguished teacher and these were
+well-deserved.</p>
+<p>Finally, there is <a href="http://freespace.virgin.net/ianstewart.joat/MANIFOLD/manifold_main.html">Manifold</a>,
+a student magazine of the University
+of Warwick, which is where the well-known math professor and
+writer Dr Ian Stewart hails from. I haven't looked at these yet
+but expect them to be interesting.</p>
+<p>If you know of other sources of such magazines let me know in the
+comments!</p>
 </div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
+    </section><footer class="post-meta"><a href="authors/geekraver.html">geekraver</a>
 
         on
 
-        <time class="post-date" datetime="2015-09-20T08:12:00-07:00">
-            2015-09-20 08:12
+        <time class="post-date" datetime="2015-04-25T00:00:00-07:00">
+            2015-04-25 00:00
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/a-christmas-carroll.html">A Christmas Carroll</a></h2>
+    </header><section class="post-excerpt"><div>
+<p>On Christmas day, 1877, Lewis Carroll, author of the Alice books,
+entertained two bored young girls by inventing a new game that he called
+Word Links: given two words, change one word to the other by changing a
+single letter at a time with the intermediate steps all being valid
+words themselves. For example, to change "cold" to "warm", one can use
+the steps "cord", "card", "ward". Carroll later popularised this form of
+puzzle in a series of articles in Vanity Fair magazine, changing the
+name to Doublets - from the "double, double, toil and trouble" witches'
+incantation in Shakespeare's Macbeth.</p>
+<p>These puzzles are still popular today (usually called Word Ladders). The
+noted Stanford computer sciencist Don Knuth dedicated several pages of
+his work on graph algorithms (The Stanford Graphbase) to the topic.
+Knuth investigated five-letter words and found that of a set of 5,757
+common English words, there were 14,135 links between words (where a
+link is a single ladder step). Only 671 words had no links - Knuth
+called these words 'aloof' - 'aloof' itself being aloof, along with
+words such as 'earth', 'ocean', 'sugar' and 'laugh'. 103 pairs such as
+'opium' and 'odium' exist. The two biggest connected sets have 25 words
+each. By relaxing the rules - for example by allowing the letters to be
+rearranged at each step - the words become considerably more connected.</p>
+<p>Ted Johnson <a href="//users.rcn.com/ted.johnson/fourletter.htm">conducted an analysis of four letter
+words</a>, with the additional
+rule of allowing the word to be reversed at any step. Starting with an
+online dictionary of 4776 words, he found that there was one huge linked
+component of 4436 words. This is not surprising; in 1960 Paul Erdős and
+Alfred Rényi proved that if the average number of links is sufficiently
+high then<a href="http://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model">the set of words will form one large connected component with
+a few outliers</a>.
+Word ladders are interesting because of their similarity to genetic
+mutation in DNA. Carroll himself came up with the evolutionary chain
+'ape', 'are', 'ere', 'err', 'ear', 'mar', 'man', although he was a
+sceptic of Darwin's theories.</p>
+<p>Consider the subsequence from 'err' to 'man' - can you prove that to
+change one word with a single vowel to another word with a single vowel
+but in a different position, that it is necessary to go through an
+intermediate step of a word with two vowels? For the purpose of this
+problem, consider 'y' to be a vowel.</p>
+</div>
+    </section><footer class="post-meta"><a href="authors/geekraver.html">geekraver</a>
+
+        on
+                <a href="categories/mathjax.html">#mathjax</a>,
+
+        <time class="post-date" datetime="2011-03-29T22:11:00-07:00">
+            2011-03-29 22:11
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/the-gym-locker-paradox.html">The Gym Locker Paradox</a></h2>
+    </header><section class="post-excerpt"><div>
+<p>It happens so often - you go to your section of the gym change room, and
+there is just one other person there, and they are using the locker next
+to yours and blocking the way. I noticed this a long time ago, and
+noticed that others noticed it too, referring to Murphy’s law, or “just
+my luck”, or some such explanation. Why does it happen so often?</p>
+<p>I call this the <em>Gym Locker Paradox</em>. It is related to a much more well
+known paradox, the <em><a href="http://en.wikipedia.org/wiki/Birthday_paradox">Birthday
+Paradox</a></em>, which is
+commonly formulated as a puzzle: how many people do you need to have in
+a room together before the odds are better than even that two share the
+same birthday?</p>
+<p><img alt="" src="images/740px-TooManyPigeons.jpg" style="float:left;width:40%;margin:10px"></p>
+<p>Obviously in a non-leap year, if there are 366 people you are guaranteed
+a matching pair (in the worst case there will be one person for every
+day of the year plus one duplicate). This worst case is generalized as
+the <em><a href="http://en.wikipedia.org/wiki/Pigeonhole_principle">Pigeonhole
+Principle</a></em> - if you
+have <em>n</em> items shared between <em>m</em> containers, then if <em>n</em> &gt; <em>m</em> at
+least one container will have more than one item.</p>
+<p>The answer to the Birthday Paradox is 23. This is because we care only
+about any pair matching, not a particular match. There are a large
+number of possible pairs in this case.</p>
+<p>We can calculate the probability more easily by thinking about the
+probability of no match. For one person this is 1. Add a second person
+and they for them not to match they must have a birthday on one of the
+other 364 days, i.e. the probability of them not matching is 364/365.
+Similarly, for the third person not to match they must be on one of the
+363 days left, with probability 363/365.</p>
+<p>The total probability for n people is then:</p>
+<p>$$P(n) = \frac{365}{365} \times \frac{364}{365} \times
+\frac{363}{365} \times \ldots \times \frac{(365-n+1)}{365} =
+\frac{365!}{365^{n} (365-n)!}$$</p>
+<p>which falls below 50% at 23 people.</p>
+<p>This result - which many people find surprising - is the basis of what
+are known as <em><a href="http://en.wikipedia.org/wiki/Birthday_attack">Birthday
+Attacks</a></em> on cryptographic
+hash functions used in computer security. Cryptographic hash functions
+compute some value that is treated as a secure “fingerprint” of a much
+larger input. For example a digital contract may be “signed” using such
+a function. An attacker could use the birthday paradox to try to create
+two versions of a contract with the same fingerprint, one of which is
+legitimate, then get the legitimate contract approved based on the
+fingerprint, and finally substitute the fraudulent one. If just the
+fingerprint is used for verification the fraudulent contract will be
+accepted. To avoid this kind of attack the number of possible
+fingerprints needs to be extremely large before the attack becomes
+impractical.</p>
+<p>The math behind the gym locker paradox is much more complex. However,
+clearly if a locker has multiple neighbors the chance of two people
+having adjacent lockers is that much higher (consider a version of the
+birthday problem where we consider a collision to be not just a match
+but a match within a day or two of each other). Add to that the fact
+that gym locker selection is not entirely random (people like lockers at
+eye level rather than lower down, for example), and it is no wonder just
+a few people can clog up a change room.</p>
+</div>
+    </section><footer class="post-meta"><a href="authors/geekraver.html">geekraver</a>
+
+        on
+                <a href="categories/mathjax.html">#mathjax</a>,
+
+        <time class="post-date" datetime="2011-01-20T06:02:00-08:00">
+            2011-01-20 06:02
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/the-calculus-of-democracy.html">The Calculus of Democracy</a></h2>
+    </header><section class="post-excerpt"><div>
+<p>Earlier this year I went to a “guys movie night” at a friends house.
+Before the movie we sat around drinking Croatian Schnapps and eating
+Chinese food, and the conversation turned to politics. There was general
+agreement that our various political systems were highly suspect and not
+very democratic, but Ray, the Texan lawyer with the Croatian wife who
+had provided the schnapps, explained the Australian system of instant
+runoffs and asserted that this was at last a fair system.</p>
+<p>For those not familiar with this system, let me explain: voters get to
+rank the candidates in order of preference. The votes for everyone’s
+first preference are counted, and the candidate who gets the least votes
+is eliminated. That candidate is also struck from the voters choices and
+the process is repeated until there is a candidate that has more than
+50% of the vote.</p>
+<p>This <img alt="Marquis de
+Condorcet" src="images/Marquis_de_condorcet_hd.jpg" style="float:left" title="Marquis de Condorcet">
+seems fair on the surface - if someone obviously gets too few votes they
+should be out of the running, and everyone gets their preferences for
+the remaining candidates counted. But back in 1785, the Marquis de
+Condorcet pointed out paradoxes in this system. For example, if there
+are three candidates A, B, C and three voters who rank them A-B-C,
+B-C-A, and C-A-B, the system is a tie. In general, this is known as
+<a href="http://en.wikipedia.org/wiki/Voting_paradox">Condorcet’s paradox</a>.</p>
+<p>Still, this system is more fair then the plurality voting systems used
+in Canada, India, the UK and the USA, where in each district the winner
+takes all. In systems with multiple parties the winner may get way less
+than half the vote and still get to represent the entire district. Often
+two dominant parties with similar policies will split the vote allowing
+a less popular party to win a majority.</p>
+<p>Sometimes a hybrid system with a second run-off election between the top
+two candidates is used - but due to the vagaries of plurality systems,
+the “top two” candidates may not really be the top two at all.</p>
+<p>In two party systems like the USA parties mostly compete for the center,
+causing the difference between them to become all but irrelevant (in
+economics this is known as <a href="http://en.wikipedia.org/wiki/Hotelling%27s_law">Hotelling’s
+law</a>). Over time these
+systems tend to lose the interest of the voters, occasionally being
+re-energized when someone breaks the mold and retargets the extreme
+instead, as George W. Bush did.</p>
+<p><a href="images/The_Gerry-Mander_Edit.png" style="width:45%;float:left;margin:10px"><img alt="The
+Gerry-Mander" src="images/573px-The_Gerry-Mander_Edit.png" title="The Gerry-Mander"></a>
+Another
+problem with plurality systems is the way in which voting district
+boundaries are drawn up. A candidate may even win the election while
+losing the popular vote overall, as George Bush did in 2000. Economic
+and other factors often cause areas to have a preference for one party
+over another, and ruling parties often exploit this by redrawing
+boundaries while they are in power to favor their chances, a process
+known as gerrymandering after the 19th century governor of
+Massachusetts, Elbridge Gerry, who drew up a district map so convoluted
+it was compared to a salamander (see photo).</p>
+<p>Yet another common system is proportional representation, where each
+district has representatives allocated to each party in proportion to
+the percentage of votes that party obtained. Once again this is subject
+to issues with how districts are divided up. It may seem to make sense
+to have just one district, the entire country - the system used in
+Israel - but the disadvantage is that voters end up with little control
+over which individuals represent them, even if they do have some control
+over which parties do. Furthermore, such systems often end up with weak
+coalition governments that are hamstrung and ineffective, or in which
+minority parties can wield excessive power as “king-makers” for their
+bigger rivals.</p>
+<p>So what makes a fair system? In 1963 the economist Kenneth Arrow came up
+with four attributes that he felt described a fair voting system - and
+then went on to prove <a href="http://en.wikipedia.org/wiki/Arrow's_impossibility_theorem">Arrow’s impossibility
+theorem</a> -
+no voting system could satisfy all four conditions. Democracy, it seems,
+isn’t.</p>
+</div>
+    </section><footer class="post-meta"><a href="authors/geekraver.html">geekraver</a>
+
+        on
+
+        <time class="post-date" datetime="2010-07-20T05:03:00-07:00">
+            2010-07-20 05:03
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/fibonacci-ties-it-all-together.html">Fibonacci ties it all together</a></h2>
+    </header><section class="post-excerpt"><div>
+<p>In the past few posts I have discussed a diverse set of topics, from
+number representation to recurrence relations, Pythagorean triples.</p>
+<p>All of these topics are related, and this is particularly illustrated
+when we consider the work of Leonardo of Pisa, better known as Fibonacci
+(from the Latin “de filiis Bonacci”, or “of the family of Bonacci”).
+Fibonacci was born in 1175, in Pisa, Italy, shortly after the start of
+the construction of the famous leaning tower. The city of Pisa was a
+maritime republic which had its own colonies, including Bugia (in modern
+day Algeria), where Leonardo’s father moved in 1192 to be a clerk in the
+customs house. It was here that Fibonacci became acquainted with the
+Hindu numerals and zero, and where his Muslim teacher introduced him to
+the the great book <em><a href="http://magimathics.com/much-ado-about-nothing">Al-Jabr
+wal-Muqabalah</a></em>.
+Fibonacci subsequently travelled broadly, where he learnt from
+mathematicians of different cultures. Around 1200 he returned to Pisa
+and began work on his masterpiece <em>Liber Abaci</em>, which was published in
+1202, and begins with these words:</p>
+<blockquote>
+<p>“The nine Indian figures are 9 8 7 6 5 4 3 2 1.</p>
+<p>With these nine figures, and with the sign 0, which the Arabs call
+zephyr, any number whatsoever is written”.</p>
+</blockquote>
+<p>This is the earliest known formal mention of the decadic Hindu-Arabic
+number system in the Western world.</p>
+<p><a href="images/image15.png" style="float:right;size:35%;margin:10px"><img alt="A page of the Liber Abaci" src="images/image_thumb15.png" title="A page of the Liber Abaci"></a></p>
+<p>The <em>Liber Abaci</em> contains a large collection of problems, some aimed at
+merchants, but most related to algebra and what would now days be
+considered number theory. One of these problems concerned the rate of
+reproduction of rabbits, and how the number of pairs of rabbits grows
+over successive generations assuming each pair spawns another at each
+generation. If each pair takes one generation to mature, then the number
+of adult pairs is given by the sequence:</p>
+<p>1, 1, 2, 3, 5, 8, 13, 21, …</p>
+<p>which are the now-famous Fibonacci numbers, defined by the recurrence
+relation:</p>
+<p>$$F_n = F_{n-1} + F_{n-2}$$</p>
+<p>These numbers are a source of endless fascination, as they appear in
+various guises throughout nature, art, architecture, and mathematics.
+For example, the number of spirals of bracts on pineapples and pinecones
+are Fibonacci numbers, as are the number of branches on some species of
+trees, the number of ancestors at each generation of male bees, and
+more. Furthermore, the ratio between consecutive Fibonacci numbers
+approaches phi, the golden ratio, which again appears throughout art and
+science. Many of these relationships only began to be noticed in the
+1800’s, and it was in the mid-1800’s that the name “Fibonacci numbers”
+was given them by Edouard Lucas - the inventor of the <a href="http://magimathics.com/the-end-of-the-universe">Tower of
+Hanoi</a>
+puzzle. Today they still command attention, so much so that there is a
+<a href="http://www.fq.math.ca/">quarterly journal</a> dedicated to their
+exploration!</p>
+<p>Many of these interesting properties of the Fibonacci numbers will be
+discussed in future posts; for now, I wish to focus on the relationship
+of the Fibonacci numbers to the Pythagorean triples. Before doing so I
+need to point out one of the many interesting properties of the
+Fibonacci numbers; the proof will be left for another day although you
+may want to try obtain it yourself:</p>
+<p>$$F_{2n-1} = F_n^2 + F_{n-1}^2$$</p>
+<p>Can you prove the following?</p>
+<ul>
+<li>If we have a succession of four consecutive Fibonacci numbers
+    \(a, b, c, d\), then \((2bc, ad, b^2c^2)\) form a
+    Pythagorean triple</li>
+<li>Is it possible to have a triangle whose sides are all <em>distinct</em>
+    Fibonacci numbers? It should be obvious that this is not possible
+    with consecutive Fibonacci numbers, but what if we can choose any
+    Fibonacci numbers?</li>
+</ul>
+<p>The first problem is quite easy to prove if we just note that \(c = a + b\)
+and \(d = c + b = a + 2b\), and then expand the three
+operations in the triple in terms of just \(a\) and \(b\):</p>
+<p>$$A = 2bc = 2b ( a + b) = 2ab + 2b^2$$</p>
+<p>$$B = ad = a (b + a + b) = a^2 + 2ab$$</p>
+<p>$$C = b^2 + c^2 = b^2 + (a + b)^2 = a^2 + 2ab + 2b^2$$</p>
+<p>If we then square these results it is trivial to see that \(A^2 + B^2 = C^2\) holds.</p>
+<p>Interestingly, if we use two consecutive Fibonacci numbers as the
+coefficients in the Babylonian formulae for Pythagorean triples (i.e.
+<a href="http://magimathics.com/more-on-diophantus-and-fermat">the formulae given by
+Diophantus</a>),
+then one of the numbers in the triple is a Fibonacci number. This should
+be clear from the property mentioned above, which stated that the sum of
+the squares of two consecutive Fibonacci numbers is a Fibonacci number</p>
+<p>For the second problem, assume we have three distinct Fibonacci numbers,
+\(F_a\), \(F_b\) and \(F_c\), ordered by size, so
+that:</p>
+<p>$$F_a \leq F_{b-1}$$</p>
+<p>$$F_{b+1} \leq F_c$$</p>
+<p>Then:</p>
+<p>$$F_a + F_b \leq F_{b+1}$$</p>
+<p>So:</p>
+<p>$$F_a + F_b \leq F_c$$</p>
+<p>which contradicts the <em>triangle inequality</em> - namely that the sum of any
+two sides of a triangle must be greater than the third side.</p>
+</div>
+    </section><footer class="post-meta"><a href="authors/geekraver.html">geekraver</a>
+
+        on
+                <a href="categories/mathjax.html">#mathjax</a>,
+
+        <time class="post-date" datetime="2010-01-20T05:37:00-08:00">
+            2010-01-20 05:37
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/the-horn-of-gabriel.html">The Horn of Gabriel</a></h2>
+    </header><section class="post-excerpt"><div>
+<p>“<a href="http://bible.cc/revelation/11-15.htm"></a><em>And the seventh angel sounded
+[his horn]; and there were great voices in heaven, saying, The kingdoms
+of this world are become the kingdoms of our Lord, and of his Christ;
+and he shall reign for ever and ever.”</em> (Revelations 11.15, King James
+Edition)</p>
+<p>In Christian and Islamic folklore, it is the angel Gabriel who is
+considered to be the seventh angel, who announced the coming of
+judgement day. An angel with such a huge responsibility clearly needs an
+instrument worthy of the task, and indeed there is one: Gabriel’s horn,
+also known as Torricelli’s trumpet, after its discoverer, Evangelista
+Torricelli, a student of Galileo. Gabriel’s horn has infinite surface
+area but finite volume, and is described the rotating the curve
+\(y=\frac{1}{x}\) for \(x \geq 1\) around the \(x\) axis.</p>
+<p><a href="images/image13.png" style="float:right;size:35%;margin:10px"><img alt="image" src="images/image_thumb13.png" title="image"></a></p>
+<p>It is easy to see that this shape, which extends to infinity along the
+positive \(x\) axis but gets thinner and thinner, must have
+infinite surface area. It is less obvious that it has finite volume,
+although this can be shown with elementary calculus (if you’re
+unfamiliar with the calculus needed for surface area of revolution and
+solid volume of revolution, just bear with me).</p>
+<p>The volume is given by:</p>
+<p>$$V = \pi \int_{1}^{a} \frac{1}{x^2} dx = \pi (1 - \frac{1}{a})$$</p>
+<p>While the surface area is given by:</p>
+<p>$$A = 2 \pi \int_{1}^{a} \frac{\sqrt{1 + \frac{1}{x^4}}}{x} dx &gt; 2 \pi \int_{1}^{a} \frac{\sqrt{1}}{x} dx = 2 \pi ln(a)$$</p>
+<p>Clearly in the limit \(a \rightarrow \infty\), we have:</p>
+<p>$$V = \pi$$</p>
+<p>$$A = \infty$$</p>
+<p>At the time that Torricelli discovered this (1641), calculus had not yet
+been invented, and he obtained the results by a technique developed by
+his friend Cavalieri, called the summation of plane slices - essentially
+a technique similar to the calculus of limits using successively smaller
+slices. This itself required a leap of faith at the time and only became
+solidified later, as the idea of limits took hold, and the concept of
+infinitely many infinitely thin slices was given a rigorous mathematical
+foundation.</p>
+<p>Torricelli’s trumpet caused some consternation and disbelief - in 1672,
+for example, Thomas Hobbes, the English philosopher, claimed that to
+believe Torricelli would be madness. It appears to result in a paradox,
+the <em>painter’s paradox</em>: if the volume is finite, the horn can be filled
+with a finite amount of paint, and yet to cover its interior surface
+would require an infinite amount of paint! Before reading on, can you
+resolve this paradox?</p>
+<p>The paradox comes from confusing our mental model of real paint with
+“mathematical” paint. Real paint has a finite thickness - say the
+thickness of a paint molecule. At some point the trumpet becomes thinner
+than this, and so with real paint we could neither fill the trumpet nor
+cover its surface. The only paint that could do this would be
+“mathematical” paint that has infinitely small thickness. A finite
+amount of infinitely thin paint could cover an infinite
+surface.<a href="images/image14.png" style="float:right;size:35%;margin:10px"><img alt="image" src="images/image_thumb14.png" title="image"></a></p>
+<p>While he made a number of contributions to mathematics, Torricelli is
+more well known for his contributions to physics. He was the first
+scientist to create a sustained vacuum and suggested the experiments
+that led to the invention of the barometer; later he went on to use the
+much more effective mercury in place of water. In his honour the vacuum
+in a barometer is known as a Torricelli vacuum, and the Torr is a
+measure of vacuum. He gave the first scientific explanation for wind,
+which he recognized as being caused by variations in air density caused
+by temperature differences. He was a skilled lens maker and his
+telescopes and microscopes provided much of his income. Sadly, he
+contracted typhoid and died at the age of 39  in 1647;  not all his
+writing and research was preserved, and had he lived longer he may well
+have been credited with being the inventor of integral calculus; he was
+well on the way to understanding its principles.</p>
+<p>"<em>We live submerged at the bottom of an ocean of air</em>." - Evangelista
+Torricelli, 1644.</p>
+</div>
+    </section><footer class="post-meta"><a href="authors/geekraver.html">geekraver</a>
+
+        on
+                <a href="categories/mathjax.html">#mathjax</a>,
+
+        <time class="post-date" datetime="2010-01-18T06:48:00-08:00">
+            2010-01-18 06:48
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/more-on-pythagoras.html">More on Pythagoras</a></h2>
+    </header><section class="post-excerpt"><div>
+<p>Pythagoras is known for two great contributions to mathematics – he
+established the need for formal proofs instead of just conjecture and
+rules of thumb, and he established the existence of the irrationals. In
+popular culture of course, Pythagoras is more well known for the
+Pythagorean theorem – that the square of the hypotenuse of a right
+angled triangle is the sum of the squares of the other two sides – but
+this was one of the oldest known results in mathematics and in fact
+predates Pythagoras by as much as a thousand years. Nonetheless,
+Pythagoras provided a formal proof, and the result led him to ask
+whether there were rational numbers that worked in the case where the
+hypotenuse had the length two. That is, what was the fractional
+representation of the square root of two? Pythagoras managed to show
+there was none, leading to the discovery of the irrational numbers.</p>
+<p>His proof was quite simple. Assume that \(\sqrt{2}\) can be
+expressed as a fraction \(\frac{a}{b}\) of two whole
+numbers \(a\) and \(b\). Assume these are the two smallest
+such whole numbers – that is, they have no common divisor allowing the
+fraction to be further reduced. Then:</p>
+<p>$$\frac{a^2}{b^2} = 2$$</p>
+<p>so:</p>
+<p>$$a^2 = 2 b^2$$</p>
+<p>The right hand side is even, which means \(a^2\) is even, and
+thus \(a\) must be even, or \(a=2m\) for some \(m\). But
+then:</p>
+<p>$${(2m)}^2 = 2b^2$$</p>
+<p>so:</p>
+<p>$$2m^2 = b^2$$</p>
+<p>So the left hand side is even, and thus \(b\) must be even. But if
+both \(a\) and \(b\) are even, then they have a common factor
+2, which contradicts the assumption that they were the smallest such
+numbers.</p>
+<p>There are, of course, infinitely many cases where the Pythagorean
+triangles have sides with rational length, and for that matter, integer
+length. In a <a href="http://magimathics.com/more-on-diophantus-and-fermat">recent
+post</a>
+I mentioned the method described by Diophantus that inspired Fermat’s
+last theorem. It is easy to derive this method. Assume \(a\)
+and \(b\) are relatively prime, and that \(b\) is odd. Then:</p>
+<p>$${(a+b)}^2 = a^2 + b^2 + 2ab &gt; a^2 + b^2 = c^2$$</p>
+<p>Thus \(c &lt; a+b\). So we can write \(c = a+b-d\) for some
+positive \(d\). Then:</p>
+<p>$$a^2 + b^2 = {(a+b-d)}^2 = a^2 + b^2 + d^2 + 2ab -2ad -2bd$$</p>
+<p>So:</p>
+<p>$$d^2 = 2ad + 2bd - 2ab$$</p>
+<p>From this we can see \(d\) must be even. Let \(d=2m\); then:</p>
+<p>$$4m^2 = 4am+4bm-2ab$$</p>
+<p>So:</p>
+<p>$$ab=2am+2bm-2m^2$$</p>
+<p>Thus \(ab\) is even, and as we assumed \(b\) is odd, \(
+a\) must be even. Since the sum of an even and an odd is an odd, \(
+c^2\) must be odd and so \(c\) must be odd.</p>
+<p>So \(a\) is even, and \(b\) and \(c\) are odd. We can
+write \(b=s-t\) and \(c=s+t\) for some integers \(s\)
+and \(t\). Then:</p>
+<p>$$a^2 + {(s-t)}^2 = {(s+t)}^2$$</p>
+<p>or:</p>
+<p>$$a^2 + (s^2 - 2st + t^2) = (s^2 + 2st + t^2)$$</p>
+<p>Simplifying:</p>
+<p>$$a^2 = 4st$$</p>
+<p>So \(st\) must be a perfect square. We can write \(s=u^2\)
+and \(t=v^2\). Thus:</p>
+<p>$$a^2 = 4u^2v^2$$</p>
+<p>So:</p>
+<p>$$a=2uv$$</p>
+<p>So we have shown that a Pythagorean triple takes the form:</p>
+<p>$$( 2uv, u^2-v^2, u^2 + v^2 )$$</p>
+</div>
+    </section><footer class="post-meta"><a href="authors/geekraver.html">geekraver</a>
+
+        on
+                <a href="categories/mathjax.html">#mathjax</a>,
+
+        <time class="post-date" datetime="2010-01-17T03:12:00-08:00">
+            2010-01-17 03:12
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/much-ado-about-nothing.html">Much Ado about Nothing</a></h2>
+    </header><section class="post-excerpt"><div>
+<p>Many people have heard that the number zero was introduced later than
+the other digits. Upon hearing this it seems fantastical - how could
+people have managed even elementary arithmetic without zero? However, it
+is not the concept of “nothing” that was missing, but rather the use of
+a zero in other places when representing or recording numbers. For
+example, in the number 101, zero is used as a separator, and it is this
+concept that was lacking in early number systems.</p>
+<p><a href="images/image10.png" style="float:right;size:35%;margin:10px"><img alt="Medieval tallies" src="images//image_thumb10.png" title="Medieval tallies"></a></p>
+<p>We are used to our modern decimal representation where each digit
+represents units, tens, hundreds, thousands, etc. Not all systems worked
+that way - the Roman system is a well-known example of a different
+approach. Throughout history there have been many alternative ways of
+recording numbers. In ancient China and the South Sea islands knots in
+string were used. Creating notches in sticks is another (the word
+<em>score</em> has its roots in this method, as do the Roman numerals I, II,
+III). Contracts were often formalized by scoring a piece of wood with an
+appropriate count then splitting it in two with each party taking half;
+the halves would be matched up later to ensure no alteration. <a href="images/image11.png" style="float:right;size:35%;margin:10px"><img alt="The
+burning of the Parliament, painted by
+Turner" src="images/image_thumb11.png" title="The burning of the Parliament, painted by Turner"></a></p>
+<p>In Britain such Exchequer tallies were used from the 12th century and
+were legally binding until 1826; in 1834 the burning of the no-longer
+required tallies started a fire that destroyed the old Parliament
+buildings.</p>
+<p>The use of simple score marks developed with writing into more
+sophisticated forms. Different symbols were used for values of different
+magnitudes, and they were repeated as necessary (e.g. III for 3, and CCC
+for 300 in Rome). The use of subtractive methods (IV instead of IIII)
+was a later innovation.</p>
+<p>This simple grouping approach evolved into a multiplicative approach,
+where instead of repeating a symbol it was preceded with a count. For
+example, if that were applied to Roman numbers we might write 3C3V for
+315. A real example is the Chinese-Japanese number system.</p>
+<p>A different approach is a ciphered approach, where there are separate
+symbols for the ten symbols 0 through 9, then the nine symbols 10 , 20,
+30 through 90, then 100, 200, 300 through 900, and so on. Examples of
+this are the Hindu Brahmi and the Egyptian hieratic and demotic systems.
+Variations on this, where alphabetic characters were repurposed for
+numbers, are the Greek numerals, Hebrew, Syrian and Gothic systems.</p>
+<p>Unfortunately, many of these systems are ill-suited for calculations, as
+anyone who has attempted math on Roman numerals will know. Performing
+arithmetic was thus considered an advanced art and required the
+assistance of tools such as the abacus.  It was only with the spread of
+the Hindu-Arabic decadic positional system around 800AD that arithmetic
+operations became easy to perform without assistance. It was positional
+systems that necessitated the introduction of a symbol to represent no
+value at a particular position, to distinguish, for example, 31 from
+301. The lack of a zero made the earlier positional systems such as the
+Babylonian sexagesimal system highly ambiguous, although the Mayans
+developed an early positional representation system that included a
+zero, which may account for why their mathematical calculations were
+considerably more advanced and accurate than other cultures.</p>
+<p><a href="images/image12.png" style="float:right;size:35%;margin:10px"><img alt="A page of Al-Jabr
+wal-Muqabalah" src="images/image_thumb12.png" title="A page of Al-Jabr wal-Muqabalah "></a></p>
+<p>The spread of the Hindu-Arabic system was largely facilitated by the
+translation into Latin of the text <em>Al-Jabr wal-Muqabalah</em> (hence:
+algebra) by the great Arab mathematician Mohammed ibn Musa
+al-Khowarizmi.  The use of this system became known as algorism (leading
+to the modern word algorithm) , but its adoption took time; the abacists
+who adhered to the Roman system resisted the algorismic system and it
+took until the 16th century for it to become predominant in Europe.</p>
+</div>
+    </section><footer class="post-meta"><a href="authors/geekraver.html">geekraver</a>
+
+        on
+
+        <time class="post-date" datetime="2010-01-13T05:53:00-08:00">
+            2010-01-13 05:53
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/primal-soup.html">Primal Soup</a></h2>
+    </header><section class="post-excerpt"><div>
+<p><a href="images/image9.png" style="float:right;size:35%;margin:10px"><img alt="image" src="images/image_thumb9.png" title="image"></a></p>
+<p>Number theory really began with Euclid, around 300BC, in books 7 through
+9 of his masterwork, <em>The Elements</em>. It is here that we find the
+original definitions of odd and even numbers, prime and composite
+numbers, perfect numbers (numbers which are the sum of their factors,
+e.g. 6 = 3 + 2 + 1), and more. But the greatest achievements of all were
+his proofs that composite numbers are the products of primes, that this
+factorization is unique, and that there are an infinity of primes. Most
+introductory algebra or number theory classes cover these three great
+proofs, but they are worth revisiting for those who may have forgotten.</p>
+<p>Before doing so, it is worth revisiting Euclid’s clever algorithm for
+calculating the greatest common divisor (GCD) of two numbers. We made
+use of this when solving the <a href="http://magimathics.com/monkeying-around">Monkey and Coconuts
+puzzle</a>.</p>
+<p>We divide the smaller number into the larger and keep track of the
+remainder. Then we divide that remainder into the smaller number to get
+a second remainder, then divide the second remainder into the first
+remainder to get a third remainder, and so on. Eventually we get a
+remainder of zero; the remainder just before this is the GCD. If this
+happens to be one, we say the numbers are coprime. For example, consider
+64 and 10:</p>
+<ul>
+<li>64 = 10 x 6 + 4</li>
+<li>10 = 4 x 2 + 2</li>
+<li>4 = 2 x 2 + 0</li>
+</ul>
+<p>So the GCD is 2.</p>
+<p>For another example, consider 77 and 65:</p>
+<ul>
+<li>77 = 65 x 1 + 12</li>
+<li>65 = 12 x 5 + 5</li>
+<li>12 = 5 x 2 + 2</li>
+<li>5 = 2 x 2 + 1</li>
+<li>2 = 1 x 2 + 0</li>
+</ul>
+<p>So the GCD is 1 and the numbers are coprime.</p>
+<p>In the proofs below we make use of a special case of Bézout's identity,
+which states that if two numbers \(a\) and \(b\) have a
+GCD \(g\), then there exists some \(x\) and \(y\) such
+that \(ax + by = g\). In our case we care about the situation
+where \(a\) and \(b\) are coprime, so that there exists
+some \(x\) and \(y\) such that \(ax + by = 1\). We aren’t
+proving that here but it is exactly equivalent to solving the
+Diophantine equations we solved for the <a href="http://magimathics.com/monkeying-around">Monkey and Coconuts
+problem</a>
+(where  \(x\) and  \(y\) where the number of coconuts at the
+start and end).</p>
+<p><strong><em>Proof that Composite Numbers have Prime Factors</em></strong></p>
+<p>Let \(A\) be a composite number. Then by definition \(A\) must
+be divisible by some smaller number \(B\). If \(B\) is prime
+we are done; if \(B\) is not prime it is must be divisible by some
+smaller number \(C\), and so on. Continuing in this way, we find:</p>
+<p>$$A &gt; B &gt; C &gt; \dots &gt; 1$$</p>
+<p>This sequence must terminate with a prime number in the last position
+before 1; if not, that is, if each successive number is still composite,
+then the series is infinite, but we cannot have an infinite series of
+decreasing whole numbers.</p>
+<p><strong><em>Prime Factorization Theorem (aka the Unique Factorization Theorem aka
+the Fundamental Theorem of Arithmetic)</em></strong></p>
+<p>There are two steps: first we show that if a prime \(p\) divides a
+composite \(ab\), then \(p\) must divide at least one
+of \(a\) or \(b\). Assume \(p\) does not divide \(
+a\) - then the GCD (greatest common divisor) of \(p\) and \(
+a\) must be 1, as \(p\) is prime. By Bézout's identity, there must
+be some integers \(x\) and \(y\) satisfying \(px + ay =
+1\). Multiplying both sides by \(b\) gives \(pxb+aby = b\),
+and both terms on the left hand side are products of \(p\),
+thus \(b\) must be a product of \(p\).</p>
+<p>Now for the main proof. Let \(s\) be the smallest natural number
+that can be written as a product of prime numbers in more than one way
+(ignoring ordering, of course). Let one factorization be \(p_1
+p_2 \dots p_m\) and another be \(q_1 q_2 \dots q_n\). The
+previous result proves that \(p_1\) divides either \(q_1\)
+or \(q_2 \dots q_n\). Because both  \(q_1\) and  \(
+q_2 \dots q_n\) must have unique prime factorizations, \(p_1\)
+must equal some \(q_i\). If we then remove \(p_1\)
+and \(q_i\)  we have two different factorizations of a number
+\(\frac{s}{p_1}\) which is smaller than \(s\), which
+contradicts our assumption that \(s\) is the smallest such number.</p>
+<p><strong><em>Proof of the Infinitude of the Primes</em></strong></p>
+<p>Assume the set of primes is finite, given by \({ p_1, p_2,
+\dots, p_n }\). Consider the number  \(p = p_1 p_2 p_3 \dots
+p_n + 1\). This is not divisible by any of the primes in the set; it
+always leaves a remainder of 1. Therefore it is either itself prime or
+has other prime divisors not in the set, and so the set is incomplete.</p>
+<p>Further reading: William Dunham’s <a href="http://www.amazon.com/gp/product/014014739X?ie=UTF8&amp;tag=wishwatcher-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=014014739X">Journey through Genius: The Great
+Theorems of
+Mathematics</a>
+has two chapters on Euclid’s elements and covers much of this material
+(although he omits the proofs apart from the last one). <a href="http://www.amazon.com/gp/product/3642008550?ie=UTF8&amp;tag=wishwatcher-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=3642008550">Proofs from THE
+BOOK</a>
+has about six different proofs of the infinitude of the primes, each
+using a different branch of mathematics, from algebra to set theory to
+topology. To dust off my rusty memory of these proofs I had to pull out
+my well-thumbed college textbook <a href="http://www.amazon.com/gp/product/0713134763?ie=UTF8&amp;tag=wishwatcher-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=0713134763">Rings, Fields and Groups: An
+Introduction to Abstract
+Algebra</a>,
+but while it is a great text I wouldn’t recommend it to those faint of
+heart!</p>
+</div>
+    </section><footer class="post-meta"><a href="authors/geekraver.html">geekraver</a>
+
+        on
+                <a href="categories/mathjax.html">#mathjax</a>,
+
+        <time class="post-date" datetime="2010-01-06T06:54:00-08:00">
+            2010-01-06 06:54
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/archimedes-counts-the-sand.html">Archimedes counts the sand</a></h2>
+    </header><section class="post-excerpt"><div>
+<p>In a <a href="http://www.magimathics.com/babylonian-numbers-in-60-seconds">previous
+post</a>
+I described the Babylonian/Sumerian sexagesimal (base 60) counting
+system. Unlike this system, most cultures adopted a base 10 counting
+system due to the natural inclination to count with the fingers (leading
+to the term <em>digits</em>). Less common were quinary (base 5) systems, but
+vigesimal (base 20) were not unusual - for example, this was widespread
+in native American culture, including (with a novel variation) the
+Mayans. Duodecimal (base 12) has also played a role; we still have
+remnants in the groupings of dozens and gross.</p>
+<p>Once the numbers in the base group are exceeded, we need to group to
+represent larger numbers - for example in decimal we have units, tens,
+tens of tens (hundreds), and so on. The Mayans used a novel variation
+where the second grouping only went up to 18, although after this the
+groupings reverted to base 20 again. This means the second order group
+represents numbers up to 360 rather than 400, and may relate to the
+Mayan calendar of 18 months of 20 days plus 5 extra days.</p>
+<p>The larger groupings have names that are often quite recent
+introductions to language; while the term <em>hundred</em> can be traced back
+to a root meaning <em>ten times (ten)</em>, the word <em>thousand</em> has no clear
+relation to the roots of Indo-European languages and is likely quite a
+late construction, seemingly from an early Germanic term meaning <em>great
+hundred</em>. An exception was the Hindus who seemed attracted to large
+numbers; there is a story from the life of the Buddha which mentions
+numbers up to \(2^{153}\). The Greeks typically stopped at
+<em>myriad</em> (ten thousand), and for a long time the Roman number system
+stopped at 100,000; the term for a <em>million</em> appeared around 1400AD in
+Italy. Numbers larger than a million have appeared so recently in
+European language that there is no common agreement - a <em>billion</em> in
+Europe is \(10^{12}\) while in America it is \(10^9\)
+(called a <em>milliard</em> in Europe), and things get worse for trillion and
+quadrillion.</p>
+<p><a href="images/archimedes.png" style="float:right;width:35%;margin:10px"><img alt="Archimedes Thoughtful by Fetti
+(1620)" src="images/archimedes_thumb.png" title="Archimedes Thoughtful by Fetti (1620)"></a></p>
+<p>One of the first known efforts to systematize the number system to
+encompass large numbers is Archimedes’ <em><a href="http://www.calstatela.edu/faculty/hmendel/Ancient%20Mathematics/Archimedes/SandReckoner/SandReckoner.html">The Sand
+Reckoning</a></em>,
+a treatise addressed to his relative King Gelo of Syracuse, in which
+Archimedes constructs a systematic method for representing arbitrarily
+large numbers while addressing the problem of estimating the number of
+grains of sand in the universe. In his preface, he stated “There are
+some, King Gelo, who think that the number of the sand is infinite in
+multitude; and I mean by the sand not only that which exists about
+Syracuse and the rest of Sicily but also that which is found in every
+region whether inhabited or uninhabited.” Archimedes went on to use
+myriads raised to the the power of myriads, successively, to represent
+the very large numbers he needed for his calculations. In the process of
+doing this Archimedes discovered and proved the law of exponents:</p>
+<p>$$10^a 10^b = 10^{a+b}$$</p>
+<p>Archimedes had to estimate the size of the universe. He assumed a
+heliocentric model, with the earth revolving around the sun, the sun at
+the center, and the stars at the periphery. By his estimates the
+universe was about two light years across. Given we now know the next
+closest star to our sun is about 4 lights years away this was quite
+impressive for the time!</p>
+</div>
+    </section><footer class="post-meta"><a href="authors/geekraver.html">geekraver</a>
+
+        on
+                <a href="categories/mathjax.html">#mathjax</a>,
+
+        <time class="post-date" datetime="2010-01-05T06:48:00-08:00">
+            2010-01-05 06:48
         </time></footer></article>
 </div>
 
         <nav class="postindexpager"><ul class="pager">
 <li class="previous">
-                <a href="index.html" rel="prev">Newer posts</a>
+                <a href="index-6.html" rel="prev">Newer posts</a>
             </li>
             <li class="next">
                 <a href="index-4.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+        </ul></nav><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
 
     <script type="text/javascript" src="assets/js/jquery.js"></script><script type="text/javascript" src="assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="assets/js/index.js"></script><script>

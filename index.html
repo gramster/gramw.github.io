@@ -17,8 +17,8 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
 <link rel="canonical" href="https://www.grahamwheeler.com/index.html">
-<link rel="next" href="index-5.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/zite-replacement-11.html" type="text/html">
+<link rel="next" href="index-6.html" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/blogagain.html" type="text/html">
 </head>
 <body class="nav-closed">
 
@@ -76,7 +76,28 @@
     </header><main id="content" class="content" role="main"><div class="postindex">
 
 
-<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-11.html">Building a Zite Replacement (Part 11)</a></h2>
+<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/blogagain.html">Blogging again</a></h2>
+    </header><section class="post-excerpt"><div>
+<p>Well, it's been quite a while since I last blogged. My Zite project is not dead; it's actually up and 
+running well as a personal aggregator but not ready for multi-user access, and I'm not sure when it
+might be. But I've been feeling a bit of an itch to start blogging again so here goes.</p>
+<p>I have some material already lined up: I've been teaching an introductory data science bootcamp at
+work and thought the notebooks from that could be useful blog posts in and of themselves. So I'll
+start slowly publishing those while I write some new material. I'm also going to expand the scope 
+of this blog; I'll still cover some tech topics but I',m going to fold in the content from my
+dormant math blog and retire it; this may inspire me to do some math blogging again. And I'll be 
+throwing in some stuff on management and psychology too. So this will be a mishmash living up to 
+the random forest name. I'll use categories to make it more accessible for those only interested
+in specific topics.</p>
+<p>More soon!</p>
+</div>
+    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
+
+        on
+
+        <time class="post-date" datetime="2018-04-11T21:00:00-07:00">
+            2018-04-11 21:00
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-11.html">Building a Zite Replacement (Part 11)</a></h2>
     </header><section class="post-excerpt"><div>
 <p>It's been a while since I worked on this but it is still on my mind a lot. I've been mulling over ways to improve categorization without the semi-supervised tweaking I've had to do.</p>
 <p>Just to recap, currently this is what I am doing:</p>
@@ -2574,229 +2595,16 @@ Comment on Foolproof Yorkshire Pudding Recipe by pearl
 
         <time class="post-date" datetime="2015-09-23T22:21:00-07:00">
             2015-09-23 22:21
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-4.html">Building a Zite Replacement (Part 4)</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>Following my <a href="http://www.grahamwheeler.com/posts/zite-replacement-3.html">last post</a>, I started gathering URLs of feeds to use for sample data. First I scraped the links that I had saved in Pocket (a scarily large number). It didn't seem like Pocket had an easy way to export this, so I loaded up Pocket in Chrome, scrolled and scrolled and scrolled until I could scroll no more, then saved the resulting web page once it was done loading. It was pretty easy to then scrape that to get the links. After sorting and uniq-ing those, and running them through <a href="http://www.aaronsw.com/2002/feedfinder/">feedfinder</a>, I had somewhere north of 1000 feeds. However, these were very skewed to my interests and I wanted diversity so I pressed on and scraped a bunch of blog rolls and other link collections covering many other areas. In the end I got about 2,500 feed URLs to start with, in a file named 'feeds.txt'.</p>
-<p>At that point I ran the code below to fetch and categorize the articles.</p>
-<table class="codehilitetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27</pre></div></td>
-<td class="code">
-<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">datetime</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'feeds.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">feeds</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'articles.txt'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">feed</span> <span class="ow">in</span> <span class="n">feeds</span><span class="p">:</span>
-        <span class="n">feed</span> <span class="o">=</span> <span class="n">feed</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">continue</span>
-        <span class="k">print</span> <span class="n">feed</span>
-        <span class="n">when</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
-        <span class="n">articles</span> <span class="o">=</span> <span class="n">get_feed_with_tf_idf</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span>
-        <span class="k">print</span> <span class="s1">'</span><span class="si">%d</span><span class="s1"> articles processed from feed </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">articles</span><span class="p">),</span> <span class="n">feed</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
-            <span class="n">record</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'feed'</span><span class="p">:</span> <span class="n">feed</span><span class="p">,</span> 
-                      <span class="s1">'fetched'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">when</span><span class="p">),</span>
-                      <span class="s1">'category'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'category'</span><span class="p">],</span>
-                      <span class="s1">'link'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'link'</span><span class="p">],</span> 
-                      <span class="s1">'date'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'date'</span><span class="p">],</span>
-                      <span class="s1">'terms'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">],</span>
-                      <span class="s1">'title'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span>
-                      <span class="s1">'thumbnail'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'media_thumbnail'</span><span class="p">]</span>
-            <span class="p">}</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">record</span><span class="p">))</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
-</pre>
-</td>
-</tr></table>
-<p>It ran surprisingly fast; it actually took a lot longer to find the feed URLs than it did to fetch the articles and do term extraction. A number of sites returned 0 articles and I need to do  prune of those from the feed list as they are probably either dead or uninteresting.</p>
-<p>Once that was done I had close to 40,000 articles to work with. A simple approach is to not even bother going further and just use the extracted terms for deciding what articles to show. I could probably get pretty good results this way; for example, where Zite would typically give me about ten articles on Clojure, I already have over 200!  But I'd like to press on and do some clustering and use that for higher-level tagging and eventually supervised learning.</p>
-<p>For clustering we need some way of measuring <a href="https://en.wikipedia.org/wiki/Similarity_measure">similarity</a>
-between articles (or conversely, distance). For <a href="https://en.wikipedia.org/wiki/Categorical_variable">categorical data</a>
-(as opposed to quantitative data), like our lists of terms, a simple but highly effective measure is
-<a href="https://en.wikipedia.org/wiki/Jaccard_index">Jacard similarity</a>, which is the size of the intersection 
-of our list of terms divided by the size of the union. For example, if one document had the terms 'Obama', 'president', 'visit', and the other had the terms 'Trump', 'president', 'campaign', 'Fiorina', then the Jacard similarity of these documents would be 2/6. The Jacard distance is just 1 - the similarity. Some algorithms work with similarities and some with distances so it is useful to know how to compute both. For points in n-dimensional space, for example, distance is usually Euclidean distance (the square root of the sum of the squares of the distances on each axis), while similarity would be 1/distance,  or some other value that increases as distance decreases; we want to avoid division by zero so 1 / (1 + distance) is more common.</p>
-<p>Calculating the Jacard similarity of all the pairwise combinations of nearly 40,000 items is no mean feat, and to make this tractable in an interpreted language like Python you have to leverage libraries that have efficient native implementations under the hood very effectively. I found the code below not too bad; it took about 20 minutes on my MacBook Pro:</p>
-<table class="codehilitetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40</pre></div></td>
-<td class="code">
-<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">import</span> <span class="nn">numpy</span>
-
-<span class="kn">import</span> <span class="nn">json</span>
-
-<span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># Load the articles back in.</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'articles.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="c1"># We will add line number info in for easy cross reference.</span>
-    <span class="n">linenum</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
-        <span class="n">linenum</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">ve</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s2">"Failed to parse line </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">linenum</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">ve</span><span class="p">)</span>
-        <span class="c1"># Drop any that have no terms.</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">continue</span>
-        <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'feed'</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="s1">'feed'</span><span class="p">],</span> 
-                     <span class="s1">'line'</span><span class="p">:</span> <span class="n">linenum</span><span class="p">,</span>
-                     <span class="s1">'title'</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span>
-                     <span class="s1">'terms'</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">])})</span>
-
-
-<span class="k">def</span> <span class="nf">jacard_similarity</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">):</span>
-    <span class="sd">""" Jacard similarity is the size of the intersection divided by the union.</span>
-<span class="sd">    """</span>
-    <span class="n">set1</span> <span class="o">=</span> <span class="n">row1</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">]</span>
-    <span class="n">set2</span> <span class="o">=</span> <span class="n">row2</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">]</span>
-    <span class="n">intersection_len</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">)))</span>
-    <span class="n">union_len</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span> <span class="o">-</span> <span class="n">intersection_len</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">intersection_len</span> <span class="o">/</span> <span class="n">union_len</span>
-
-<span class="c1"># Compute the pairwise distance matrix. We do the upper triangle.</span>
-<span class="n">similarity_generator</span> <span class="o">=</span> <span class="p">(</span><span class="n">jacard_similarity</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">)</span> \
-    <span class="k">for</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">upper_triangle</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">fromiter</span><span class="p">(</span><span class="n">similarity_generator</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-</pre>
-</td>
-</tr></table>
-<p>This computes the upper triangle, and we would need to make a reflection around the diagonal to complete a square matrix. Note how we leverage Python sets for efficient calculation of union and intersection, and use itertools instead of explicit loops. To complete the matrix we can do this:</p>
-<table class="codehilitetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td>
-<td class="code">
-<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">scipy.spatial</span>
-<span class="c1"># Expand to a square</span>
-<span class="n">distance_matrix</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">squareform</span><span class="p">(</span><span class="n">upper_triangle</span><span class="p">)</span>
-</pre>
-</td>
-</tr></table>
-<p>Once we have this matrix we can use it for our clustering. The approach I am interested in trying is <a href="https://en.wikipedia.org/wiki/Affinity_propagation">affinity propagation</a>. The implementation in SciKit can use a precomputed similarity matrix and apparently its a very good algorithm for finding optimal clusters, but it is quadratic so computing clusters will be slow.</p>
-<p>The code to compute the clusters is below:</p>
-<table class="codehilitetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td>
-<td class="code">
-<pre class="code literal-block"><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">AffinityPropagation</span>
-
-<span class="n">af</span> <span class="o">=</span> <span class="n">AffinityPropagation</span><span class="p">(</span><span class="n">affinity</span><span class="o">=</span><span class="s1">'precomputed'</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">distance_matrix</span><span class="p">)</span>
-
-<span class="n">cluster_centers_indices</span> <span class="o">=</span> <span class="n">af</span><span class="o">.</span><span class="n">cluster_centers_indices_</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="n">af</span><span class="o">.</span><span class="n">labels_</span>
-
-<span class="n">n_clusters_</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cluster_centers_indices</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_clusters_</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Cluster </span><span class="si">%d</span><span class="se">\n</span><span class="s2">"</span> <span class="o">%</span> <span class="n">k</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="n">labels</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-</pre>
-</td>
-</tr></table>
-<p>Starting with smaller samples, for 1000 articles I got about 160 clusters; for 2000 about 290, and for 3000, 410.
-Some of the clusters make sense (e.g. I see some recipes being clustered) but a lot don't. I expect there are three reasons for this: the small sample across diverse topics mean lots of articles have no common terms, possibly I need more terms, the algorithm is running with all defaults and hasn't been tuned, and of course it is possible I have bugs; I have not validated the Jacard values. So I will need to go deeper. Amongst other things I think I should drop any terms that only occur in single documents as they add cost but no benefit; I found that there are only about 20% of the terms that actually occur in two or more documents.</p>
-<p>Watch this space!</p>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2015-09-22T21:01:00-07:00">
-            2015-09-22 21:01
         </time></footer></article>
 </div>
 
         <nav class="postindexpager"><ul class="pager">
 <li class="next">
-                <a href="index-5.html" rel="next">Older posts</a>
+                <a href="index-6.html" rel="next">Older posts</a>
             </li>
         </ul></nav><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-        </script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2017         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+        </script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
 
     <script type="text/javascript" src="assets/js/jquery.js"></script><script type="text/javascript" src="assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="assets/js/index.js"></script><script>
