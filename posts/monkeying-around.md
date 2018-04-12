@@ -1,8 +1,7 @@
 .. title: Monkeying Around
 .. date: 2009-12-13 19:03
-.. author: geekraver
-.. category: Uncategorized
-.. slug: monkeying-around
+.. author: Graham Wheeler
+.. category: Math
 .. comments: enabled
 .. tags: mathjax
 

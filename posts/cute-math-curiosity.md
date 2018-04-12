@@ -1,7 +1,7 @@
 .. title: Cute Math Curiosity
 .. date: 2008-05-06 05:27
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: cute-math-curiosity
 
 I heard this proof a couple of days back and thought it was fun and

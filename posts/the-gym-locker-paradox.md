@@ -1,7 +1,7 @@
 .. title: The Gym Locker Paradox
 .. date: 2011-01-20 06:02
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: the-gym-locker-paradox
 .. comments: enabled
 .. tags: mathjax

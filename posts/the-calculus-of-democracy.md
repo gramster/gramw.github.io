@@ -1,7 +1,7 @@
 .. title: The Calculus of Democracy
 .. date: 2010-07-20 05:03
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: the-calculus-of-democracy
 .. comments: enabled
 

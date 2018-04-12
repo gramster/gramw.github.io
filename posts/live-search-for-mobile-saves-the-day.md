@@ -1,7 +1,7 @@
 .. title: Live Search for Mobile Saves the Day
 .. date: 2008-03-05 05:31
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: live-search-for-mobile-saves-the-day
 
 I love [stories like

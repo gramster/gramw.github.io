@@ -1,7 +1,7 @@
 .. title: Monkeyin’ Around
 .. date: 2007-04-19 05:20
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: General
 .. slug: monkeyin-around
 
 My partner in crime on Live Search for Mobile, Ashley, has started a

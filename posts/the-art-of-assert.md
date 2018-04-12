@@ -1,7 +1,7 @@
 .. title: The Art of Assert
 .. date: 2008-05-02 05:28
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Programming
 .. slug: the-art-of-assert
 
 

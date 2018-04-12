@@ -1,7 +1,7 @@
 .. title: Some Math Magazines
 .. date: 2015-04-25
 .. author: geekraver
-.. category: Uncategorized
+.. category: Math
 .. slug: math-magazines
 .. comments: enabled
 

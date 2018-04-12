@@ -1,7 +1,7 @@
 .. title: Capturing the Elusive Form
 .. date: 2007-01-29 03:50
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Programming
 .. slug: capturing-the-elusive-form
 
 Last night I decided to try write a web browser that has the ability to

@@ -1,7 +1,7 @@
 .. title: The Windows XP "Upgrade"
 .. date: 2008-03-25 05:32
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Computers
 .. slug: the-windows-xp-upgrade
 
 I have had all the PCs in our house on Vista since Vista RTMed. This

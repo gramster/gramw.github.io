@@ -1,7 +1,7 @@
 .. title: Scanner + Printer == Photocopier (eventually)
 .. date: 2008-02-01 05:35
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Programming
 .. slug: scanner-printer-photocopier-eventually
 
 My wife has been bugging me to make it easier for her to use our scanner

@@ -1,7 +1,7 @@
 .. title: Why Can't I Enter An Address In The Search Box
 .. date: 2008-01-19 05:36
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: why-cant-i-enter-an-address-in-the-search-box
 
 A common source of confusion for our users is the distinction we make

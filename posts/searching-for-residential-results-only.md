@@ -1,7 +1,7 @@
 .. title: Searching for Residential Results Only
 .. date: 2008-01-11 05:40
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: searching-for-residential-results-only
 
 A few people have asked how to limit search results to residential

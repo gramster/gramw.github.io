@@ -1,7 +1,7 @@
 .. title: A Christmas Carroll
 .. date: 2011-03-29 22:11
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: a-christmas-carroll
 .. comments: enabled
 .. tags: mathjax

@@ -1,7 +1,7 @@
 .. title: Last Day on Live Search for Mobile
 .. date: 2008-04-20 05:42
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: last-day-on-live-search-for-mobile
 
 Today is my last official day on the Live Search for Mobile team. I am

@@ -1,7 +1,7 @@
 .. title: Organizing Life
 .. date: 2006-08-20 03:54
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Productivity
 .. slug: organizing-life
 
 I tend to be one of those people who accumulates vast amounts of clutter

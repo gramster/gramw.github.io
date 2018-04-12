@@ -1,7 +1,7 @@
 .. title: .Net async calls may run on the calling thread
 .. date: 2006-08-22 03:52
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Programming
 .. slug: net-async-calls-may-run-on-the-calling-thread
 
 I got bitten today with a nasty deadlock in my code. It took a while to

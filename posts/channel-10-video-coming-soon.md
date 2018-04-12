@@ -1,7 +1,7 @@
 .. title: Channel 10 Video coming soon!
 .. date: 2008-03-25 05:31
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: channel-10-video-coming-soon
 
 Last week the [Channel 10](http://on10.net/) team visited us and shot

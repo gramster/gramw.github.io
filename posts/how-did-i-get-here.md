@@ -1,7 +1,7 @@
 .. title: How Did I Get Here?
 .. date: 2007-06-02 05:17
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Programming
 .. slug: how-did-i-get-here
 
 Assertions can be great for detecting unexpected state in your code. But

@@ -1,7 +1,7 @@
 .. title: Primal Soup
 .. date: 2010-01-06 06:54
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: primal-soup
 .. comments: enabled
 .. tags: mathjax

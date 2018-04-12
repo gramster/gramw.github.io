@@ -1,7 +1,7 @@
 .. title: Archimedes counts the sand
 .. date: 2010-01-05 06:48
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: archimedes-counts-the-sand
 .. comments: enabled
 .. tags: mathjax

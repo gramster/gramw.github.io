@@ -1,7 +1,7 @@
 .. title: Accelerated Planning Technique
 .. date: 2006-08-21 03:53
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Productivity
 .. slug: accelerated-planning-technique
 
 [Bob Walsh has just

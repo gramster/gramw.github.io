@@ -1,7 +1,7 @@
 .. title: My Leopard Has Lost Its Spots
 .. date: 2008-01-16 05:37
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Computers
 .. slug: my-leopard-has-lost-its-spots
 
 I run a mostly Windows-only setup at home these days. My home setup

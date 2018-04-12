@@ -1,7 +1,7 @@
 .. title: This is s-o-o-o true!
 .. date: 2006-02-28 03:55
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: General
 .. slug: this-is-s-o-o-o-true
 
 Check out this [spoof

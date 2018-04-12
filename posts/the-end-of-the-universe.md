@@ -1,7 +1,7 @@
 .. title: The End of the Universe
 .. date: 2009-12-13 06:00
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: the-end-of-the-universe
 .. comments: enabled
 .. tags: mathjax
