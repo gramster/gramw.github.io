@@ -161,7 +161,8 @@ GLOBAL_CONTEXT = {
     'TWITTER_URL': 'https://twitter.com/gramnix',
     'GITHUB_URL': 'https://github.com/gramster',
     'LINKEDIN_URL': 'https://www.linkedin.com/in/grahamwheeler',
-    'BANNER_URL': '/assets/img/IMG_5590.JPG'
+    'BANNER_URL': '/images/autumn-3295747_1280.jpg'
+    #'BANNER_URL': '/assets/img/IMG_5590.JPG'
     #'BANNER_URL': '/assets/img/silk_road.jpg'
 }
 
