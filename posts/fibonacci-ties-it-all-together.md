@@ -1,7 +1,7 @@
 .. title: Fibonacci ties it all together
 .. date: 2010-01-20 05:37
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: fibonacci-ties-it-all-together
 .. comments: enabled
 .. tags: mathjax

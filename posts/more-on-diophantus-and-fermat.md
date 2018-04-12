@@ -1,7 +1,7 @@
 .. title: More on Diophantus and Fermat
 .. date: 2010-01-03 20:06
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: more-on-diophantus-and-fermat
 .. comments: enabled
 .. tags: mathjax

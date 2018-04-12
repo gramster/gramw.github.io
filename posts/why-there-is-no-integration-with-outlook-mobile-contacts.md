@@ -1,7 +1,7 @@
 .. title: Why There Is No Integration With Outlook Mobile Contacts
 .. date: 2008-02-01 05:34
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: why-there-is-no-integration-with-outlook-mobile-contacts
 
 We often get asked why we don't have a menu item in the Contacts app on

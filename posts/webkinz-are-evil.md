@@ -1,7 +1,7 @@
 .. title: Webkinz Are Evil
 .. date: 2008-02-02 05:34
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Computers
 .. slug: webkinz-are-evil
 
 My daughter bought a Webkinz today. These are cheap stuffed animals that

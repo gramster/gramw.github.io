@@ -1,7 +1,7 @@
 .. title: Fixing the Live Search home screen launcher on Sprint devices
 .. date: 2007-12-29 05:38
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: fixing-the-live-search-home-screen-launcher-on-sprint-devices
 
 Several new Sprint phones come with Live Search for Mobile already

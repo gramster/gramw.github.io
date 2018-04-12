@@ -1,7 +1,7 @@
 .. title: Functional Synchronicity
 .. date: 2006-08-23 03:51
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: General
 .. slug: functional-synchronicity
 
 There's been some weird synchronicity going on recently. It started a

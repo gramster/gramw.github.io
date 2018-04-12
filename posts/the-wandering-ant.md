@@ -1,7 +1,7 @@
 .. title: The Wandering Ant
 .. date: 2010-01-03 19:29
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: the-wandering-ant
 .. comments: enabled
 

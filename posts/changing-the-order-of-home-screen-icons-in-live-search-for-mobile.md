@@ -1,7 +1,7 @@
 .. title: Changing the order of home screen icons in Live Search for Mobile
 .. date: 2007-12-23 05:38
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: changing-the-order-of-home-screen-icons-in-live-search-for-mobile
 
 If you live in an area where there is no traffic coverage, you may not

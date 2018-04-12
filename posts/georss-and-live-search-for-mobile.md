@@ -1,7 +1,7 @@
 .. title: GeoRSS and Live Search for Mobile
 .. date: 2008-06-06 05:26
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: georss-and-live-search-for-mobile
 
 Hopefully by now you all have v3.0 of the Live Search client, and are

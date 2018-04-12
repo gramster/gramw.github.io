@@ -1,7 +1,7 @@
 .. title: Live Search for Mobile 2.5 Released!
 .. date: 2007-10-17 05:13
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: live-search-for-mobile-2-5-released
 
 After 3 months we have finally released the latest version of Live

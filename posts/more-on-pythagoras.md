@@ -1,7 +1,7 @@
 .. title: More on Pythagoras
 .. date: 2010-01-17 03:12
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: more-on-pythagoras
 .. comments: enabled
 .. tags: mathjax

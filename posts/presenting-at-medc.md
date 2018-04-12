@@ -1,7 +1,7 @@
 .. title: Presenting at MEDC
 .. date: 2007-04-30 05:18
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: presenting-at-medc
 
 Ashley, Steve and I are giving a talk at MEDC on our baby, Live Search

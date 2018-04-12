@@ -1,7 +1,7 @@
 .. title: The Horn of Gabriel
 .. date: 2010-01-18 06:48
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: the-horn-of-gabriel
 .. comments: enabled
 .. tags: mathjax

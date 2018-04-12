@@ -1,7 +1,7 @@
 .. title: Why There Are no ARCO Gas Prices
 .. date: 2008-04-12 05:29
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: why-there-are-no-arco-gas-prices
 
 We get gas price data from a 3rd party provider. They in turn get the

@@ -1,7 +1,7 @@
 .. title: We're Hiring!
 .. date: 2008-04-10 05:30
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: were-hiring
 
 My team is hiring. The job descriptions are below. PM me if you're

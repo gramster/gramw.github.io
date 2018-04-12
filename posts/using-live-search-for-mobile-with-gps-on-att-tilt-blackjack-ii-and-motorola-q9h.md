@@ -1,7 +1,7 @@
 .. title: Using Live Search for Mobile with GPS on AT&T Tilt, Blackjack II and Motorola Q9H
 .. date: 2007-12-21 05:24
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: using-live-search-for-mobile-with-gps-on-att-tilt-blackjack-ii-and-motorola-q9h
 
 Windows Mobile 6 phones are out and about, and several of them have

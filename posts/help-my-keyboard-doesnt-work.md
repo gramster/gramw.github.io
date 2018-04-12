@@ -1,7 +1,7 @@
 .. title: Help! My Keyboard Doesn't Work!
 .. date: 2008-01-12 05:39
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: help-my-keyboard-doesnt-work
 
 We get a lot of people reporting problems with their hardware keyboards

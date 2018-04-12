@@ -1,7 +1,7 @@
 .. title: Connectivity problems with Live Search on Blackberry
 .. date: 2008-02-24 05:33
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: connectivity-problems-with-live-search-on-blackberry
 
 I just wanted to share this information that one of our Blackberry devs,

@@ -1,7 +1,7 @@
 .. title: Babylonian numbers in 60 seconds
 .. date: 2009-12-27 06:09
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: babylonian-numbers-in-60-seconds
 .. comments: enabled
 .. tags: mathjax

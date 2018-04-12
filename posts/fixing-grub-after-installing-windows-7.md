@@ -1,7 +1,7 @@
 .. title: Fixing Grub after installing Windows 7
 .. date: 2009-05-16 05:25
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Computers
 .. slug: fixing-grub-after-installing-windows-7
 
 I have an MSI Wind on which I run both Windows 7 and Ubuntu. I rarely

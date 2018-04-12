@@ -1,7 +1,7 @@
 .. title: Easy Architecture Improvements
 .. date: 2007-04-16 05:23
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Programming
 .. slug: easy-architecture-improvements
 
 I was searching a couple of days back for a tool that would generate

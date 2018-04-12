@@ -1,7 +1,7 @@
 .. title: The Mathematics of Toilet Rolls
 .. date: 2009-12-27 06:36
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: the-mathematics-of-toilet-rolls
 .. comments: enabled
 .. tags: mathjax

@@ -1,7 +1,7 @@
 .. title: Much Ado about Nothing
 .. date: 2010-01-13 05:53
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Math
 .. slug: much-ado-about-nothing
 .. comments: enabled
 

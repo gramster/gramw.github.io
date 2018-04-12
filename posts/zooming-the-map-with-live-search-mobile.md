@@ -1,7 +1,7 @@
 .. title: Zooming the map with Live Search Mobile
 .. date: 2008-01-11 05:41
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: Mobile
 .. slug: zooming-the-map-with-live-search-mobile
 
 One thing we have found is that our zoom UI is not very discoverable.

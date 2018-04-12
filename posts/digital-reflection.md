@@ -1,7 +1,7 @@
 .. title: Digital Reflection
 .. date: 2005-02-11 03:57
-.. author: geekraver
-.. category: Uncategorized
+.. author: Graham Wheeler
+.. category: General
 .. slug: digital-reflection
 
 I've been going through old CD-R discs of mine with a view to reburning
