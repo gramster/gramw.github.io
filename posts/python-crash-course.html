@@ -15,12 +15,12 @@
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
-<link rel="canonical" href="https://www.grahamwheeler.com/posts/python-overview.html">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/python-crash-course.html">
 <!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]--><meta name="author" content="Graham Wheeler">
 <link rel="prev" href="blogagain.html" title="Blogging again" type="text/html">
 <meta property="og:site_name" content="Graham Wheeler's Random Forest">
 <meta property="og:title" content="A Python Crash Course">
-<meta property="og:url" content="https://www.grahamwheeler.com/posts/python-overview.html">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/python-crash-course.html">
 <meta property="og:description" content="I've been teaching a crash course in data science with Python, which starts off with learning Python itself. The target audience is Java programmers (generally senior level) so its assumed that things">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2018-04-12T20:10:00-07:00">
@@ -78,14 +78,14 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I've been teaching a crash course in data science with Python, which starts off with learning Python itself. The target audience is Java programmers (generally senior level) so its assumed that things like classes and methods are well understood. The focus is mostly on what is different with Python. I teach it using Jupyter notebooks but the content is useful as a blog post too so here we go:</p>
-<h3 id="Introduction">Introduction<a class="anchor-link" href="python-overview.html#Introduction">¶</a>
+<h3 id="Introduction">Introduction<a class="anchor-link" href="python-crash-course.html#Introduction">¶</a>
 </h3>
-<h4 id="Python's-Origins">Python's Origins<a class="anchor-link" href="python-overview.html#Python's-Origins">¶</a>
+<h4 id="Python's-Origins">Python's Origins<a class="anchor-link" href="python-crash-course.html#Python's-Origins">¶</a>
 </h4>
 <p>Python was conceived in the late 1980s, and its implementation began in December 1989 by Guido van Rossum at Centrum Wiskunde &amp; Informatica (CWI) in the Netherlands as a successor to the ABC language. It takes its name from Monty Python's Flying Circus.</p>
 <p>Python is a dynamic language but is strongly typed (i.e. variables are untyped but refer to objects of fixed type).</p>
 <blockquote>
-<h4 id="How-Python-Evolves">How Python Evolves<a class="anchor-link" href="python-overview.html#How-Python-Evolves">¶</a>
+<h4 id="How-Python-Evolves">How Python Evolves<a class="anchor-link" href="python-crash-course.html#How-Python-Evolves">¶</a>
 </h4>
 <p>Python evolves in a fairly straightforward way, more-or-less like this:</p>
 <ul>
@@ -105,21 +105,21 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="StackOverflow-is-your-friend!">StackOverflow is your friend!<a class="anchor-link" href="python-overview.html#StackOverflow-is-your-friend!">¶</a>
+<h4 id="StackOverflow-is-your-friend!">StackOverflow is your friend!<a class="anchor-link" href="python-crash-course.html#StackOverflow-is-your-friend!">¶</a>
 </h4>
 <p>For Python questions and Python data science questions, make use of StackOverflow. Pay attention to comments on suggested answers; the "accepted answer" is often not the best. Look for comments about whether it is the "most Pythonic". Python has an idiomatic style different to many other languages and so a novice coming from another language will often accept an answer that is closer to idiomatic in that other language rather than Python.</p>
 <p><a href="https://stackoverflow.com/questions/tagged/python">https://stackoverflow.com/questions/tagged/python</a></p>
 <p>Also, if you're struggling to understand some code in your early days with Python, you may find this 'execution visualizer' helpful:</p>
 <p><a href="http://pythontutor.com/">http://pythontutor.com/</a></p>
-<h4 id='"Batteries-Included"'>"Batteries Included"<a class="anchor-link" href="python-overview.html#%22Batteries-Included%22">¶</a>
+<h4 id='"Batteries-Included"'>"Batteries Included"<a class="anchor-link" href="python-crash-course.html#%22Batteries-Included%22">¶</a>
 </h4>
 <p>Python is often described as having "batteries included". This is a reference to the rich set of libraries (packages)included in the standard distribution as well as the vast collection of freely available packages that can be used to bootstrap your development. Or, as Randall Munroe puts it:</p>
 <p><img src="https://imgs.xkcd.com/comics/python.png" alt=""></p>
 <p>There are many thousands of Python packages available, often giving you many choices for similar purposes. One way to find quality packages is to look the curated lists at <a href="https://python.libhunt.com/">https://python.libhunt.com/</a> and <a href="https://awesome-python.com/">https://awesome-python.com/</a></p>
-<h4 id="Python-2.7-or-Python-3.x?">Python 2.7 or Python 3.x?<a class="anchor-link" href="python-overview.html#Python-2.7-or-Python-3.x?">¶</a>
+<h4 id="Python-2.7-or-Python-3.x?">Python 2.7 or Python 3.x?<a class="anchor-link" href="python-crash-course.html#Python-2.7-or-Python-3.x?">¶</a>
 </h4>
 <p>You can use conda to create a Python 2.7 virtual environment for when you have to use 2.7, but all new projects should be Python 3.5 or later. Python 2.7 is the end of the 2.x line and will be end-of-lifed on Jan 1, 2020. Avoid it; the only reason to use it is if there is a package you really need that hasn't been ported yet.</p>
-<h3 id="Python-docs">Python docs<a class="anchor-link" href="python-overview.html#Python-docs">¶</a>
+<h3 id="Python-docs">Python docs<a class="anchor-link" href="python-crash-course.html#Python-docs">¶</a>
 </h3>
 <p><a href="https://docs.python.org/3/">https://docs.python.org/3/</a> has very detailed documentation.</p>
 <p>Most Python packages have good documentation at <a href="https://readthedocs.org/">https://readthedocs.org/</a></p>
@@ -134,7 +134,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Using-the-REPL">Using the REPL<a class="anchor-link" href="python-overview.html#Using-the-REPL">¶</a>
+<h3 id="Using-the-REPL">Using the REPL<a class="anchor-link" href="python-crash-course.html#Using-the-REPL">¶</a>
 </h3>
 <p>To start the REPL (read-execute-print loop, or interactive interpreter), just type <code>python</code> at the command line.</p>
 <p>Use the <code>help()</code> function to read the documentation for a module/class/function. As a standalone invocation, you enter the help system and can explore various topics.</p>
@@ -145,7 +145,7 @@
 </code></pre>
 <p>When you do so the Python interpreter will compile the script to an intermediate bytecode, and the result will be stored in a file with the same base name and a <code>.pyc</code> extension. As an optimisation, the interpreter will look to see if a <code>.pyc</code> file with a more recent file modification date exists when you invoke it to run a script and use that if it does. In Python 2.x these files were saved alongside the Python source files but in Python 3.x they are stored in a subdirectory named <code>__pycache__</code>.</p>
 <blockquote>
-<h4 id="A-better-REPL:-bpython">A better REPL: bpython<a class="anchor-link" href="python-overview.html#A-better-REPL:-bpython">¶</a>
+<h4 id="A-better-REPL:-bpython">A better REPL: bpython<a class="anchor-link" href="python-crash-course.html#A-better-REPL:-bpython">¶</a>
 </h4>
 <p>bpython is an alternative REPL that adds a number of useful features at the command line, like syntax highlighting and auto-completion.</p>
 <p><a href="https://www.bpython-interpreter.org/">https://www.bpython-interpreter.org/</a></p>
@@ -169,7 +169,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Quickstart---A-Simple-Example">Quickstart - A Simple Example<a class="anchor-link" href="python-overview.html#Quickstart---A-Simple-Example">¶</a>
+<h3 id="Quickstart---A-Simple-Example">Quickstart - A Simple Example<a class="anchor-link" href="python-crash-course.html#Quickstart---A-Simple-Example">¶</a>
 </h3>
 <p>Before diving into the details, let's look at a simple Python script to get a quick taste of what's to come. We're not going to go into details here but have annotated the code with some comments and if you are familiar with other object-oriented languages this should be quite easy to understand. Some things that may be unusual to you:</p>
 <ul>
@@ -329,7 +329,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Installing-Third-Party-Packages">Installing Third-Party Packages<a class="anchor-link" href="python-overview.html#Installing-Third-Party-Packages">¶</a>
+<h3 id="Installing-Third-Party-Packages">Installing Third-Party Packages<a class="anchor-link" href="python-crash-course.html#Installing-Third-Party-Packages">¶</a>
 </h3>
 <p>The standard way to install packages is with <code>pip install</code>. However, if you have installed <code>conda</code> you should use <code>conda install</code> first and only if that fails use <code>pip install</code>. Conda has a smaller set of packages which is why it doesn't always succeed, but the ones it does have have been built for Conda so installing that way is preferred.</p>
 <p>Use <code>conda uninstall</code> or <code>pip uninstall</code> to remove packages.</p>
@@ -344,7 +344,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Python-is-an-OOPL">Python is an OOPL<a class="anchor-link" href="python-overview.html#Python-is-an-OOPL">¶</a>
+<h3 id="Python-is-an-OOPL">Python is an OOPL<a class="anchor-link" href="python-crash-course.html#Python-is-an-OOPL">¶</a>
 </h3>
 <p>Python is a pure object-oriented language. Operators like <code>+</code> are simply methods on a class. The Python interpreter will convert an infix operator to an instance method call.</p>
 <p>For example, there is an <code>int</code> class for integers. There is an <code>__add__</code> method defined on that class for addition. So:</p>
@@ -479,7 +479,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Indentation-and-Comments">Indentation and Comments<a class="anchor-link" href="python-overview.html#Indentation-and-Comments">¶</a>
+<h3 id="Indentation-and-Comments">Indentation and Comments<a class="anchor-link" href="python-crash-course.html#Indentation-and-Comments">¶</a>
 </h3>
 <p>Python does not use {} for demarcating blocks of code; instead it uses indentation. This distinguishes it from most other programming languages and can take some getting used to. In particular, it requires care when pasting code in an editor (most Python editors are smart about this but other editors are not). The reason for this choice is that Guido originally designed Python as a teaching language and favored readability.</p>
 <p>The convention in Python is to indent with spaces, not tabs (this avoids tab settings causing misnterpretation of code). Indentation standard is 4 spaces at a time, although some companies have different conventions (usually 2, if not 4).</p>
@@ -493,7 +493,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Simple-Functions">Simple Functions<a class="anchor-link" href="python-overview.html#Simple-Functions">¶</a>
+<h3 id="Simple-Functions">Simple Functions<a class="anchor-link" href="python-crash-course.html#Simple-Functions">¶</a>
 </h3>
 <p>Python named functions are defined with <code>def</code>:</p>
 
@@ -616,7 +616,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="import">import<a class="anchor-link" href="python-overview.html#import">¶</a>
+<h4 id="import">import<a class="anchor-link" href="python-crash-course.html#import">¶</a>
 </h4>
 <p>Python code is packaged in the form of <em>packages</em> consisting of one of more <em>modules</em>. A module is a single Python file, while a package is a directory of Python modules containing an additional <code>__init__.py</code> file, to distinguish a package from a directory that just happens to contain a bunch of Python scripts.</p>
 <p>You install a package with <code>pip</code> or <code>conda</code>. Once installed, to use the package you must import it. You can also import modules although this is less common.</p>
@@ -642,7 +642,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Writing-a-main-function-and-handling-command-line-arguments">Writing a main function and handling command line arguments<a class="anchor-link" href="python-overview.html#Writing-a-main-function-and-handling-command-line-arguments">¶</a>
+<h4 id="Writing-a-main-function-and-handling-command-line-arguments">Writing a main function and handling command line arguments<a class="anchor-link" href="python-crash-course.html#Writing-a-main-function-and-handling-command-line-arguments">¶</a>
 </h4>
 <p>The <code>sys</code> module lets us access command line arguments as `sys.argv:</p>
 <div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
@@ -668,7 +668,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="An-Overview-of-Python-Types">An Overview of Python Types<a class="anchor-link" href="python-overview.html#An-Overview-of-Python-Types">¶</a>
+<h3 id="An-Overview-of-Python-Types">An Overview of Python Types<a class="anchor-link" href="python-crash-course.html#An-Overview-of-Python-Types">¶</a>
 </h3>
 <p>See <a href="https://docs.python.org/3/library/stdtypes.html">https://docs.python.org/3/library/stdtypes.html</a> for detailed documentation.</p>
 <p>The main types are:</p>
@@ -742,7 +742,7 @@
 </tbody>
 </table>
 <p>In addition, modules, classes, instances, methods, and functions are all types. The Boolean constants <code>True</code> and <code>False</code>, and the value <code>None</code>, are instances of their own special types, and there are several other special cases like this. See the link above for more. Note that there is a string type but not a character type; characters are not treated any differently from other strings.</p>
-<h4 id="The-Boolean-Truth-Value-of-Types">The Boolean Truth Value of Types<a class="anchor-link" href="python-overview.html#The-Boolean-Truth-Value-of-Types">¶</a>
+<h4 id="The-Boolean-Truth-Value-of-Types">The Boolean Truth Value of Types<a class="anchor-link" href="python-crash-course.html#The-Boolean-Truth-Value-of-Types">¶</a>
 </h4>
 <p>Any object can be tested for truth value, for use in an <code>if</code> or <code>while</code> condition or as operand in a Boolean expression.</p>
 <p>By default, an object is considered true unless its class defines either a <code>__bool__()</code> method that returns False or a <code>__len__()</code> method that returns zero, when called with the object. Zero numeric values are considered False, as are empty collections or sequences, and vice-versa.</p>
@@ -792,7 +792,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="None">None<a class="anchor-link" href="python-overview.html#None">¶</a>
+<h4 id="None">None<a class="anchor-link" href="python-crash-course.html#None">¶</a>
 </h4>
 <p>Python has no null object, but has a special object instance <code>None</code>.</p>
 <p>To test if an object is <code>None</code>, use <code>is</code> or <code>is not</code>, not <code>==</code> or <code>!=</code>.</p>
@@ -889,7 +889,7 @@ False
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Numbers">Numbers<a class="anchor-link" href="python-overview.html#Numbers">¶</a>
+<h4 id="Numbers">Numbers<a class="anchor-link" href="python-crash-course.html#Numbers">¶</a>
 </h4>
 <p>Most of the typical operators you know from other languages are supported. Here are some more-specific to Python:</p>
 
@@ -1133,7 +1133,7 @@ False
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Strings">Strings<a class="anchor-link" href="python-overview.html#Strings">¶</a>
+<h4 id="Strings">Strings<a class="anchor-link" href="python-crash-course.html#Strings">¶</a>
 </h4>
 <p>Python 3 strings are unicode. String literals can use single our double quotes (but must use same type to close as to open). Multi-line strings are most easily written using triple quotes.</p>
 
@@ -1509,7 +1509,7 @@ False
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Lists">Lists<a class="anchor-link" href="python-overview.html#Lists">¶</a>
+<h4 id="Lists">Lists<a class="anchor-link" href="python-crash-course.html#Lists">¶</a>
 </h4>
 <p>Lists are ordered, mutable sequences. They can be indexed, sliced (more on that below), appended to, have elements deleted, and sorted. They are heterogeneous. Examples:</p>
 
@@ -2079,7 +2079,7 @@ True
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Dicts">Dicts<a class="anchor-link" href="python-overview.html#Dicts">¶</a>
+<h4 id="Dicts">Dicts<a class="anchor-link" href="python-crash-course.html#Dicts">¶</a>
 </h4>
 <p>Dictionaries are mutable mappings of keys to values. Keys must be hashable, but values can be any object.</p>
 <hr>
@@ -2535,7 +2535,7 @@ phone
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Sets">Sets<a class="anchor-link" href="python-overview.html#Sets">¶</a>
+<h4 id="Sets">Sets<a class="anchor-link" href="python-crash-course.html#Sets">¶</a>
 </h4>
 <p>A set is a mutable unordered collection that cannot contain duplicates. Sets are used to remove duplicates and test for membership. One use for sets is to quickly see differences. For example, if you have two dicts and want to see what keys are in one but not the other:</p>
 
@@ -2593,7 +2593,7 @@ phone
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Tuples">Tuples<a class="anchor-link" href="python-overview.html#Tuples">¶</a>
+<h4 id="Tuples">Tuples<a class="anchor-link" href="python-crash-course.html#Tuples">¶</a>
 </h4>
 <p>Tuples are immutable sequences. Typically they are used to store record type data, or to return multiple values from a function. Tuples behave a lot like lists and support many of the same operations with similar behavior, aside from their immutability. We'll consider them briefly here.</p>
 <p>The <code>collections</code> package defines a variant <code>namedtuple</code> which allows each field to be given a name; we won't go into that here other than to point out its existence. <code>collections</code> also defines a <code>deque</code> class; stacks are easy to implement just with the built-io list type.</p>
@@ -2949,7 +2949,7 @@ bone
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Some-built-in-Functions">Some built-in Functions<a class="anchor-link" href="python-overview.html#Some-built-in-Functions">¶</a>
+<h3 id="Some-built-in-Functions">Some built-in Functions<a class="anchor-link" href="python-crash-course.html#Some-built-in-Functions">¶</a>
 </h3>
 <p>See <a href="https://docs.python.org/3.6/library/functions.html">https://docs.python.org/3.6/library/functions.html</a> for a full list and more details.</p>
 <p><code>abs(num)</code> - Return absolute value</p>
@@ -3604,7 +3604,7 @@ After second next()
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="String-Formatting">String Formatting<a class="anchor-link" href="python-overview.html#String-Formatting">¶</a>
+<h3 id="String-Formatting">String Formatting<a class="anchor-link" href="python-crash-course.html#String-Formatting">¶</a>
 </h3>
 <p>String formatting has evolved over time with Python. Python 3.6 introduced "format strings" which allow code to be directly embedded in the string. This is an improvement over older approaches and we will use it extensively.
 Format strings have an <code>f</code> prefix and include code in <code>{}</code>. For example:</p>
@@ -3705,7 +3705,7 @@ Format strings have an <code>f</code> prefix and include code in <code>{}</code>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Sorting">Sorting<a class="anchor-link" href="python-overview.html#Sorting">¶</a>
+<h3 id="Sorting">Sorting<a class="anchor-link" href="python-crash-course.html#Sorting">¶</a>
 </h3>
 <p>We've already seen the <code>sorted</code> function, that can create a sorted list from any iterable:</p>
 
@@ -3856,7 +3856,7 @@ Format strings have an <code>f</code> prefix and include code in <code>{}</code>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Statements">Statements<a class="anchor-link" href="python-overview.html#Statements">¶</a>
+<h3 id="Statements">Statements<a class="anchor-link" href="python-crash-course.html#Statements">¶</a>
 </h3>
 <p>Here we will consider statements. We'll leave some statements to when we get to exceptions, functions and classes.</p>
 <p>For more info on statements see <a href="https://docs.python.org/3/reference/simple_stmts.html">https://docs.python.org/3/reference/simple_stmts.html</a></p>
@@ -3869,13 +3869,13 @@ Format strings have an <code>f</code> prefix and include code in <code>{}</code>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="pass">pass<a class="anchor-link" href="python-overview.html#pass">¶</a>
+<h4 id="pass">pass<a class="anchor-link" href="python-crash-course.html#pass">¶</a>
 </h4>
 <p>The <code>pass</code> statement is a no-op. This is needed in Python as the language doesn't use braces, so it is the equivalent of <code>{}</code> in Java- or C-like languages.</p>
-<h4 id="del">del<a class="anchor-link" href="python-overview.html#del">¶</a>
+<h4 id="del">del<a class="anchor-link" href="python-crash-course.html#del">¶</a>
 </h4>
 <p><code>del</code> is used to delete an object; it isn't used much but can be useful if the object uses a lot of memory to allow it to be garbage-collected.</p>
-<h4 id="for,-break-and-continue">for, break and continue<a class="anchor-link" href="python-overview.html#for,-break-and-continue">¶</a>
+<h4 id="for,-break-and-continue">for, break and continue<a class="anchor-link" href="python-crash-course.html#for,-break-and-continue">¶</a>
 </h4>
 <p>You can loop over any iterable with <code>for...in</code>. <code>break</code> and <code>continue</code> are supported, and behave in the expected fashion.</p>
 
@@ -4266,7 +4266,7 @@ At position 2 we have value 3
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="while">while<a class="anchor-link" href="python-overview.html#while">¶</a>
+<h4 id="while">while<a class="anchor-link" href="python-crash-course.html#while">¶</a>
 </h4>
 <p><code>while</code> loops are very straighforward:</p>
 
@@ -4451,7 +4451,7 @@ No even numbers!
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="if-Statement-and-Boolean-Expressions">if Statement and Boolean Expressions<a class="anchor-link" href="python-overview.html#if-Statement-and-Boolean-Expressions">¶</a>
+<h4 id="if-Statement-and-Boolean-Expressions">if Statement and Boolean Expressions<a class="anchor-link" href="python-crash-course.html#if-Statement-and-Boolean-Expressions">¶</a>
 </h4>
 <p>Python uses <code>if...elif...else</code> syntax:</p>
 
@@ -4779,7 +4779,7 @@ False
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="with">with<a class="anchor-link" href="python-overview.html#with">¶</a>
+<h4 id="with">with<a class="anchor-link" href="python-crash-course.html#with">¶</a>
 </h4>
 <p><code>with</code> is used for scoped use of classes that need to clean up when they are no longer used (e.g. file objects that need to release underlying file handles).</p>
 <p>The most common place you'll see this is with file reading and writing, which we conver in the next section.</p>
@@ -4838,7 +4838,7 @@ ham
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Reading-and-Writing-Files">Reading and Writing Files<a class="anchor-link" href="python-overview.html#Reading-and-Writing-Files">¶</a>
+<h3 id="Reading-and-Writing-Files">Reading and Writing Files<a class="anchor-link" href="python-crash-course.html#Reading-and-Writing-Files">¶</a>
 </h3>
 <p>Python has a built-in <code>open</code> function for opening files for reading and writing: <a href="https://docs.python.org/3.6/library/functions.html#open">https://docs.python.org/3.6/library/functions.html#open</a></p>
 <p>The simplest for of reading a file is just:</p>
@@ -4862,7 +4862,7 @@ ham
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Functions-and-Lambdas">Functions and Lambdas<a class="anchor-link" href="python-overview.html#Functions-and-Lambdas">¶</a>
+<h3 id="Functions-and-Lambdas">Functions and Lambdas<a class="anchor-link" href="python-crash-course.html#Functions-and-Lambdas">¶</a>
 </h3>
 <p>Recall that Python named functions are defined with <code>def</code>:</p>
 
@@ -5756,7 +5756,7 @@ Named1 is hat
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Classes">Classes<a class="anchor-link" href="python-overview.html#Classes">¶</a>
+<h3 id="Classes">Classes<a class="anchor-link" href="python-crash-course.html#Classes">¶</a>
 </h3>
 </div>
 </div>
@@ -6092,7 +6092,7 @@ class Widget(builtins.object)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Constructors-and-visibility">Constructors and visibility<a class="anchor-link" href="python-overview.html#Constructors-and-visibility">¶</a>
+<h4 id="Constructors-and-visibility">Constructors and visibility<a class="anchor-link" href="python-crash-course.html#Constructors-and-visibility">¶</a>
 </h4>
 <p>A class does not require a constructor, but can have (at most) one. The constructor is an instance method named <code>__init__</code>. It can take additional parameters other than <code>self</code>.</p>
 <p>Python does not support private or protected members. By convention, private members should be named starting with an underscore, but this is an 'honor system'; everything is public. Also by convention, you should avoid double underscores; that should be reerved for dunder-methods.</p>
@@ -6264,7 +6264,7 @@ class Bug(builtins.object)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Inheritance">Inheritance<a class="anchor-link" href="python-overview.html#Inheritance">¶</a>
+<h4 id="Inheritance">Inheritance<a class="anchor-link" href="python-crash-course.html#Inheritance">¶</a>
 </h4>
 <p>Python supports both single and multiple inheritance (which we won't discuss). To up-call to a base method with single-inheritance we use <code>super()</code>:</p>
 
@@ -6352,7 +6352,7 @@ class Bug(builtins.object)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Under-the-Hood">Under the Hood<a class="anchor-link" href="python-overview.html#Under-the-Hood">¶</a>
+<h4 id="Under-the-Hood">Under the Hood<a class="anchor-link" href="python-crash-course.html#Under-the-Hood">¶</a>
 </h4>
 <p>You can skip this section if you're not interested, but it can be useful to have some understanding of how classes work in Python.</p>
 <p>Classes and class instances both have a <code>.__dict__</code> attribute that holds their methods and variables/attributes. For example:</p>
@@ -6664,7 +6664,7 @@ e2 class var is actually an instance var
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exceptions">Exceptions<a class="anchor-link" href="python-overview.html#Exceptions">¶</a>
+<h3 id="Exceptions">Exceptions<a class="anchor-link" href="python-crash-course.html#Exceptions">¶</a>
 </h3>
 <p>You can raise an exception with the <code>raise</code> statememt. You can give an instance of any class that derives from the <code>BaseException</code> class. You can catch exceptions using <code>try: except:</code>. If you want to get a reference to the exception, use <code>catch..as..</code>:</p>
 
@@ -6752,7 +6752,7 @@ None
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Comprehensions">Comprehensions<a class="anchor-link" href="python-overview.html#Comprehensions">¶</a>
+<h3 id="Comprehensions">Comprehensions<a class="anchor-link" href="python-crash-course.html#Comprehensions">¶</a>
 </h3>
 <p>Comprehensions are a powerful feature in Python, allowing lists, dictionaries and tuples to be constructed from iterative computations with minimal code. These are best illustrated by examples:</p>
 
@@ -6935,7 +6935,7 @@ None
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Iterators-and-Generators">Iterators and Generators<a class="anchor-link" href="python-overview.html#Iterators-and-Generators">¶</a>
+<h3 id="Iterators-and-Generators">Iterators and Generators<a class="anchor-link" href="python-crash-course.html#Iterators-and-Generators">¶</a>
 </h3>
 <p>A Python iterator is an object with a <code>__next__</code> method for sequential access, that raises a StopIteration when done.</p>
 <p>A Python iterable is an object that defines a <code>__getitem__</code> method that can take sequential integer indices starting from 0 (so not necessarily random access) and raises an IndexError when done, or that has an <code>__iter__</code> method which returns an iterator.</p>
@@ -7074,7 +7074,7 @@ s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="async/await">async/await<a class="anchor-link" href="python-overview.html#async/await">¶</a>
+<h3 id="async/await">async/await<a class="anchor-link" href="python-crash-course.html#async/await">¶</a>
 </h3>
 <p>Python runs as a single-threaded process. That means things like I/O can slow things down a lot. It is possible to use multiple threads - there are several libaries for that - but even with a single thread big improvements are possible with async code. The details are beyond the scope of the bootcamp, but more info is available here: <a href="https://docs.python.org/3/library/asyncio-task.html">https://docs.python.org/3/library/asyncio-task.html</a>. Recent changes in Python have made this much more powerful, flexible and easy to use.</p>
 
@@ -7086,7 +7086,7 @@ s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Type-Annotations">Type Annotations<a class="anchor-link" href="python-overview.html#Type-Annotations">¶</a>
+<h3 id="Type-Annotations">Type Annotations<a class="anchor-link" href="python-crash-course.html#Type-Annotations">¶</a>
 </h3>
 <p>Python has some mechanisms for doing optional type annotations. These can improve execution speed and there are some packages that can enforce type checking at run-time. It's not a bad idea to start using these but they're out of scope of this bootcamp.</p>
 <p>See <a href="https://docs.python.org/3/library/typing.html">https://docs.python.org/3/library/typing.html</a> and <a href="http://mypy-lang.org/">http://mypy-lang.org/</a> for more.</p>
@@ -7099,7 +7099,7 @@ s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Logging">Logging<a class="anchor-link" href="python-overview.html#Logging">¶</a>
+<h3 id="Logging">Logging<a class="anchor-link" href="python-crash-course.html#Logging">¶</a>
 </h3>
 <p>See <a href="https://opensource.com/article/17/9/python-logging">https://opensource.com/article/17/9/python-logging</a> for detals on Python logging.</p>
 <p>I recommend looking at Daiquiri, which builds on top of the standard logging library and make things easy:</p>
@@ -7187,7 +7187,7 @@ You should consider upgrading via the 'pip install --upgrade pip' command.</span
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Debugging">Debugging<a class="anchor-link" href="python-overview.html#Debugging">¶</a>
+<h3 id="Debugging">Debugging<a class="anchor-link" href="python-crash-course.html#Debugging">¶</a>
 </h3>
 <p>Python comes with a debugger, pdb. You can read about using it here: <a href="https://pymotw.com/3/pdb/">https://pymotw.com/3/pdb/</a></p>
 <p>You can use pdb within a Jupyter notebook. Just add this code at the point you want to break execution and enter the debugger:</p>
@@ -7203,7 +7203,7 @@ You should consider upgrading via the 'pip install --upgrade pip' command.</span
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Converting-between-Lists/Dictionaries-and-JSON">Converting between Lists/Dictionaries and JSON<a class="anchor-link" href="python-overview.html#Converting-between-Lists/Dictionaries-and-JSON">¶</a>
+<h3 id="Converting-between-Lists/Dictionaries-and-JSON">Converting between Lists/Dictionaries and JSON<a class="anchor-link" href="python-crash-course.html#Converting-between-Lists/Dictionaries-and-JSON">¶</a>
 </h3>
 <p>Non-tabular data can be stored in dictionaries, which may be nested and contain lists. This is similar to JSON data on the web and in Javascript, and Python provides a <code>json</code> package for converting between these formats.</p>
 
@@ -7339,7 +7339,7 @@ You should consider upgrading via the 'pip install --upgrade pip' command.</span
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Dates-and-Times">Dates and Times<a class="anchor-link" href="python-overview.html#Dates-and-Times">¶</a>
+<h3 id="Dates-and-Times">Dates and Times<a class="anchor-link" href="python-crash-course.html#Dates-and-Times">¶</a>
 </h3>
 <p>It's worth briefly discussing Python's support for date and time operations as these are relevant to the exploratory data analysis we will be doing.</p>
 <p>The standard library has two modules related to this area:</p>
@@ -7363,7 +7363,7 @@ You should consider upgrading via the 'pip install --upgrade pip' command.</span
 <li>
 <code>tzinfo</code>, a class that contains information about a time zone</li>
 </ul>
-<h3 id="Cool-Stuff">Cool Stuff<a class="anchor-link" href="python-overview.html#Cool-Stuff">¶</a>
+<h3 id="Cool-Stuff">Cool Stuff<a class="anchor-link" href="python-crash-course.html#Cool-Stuff">¶</a>
 </h3>
 <p>Notable Python features: <a href="https://github.com/tukkek/notablepython">https://github.com/tukkek/notablepython</a></p>
 <p>Concise reference: <a href="https://github.com/mattharrison/Tiny-Python-3.6-Notebook">https://github.com/mattharrison/Tiny-Python-3.6-Notebook</a></p>
@@ -7430,9 +7430,9 @@ Disassembly of print_my_class:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Going-Deeper">Going Deeper<a class="anchor-link" href="python-overview.html#Going-Deeper">¶</a>
+<h3 id="Going-Deeper">Going Deeper<a class="anchor-link" href="python-crash-course.html#Going-Deeper">¶</a>
 </h3>
-<h4 id="The-sys-module">The sys module<a class="anchor-link" href="python-overview.html#The-sys-module">¶</a>
+<h4 id="The-sys-module">The sys module<a class="anchor-link" href="python-crash-course.html#The-sys-module">¶</a>
 </h4>
 <p><code>sys.modules</code> is a dictionary of the currently imported modules. This can be large so let's just look at the names of the first few:</p>
 
@@ -7549,16 +7549,16 @@ Disassembly of print_my_class:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Using-Threads-and-Processes">Using Threads and Processes<a class="anchor-link" href="python-overview.html#Using-Threads-and-Processes">¶</a>
+<h4 id="Using-Threads-and-Processes">Using Threads and Processes<a class="anchor-link" href="python-crash-course.html#Using-Threads-and-Processes">¶</a>
 </h4>
 <p>See <a href="https://medium.com/@bfortuner/python-multithreading-vs-multiprocessing-73072ce5600b">https://medium.com/@bfortuner/python-multithreading-vs-multiprocessing-73072ce5600b</a></p>
-<h4 id="Extending-Python-with-C-code">Extending Python with C code<a class="anchor-link" href="python-overview.html#Extending-Python-with-C-code">¶</a>
+<h4 id="Extending-Python-with-C-code">Extending Python with C code<a class="anchor-link" href="python-crash-course.html#Extending-Python-with-C-code">¶</a>
 </h4>
 <p>See <a href="https://dbader.org/blog/python-ctypes-tutorial#">https://dbader.org/blog/python-ctypes-tutorial#</a>.</p>
-<h4 id="Functional-Programming-in-Python">Functional Programming in Python<a class="anchor-link" href="python-overview.html#Functional-Programming-in-Python">¶</a>
+<h4 id="Functional-Programming-in-Python">Functional Programming in Python<a class="anchor-link" href="python-crash-course.html#Functional-Programming-in-Python">¶</a>
 </h4>
 <p>See <a href="https://docs.python.org/dev/howto/functional.html#iterators">https://docs.python.org/dev/howto/functional.html#iterators</a> and <a href="http://coconut-lang.org/">http://coconut-lang.org/</a></p>
-<h4 id="Making-HTTP-Requests-and-Parsing-Responses">Making HTTP Requests and Parsing Responses<a class="anchor-link" href="python-overview.html#Making-HTTP-Requests-and-Parsing-Responses">¶</a>
+<h4 id="Making-HTTP-Requests-and-Parsing-Responses">Making HTTP Requests and Parsing Responses<a class="anchor-link" href="python-crash-course.html#Making-HTTP-Requests-and-Parsing-Responses">¶</a>
 </h4>
 <p>There are numerous ways to do this in Python, but the most commonly used libraries for these are <code>requests</code> (<a href="http://docs.python-requests.org/en/master/">http://docs.python-requests.org/en/master/</a>) and Beautiful Soup (<a href="https://www.crummy.com/software/BeautifulSoup/">https://www.crummy.com/software/BeautifulSoup/</a>); look at those first before considering anything else as they are powerful, stable, mature and easy to use. Kenneth Reitz, who wrote <code>requests</code>, has recently implemented a new library on top of both <code>requests</code> and Beautiful Soup: <a href="https://github.com/kennethreitz/requests-html">https://github.com/kennethreitz/requests-html</a></p>
 
@@ -7574,9 +7574,9 @@ Disassembly of print_my_class:
         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="randomforest",
-            disqus_url="https://www.grahamwheeler.com/posts/python-overview.html",
+            disqus_url="https://www.grahamwheeler.com/posts/python-crash-course.html",
         disqus_title="A Python Crash Course",
-        disqus_identifier="cache/posts/Python Overview.html",
+        disqus_identifier="cache/posts/Python Crash Course.html",
         disqus_config = function () {
             this.language = "en";
         };
