@@ -7102,7 +7102,7 @@ s
 <h3 id="Logging">Logging<a class="anchor-link" href="python-overview.html#Logging">¶</a>
 </h3>
 <p>See <a href="https://opensource.com/article/17/9/python-logging">https://opensource.com/article/17/9/python-logging</a> for detals on Python logging.</p>
-<p>I recommend looking at Daiquiri, which biulds on top of the standard logging library and make things easy:</p>
+<p>I recommend looking at Daiquiri, which builds on top of the standard logging library and make things easy:</p>
 <p><a href="https://julien.danjou.info/blog/python-logging-easy-with-daiquiri">https://julien.danjou.info/blog/python-logging-easy-with-daiquiri</a></p>
 
 </div>
@@ -7187,9 +7187,10 @@ You should consider upgrading via the 'pip install --upgrade pip' command.</span
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Debugging-in-the-Notebook">Debugging in the Notebook<a class="anchor-link" href="python-overview.html#Debugging-in-the-Notebook">¶</a>
+<h3 id="Debugging">Debugging<a class="anchor-link" href="python-overview.html#Debugging">¶</a>
 </h3>
-<p>You can use the Python debugger pdf within a notebook. Just add this code at the point you want to break execution and enter the debugger:</p>
+<p>Python comes with a debugger, pdb. You can read about using it here: <a href="https://pymotw.com/3/pdb/">https://pymotw.com/3/pdb/</a></p>
+<p>You can use pdb within a Jupyter notebook. Just add this code at the point you want to break execution and enter the debugger:</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pdb</span><span class="p">;</span> <span class="n">pdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
 </pre></div>
 <p>Once you're in the debugger, use the command <code>h</code> for help to see the commands available.</p>
@@ -7364,10 +7365,10 @@ You should consider upgrading via the 'pip install --upgrade pip' command.</span
 </ul>
 <h3 id="Cool-Stuff">Cool Stuff<a class="anchor-link" href="python-overview.html#Cool-Stuff">¶</a>
 </h3>
-<p>See <a href="https://github.com/tukkek/notablepython">https://github.com/tukkek/notablepython</a></p>
+<p>Notable Python features: <a href="https://github.com/tukkek/notablepython">https://github.com/tukkek/notablepython</a></p>
 <p>Concise reference: <a href="https://github.com/mattharrison/Tiny-Python-3.6-Notebook">https://github.com/mattharrison/Tiny-Python-3.6-Notebook</a></p>
 <p>The Hitchhikers Guide to Python documents many best practices: <a href="http://docs.python-guide.org/en/latest/">http://docs.python-guide.org/en/latest/</a></p>
-<p>Easily progress bars to outer loops (works in Jupyter and console): <a href="https://pypi.python.org/pypi/tqdm">https://pypi.python.org/pypi/tqdm</a></p>
+<p>Easily add progress bars to outer loops (works in Jupyter and console): <a href="https://pypi.python.org/pypi/tqdm">https://pypi.python.org/pypi/tqdm</a></p>
 <p>For anyone who wants to get really serious about Python, Mark Lutz's and David Beazley's books are good but some are dated, but the best book on the language itself is IMO "Fluent Python" by Luciano Ramalho. There are also many excellent talks at <a href="http://pyvideo.org/">http://pyvideo.org/</a>.</p>
 <p>Blog aggregator for Python: <a href="http://planetpython.org/">http://planetpython.org/</a></p>
 <p>If you're interested in what the underlying Python byte code looks like for a function or class you can use the <code>dis</code> module:</p>
