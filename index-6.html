@@ -77,7 +77,597 @@
     </header><main id="content" class="content" role="main"><div class="postindex">
 
 
-<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-4.html">Building a Zite Replacement (Part 4)</a></h2>
+<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-5.html">Building a Zite Replacement (Part 5)</a></h2>
+    </header><section class="post-excerpt"><div>
+<p>My initial experience with clustering was somewhat disappointing. Its clear I need to do some tuning of the approach. The first thing I did was to rerun the article download process, but instead of just keeping the top ten terms and dropping their TF-IDF values, I kept them all. I think there are better ways to select the terms to use for Jacard similarity.</p>
+<p>For starters, using a fixed number of terms could lead to keeping a wildly different range of TF-IDF values for different articles. It makes more sense to have some threshold value and keep all terms that exceed the threshold. That may mean more than ten terms for some articles and less for others.</p>
+<p>Secondly, there is not much point in keeping terms that only appear in a single article. That term may be useful if we search articles based on terms, but it will not help much in computing Jacard distances. Some caution is needed here - dropping these terms does reduce the size of the term set and thus will reduce the union with any other article's term set, thus boosting the similarity that the first article has with all other articles. But as this gets boosted across the board, I don't expect it to be much of an issue.</p>
+<p>Finally, it may not be a bad idea to create some 'fake' term sets that can act as cluster centroids. I.e. for some topic, create a term set of terms that are particularly relevant and if possible unique to that topic. Using these as centroids we could simply assign each article to the closest centroid which is a straightforward task. Furthermore, we don't have to compute the $n ^ 2$ matrix of distances; if we have $m$ centroids we need only compute $n \times m$ distances, and if $m$ is fixed we essentially have a linear scaling approach.</p>
+<p>In order to do this, it is a reasonable idea to take the full set of terms that occur at least $k$ times for some chosen value $k$, assign each of these terms one or more topics, and then pivot that so each topic has a set of terms, which becomes a pseudo-article and the centroid for that topic.</p>
+<p>Below is the code I am now using to get the articles:</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">feedparser</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span> 
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="c1"># A simple tag stripper</span>
+<span class="kn">from</span> <span class="nn">HTMLParser</span> <span class="kn">import</span> <span class="n">HTMLParser</span>
+
+<span class="k">class</span> <span class="nc">MLStripper</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fed</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fed</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">strip_tags</span><span class="p">(</span><span class="n">html</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">MLStripper</span><span class="p">()</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+
+<span class="c1"># Get the word frequencies for top 5000 words</span>
+<span class="c1"># You can get this list here: http://www.wordfrequency.info/free.asp</span>
+<span class="c1"># I cannot redistribute it so get your own copy to follow along.</span>
+
+<span class="n">words5000</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">top_words</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'freq5000.csv'</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s1">''</span> <span class="ow">or</span> <span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="s1">'9'</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'ascii'</span><span class="p">,</span> <span class="s1">'ignore'</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">&lt;=</span> <span class="mi">500</span><span class="p">:</span>
+            <span class="n">top_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">words5000</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">v</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="n">min_words5000_freq</span> <span class="o">=</span> <span class="n">total</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words5000</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">words5000</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">/=</span> <span class="n">total</span>
+    <span class="k">if</span> <span class="n">min_words5000_freq</span> <span class="o">&gt;</span> <span class="n">words5000</span><span class="p">[</span><span class="n">word</span><span class="p">]:</span>
+        <span class="n">min_words5000_freq</span> <span class="o">=</span> <span class="n">words5000</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">get_article_terms</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">article</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Get the terms and counts from an article. Strip HTML tags and</span>
+<span class="sd">    non-essential punctuation, whitespace, and single</span>
+<span class="sd">    character 'words' like s that may come from punctuation removal.</span>
+<span class="sd">    Try normalize initial letter case using the 5000 word dictionary.</span>
+<span class="sd">    Return a set of words and counts and a total count.</span>
+<span class="sd">    """</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">article</span> <span class="o">=</span> <span class="n">title</span> <span class="o">+</span> <span class="s1">'. '</span> <span class="o">+</span> <span class="n">strip_tags</span><span class="p">(</span><span class="n">article</span><span class="p">)</span>
+    <span class="c1"># replace non-ASCII chars with space. We keep '-', '.', ',', '\''.</span>
+    <span class="n">article</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r'[^A-Za-z0-9\.,\-</span><span class="se">\'</span><span class="s1">]+'</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
+    <span class="c1"># replace 's with space and remove other single quotes.</span>
+    <span class="c1"># We do want to preserve *n't and maybe others so switch those</span>
+    <span class="c1"># to " and back before/after</span>
+    <span class="n">article</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">article</span><span class="p">,</span> <span class="s2">"'s "</span><span class="p">,</span> <span class="s2">" "</span><span class="p">)</span>\
+                    <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"n't"</span><span class="p">,</span> <span class="s1">'n"t'</span><span class="p">)</span>\
+                    <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"'"</span><span class="p">,</span> <span class="s2">","</span><span class="p">)</span>\
+                    <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'n"t'</span><span class="p">,</span> <span class="s2">"n't"</span><span class="p">)</span>
+    <span class="c1"># Split on '.' and check first words to see if they should be lower-cased.</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+    <span class="n">article</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">words5000</span><span class="p">:</span>
+            <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
+        <span class="n">article</span> <span class="o">+=</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+    <span class="c1"># Look for consecutive sequences of capitalized words with no </span>
+    <span class="c1"># intervening punctuation other than '-' and turn them into</span>
+    <span class="c1"># single terms with '_' replacing space.</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
+    <span class="n">article</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="ow">and</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isupper</span><span class="p">():</span>
+                <span class="n">words</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'_'</span> <span class="o">+</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">''</span>
+        <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span>
+        <span class="n">article</span> <span class="o">+=</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+    <span class="c1"># replace non-ASCII chars with space. We keep '-' and underscore.</span>
+    <span class="n">article</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r'[^A-Za-z0-9\-_</span><span class="se">\'</span><span class="s1">]+'</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
+    <span class="c1"># We could use a Counter here but the would need to post-process </span>
+    <span class="c1"># the keys to remove the bogus ones and correct capitalization.</span>
+    <span class="c1"># Consider for later.</span>
+    <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">article</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">term</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="p">(</span><span class="n">term</span> <span class="o">!=</span> <span class="s1">'a'</span> <span class="ow">or</span> <span class="n">term</span> <span class="o">==</span> <span class="s1">'I'</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">top_words</span> <span class="ow">or</span> \
+            <span class="p">(</span><span class="n">term</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="ow">and</span> <span class="n">term</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">top_words</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="c1"># Update the count.</span>
+           <span class="n">terms</span><span class="p">[</span><span class="n">term</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">terms</span><span class="p">,</span> <span class="n">total</span>
+
+
+<span class="k">def</span> <span class="nf">get_article_data</span><span class="p">(</span><span class="n">feed_url</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Calculate the term counts for each article in a feed as well as</span>
+<span class="sd">    the document counts for each term. Return a list of article </span>
+<span class="sd">    metadata including the title, a snippet, the distinct terms and </span>
+<span class="sd">    their counts, etc, as well as the counts of how many documents </span>
+<span class="sd">    each term appeared in.</span>
+<span class="sd">    """</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="n">feedparser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">feed_url</span><span class="p">)</span>
+
+    <span class="n">doc_terms</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">()</span>
+    <span class="n">articles</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">entries</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">'entries'</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'title'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># For some sites seem we get summary and some content</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'summary'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">article</span> <span class="o">=</span> <span class="n">summary</span> <span class="k">if</span> <span class="n">content</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">content</span>
+        <span class="k">if</span> <span class="n">article</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">article</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="c1"># Maybe concantenate them? Dig into this; it may be </span>
+            <span class="c1"># multi-language or something.</span>
+            <span class="n">article</span> <span class="o">=</span> <span class="n">article</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">article</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">article</span> <span class="o">=</span> <span class="n">article</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span>
+
+        <span class="n">terms</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="n">get_article_terms</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
+        <span class="n">doc_terms</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">terms</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">articles</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'title'</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span> 
+                         <span class="s1">'category'</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'category'</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+                         <span class="s1">'guid'</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'guid'</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+                         <span class="s1">'terms'</span><span class="p">:</span> <span class="n">terms</span><span class="p">,</span> 
+                         <span class="s1">'count'</span><span class="p">:</span> <span class="n">count</span><span class="p">,</span> 
+                         <span class="s1">'link'</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'link'</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+                         <span class="s1">'media_thumbnail'</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'media_thumbnail'</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+                         <span class="s1">'date'</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'published'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)})</span>
+    <span class="k">return</span> <span class="n">articles</span><span class="p">,</span> <span class="n">doc_terms</span>
+
+
+<span class="k">def</span> <span class="nf">get_feed_with_tf_idf</span><span class="p">(</span><span class="n">feed_url</span><span class="p">,</span> <span class="n">top_term_count</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
+    <span class="sd">""" Calculate TF-IDFs for each article in a feed """</span>
+    <span class="n">articles</span><span class="p">,</span> <span class="n">doc_terms</span> <span class="o">=</span> <span class="n">get_article_data</span><span class="p">(</span><span class="n">feed_url</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
+        <span class="n">terms</span> <span class="o">=</span> <span class="n">article</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">]</span>
+        <span class="n">tf_idf</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">article_count</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">article</span><span class="p">[</span><span class="s1">'count'</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">terms</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">tf_idf</span><span class="p">[</span><span class="n">term</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">count</span> <span class="o">/</span> <span class="n">article_count</span><span class="p">)</span> <span class="o">*</span> \
+                <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">articles</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">doc_terms</span><span class="p">[</span><span class="n">term</span><span class="p">]))</span>
+        <span class="n">article</span><span class="p">[</span><span class="s1">'tf_idf'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="n">term</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'_'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">):</span> <span class="n">weight</span><span class="p">}</span> \
+            <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">tf_idf</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">articles</span>
+
+<span class="c1"># Read the list of feed URLs</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'feeds.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">feeds</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="c1"># Get the articles for each feed, process them and save them </span>
+<span class="c1"># as JSON to a file.</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'articles.txt'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">feed</span> <span class="ow">in</span> <span class="n">feeds</span><span class="p">:</span>
+        <span class="n">feed</span> <span class="o">=</span> <span class="n">feed</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">print</span> <span class="n">feed</span>
+        <span class="n">when</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+        <span class="n">articles</span> <span class="o">=</span> <span class="n">get_feed_with_tf_idf</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s1">'</span><span class="si">%d</span><span class="s1"> articles processed from feed </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">articles</span><span class="p">),</span> <span class="n">feed</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
+            <span class="n">record</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'feed'</span><span class="p">:</span> <span class="n">feed</span><span class="p">,</span> 
+                      <span class="s1">'fetched'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">when</span><span class="p">),</span>
+                      <span class="s1">'category'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'category'</span><span class="p">],</span>
+                      <span class="s1">'link'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'link'</span><span class="p">],</span> 
+                      <span class="s1">'date'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'date'</span><span class="p">],</span>
+                      <span class="s1">'terms'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">],</span>
+                      <span class="s1">'tf_idf'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'tf_idf'</span><span class="p">],</span>
+                      <span class="s1">'title'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span>
+                      <span class="s1">'thumbnail'</span><span class="p">:</span> <span class="n">article</span><span class="p">[</span><span class="s1">'media_thumbnail'</span><span class="p">]</span>
+            <span class="p">}</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">record</span><span class="p">))</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+</pre>
+</td>
+</tr></table>
+<p>There have been some improvements since part two, especially in the handing of commas and periods, capitalization correction, etc. </p>
+<p>So, let's start by counting the number of times each term occurs in a document. This was already done for computing TF-IDF but the information wasn't saved but its easy to get again.</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+
+<span class="n">terms</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'articles.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">linenum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="n">linenum</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">ve</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s2">"Failed to parse line </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">linenum</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">ve</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">]:</span>
+            <span class="n">terms</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># Drop all terms with an incidence less than 4</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">terms</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+    <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">del</span> <span class="n">terms</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+
+<span class="n">ranked</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">terms</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre>
+</td>
+</tr></table>
+<p>The top terms I got out of this are 'is' and 'are', so its clear that the top_words list could do with some more stop words, but that doesn't really matter. I put together a new list of about 700 stop words I will use in future, and filter those out below:</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'stopwords.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">terms</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="p">:</span>
+        <span class="k">del</span> <span class="n">terms</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+
+<span class="n">ranked</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">terms</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre>
+</td>
+</tr></table>
+<p>That still leaves me with about 50,000 terms, with about 25% of that being terms that occur 4 or 5 times only. There are some interesting terms in there but clearly it would be costly to deal with that many. Sticking with capitalized terms cuts things down to about 15000. This would still be a lot of work to categorize so I think its time to take a different tack and try using gensim. My hope is that gensim can do better clustering than I got with affinity propagation and I can use the results to in turn extract the initial category term sets. Let's see what it can do. The code below will use Latent Dirichlet Allocation to cluster the articles into 200 clusters. First we need to turn our articles into term lists expanded out by term count (so if 'recipe' appears four times we need to make four copies; it is unfortunate that gensim will turn that back into a bag but doesn't seem to be able to take an existing bag as input).</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="n">stoplist</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="p">)</span>
+
+<span class="n">documents</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'articles.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">linenum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="n">linenum</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">ve</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s2">"Failed to parse line </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">linenum</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">ve</span><span class="p">)</span>
+        <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">'terms'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stoplist</span><span class="p">:</span>
+                <span class="n">terms</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span><span class="p">)</span>
+        <span class="n">documents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+</pre>
+</td>
+</tr></table>
+<p>Next we get gensim to create a sparse matrix model of the corpus and do LDA:</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="kn">from</span> <span class="nn">gensim</span> <span class="kn">import</span> <span class="n">corpora</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">similarities</span>
+
+<span class="n">dictionary</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+<span class="n">dictionary</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">'articles.dict'</span><span class="p">)</span>
+
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">]</span>
+<span class="n">corpora</span><span class="o">.</span><span class="n">MmCorpus</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="s1">'article.mm'</span><span class="p">,</span> <span class="n">corpus</span><span class="p">)</span>
+
+<span class="c1"># extract 200 LDA topics, using 1 pass and updating once every </span>
+<span class="c1"># 1 chunk (1,000 documents)</span>
+<span class="n">lda</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ldamodel</span><span class="o">.</span><span class="n">LdaModel</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> 
+    <span class="n">num_topics</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">update_every</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre>
+</td>
+</tr></table>
+<p>It takes a few minutes to run but its worth it! The result is a set of vectors that give the the most important words and their weights for the cluster. A lot of these don't make sense but quite a number do - certainly enough to give the centroid articles I need. For example:</p>
+<pre class="code literal-block"><span></span>u'0.060*cup + 0.055*kitchen + 0.039*sugar + 0.038*baking + 0.034*size + 0.034*milk + 0.031*recipe
+ + 0.030*cheese + 0.026*dough + 0.025*bread'
+</pre>
+
+
+<p>gives a set of important words for cooking/recipes category, while:</p>
+<pre class="code literal-block"><span></span>u'0.273*God + 0.050*playing + 0.038*exercise + 0.030*Bible + 0.025*religion + 0.023*argument +
+ 0.020*prayer + 0.016*religious + 0.016*claims + 0.014*mercy',
+</pre>
+
+
+<p>gives some for religion. I may need more than 200 clusters but this is a good start. More to come!</p>
+</div>
+    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
+
+        on
+
+        <time class="post-date" datetime="2015-09-23T22:21:00-07:00">
+            2015-09-23 22:21
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-4.html">Building a Zite Replacement (Part 4)</a></h2>
     </header><section class="post-excerpt"><div>
 <p>Following my <a href="http://www.grahamwheeler.com/posts/zite-replacement-3.html">last post</a>, I started gathering URLs of feeds to use for sample data. First I scraped the links that I had saved in Pocket (a scarily large number). It didn't seem like Pocket had an easy way to export this, so I loaded up Pocket in Chrome, scrolled and scrolled and scrolled until I could scroll no more, then saved the resulting web page once it was done loading. It was pretty easy to then scrape that to get the links. After sorting and uniq-ing those, and running them through <a href="http://www.aaronsw.com/2002/feedfinder/">feedfinder</a>, I had somewhere north of 1000 feeds. However, these were very skewed to my interests and I wanted diversity so I pressed on and scraped a bunch of blog rolls and other link collections covering many other areas. In the end I got about 2,500 feed URLs to start with, in a file named 'feeds.txt'.</p>
 <p>At that point I ran the code below to fetch and categorize the articles.</p>
