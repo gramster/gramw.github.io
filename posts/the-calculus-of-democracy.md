@@ -20,9 +20,8 @@ is eliminated. That candidate is also struck from the voters choices and
 the process is repeated until there is a candidate that has more than
 50% of the vote.
 
-This ![Marquis de
-Condorcet](/images/Marquis_de_condorcet_hd.jpg "Marquis de Condorcet"){: style="float:left"}
-seems fair on the surface - if someone obviously gets too few votes they
+![Marquis de Condorcet](/images/Marquis_de_condorcet_hd.jpg "Marquis de Condorcet"){: style="float:left"}
+This seems fair on the surface - if someone obviously gets too few votes they
 should be out of the running, and everyone gets their preferences for
 the remaining candidates counted. But back in 1785, the Marquis de
 Condorcet pointed out paradoxes in this system. For example, if there
