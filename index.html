@@ -86,7 +86,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I've been teaching a crash course in data science with Python, which starts off with learning Python itself. The target audience is Java programmers (generally senior level) so its assumed that things like classes and methods are well understood. The focus is mostly on what is different with Python. I teach it using Jupyter notebooks but the content is useful as a blog post too so here we go:</p>
+<p>I've been teaching <a href="https://github.com/gramster/pythonbootcamp">a crash course in data science with Python</a>, which starts off with learning Python itself. The target audience is Java programmers (generally senior level) so its assumed that things like classes and methods are well understood. The focus is mostly on what is different with Python. I teach it using Jupyter notebooks but the content is useful as a blog post too so here we go:</p>
 <h3 id="Introduction">Introduction<a class="anchor-link" href="posts/python-crash-course.html#Introduction">¶</a>
 </h3>
 <h4 id="Python's-Origins">Python's Origins<a class="anchor-link" href="posts/python-crash-course.html#Python's-Origins">¶</a>
@@ -152,7 +152,7 @@
 <pre><code>python foo.py
 
 </code></pre>
-<p>When you do so the Python interpreter will compile the script to an intermediate bytecode, and the result will be stored in a file with the same base name and a <code>.pyc</code> extension. As an optimisation, the interpreter will look to see if a <code>.pyc</code> file with a more recent file modification date exists when you invoke it to run a script and use that if it does. In Python 2.x these files were saved alongside the Python source files but in Python 3.x they are stored in a subdirectory named <code>__pycache__</code>.</p>
+<p>When you do so the Python interpreter will compile the script to an intermediate bytecode, and the result will be stored in a file with the same base name and a <code>.pyc</code> extension. As an optimization, the interpreter will look to see if a <code>.pyc</code> file with a more recent file modification date exists when you invoke it to run a script and use that if it does. In Python 2.x these files were saved alongside the Python source files but in Python 3.x they are stored in a subdirectory named <code>__pycache__</code>.</p>
 <blockquote>
 <h4 id="A-better-REPL:-bpython">A better REPL: bpython<a class="anchor-link" href="posts/python-crash-course.html#A-better-REPL:-bpython">¶</a>
 </h4>
@@ -491,7 +491,7 @@
 <h3 id="Indentation-and-Comments">Indentation and Comments<a class="anchor-link" href="posts/python-crash-course.html#Indentation-and-Comments">¶</a>
 </h3>
 <p>Python does not use {} for demarcating blocks of code; instead it uses indentation. This distinguishes it from most other programming languages and can take some getting used to. In particular, it requires care when pasting code in an editor (most Python editors are smart about this but other editors are not). The reason for this choice is that Guido originally designed Python as a teaching language and favored readability.</p>
-<p>The convention in Python is to indent with spaces, not tabs (this avoids tab settings causing misnterpretation of code). Indentation standard is 4 spaces at a time, although some companies have different conventions (usually 2, if not 4).</p>
+<p>The convention in Python is to indent with spaces, not tabs (this avoids tab settings causing misinterpretation of code). Indentation standard is 4 spaces at a time, although some companies have different conventions (usually 2, if not 4).</p>
 <p>Comments start with # and continue to the end of the line. By convention if # is used on the same line as code it should be preceded by at least two spaces.</p>
 
 </div>
@@ -1144,7 +1144,7 @@ False
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Strings">Strings<a class="anchor-link" href="posts/python-crash-course.html#Strings">¶</a>
 </h4>
-<p>Python 3 strings are unicode. String literals can use single our double quotes (but must use same type to close as to open). Multi-line strings are most easily written using triple quotes.</p>
+<p>Python 3 strings are Unicode. String literals can use single our double quotes (but must use same type to close as to open). Multi-line strings are most easily written using triple quotes.</p>
 
 </div>
 </div>
@@ -2532,7 +2532,7 @@ phone
 <li>
 <code>collections.OrderedDict</code>s remember the order of insertion so this is preserved when iterating over the entries or keys</li>
 <li>
-<code>collections.defaultdict</code>s can specify a type in the constructor whose return vaslue will be used if an entry can't be found</li>
+<code>collections.defaultdict</code>s can specify a type in the constructor whose return value will be used if an entry can't be found</li>
 <li>
 <code>collections.ChainMap</code>s group multiple dictionaries into a single item for lookups; inserts go in the first dictionary</li>
 </ul>
@@ -2605,7 +2605,7 @@ phone
 <h4 id="Tuples">Tuples<a class="anchor-link" href="posts/python-crash-course.html#Tuples">¶</a>
 </h4>
 <p>Tuples are immutable sequences. Typically they are used to store record type data, or to return multiple values from a function. Tuples behave a lot like lists and support many of the same operations with similar behavior, aside from their immutability. We'll consider them briefly here.</p>
-<p>The <code>collections</code> package defines a variant <code>namedtuple</code> which allows each field to be given a name; we won't go into that here other than to point out its existence. <code>collections</code> also defines a <code>deque</code> class; stacks are easy to implement just with the built-io list type.</p>
+<p>The <code>collections</code> package defines a variant <code>namedtuple</code> which allows each field to be given a name; we won't go into that here other than to point out its existence. <code>collections</code> also defines a <code>deque</code> class; stacks are easy to implement just with the built-in list type.</p>
 
 </div>
 </div>
@@ -4791,7 +4791,7 @@ False
 <h4 id="with">with<a class="anchor-link" href="posts/python-crash-course.html#with">¶</a>
 </h4>
 <p><code>with</code> is used for scoped use of classes that need to clean up when they are no longer used (e.g. file objects that need to release underlying file handles).</p>
-<p>The most common place you'll see this is with file reading and writing, which we conver in the next section.</p>
+<p>The most common place you'll see this is with file reading and writing, which we cover in the next section.</p>
 <hr>
 <blockquote>
 <p><em>Under the Hood</em></p>
@@ -5323,7 +5323,7 @@ add(a, b)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Python supports continuations with yield (this returns a generator which we will dicuss later):</p>
+<p>Python supports continuations with yield (this returns a generator which we will discuss later):</p>
 
 </div>
 </div>
@@ -5670,7 +5670,7 @@ Named1 is hat
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>What heppened above is that the empty list argument was created at function definition time, and at function call time a is assigned a default value which is a reference to the previously created list object. If the list changes those changes will persist.</p>
+<p>What happened above is that the empty list argument was created at function definition time, and at function call time a is assigned a default value which is a reference to the previously created list object. If the list changes those changes will persist.</p>
 <p>Instead, use something like:</p>
 
 </div>
@@ -6104,7 +6104,7 @@ class Widget(builtins.object)
 <h4 id="Constructors-and-visibility">Constructors and visibility<a class="anchor-link" href="posts/python-crash-course.html#Constructors-and-visibility">¶</a>
 </h4>
 <p>A class does not require a constructor, but can have (at most) one. The constructor is an instance method named <code>__init__</code>. It can take additional parameters other than <code>self</code>.</p>
-<p>Python does not support private or protected members. By convention, private members should be named starting with an underscore, but this is an 'honor system'; everything is public. Also by convention, you should avoid double underscores; that should be reerved for dunder-methods.</p>
+<p>Python does not support private or protected members. By convention, private members should be named starting with an underscore, but this is an 'honor system'; everything is public. Also by convention, you should avoid double underscores; that should be reserved for dunder-methods.</p>
 
 </div>
 </div>
@@ -6675,7 +6675,7 @@ e2 class var is actually an instance var
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Exceptions">Exceptions<a class="anchor-link" href="posts/python-crash-course.html#Exceptions">¶</a>
 </h3>
-<p>You can raise an exception with the <code>raise</code> statememt. You can give an instance of any class that derives from the <code>BaseException</code> class. You can catch exceptions using <code>try: except:</code>. If you want to get a reference to the exception, use <code>catch..as..</code>:</p>
+<p>You can raise an exception with the <code>raise</code> statement. You can give an instance of any class that derives from the <code>BaseException</code> class. You can catch exceptions using <code>try: except:</code>. If you want to get a reference to the exception, use <code>catch..as..</code>:</p>
 
 </div>
 </div>
@@ -7073,7 +7073,7 @@ s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It is worth noting that using these is very idiomatic to Python normally (see the <em>Fluent Python</em> book for example), but in the data science domain, this idiom is more commonly replaced by vectorising. This web-based book goes deep into this different way of thinking: <a href="http://www.labri.fr/perso/nrougier/from-python-to-numpy/">http://www.labri.fr/perso/nrougier/from-python-to-numpy/</a></p>
+<p>It is worth noting that using these is very idiomatic to Python normally (see the <em>Fluent Python</em> book for example), but in the data science domain, this idiom is more commonly replaced by vectorizing. This web-based book goes deep into this different way of thinking: <a href="http://www.labri.fr/perso/nrougier/from-python-to-numpy/">http://www.labri.fr/perso/nrougier/from-python-to-numpy/</a></p>
 
 </div>
 </div>
@@ -7085,7 +7085,7 @@ s
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="async/await">async/await<a class="anchor-link" href="posts/python-crash-course.html#async/await">¶</a>
 </h3>
-<p>Python runs as a single-threaded process. That means things like I/O can slow things down a lot. It is possible to use multiple threads - there are several libaries for that - but even with a single thread big improvements are possible with async code. The details are beyond the scope of the bootcamp, but more info is available here: <a href="https://docs.python.org/3/library/asyncio-task.html">https://docs.python.org/3/library/asyncio-task.html</a>. Recent changes in Python have made this much more powerful, flexible and easy to use.</p>
+<p>Python runs as a single-threaded process. That means things like I/O can slow things down a lot. It is possible to use multiple threads - there are several libraries for that - but even with a single thread big improvements are possible with async code. The details are beyond the scope of the bootcamp, but more info is available here: <a href="https://docs.python.org/3/library/asyncio-task.html">https://docs.python.org/3/library/asyncio-task.html</a>. Recent changes in Python have made this much more powerful, flexible and easy to use.</p>
 
 </div>
 </div>
@@ -7110,7 +7110,7 @@ s
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Logging">Logging<a class="anchor-link" href="posts/python-crash-course.html#Logging">¶</a>
 </h3>
-<p>See <a href="https://opensource.com/article/17/9/python-logging">https://opensource.com/article/17/9/python-logging</a> for detals on Python logging.</p>
+<p>See <a href="https://opensource.com/article/17/9/python-logging">https://opensource.com/article/17/9/python-logging</a> for details on Python logging.</p>
 <p>I recommend looking at Daiquiri, which builds on top of the standard logging library and make things easy:</p>
 <p><a href="https://julien.danjou.info/blog/python-logging-easy-with-daiquiri">https://julien.danjou.info/blog/python-logging-easy-with-daiquiri</a></p>
 
@@ -7650,7 +7650,7 @@ in specific topics.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I recently started playing guitar again after a long absence and wanted to start making some notes in a digital form. Unfortunately, I didn't find any good tools. There is TeX of course, which can do anything, but I was hoping for something a bit more WYSIWYGy. There are some very good tools availabe for musical scores (MuseScore, Frescobaldi), but I want something that is more like a traditional notebook with lots of notes interspersed with occasional musical notation (in both traditional and tablature forms).</p>
+<p>I recently started playing guitar again after a long absence and wanted to start making some notes in a digital form. Unfortunately, I didn't find any good tools. There is TeX of course, which can do anything, but I was hoping for something a bit more WYSIWYGy. There are some very good tools available for musical scores (MuseScore, Frescobaldi), but I want something that is more like a traditional notebook with lots of notes interspersed with occasional musical notation (in both traditional and tablature forms).</p>
 <p>So an obvious potential candidate is Jupyter (nee IPython), but it has no support for musical notation out of the box. But it is doable and in this post I'll walk through how I got it to work on my Mac. This is also my first attempt at using a Jupyter notebook as my blog post in Nikola so I'm kiling two birds with one stone.</p>
 <p>I want something that is fairly easy to write the music in. MusicXML isn't too bad, except XML. What little I've seen of Liyponds markup looked pretty unfriendly for the simple use cases I have. A few days ago I stumbled across a Python library called abjad which looked just the ticket. As I write this I have it working for music on the staff but not tablature (I'm not sure it supports that) but I hope by the end of this post I'll have that figured out too!</p>
 <p>Abjad relies on Lilypond, so first that has to be installed. It can be downloaded from <a href="http://lilypond.org/macos-x.html">http://lilypond.org/macos-x.html</a>, and then the tarball needs to be uncompressed and the Lilypond.app folder dragged to /Applications. You need to follow the instructions at that link to set up a command line version too. I created a file /usr/local/bin/lilypond for that; my Homebrew install uses that folder so it is already in my path.</p>
@@ -7664,7 +7664,7 @@ in specific topics.</p>
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span>%%bash
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
 pip install abjad<span class="o">[</span>development,ipython<span class="o">]</span>
 </pre></div>
 
@@ -7677,7 +7677,10 @@ pip install abjad<span class="o">[</span>development,ipython<span class="o">]</s
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Collecting abjad[development,ipython]
   Downloading Abjad-2.16.tar.gz (27.2MB)
@@ -7724,7 +7727,10 @@ Successfully installed Sphinx-1.3.5 abjad-2.16 alabaster-0.7.7 babel-2.2.0 confi
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>  Abjad 2.16 does not provide the extra 'development'
   Abjad 2.16 does not provide the extra 'ipython'
@@ -7753,7 +7759,7 @@ Successfully installed Sphinx-1.3.5 abjad-2.16 alabaster-0.7.7 babel-2.2.0 confi
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span>%%bash
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
 
 brew install fluidsynth --with-libsndfile
 </pre></div>
@@ -7767,7 +7773,10 @@ brew install fluidsynth --with-libsndfile
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>==&gt; Installing dependencies for fluid-synth: flac, libogg, libvorbis, libsndfile
 ==&gt; Installing fluid-synth dependency: flac
@@ -7815,7 +7824,7 @@ brew install fluidsynth --with-libsndfile
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> abjad.ext.ipython
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> abjad.ext.ipython
 </pre></div>
 
 </div>
@@ -7838,7 +7847,7 @@ brew install fluidsynth --with-libsndfile
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">abjad</span> <span class="kn">import</span> <span class="o">*</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">abjad</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 
 </div>
@@ -7851,7 +7860,7 @@ brew install fluidsynth --with-libsndfile
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">duration</span> <span class="o">=</span> <span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duration</span> <span class="o">=</span> <span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Note</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span> <span class="k">for</span> <span class="n">pitch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
 <span class="n">staff</span> <span class="o">=</span> <span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -7866,7 +7875,10 @@ brew install fluidsynth --with-libsndfile
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
+
 <div class="output_subarea output_text output_error">
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
@@ -7956,7 +7968,7 @@ brew install fluidsynth --with-libsndfile
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span>%%bash
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
 
 <span class="nb">cd</span> ~
 git clone https://github.com/Abjad/abjad.git
@@ -7973,7 +7985,10 @@ pip install --upgrade .
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Processing /Users/gram/abjad
 Requirement already up-to-date: ply in /Users/gram/anaconda/envs/nikola/lib/python3.5/site-packages (from Abjad==2.16)
@@ -7990,7 +8005,10 @@ Successfully installed Abjad-2.16
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>Cloning into 'abjad'...
 Checking out files: 100% (2651/2651), done.
@@ -8017,7 +8035,7 @@ Checking out files: 100% (2651/2651), done.
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> abjad.ext.ipython
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> abjad.ext.ipython
 </pre></div>
 
 </div>
@@ -8030,7 +8048,7 @@ Checking out files: 100% (2651/2651), done.
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">abjad</span> <span class="kn">import</span> <span class="o">*</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">abjad</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 
 </div>
@@ -8043,7 +8061,7 @@ Checking out files: 100% (2651/2651), done.
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">duration</span> <span class="o">=</span> <span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duration</span> <span class="o">=</span> <span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Note</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span> <span class="k">for</span> <span class="n">pitch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
 <span class="n">staff</span> <span class="o">=</span> <span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -8059,7 +8077,7 @@ Checking out files: 100% (2651/2651), done.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Unfortunately, no output was produced. We can look at the source of the <code>show()</code> methd by executing <code>show??</code> in a cell. I've done that and am going to execute the same code in more detail below. First the part that should generate a PNG in a temporary file:</p>
+<p>Unfortunately, no output was produced. We can look at the source of the <code>show()</code> method by executing <code>show??</code> in a cell. I've done that and am going to execute the same code in more detail below. First the part that should generate a PNG in a temporary file:</p>
 
 </div>
 </div>
@@ -8069,9 +8087,9 @@ Checking out files: 100% (2651/2651), done.
 <div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">abjad.tools</span> <span class="kn">import</span> <span class="n">systemtools</span>
-<span class="kn">from</span> <span class="nn">abjad.tools</span> <span class="kn">import</span> <span class="n">topleveltools</span>
-<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display_png</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">abjad.tools</span> <span class="k">import</span> <span class="n">systemtools</span>
+<span class="kn">from</span> <span class="nn">abjad.tools</span> <span class="k">import</span> <span class="n">topleveltools</span>
+<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="k">import</span> <span class="n">display_png</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">tempfile</span>
 
@@ -8083,8 +8101,8 @@ Checking out files: 100% (2651/2651), done.
     <span class="s1">'output.png'</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">topleveltools</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span><span class="o">.</span><span class="n">as_png</span><span class="p">(</span><span class="n">temporary_file_path</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">temporary_file_path</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temporary_file_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -8096,7 +8114,10 @@ Checking out files: 100% (2651/2651), done.
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>/var/folders/rf/zdnznzn15_l5q5x64pyd7b7m0000gq/T/tmp4vq93m6l/output.png
 ((), 0.006474018096923828, 0.5328137874603271, False)
@@ -8128,8 +8149,8 @@ Checking out files: 100% (2651/2651), done.
 <div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">topleveltools</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">topleveltools</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -8141,7 +8162,10 @@ Checking out files: 100% (2651/2651), done.
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>PersistenceAgent(client=Staff("c'4 cs'4 d'4 ef'4 e'4 f'4 fs'4 g'4"))
 </pre>
@@ -8167,7 +8191,7 @@ Checking out files: 100% (2651/2651), done.
 <div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">systemtools</span><span class="o">.</span><span class="n">IOManager</span><span class="o">.</span><span class="n">run_lilypond</span><span class="p">(</span><span class="s1">'/var/folders/rf/zdnznzn15_l5q5x64pyd7b7m0000gq/T/tmp4vq93m6l/output.ly'</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="s1">'--png'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">systemtools</span><span class="o">.</span><span class="n">IOManager</span><span class="o">.</span><span class="n">run_lilypond</span><span class="p">(</span><span class="s1">'/var/folders/rf/zdnznzn15_l5q5x64pyd7b7m0000gq/T/tmp4vq93m6l/output.ly'</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="s1">'--png'</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -8179,7 +8203,10 @@ Checking out files: 100% (2651/2651), done.
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[20]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -8263,7 +8290,7 @@ def run_lilypond(ly_path, flags=None, lilypond_path=None):
 <div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">abjad_configuration</span><span class="o">.</span><span class="n">lilypond_log_file_path</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">abjad_configuration</span><span class="o">.</span><span class="n">lilypond_log_file_path</span>
 </pre></div>
 
 </div>
@@ -8275,7 +8302,10 @@ def run_lilypond(ly_path, flags=None, lilypond_path=None):
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[22]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -8293,7 +8323,7 @@ def run_lilypond(ly_path, flags=None, lilypond_path=None):
 <div class="prompt input_prompt">In [23]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span>%%bash
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
 tail <span class="s1">'/Users/gram/.abjad/output/lily.log'</span>
 </pre></div>
 
@@ -8306,7 +8336,10 @@ tail <span class="s1">'/Users/gram/.abjad/output/lily.log'</span>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Preprocessing graphical objects...
 Finding the ideal number of pages...
@@ -8341,7 +8374,7 @@ fatal error: GS exited with status: 5
 <div class="prompt input_prompt">In [25]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span>%%bash
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
 <span class="nb">cd</span> /Applications/LilyPond.app/Contents/Resources/bin
 install_name_tool -change ./bin/../sobin/libgs.8.70.dylib @executable_path/../lib/libgs.8.70.dylib gs
 </pre></div>
@@ -8366,7 +8399,7 @@ install_name_tool -change ./bin/../sobin/libgs.8.70.dylib @executable_path/../li
 <div class="prompt input_prompt">In [28]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -8378,7 +8411,10 @@ install_name_tool -change ./bin/../sobin/libgs.8.70.dylib @executable_path/../li
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
+
 
 
 <div class="output_png output_subarea ">
@@ -8406,7 +8442,7 @@ install_name_tool -change ./bin/../sobin/libgs.8.70.dylib @executable_path/../li
 <div class="prompt input_prompt">In [29]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">staff</span> <span class="o">=</span> <span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span> <span class="n">context_name</span><span class="o">=</span><span class="s1">'TabStaff'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">staff</span> <span class="o">=</span> <span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span> <span class="n">context_name</span><span class="o">=</span><span class="s1">'TabStaff'</span><span class="p">)</span>
 <span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
 
@@ -8419,7 +8455,10 @@ install_name_tool -change ./bin/../sobin/libgs.8.70.dylib @executable_path/../li
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
+
 
 
 <div class="output_png output_subarea ">
