@@ -20,7 +20,7 @@ is eliminated. That candidate is also struck from the voters choices and
 the process is repeated until there is a candidate that has more than
 50% of the vote.
 
-![Marquis de Condorcet](/images/Marquis_de_condorcet_hd.jpg "Marquis de Condorcet"){: style="float:left"}
+![Marquis de Condorcet](/images/Marquis_de_condorcet_hd.jpg "Marquis de Condorcet"){: style="float:right;size:35%;margin:10px"}
 This seems fair on the surface - if someone obviously gets too few votes they
 should be out of the running, and everyone gets their preferences for
 the remaining candidates counted. But back in 1785, the Marquis de
@@ -48,10 +48,8 @@ systems tend to lose the interest of the voters, occasionally being
 re-energized when someone breaks the mold and retargets the extreme
 instead, as George W. Bush did.
 
-[![The
-Gerry-Mander](/images/573px-The_Gerry-Mander_Edit.png "The Gerry-Mander")](/images/The_Gerry-Mander_Edit.png){: style="width:45%;float:left;margin:10px"}
-Another
-problem with plurality systems is the way in which voting district
+[![The Gerry-Mander](/images/573px-The_Gerry-Mander_Edit.png "The Gerry-Mander")](/images/The_Gerry-Mander_Edit.png){: style="width:40%;float:left;margin:50px"}
+Another problem with plurality systems is the way in which voting district
 boundaries are drawn up. A candidate may even win the election while
 losing the popular vote overall, as George Bush did in 2000. Economic
 and other factors often cause areas to have a preference for one party
