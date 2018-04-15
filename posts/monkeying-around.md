@@ -169,22 +169,29 @@ apply Euclid’s method for finding the GCD of the coefficients (which
 will be 1, as our coefficients are coprime, but we are interested in the
 steps anyway):
 
-$$15625 = 15 \times 1024 + 265\\ 1024 = 3 \times 265 + 229
-\\ 265 = 1 \times 229 + 36 \\ 229 = 6 \times 36 + 13 \\ 36 = 2
-\times 13 + 10 \\ 13 = 1 \times 10 + 3 \\ 10 = 3 \times 3 + 1$$
+$$15625 = 15 \times 1024 + 265\\\\
+ 1024 = 3 \times 265 + 229 \\\\
+ 265 = 1 \times 229 + 36 \\\\
+ 229 = 6 \times 36 + 13 \\\\
+ 36 = 2 \times 13 + 10 \\\\
+ 13 = 1 \times 10 + 3 \\\\
+ 10 = 3 \times 3 + 1$$
 
 Note how the coefficients on the left of the right hand side match those
 in the continued fraction:
 
-$$\frac{15625}{1024} = 15 + \frac{265}{1024}\\ = 15 +
-\frac{1}{\frac{1024}{265}}\\ = 15 + \frac{1}{3 +
-\frac{229}{265}}\\ = 15 + \frac{1}{3 +
-\frac{1}{\frac{265}{229}}}\\ = 15 + \frac{1}{3 + \frac{1}{1 +
-\frac{36}{229}}}\\ = 15 + \frac{1}{3 + \frac{1}{1 +
-\frac{1}{\frac{229}{36}}}} \\ = 15 + \frac{1}{3 + \frac{1}{1 +
-\frac{1}{6 + \frac{13}{36}}}} \\ \ldots\\ = 15 + \frac{1}{3 +
-\frac{1}{1 + \frac{1}{6 + \frac{1}{2 + \frac{1}{1 + \frac{1}{3 +
-\frac{1}{3}}}}}}} \\ = \langle 15; 3, 1, 6, 2, 1, 3, 3 \rangle$$
+$$\begin{align}
+\frac{15625}{1024} & = 15 + \frac{265}{1024}\\\\
+                   & = 15 + \frac{1}{\frac{1024}{265}}\\\\
+                   & = 15 + \frac{1}{3 + \frac{229}{265}}\\\\
+                   & = 15 + \frac{1}{3 + \frac{1}{\frac{265}{229}}}\\\\
+                   & = 15 + \frac{1}{3 + \frac{1}{1 + \frac{36}{229}}}\\\\
+                   & = 15 + \frac{1}{3 + \frac{1}{1 + \frac{1}{\frac{229}{36}}}} \\\\
+                   & = 15 + \frac{1}{3 + \frac{1}{1 + \frac{1}{6 + \frac{13}{36}}}} \\\\
+                   & \ldots\\\\
+                   & = 15 + \frac{1}{3 + \frac{1}{1 + \frac{1}{6 + \frac{1}{2 + \frac{1}{1 + \frac{1}{3 + \frac{1}{3}}}}}}} \\\\
+                   & = \langle 15; 3, 1, 6, 2, 1, 3, 3 \rangle
+\end{align}$$
 
 We can invert the steps to get a solution. Starting at the bottom:
 
@@ -193,17 +200,21 @@ $$10 = 3 \times 3 + 1 \Rightarrow 1 = 10 - 3 \times 3$$
 We keep expanding this, working backwards, and substituting the
 equations we have derived above for the remainders:
 
-$$1=10-3\times 3=10-3\times(13-1\times 10)=4\times 10-3\times 13$$
-
-$$1=4\times 10-3\times 13=4\times(36-2\times 13)-3\times 13=4\times 36-11\times 13$$
-
-$$1 = 4 \times 36-11 \times 13 = 4 \times 36-11 \times ( 229-6 \times 36 ) = 70 \times 36-11 \times 229$$
-
-$$1 = 70 \times 36-11 \times 229 = 70 \times ( 265-1 \times 229 )-11 \times 229 = 70 \times 265-81 \times 229$$
-
-$$1 = 70 \times 265-81 \times 229 = 70 \times 265-81 \times ( 1024-3 \times 265 ) = 313 \times 265-81 \times 1024$$
-
-$$1 = 313 \times 265-81 \times 1024 = 313 \times ( 15625-15 \times 1024 )-81 \times 1024 = 313 \times 15625-4776 \times 1024$$
+$$\begin{align}
+1 & = 10-3\times 3 \\\\
+  & = 10-3\times(13-1\times 10) \\\\
+  & = 4\times 10-3\times 13 \\\\
+  & = 4\times(36-2\times 13)-3\times 13 \\\\
+  & = 4\times 36-11\times 13 \\\\
+  & = 4 \times 36-11 \times ( 229-6 \times 36 ) \\\\
+  & = 70 \times 36-11 \times 229 \\\\
+  & = 70 \times ( 265-1 \times 229 )-11 \times 229 \\\\
+  & = 70 \times 265-81 \times 229 \\\\
+  & = 70 \times 265-81 \times ( 1024-3 \times 265 ) \\\\
+  & = 313 \times 265-81 \times 1024 \\\\
+  & = 313 \times ( 15625-15 \times 1024 )-81 \times 1024 \\\\
+  &  = 313 \times 15625-4776 \times 1024
+\end{align}$$
 
 So we have determined that \\(x=-4776\\) and  \\(y=-313\\) is a
 solution of \\(1024x-15625y=1\\). This is all very well but how do we
