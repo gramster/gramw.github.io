@@ -9,6 +9,7 @@ Are you a people manager? Do you enjoy doing 1-1s with your reports? No? Then yo
 1-1s are a valuable and important part of both managing your team and becoming a better manager. You should see them as as much for your benefit as for your reports - arguably more so! Not only are you getting the opportunity to keep your reports on track and on a growth path, but it's a great opportunity to get feedback yourself. Unless you're the kind of manager who thinks managing is all about giving orders and having them carried out, in which case this post isn't for you; go enlist or something.
 
 There are a number of reasons why managers (and employees) don't enjoy 1-1s:
+<!-- TEASER_END -->
 
 * there isn't enough to talk about
 * there is no personal rapport

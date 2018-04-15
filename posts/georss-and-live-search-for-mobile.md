@@ -27,6 +27,7 @@ and overcome limitations I have blogged about in the past:
     We have a better geocoder now on the back end and are more confident
     that you will get the results you want when doing this.
 
+<!-- TEASER_END -->
 Okay, on to GeoRSS. This was my pet feature that I originally built in
 September 2006 and it finally got shipped (and if you say 'about time!'
 then I have the names of the two people who kept trying to kill this to

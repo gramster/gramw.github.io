@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Mobile)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/cat_mobile.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 15 Apr 2018 17:13:36 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GeoRSS and Live Search for Mobile</title><link>https://www.grahamwheeler.com/posts/georss-and-live-search-for-mobile.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;Hopefully by now you all have v3.0 of the Live Search client, and are
+enjoying the new features (web search, weather, and collections). I'd
+like to talk about collections in this post, but first it is worth
+mentioning a couple of changes in this version that are less obvious,
+and overcome limitations I have blogged about in the past:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;we now have Outlook contact integration. From Outlook contacts you
+    can select the "Show on Map" menu option to map a contact. &lt;a href="http://geekraver.spaces.live.com/blog/cns!3690236EA2D48605!203.entry"&gt;Google
+    Maps contacts integration is still
+    broken&lt;/a&gt;,
+    but we can't let that hold us back any longer; we gave them nearly a
+    year as well as explicit instructions on what their bug was; if they
+    can't get their house in order with all that then too bad for them.
+    If you do want to use both GMM and Live Search, then install GMM
+    last. Their bug will cause problems with any other software that
+    installs menu extensions that is installed after them; if the other
+    apps are well-behaved then you can install them before GMM and you
+    should be okay.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://geekraver.spaces.live.com/blog/cns!3690236EA2D48605!181.entry"&gt;we have put back the ability to enter addresses in the search
+    box&lt;/a&gt;.
+    We have a better geocoder now on the back end and are more confident
+    that you will get the results you want when doing this.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/georss-and-live-search-for-mobile.html"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/georss-and-live-search-for-mobile.html</guid><pubDate>Fri, 06 Jun 2008 12:26:00 GMT</pubDate></item><item><title>Last Day on Live Search for Mobile</title><link>https://www.grahamwheeler.com/posts/last-day-on-live-search-for-mobile.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;Today is my last official day on the Live Search for Mobile team. I am
+moving over to a new team working on some incubating new mobile
+initiatives in emerging markets (as a South African ex-pat I can relate
+to this). It has been a fun ride and it is hard to let go of the Windows
+Mobile client which I think of as 'my baby' (with co-parent Ashley).
+There is still so much to do. However, some of the things that I have
+been trying to get shipped since September 2006 are finally going out
+the door in the upcoming release so I can feel that I have achieved at
+least some of what I set out to do.&lt;/p&gt;
+&lt;p&gt;I'll continue blogging here of course, and I expect to blog quite a lot
+about the new release once it is out.&lt;/p&gt;
+&lt;p&gt;We started the WM client team in July 2006, after the MOJAX (mobile
+AJAX) project got killed. That left the core group - the Barrel of
+Monkeys - without a home. There were five of us - Steve (PM), Ashley and
+I (dev), John (test) and Danny (architect). Rather than each go off to
+different jobs we decided to try stick together, and managed to find a
+home in local search. We had three months to get the v1.0 product out,
+and it was a hit! We got an awful lot of fan mail from that (and if you
+were a sender, thanks! We've always appreciated the love :-) ).
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/last-day-on-live-search-for-mobile.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/last-day-on-live-search-for-mobile.html</guid><pubDate>Sun, 20 Apr 2008 12:42:00 GMT</pubDate></item><item><title>Why There Are no ARCO Gas Prices</title><link>https://www.grahamwheeler.com/posts/why-there-are-no-arco-gas-prices.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;We get gas price data from a 3rd party provider. They in turn get the
+data from credit card companies. ARCO does not accept credit cards.&lt;/p&gt;
+&lt;p&gt;This is a great example of where user-contributed data would be
+valuable, and I hope that one day we will be able to extend the feature
+to include that.&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/why-there-are-no-arco-gas-prices.html</guid><pubDate>Sat, 12 Apr 2008 12:29:00 GMT</pubDate></item><item><title>We're Hiring!</title><link>https://www.grahamwheeler.com/posts/were-hiring.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;My team is hiring. The job descriptions are below. PM me if you're
+interested:
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/were-hiring.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/were-hiring.html</guid><pubDate>Thu, 10 Apr 2008 12:30:00 GMT</pubDate></item><item><title>Channel 10 Video coming soon!</title><link>https://www.grahamwheeler.com/posts/channel-10-video-coming-soon.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;p&gt;Last week the &lt;a href="http://on10.net/"&gt;Channel 10&lt;/a&gt; team visited us and shot
+some video of us demoing the Live Search for Mobile client, including
+some of the features of our upcoming release (real soon now!) I'm not
+sure when the edited video will be available - I guess after the
+release - but will update this posting with a link when it is.&lt;/p&gt;</description><guid>https://www.grahamwheeler.com/posts/channel-10-video-coming-soon.html</guid><pubDate>Tue, 25 Mar 2008 12:31:00 GMT</pubDate></item><item><title>Live Search for Mobile Saves the Day</title><link>https://www.grahamwheeler.com/posts/live-search-for-mobile-saves-the-day.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;p&gt;I love &lt;a href="http://blogs.msdn.com/peterlau/archive/2008/03/24/live-search-for-windows-mobile-saves-the-day.aspx"&gt;stories like
+this...&lt;/a&gt;&lt;/p&gt;</description><guid>https://www.grahamwheeler.com/posts/live-search-for-mobile-saves-the-day.html</guid><pubDate>Wed, 05 Mar 2008 13:31:00 GMT</pubDate></item><item><title>Connectivity problems with Live Search on Blackberry</title><link>https://www.grahamwheeler.com/posts/connectivity-problems-with-live-search-on-blackberry.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;I just wanted to share this information that one of our Blackberry devs,
+Didier, sent to a customer who was having problems as it may be useful
+to others:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Since Live Search for BlackBerry is distributed as an independent
+third party application, it works only if such applications are
+allowed to do network requests, which may depend on both your carrier
+network policies and your subscription type.&lt;/p&gt;
+&lt;p&gt;We support three connection modes in Live Search for BlackBerry:
+Direct HTTP, BES/MDS and WAP Gateway, but for CDMA devices only Direct
+HTTP and BES/MDS are possible (WAP is specific to GPRS/Edge carriers).
+BES/MDS is for corporate devices administrated through the company’s
+BlackBerry Enterprise Server, Direct HTTP is for individual
+subscribers. You can try both modes if you are unsure of your
+configuration (in Options &amp;gt; Enter your network configuration
+parameters).&lt;/p&gt;
+&lt;p&gt;But some BlackBerry data plans may be limited to Email &amp;amp; Web browsing
+and Live Search will not work in this case.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/connectivity-problems-with-live-search-on-blackberry.html</guid><pubDate>Sun, 24 Feb 2008 13:33:00 GMT</pubDate></item><item><title>Why There Is No Integration With Outlook Mobile Contacts</title><link>https://www.grahamwheeler.com/posts/why-there-is-no-integration-with-outlook-mobile-contacts.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;We often get asked why we don't have a menu item in the Contacts app on
+the phone to map a contact, but Google does. The comments can sometimes
+be quite disparaging (like what's wrong with you people in Redmond,
+anyway?). So here is the tale, told by an idiot, without much sound or
+fury.&lt;/p&gt;
+&lt;p&gt;Early in 2006 I wrote the code to hook into Contacts. It worked pretty
+well, and we planned to ship this in our v2 release in July '07. Shortly
+before our release date, Google released an update to their Windows
+Mobile map app, and they had the feature. So we immediately decided to
+test to make sure we played nicely together.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/why-there-is-no-integration-with-outlook-mobile-contacts.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/why-there-is-no-integration-with-outlook-mobile-contacts.html</guid><pubDate>Fri, 01 Feb 2008 13:34:00 GMT</pubDate></item><item><title>Why Can't I Enter An Address In The Search Box</title><link>https://www.grahamwheeler.com/posts/why-cant-i-enter-an-address-in-the-search-box.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;A common source of confusion for our users is the distinction we make
+between 'what' and 'where'. We generally search for 'what' (which is the
+text you can enter on the main form), centering the results on the
+'where' (which is the location shown just below). If you want to change
+the location, &lt;em&gt;or if you want to search for an address&lt;/em&gt;, you need to
+click on 'Choose a new location'; you can then enter the address on the
+Location screen and click 'Find' (note: the screen shots shown below
+come from a test version of the app we run on the desktop; the menus at
+the top will be on the bottom on your phone, accessible via the two
+softkeys; I just used the desktop version here as it was quicker for
+me):
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/why-cant-i-enter-an-address-in-the-search-box.html"&gt;Read more…&lt;/a&gt; (4 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/why-cant-i-enter-an-address-in-the-search-box.html</guid><pubDate>Sat, 19 Jan 2008 13:36:00 GMT</pubDate></item><item><title>Help! My Keyboard Doesn't Work!</title><link>https://www.grahamwheeler.com/posts/help-my-keyboard-doesnt-work.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;We get a lot of people reporting problems with their hardware keyboards
+on phones like the VX6800. When they press the letter keys instead of
+letters they get numbers and symbols.&lt;/p&gt;
+&lt;p&gt;Unfortunately this is a problem with the IME (input method editor) in
+the phone. IMEs are often customized by the phone OEM or the mobile
+operator to add functionality like predictive text input. For a number
+of phones, an IME was added that breaks text input from the keyboard
+with all .Net Compact Framework apps. In many cases we're the only such
+app on the phone, so users understandably think its a bug in our
+program. We wish it was - in that case we could fix it - but there
+really isn't anything we can do other than complain.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/help-my-keyboard-doesnt-work.html"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/help-my-keyboard-doesnt-work.html</guid><pubDate>Sat, 12 Jan 2008 13:39:00 GMT</pubDate></item></channel></rss>

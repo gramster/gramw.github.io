@@ -19,7 +19,7 @@ decided to take his share, and divided the coconuts equally into five.
 There was one left over which he gave to the monkey, then he took his
 share and hid them away, before going back to
 sleep.[![image](/images/image_thumb6.png "image")](/images/image6.png){: style="float:right;size:35%;margin:10px"}
-
+<!-- TEASER_END -->
 
 A little later the next man woke up, and had the same fear. He too
 divided the coconuts into five, and had one left over that he gave to

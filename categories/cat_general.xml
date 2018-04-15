@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about General)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/cat_general.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 15 Apr 2018 17:13:36 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Blogging again</title><link>https://www.grahamwheeler.com/posts/blogagain.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;Well, it's been quite a while since I last blogged. My Zite project is not dead; it's actually up and 
+running well as a personal aggregator but not ready for multi-user access, and I'm not sure when it
+might be. But I've been feeling a bit of an itch to start blogging again so here goes.&lt;/p&gt;
+&lt;p&gt;I have some material already lined up: I've been teaching an introductory data science bootcamp at
+work and thought the notebooks from that could be useful blog posts in and of themselves. So I'll
+start slowly publishing those while I write some new material. I'm also going to expand the scope 
+of this blog; I'll still cover some tech topics but I',m going to fold in the content from my
+dormant math blog and retire it; this may inspire me to do some math blogging again. And I'll be 
+throwing in some stuff on management and psychology too. So this will be a mishmash living up to 
+the random forest name. I'll use categories to make it more accessible for those only interested
+in specific topics.&lt;/p&gt;
+&lt;p&gt;More soon!&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/blogagain.html</guid><pubDate>Thu, 12 Apr 2018 04:00:00 GMT</pubDate></item><item><title>Monkeyin’ Around</title><link>https://www.grahamwheeler.com/posts/monkeyin-around.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;p&gt;My partner in crime on Live Search for Mobile, Ashley, has started a
+coding blog, which is much more interesting than mine. He's currently
+very into functional programming but with a C# bent - basically a C#
+schemer - and there's some cool stuff he's been playing around with in
+.Net 2.0 and 3.0. &lt;a href="http://blogs.msdn.com/b/ashleyf/"&gt;Check it out!&lt;/a&gt;&lt;/p&gt;</description><guid>https://www.grahamwheeler.com/posts/monkeyin-around.html</guid><pubDate>Thu, 19 Apr 2007 12:20:00 GMT</pubDate></item><item><title>Functional Synchronicity</title><link>https://www.grahamwheeler.com/posts/functional-synchronicity.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;There's been some weird synchronicity going on recently. It started a
+few weeks back at work. Earlier this year I wrote a compiler for
+Javascript, and this resulted in a conversation with a workmate about
+virtual machines. I mentioned the SECD machine and &lt;a href="http://www.amazon.com/exec/obidos/ASIN/0133315797/wishwatcher-20/"&gt;Henderson's seminal
+book&lt;/a&gt;
+from 1980 on functional programming. My workmate was interested enough
+to order a copy, and we've had a number of conversations about
+functional programming (which I haven't done in 20 years). At some point
+in this process I ended up getting the &lt;a href="http://labs.google.com/papers/mapreduce-osdi04.pdf#search=%22map%20reduce%22"&gt;Google paper on
+map/reduce&lt;/a&gt;,
+and the paper on &lt;a href="http://research.microsoft.com/~simonpj/tmp/history.pdf#search=%22history%20of%20Haskell%22"&gt;a history of
+Haskell&lt;/a&gt;.
+A few days later &lt;a href="http://www.joelonsoftware.com/items/2006/08/01.html"&gt;Joel wrote about map/reduce and
+Javascript&lt;/a&gt; on his
+blog. Then I ended up almost inadvertently getting a copy of Danny
+Hillis' &lt;a href="http://www.amazon.com/exec/obidos/ASIN/0262580977/wishwatcher-20/"&gt;Connection
+Machine&lt;/a&gt;
+book.  Today I read &lt;a href="http://www.ericsink.com/entries/LarryO.html"&gt;Eric Sink's posting about multicore CPUs and
+Erlang&lt;/a&gt;, in which he also
+mentioned &lt;a href="http://knowing.net"&gt;Larry O'Briens blog&lt;/a&gt; - so I head over
+there and the &lt;a href="http://www.knowing.net/PermaLink,guid,beab1a93-151b-44b1-9d5e-a61f077ec036.aspx"&gt;third posting
+down&lt;/a&gt;
+discusses a problem very similar to the deadlock issue I just posted
+about.&lt;/p&gt;
+&lt;p&gt;Who knows what it all means? Maybe its time to learn
+&lt;a href="http://research.microsoft.com/fsharp/fsharp.aspx"&gt;F#...&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/functional-synchronicity.html</guid><pubDate>Wed, 23 Aug 2006 10:51:00 GMT</pubDate></item><item><title>This is s-o-o-o true!</title><link>https://www.grahamwheeler.com/posts/this-is-s-o-o-o-true.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;Check out this &lt;a href="http://www.youtube.com/watch?v=VAGr3mVVUwE&amp;amp;search=microsoft%20ipod"&gt;spoof
+video&lt;/a&gt;
+about if Microsoft designed the iPod packaging.&lt;/p&gt;
+&lt;p&gt;It is very funny, particularly as it is so spot on! Probably because it
+comes from Microsoft marketing people.  Even though I personally
+wouldn't buy an iPod (I have an 8Gb Zen Micro, and can't wait for the
+12Gb version - I want small on the outside but big on the inside).&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/this-is-s-o-o-o-true.html</guid><pubDate>Tue, 28 Feb 2006 11:55:00 GMT</pubDate></item><item><title>Digital Reflection</title><link>https://www.grahamwheeler.com/posts/digital-reflection.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been going through old CD-R discs of mine with a view to reburning
+them on DVD-R to safe some space and generally clean them up. It's
+amazing what I'm finding - things that I had totally forgotten having
+written. For example, I found a SNMPv1/v2 MIB compiler and browser that
+I wrote back in 1995. Until I saw it I had no recollection that I even
+did that! After some reflection it all came back. In May 1995 I started
+Open Mind Solutions with two friends from university days. Our plan was
+to do work for hire to finance the development of a software product. At
+that stage I had quite a bit of experience with SNMP, having recently
+implemented RMON while working for Mosaic Software. It seemed that there
+was a lack of good network management software, and what was available
+was hugely expensive (HP OpenView pretty much had the market). We felt
+that we could build a worthy competitor to OpenView based on FreeBSD.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/digital-reflection.html"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/digital-reflection.html</guid><pubDate>Fri, 11 Feb 2005 11:57:00 GMT</pubDate></item></channel></rss>

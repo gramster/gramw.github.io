@@ -74,6 +74,8 @@
             </time></section></header><section class="post-content"><div>
 <p>My initial experience with clustering was somewhat disappointing. Its clear I need to do some tuning of the approach. The first thing I did was to rerun the article download process, but instead of just keeping the top ten terms and dropping their TF-IDF values, I kept them all. I think there are better ways to select the terms to use for Jacard similarity.</p>
 <p>For starters, using a fixed number of terms could lead to keeping a wildly different range of TF-IDF values for different articles. It makes more sense to have some threshold value and keep all terms that exceed the threshold. That may mean more than ten terms for some articles and less for others.</p>
+<!-- TEASER_END -->
+
 <p>Secondly, there is not much point in keeping terms that only appear in a single article. That term may be useful if we search articles based on terms, but it will not help much in computing Jacard distances. Some caution is needed here - dropping these terms does reduce the size of the term set and thus will reduce the union with any other article's term set, thus boosting the similarity that the first article has with all other articles. But as this gets boosted across the board, I don't expect it to be much of an issue.</p>
 <p>Finally, it may not be a bad idea to create some 'fake' term sets that can act as cluster centroids. I.e. for some topic, create a term set of terms that are particularly relevant and if possible unique to that topic. Using these as centroids we could simply assign each article to the closest centroid which is a straightforward task. Furthermore, we don't have to compute the $n ^ 2$ matrix of distances; if we have $m$ centroids we need only compute $n \times m$ distances, and if $m$ is fixed we essentially have a linear scaling approach.</p>
 <p>In order to do this, it is a reasonable idea to take the full set of terms that occur at least $k$ times for some chosen value $k$, assign each of these terms one or more topics, and then pivot that so each topic has a set of terms, which becomes a pseudo-article and the centroid for that topic.</p>
@@ -302,7 +304,7 @@
 <span class="kn">from</span> <span class="nn">HTMLParser</span> <span class="kn">import</span> <span class="n">HTMLParser</span>
 
 <span class="k">class</span> <span class="nc">MLStripper</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fed</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
@@ -356,7 +358,7 @@
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">article</span> <span class="o">=</span> <span class="n">title</span> <span class="o">+</span> <span class="s1">'. '</span> <span class="o">+</span> <span class="n">strip_tags</span><span class="p">(</span><span class="n">article</span><span class="p">)</span>
     <span class="c1"># replace non-ASCII chars with space. We keep '-', '.', ',', '\''.</span>
-    <span class="n">article</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r'[^A-Za-z0-9\.,\-</span><span class="se">\'</span><span class="s1">]+'</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
+    <span class="n">article</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[^A-Za-z0-9\.,\-</span><span class="se">\'</span><span class="s1">]+'</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
     <span class="c1"># replace 's with space and remove other single quotes.</span>
     <span class="c1"># We do want to preserve *n't and maybe others so switch those</span>
     <span class="c1"># to " and back before/after</span>
@@ -389,7 +391,7 @@
         <span class="n">article</span> <span class="o">+=</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
 
     <span class="c1"># replace non-ASCII chars with space. We keep '-' and underscore.</span>
-    <span class="n">article</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r'[^A-Za-z0-9\-_</span><span class="se">\'</span><span class="s1">]+'</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
+    <span class="n">article</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[^A-Za-z0-9\-_</span><span class="se">\'</span><span class="s1">]+'</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
     <span class="c1"># We could use a Counter here but the would need to post-process </span>
     <span class="c1"># the keys to remove the bogus ones and correct capitalization.</span>
     <span class="c1"># Consider for later.</span>
@@ -654,7 +656,24 @@
 
 <p>gives some for religion. I may need more than 200 clusters but this is a good start. More to come!</p>
 </div>
-    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+    </section><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>

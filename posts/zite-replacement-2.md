@@ -8,6 +8,7 @@
 In the [previous post](http://www.grahamwheeler.com/posts/zite-replacement-1.html) I gave an overview of what needs to be built for our [Zite](http://zite.com/) replacement. In this post we will look at how to load an RSS feed and generate key terms for each article. In order to fetch the feed we will make use of the [feedparser](https://pypi.python.org/pypi/feedparser) package, so make sure to install that first with pip, conda, or whatever you use.
 
 Another thing we're going to want is to strip HTML tags from the articles. I did a Google for "HTML element stripper Python" and found [this StackOverflow post](http://stackoverflow.com/questions/753052/strip-html-from-strings-in-python) with the code below that works great:
+<!-- TEASER_END -->
 
 ```python
 #!python

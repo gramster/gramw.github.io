@@ -6,7 +6,55 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
+  <loc>https://www.grahamwheeler.com/authors/geekraver.xml</loc>
+  <lastmod>2018-04-15T16:57:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://www.grahamwheeler.com/authors/graham-wheeler.xml</loc>
+  <lastmod>2018-04-15T17:13:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://www.grahamwheeler.com/categories/cat_computers.xml</loc>
+  <lastmod>2018-04-15T17:13:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://www.grahamwheeler.com/categories/cat_general.xml</loc>
+  <lastmod>2018-04-15T17:13:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://www.grahamwheeler.com/categories/cat_management.xml</loc>
+  <lastmod>2018-04-15T17:13:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://www.grahamwheeler.com/categories/cat_math.xml</loc>
+  <lastmod>2018-04-15T17:13:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://www.grahamwheeler.com/categories/cat_mobile.xml</loc>
+  <lastmod>2018-04-15T17:13:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://www.grahamwheeler.com/categories/cat_productivity.xml</loc>
+  <lastmod>2018-04-15T17:13:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://www.grahamwheeler.com/categories/cat_programming.xml</loc>
+  <lastmod>2018-04-15T17:13:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://www.grahamwheeler.com/categories/mathjax.xml</loc>
+  <lastmod>2018-04-15T17:13:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://www.grahamwheeler.com/galleries/rss.xml</loc>
+  <lastmod>2018-04-15T17:00:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://www.grahamwheeler.com/rss.xml</loc>
+  <lastmod>2018-04-15T17:13:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://www.grahamwheeler.com/sitemap.xml</loc>
-  <lastmod>2018-04-15T05:53:00Z</lastmod>
+  <lastmod>2018-04-15T17:13:00Z</lastmod>
  </sitemap>
 </sitemapindex>

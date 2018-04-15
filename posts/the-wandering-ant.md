@@ -14,6 +14,7 @@ following rules:
     a white cell it turns right 90 degrees
 -   in each case the cell it just left changes color to its opposite
     (white to black or vice-versa)
+<!-- TEASER_END -->
 
 [![image](/images/image_thumb2.png "image")](/images/image2.png){: style="float:right;size:35%;margin:10px"}
 

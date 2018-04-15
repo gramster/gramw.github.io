@@ -18,6 +18,7 @@ The section of the book where Fermat wrote his comment was on finding
 *Pythagorean triples*: square numbers whose sums also form squares. Such
 numbers can be the sides of Pythagorean (right-angled) triangles, the
 most well know being 3-4-5.
+<!-- TEASER_END -->
 
 The *Arithmetica* was a book of computational methods rather than
 theoretical mathematics. In modern terms we would call it a book of

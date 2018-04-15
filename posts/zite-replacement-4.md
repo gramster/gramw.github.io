@@ -7,6 +7,7 @@
 
 
 Following my [last post](http://www.grahamwheeler.com/posts/zite-replacement-3.html), I started gathering URLs of feeds to use for sample data. First I scraped the links that I had saved in Pocket (a scarily large number). It didn't seem like Pocket had an easy way to export this, so I loaded up Pocket in Chrome, scrolled and scrolled and scrolled until I could scroll no more, then saved the resulting web page once it was done loading. It was pretty easy to then scrape that to get the links. After sorting and uniq-ing those, and running them through [feedfinder](http://www.aaronsw.com/2002/feedfinder/), I had somewhere north of 1000 feeds. However, these were very skewed to my interests and I wanted diversity so I pressed on and scraped a bunch of blog rolls and other link collections covering many other areas. In the end I got about 2,500 feed URLs to start with, in a file named 'feeds.txt'.
+<!-- TEASER_END -->
 
 At that point I ran the code below to fetch and categorize the articles.
 

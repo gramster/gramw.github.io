@@ -8,6 +8,7 @@
 Since [yesterdays post on term extraction](http://www.grahamwheeler.com/posts/zite-replacement-2.html), I've made a few tweaks. In particular I only adjust capitalization on the first words of sentences, I'm keeping numbers and hyphenation, and if there are consecutive capitalized words I turn them into single terms.
 
 For example, the terms for the Donald Trump on vaccines article have changed from:
+<!-- TEASER_END -->
 
     vaccines
     Donald

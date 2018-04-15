@@ -6,6 +6,7 @@
 
 My team is hiring. The job descriptions are below. PM me if you're
 interested:
+<!-- TEASER_END -->
 
 Windows Live Mobile Search team is focused on delivering outstanding
 search and local navigation experience on mobile devices.  Our goal is

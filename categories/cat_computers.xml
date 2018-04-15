@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Computers)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/cat_computers.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 15 Apr 2018 17:13:36 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Fixing Grub after installing Windows 7</title><link>https://www.grahamwheeler.com/posts/fixing-grub-after-installing-windows-7.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;I have an MSI Wind on which I run both Windows 7 and Ubuntu. I rarely
+use the latter but I like to keep it around and with a 320GB hard drive
+its affordable. I have used both the Windows BCD loader and GRUB as my
+bootloader at various times (and for those using BCD I highly recommend
+&lt;a href="http://neosmart.net/dl.php?id=1"&gt;EasyBCD&lt;/a&gt; as the way to configure it).
+Most recently I've been using GRUB.&lt;/p&gt;
+&lt;p&gt;Yesterday I installed Windows 7 RC and my boot sector got clobbered by
+BCD. I had a bit of a had time getting things working again. I first
+tried using EasyBCD but this time when trying to boot Ubuntu I ended up
+at a GRUB prompt, and I could not access my Ubuntu partition (more
+precisely, while "root (hd0,2)" worked, "kernel /vmlinuz" threw errrors
+and I could not boot).
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/fixing-grub-after-installing-windows-7.html"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/fixing-grub-after-installing-windows-7.html</guid><pubDate>Sat, 16 May 2009 12:25:00 GMT</pubDate></item><item><title>The Windows XP "Upgrade"</title><link>https://www.grahamwheeler.com/posts/the-windows-xp-upgrade.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;I have had all the PCs in our house on Vista since Vista RTMed. This
+includes my kids computers, and I like the Vista parental controls
+(although I wish they were more comprehensive, combining not only
+allowed hours of use but quotas as well). I recently wanted to run my
+old copy of the game Creatures, and could not get it to install on
+Vista. This was sufficiently frustrating that I decided to switch one PC
+back to XP. With all the stories in the blogosphere of people
+"upgrading" to XP I thought it would be an interesting contrast to go
+back.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/the-windows-xp-upgrade.html"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/the-windows-xp-upgrade.html</guid><pubDate>Tue, 25 Mar 2008 12:32:00 GMT</pubDate></item><item><title>Webkinz Are Evil</title><link>https://www.grahamwheeler.com/posts/webkinz-are-evil.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;My daughter bought a Webkinz today. These are cheap stuffed animals that
+sell at a premium because they have a 'secret code' that allow you to
+access the Webkinz website and play games, etc. So of course she wanted
+me to set her up to access the site (her PC was locked down to only
+allow access to PBS Kids).&lt;/p&gt;
+&lt;p&gt;We go to the site, sign her up, and then sign in. This launches a new
+window running an Adobe Flash app. The URL is not even tied to a domain,
+but uses a numeric IP address. After watching it flash 'Loading' for a
+while, we get a picture of a green field - and nothing happens.
+Meanwhile my wife starts complaining from upstairs that the network has
+slowed to a total crawl; not only can't she browse but even the LAN is
+pretty hosed, with Outlook frozen up while trying to send an e-mail to
+the local Exchange server in the next room.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/webkinz-are-evil.html"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/webkinz-are-evil.html</guid><pubDate>Sat, 02 Feb 2008 13:34:00 GMT</pubDate></item><item><title>My Leopard Has Lost Its Spots</title><link>https://www.grahamwheeler.com/posts/my-leopard-has-lost-its-spots.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;I run a mostly Windows-only setup at home these days. My home setup
+consists of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;an SBS2003 server mostly for Exchange mail, which also runs FreeBSD
+    in a virtual machine to keep some older services running on Apache
+    (primarily the redirector from geekraver.com to Live Spaces and my
+    subversion repository).&lt;/li&gt;
+&lt;li&gt;a Windows Home Server, which has taken over the file server
+    functionality from SBS2003, as I like its more flexible file
+    replication&lt;/li&gt;
+&lt;li&gt;a media center PC running Vista Ultimate&lt;/li&gt;
+&lt;li&gt;a kitchen internet appliance running Windows CE&lt;/li&gt;
+&lt;li&gt;Vista Ultimate PCs for each of my kids (and a laptop for the wife)&lt;/li&gt;
+&lt;li&gt;a desktop PC and a Tablet PC for me with Vista Ultimate&lt;/li&gt;
+&lt;li&gt;an oldish Mac Mini G4 which was running Leopard&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/my-leopard-has-lost-its-spots.html"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/my-leopard-has-lost-its-spots.html</guid><pubDate>Wed, 16 Jan 2008 13:37:00 GMT</pubDate></item></channel></rss>

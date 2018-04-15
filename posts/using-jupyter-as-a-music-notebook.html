@@ -80,7 +80,8 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I recently started playing guitar again after a long absence and wanted to start making some notes in a digital form. Unfortunately, I didn't find any good tools. There is TeX of course, which can do anything, but I was hoping for something a bit more WYSIWYGy. There are some very good tools available for musical scores (MuseScore, Frescobaldi), but I want something that is more like a traditional notebook with lots of notes interspersed with occasional musical notation (in both traditional and tablature forms).</p>
-<p>So an obvious potential candidate is Jupyter (nee IPython), but it has no support for musical notation out of the box. But it is doable and in this post I'll walk through how I got it to work on my Mac. This is also my first attempt at using a Jupyter notebook as my blog post in Nikola so I'm kiling two birds with one stone.</p>
+<p>So an obvious potential candidate is Jupyter (nee IPython), but it has no support for musical notation out of the box. But it is doable and in this post I'll walk through how I got it to work on my Mac. This is also my first attempt at using a Jupyter notebook as my blog post in Nikola so I'm kiling two birds with one stone.
+<!-- TEASER_END --></p>
 <p>I want something that is fairly easy to write the music in. MusicXML isn't too bad, except XML. What little I've seen of Liyponds markup looked pretty unfriendly for the simple use cases I have. A few days ago I stumbled across a Python library called abjad which looked just the ticket. As I write this I have it working for music on the staff but not tablature (I'm not sure it supports that) but I hope by the end of this post I'll have that figured out too!</p>
 <p>Abjad relies on Lilypond, so first that has to be installed. It can be downloaded from <a href="http://lilypond.org/macos-x.html">http://lilypond.org/macos-x.html</a>, and then the tarball needs to be uncompressed and the Lilypond.app folder dragged to /Applications. You need to follow the instructions at that link to set up a command line version too. I created a file /usr/local/bin/lilypond for that; my Homebrew install uses that folder so it is already in my path.</p>
 <p>Next we need to install Abjad. You should ideally do this in a virtual environment. I use Anaconda and already have one set up, so can do the installation as follows; you may need to prefix this with <code>sudo</code> depending on your setup.</p>
@@ -913,7 +914,24 @@ install_name_tool -change ./bin/../sobin/libgs.8.70.dylib @executable_path/../li
     </div>
   </div>
 
-    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+    </section><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>

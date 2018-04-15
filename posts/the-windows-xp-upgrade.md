@@ -13,6 +13,7 @@ Vista. This was sufficiently frustrating that I decided to switch one PC
 back to XP. With all the stories in the blogosphere of people
 "upgrading" to XP I thought it would be an interesting contrast to go
 back.
+<!-- TEASER_END -->
 
 So on Friday I did this. It's now Sunday night and I'm back on Vista! I
 can't agree with those people who think that Vista is inferior to XP. XP

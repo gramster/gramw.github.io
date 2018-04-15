@@ -78,7 +78,9 @@ Just to recap, cur">
 <ul>
 <li>I have a bunch of 'category exemplars', which are sets of key terms associated with a category. These are the things which currently require some manual work;</li>
 <li>for each article, I extract the plain text, normalize capitalization, remove <a href="https://en.wikipedia.org/wiki/Stop_words">stop words</a>, then use <a href="https://en.wikipedia.org/wiki/Tf-idf">tf-idf</a> to extract the set of most significant terms (I'm not yet doing <a href="https://en.wikipedia.org/wiki/Stemming">stemming</a> although I'll probably start);</li>
-<li>I then use a <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">distance metric</a> from the exemplars to assign category scores to the articles. Provided the score exceeds a threshold the article will be considered to be in the category.</li>
+<li>I then use a <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">distance metric</a> from the exemplars to assign category scores to the articles. Provided the score exceeds a threshold the article will be considered to be in the category.
+<!-- TEASER_END -->
+</li>
 </ul>
 <p>The manual work right now comes in when I notice <a href="https://en.wikipedia.org/wiki/False_positives_and_false_negatives">false positives and negatives</a>. My basic web app has the ability to show me all the common terms that led to a categorization and/or missed terms leading to a missed categorization. I can use these to tweak the category exemplars to improve classification. Its not ideal; I would far prefer to make this all be automated. The plan is to make use of Wikipedia to help with generating category exemplars. I don't think that this will solve the problem entirely but I am hoping to add one level of abstraction here to potentially reduce the amount of tweaking required.</p>
 <p>My initial plan is:</p>
@@ -96,7 +98,24 @@ Just to recap, cur">
 <p>This may seem like a lot of work to come almost full circle but the hope is that these second level exemplars will be more stable and require less tweaking. As for generating the second-order exemplars, I can make use of all the articles I have categorized so far as a training set for supervized learning.</p>
 <p>The next problem is dealing wth the Wikipedia dump. Uncompressed it is close to 60GB. The first task is to split it up into separate articles, which I pan to do with <a href="https://github.com/attardi/wikiextractor">WikiExtractor</a>. After that I may try use my little 4-node ODroid cluster to do the work, which will be a nice intro to my next couple of posts about that! </p>
 </div>
-    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+    </section><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>

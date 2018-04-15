@@ -73,12 +73,13 @@
                 2015-09-19 16:18
             </time></section></header><section class="post-content"><div>
 <p>In the <a href="http://www.grahamwheeler.com/posts/zite-replacement-1.html">previous post</a> I gave an overview of what needs to be built for our <a href="http://zite.com/">Zite</a> replacement. In this post we will look at how to load an RSS feed and generate key terms for each article. In order to fetch the feed we will make use of the <a href="https://pypi.python.org/pypi/feedparser">feedparser</a> package, so make sure to install that first with pip, conda, or whatever you use.</p>
-<p>Another thing we're going to want is to strip HTML tags from the articles. I did a Google for "HTML element stripper Python" and found <a href="http://stackoverflow.com/questions/753052/strip-html-from-strings-in-python">this StackOverflow post</a> with the code below that works great:</p>
+<p>Another thing we're going to want is to strip HTML tags from the articles. I did a Google for "HTML element stripper Python" and found <a href="http://stackoverflow.com/questions/753052/strip-html-from-strings-in-python">this StackOverflow post</a> with the code below that works great:
+<!-- TEASER_END --></p>
 <pre class="code literal-block"><span></span><span class="ch">#!python</span>
 <span class="kn">from</span> <span class="nn">HTMLParser</span> <span class="kn">import</span> <span class="n">HTMLParser</span>
 
 <span class="k">class</span> <span class="nc">MLStripper</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fed</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
@@ -137,7 +138,7 @@
     <span class="c1"># Remove the HTML element tags</span>
     <span class="n">article</span> <span class="o">=</span> <span class="n">strip_tags</span><span class="p">(</span><span class="n">article</span><span class="p">)</span>
     <span class="c1"># replace non-ASCII chars with space</span>
-    <span class="n">article</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r'[^A-Za-z\-]+'</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
+    <span class="n">article</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[^A-Za-z\-]+'</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
     <span class="c1"># We could use a Counter here but the would need to post-process the keys </span>
     <span class="c1"># to remove the bogus ones and correct capitalization. Consider for later.</span>
     <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">article</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">):</span>
@@ -429,7 +430,24 @@ appointment
 experiments
 </pre>
 </div>
-    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+    </section><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>

@@ -12,6 +12,7 @@ is not the concept of “nothing” that was missing, but rather the use of
 a zero in other places when representing or recording numbers. For
 example, in the number 101, zero is used as a separator, and it is this
 concept that was lacking in early number systems.
+<!-- TEASER_END -->
 
 [![Medieval tallies](/images//image_thumb10.png "Medieval tallies")](/images/image10.png){: style="float:right;size:35%;margin:10px"}
 

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about mathjax)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/mathjax.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 15 Apr 2018 17:13:36 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>A Christmas Carroll</title><link>https://www.grahamwheeler.com/posts/a-christmas-carroll.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;On Christmas day, 1877, Lewis Carroll, author of the Alice books,
+entertained two bored young girls by inventing a new game that he called
+Word Links: given two words, change one word to the other by changing a
+single letter at a time with the intermediate steps all being valid
+words themselves. For example, to change "cold" to "warm", one can use
+the steps "cord", "card", "ward". Carroll later popularised this form of
+puzzle in a series of articles in Vanity Fair magazine, changing the
+name to Doublets - from the "double, double, toil and trouble" witches'
+incantation in Shakespeare's Macbeth.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/a-christmas-carroll.html"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/a-christmas-carroll.html</guid><pubDate>Wed, 30 Mar 2011 05:11:00 GMT</pubDate></item><item><title>The Gym Locker Paradox</title><link>https://www.grahamwheeler.com/posts/the-gym-locker-paradox.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;It happens so often - you go to your section of the gym change room, and
+there is just one other person there, and they are using the locker next
+to yours and blocking the way. I noticed this a long time ago, and
+noticed that others noticed it too, referring to Murphy’s law, or “just
+my luck”, or some such explanation. Why does it happen so often?&lt;/p&gt;
+&lt;p&gt;I call this the &lt;em&gt;Gym Locker Paradox&lt;/em&gt;. It is related to a much more well
+known paradox, the &lt;em&gt;&lt;a href="http://en.wikipedia.org/wiki/Birthday_paradox"&gt;Birthday
+Paradox&lt;/a&gt;&lt;/em&gt;, which is
+commonly formulated as a puzzle: how many people do you need to have in
+a room together before the odds are better than even that two share the
+same birthday?
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/the-gym-locker-paradox.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/the-gym-locker-paradox.html</guid><pubDate>Thu, 20 Jan 2011 14:02:00 GMT</pubDate></item><item><title>Fibonacci ties it all together</title><link>https://www.grahamwheeler.com/posts/fibonacci-ties-it-all-together.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;In the past few posts I have discussed a diverse set of topics, from
+number representation to recurrence relations, Pythagorean triples.&lt;/p&gt;
+&lt;p&gt;All of these topics are related, and this is particularly illustrated
+when we consider the work of Leonardo of Pisa, better known as Fibonacci
+(from the Latin “de filiis Bonacci”, or “of the family of Bonacci”).
+Fibonacci was born in 1175, in Pisa, Italy, shortly after the start of
+the construction of the famous leaning tower. The city of Pisa was a
+maritime republic which had its own colonies, including Bugia (in modern
+day Algeria), where Leonardo’s father moved in 1192 to be a clerk in the
+customs house. It was here that Fibonacci became acquainted with the
+Hindu numerals and zero, and where his Muslim teacher introduced him to
+the the great book &lt;em&gt;&lt;a href="http://magimathics.com/much-ado-about-nothing"&gt;Al-Jabr
+wal-Muqabalah&lt;/a&gt;&lt;/em&gt;.
+Fibonacci subsequently travelled broadly, where he learnt from
+mathematicians of different cultures. Around 1200 he returned to Pisa
+and began work on his masterpiece &lt;em&gt;Liber Abaci&lt;/em&gt;, which was published in
+1202, and begins with these words:
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/fibonacci-ties-it-all-together.html"&gt;Read more…&lt;/a&gt; (4 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/fibonacci-ties-it-all-together.html</guid><pubDate>Wed, 20 Jan 2010 13:37:00 GMT</pubDate></item><item><title>The Horn of Gabriel</title><link>https://www.grahamwheeler.com/posts/the-horn-of-gabriel.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;“&lt;a href="http://bible.cc/revelation/11-15.htm"&gt;&lt;/a&gt;&lt;em&gt;And the seventh angel sounded
+[his horn]; and there were great voices in heaven, saying, The kingdoms
+of this world are become the kingdoms of our Lord, and of his Christ;
+and he shall reign for ever and ever.”&lt;/em&gt; (Revelations 11.15, King James
+Edition)&lt;/p&gt;
+&lt;p&gt;In Christian and Islamic folklore, it is the angel Gabriel who is
+considered to be the seventh angel, who announced the coming of
+judgement day. An angel with such a huge responsibility clearly needs an
+instrument worthy of the task, and indeed there is one: Gabriel’s horn,
+also known as Torricelli’s trumpet, after its discoverer, Evangelista
+Torricelli, a student of Galileo. Gabriel’s horn has infinite surface
+area but finite volume, and is described the rotating the curve
+\(y=\frac{1}{x}\) for \(x \geq 1\) around the \(x\) axis.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/the-horn-of-gabriel.html"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/the-horn-of-gabriel.html</guid><pubDate>Mon, 18 Jan 2010 14:48:00 GMT</pubDate></item><item><title>More on Pythagoras</title><link>https://www.grahamwheeler.com/posts/more-on-pythagoras.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;Pythagoras is known for two great contributions to mathematics – he
+established the need for formal proofs instead of just conjecture and
+rules of thumb, and he established the existence of the irrationals. In
+popular culture of course, Pythagoras is more well known for the
+Pythagorean theorem – that the square of the hypotenuse of a right
+angled triangle is the sum of the squares of the other two sides – but
+this was one of the oldest known results in mathematics and in fact
+predates Pythagoras by as much as a thousand years. Nonetheless,
+Pythagoras provided a formal proof, and the result led him to ask
+whether there were rational numbers that worked in the case where the
+hypotenuse had the length two. That is, what was the fractional
+representation of the square root of two? Pythagoras managed to show
+there was none, leading to the discovery of the irrational numbers.&lt;/p&gt;
+&lt;p&gt;His proof was quite simple. Assume that \(\sqrt{2}\) can be
+expressed as a fraction \(\frac{a}{b}\) of two whole
+numbers \(a\) and \(b\). Assume these are the two smallest
+such whole numbers – that is, they have no common divisor allowing the
+fraction to be further reduced. Then:
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/more-on-pythagoras.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/more-on-pythagoras.html</guid><pubDate>Sun, 17 Jan 2010 11:12:00 GMT</pubDate></item><item><title>Primal Soup</title><link>https://www.grahamwheeler.com/posts/primal-soup.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/images/image9.png" style="float:right;size:35%;margin:10px"&gt;&lt;img alt="image" src="https://www.grahamwheeler.com/images/image_thumb9.png" title="image"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Number theory really began with Euclid, around 300BC, in books 7 through
+9 of his masterwork, &lt;em&gt;The Elements&lt;/em&gt;. It is here that we find the
+original definitions of odd and even numbers, prime and composite
+numbers, perfect numbers (numbers which are the sum of their factors,
+e.g. 6 = 3 + 2 + 1), and more. But the greatest achievements of all were
+his proofs that composite numbers are the products of primes, that this
+factorization is unique, and that there are an infinity of primes. Most
+introductory algebra or number theory classes cover these three great
+proofs, but they are worth revisiting for those who may have forgotten.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/primal-soup.html"&gt;Read more…&lt;/a&gt; (4 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/primal-soup.html</guid><pubDate>Wed, 06 Jan 2010 14:54:00 GMT</pubDate></item><item><title>Archimedes counts the sand</title><link>https://www.grahamwheeler.com/posts/archimedes-counts-the-sand.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;In a &lt;a href="http://www.magimathics.com/babylonian-numbers-in-60-seconds"&gt;previous
+post&lt;/a&gt;
+I described the Babylonian/Sumerian sexagesimal (base 60) counting
+system. Unlike this system, most cultures adopted a base 10 counting
+system due to the natural inclination to count with the fingers (leading
+to the term &lt;em&gt;digits&lt;/em&gt;). Less common were quinary (base 5) systems, but
+vigesimal (base 20) were not unusual - for example, this was widespread
+in native American culture, including (with a novel variation) the
+Mayans. Duodecimal (base 12) has also played a role; we still have
+remnants in the groupings of dozens and gross.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/archimedes-counts-the-sand.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/archimedes-counts-the-sand.html</guid><pubDate>Tue, 05 Jan 2010 14:48:00 GMT</pubDate></item><item><title>More on Diophantus and Fermat</title><link>https://www.grahamwheeler.com/posts/more-on-diophantus-and-fermat.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;In a &lt;a href="http://magimathics.com/monkeying-around"&gt;previous
+post&lt;/a&gt; I
+wrote about how Fermat scribbled his famous “last theorem” in the margin
+of Diophantus’ &lt;em&gt;Arithmetica&lt;/em&gt;. This is called Fermat’s last theorem not
+because it was the last thing Fermat wrote but because of all the
+incomplete theorem’s we know were left by Fermat it was the last to be
+proved, taking about 350 years.&lt;/p&gt;
+&lt;p&gt;The section of the book where Fermat wrote his comment was on finding
+&lt;em&gt;Pythagorean triples&lt;/em&gt;: square numbers whose sums also form squares. Such
+numbers can be the sides of Pythagorean (right-angled) triangles, the
+most well know being 3-4-5.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/more-on-diophantus-and-fermat.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/more-on-diophantus-and-fermat.html</guid><pubDate>Mon, 04 Jan 2010 04:06:00 GMT</pubDate></item><item><title>The Mathematics of Toilet Rolls</title><link>https://www.grahamwheeler.com/posts/the-mathematics-of-toilet-rolls.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;In the late 1980s I was contracted to write some software for a company
+that produced video-based educational systems. They had video cassette
+machines that had been modified to interface with a PC, which could send
+instructions to the VCRs such as play, stop, fast forward, and rewind.
+The educational programs consisted of short recorded segments which
+typically ended with a question, and based on the answer the user
+provided they wanted to continue play at different portions of the tape.
+The software they wanted me to write was meant to be able to be given a
+current position (i.e. play time) and advance to a new position. For
+example I might be told that they are at minute 8 currently and want to
+resume play at minute 12.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/the-mathematics-of-toilet-rolls.html"&gt;Read more…&lt;/a&gt; (4 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/the-mathematics-of-toilet-rolls.html</guid><pubDate>Sun, 27 Dec 2009 14:36:00 GMT</pubDate></item><item><title>Babylonian numbers in 60 seconds</title><link>https://www.grahamwheeler.com/posts/babylonian-numbers-in-60-seconds.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;My 5 year old daughter wanted to heat something up in the microwave. I
+suggested she use a minute, and she asked me how to enter that. I said
+enter 1, 0, 0, Start. “But when mom tells me to do a minute she says 6,
+0, Start”, she responded. I wasn’t sure how to explain to her that 1:00
+minute is the same as 60 seconds; microwaves are confusing enough to her
+as is.&lt;/p&gt;
+&lt;p&gt;So why are there are 60 seconds in a minute? Why not 100? The answer
+lies about 4000 years ago, in some of the earliest known mathematics, of
+Sumeria and Babylon. The Sumerians and later the Babylonians used a
+&lt;em&gt;sexagesimal&lt;/em&gt; (base 60) number system for their astronomy (although they
+used decimals for day-to-day applications). They had no way to represent
+non-whole numbers other than as fractions, and 60 was a convenient base
+as it has a large number of factors; in particular it can represent 1/2,
+1/3, 1/4, 1/5, and 1/6 all with whole numerators. In fact sexagesimal
+notation can be used to exactly represent any fraction in which the
+denominator has prime factors of 2, 3, and/or 5 (as these are the prime
+factors of 60), with a finite number of symbols.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/babylonian-numbers-in-60-seconds.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/babylonian-numbers-in-60-seconds.html</guid><pubDate>Sun, 27 Dec 2009 14:09:00 GMT</pubDate></item></channel></rss>

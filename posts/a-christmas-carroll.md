@@ -15,6 +15,7 @@ the steps "cord", "card", "ward". Carroll later popularised this form of
 puzzle in a series of articles in Vanity Fair magazine, changing the
 name to Doublets - from the "double, double, toil and trouble" witches'
 incantation in Shakespeare's Macbeth.
+<!-- TEASER_END -->
 
 These puzzles are still popular today (usually called Word Ladders). The
 noted Stanford computer sciencist Don Knuth dedicated several pages of

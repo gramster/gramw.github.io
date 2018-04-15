@@ -24,6 +24,7 @@ Fibonacci subsequently travelled broadly, where he learnt from
 mathematicians of different cultures. Around 1200 he returned to Pisa
 and began work on his masterpiece *Liber Abaci*, which was published in
 1202, and begins with these words:
+<!-- TEASER_END -->
 
 > “The nine Indian figures are 9 8 7 6 5 4 3 2 1.
 >

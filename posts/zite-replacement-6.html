@@ -99,7 +99,8 @@
 </pre>
 </td>
 </tr></table>
-<p>Note that these are deliberately in the same format as the articles in articles.txt, although without as many fields.</p>
+<p>Note that these are deliberately in the same format as the articles in articles.txt, although without as many fields.
+<!-- TEASER_END --></p>
 <p>I then modified the code that reads in the articles file and calculates the TF-IDF similarity matrix to first read this file (categories.txt) so that these become the first 4 articles, then I recomputed the matrix.</p>
 <p>I then sorted each item by similarity with each of these category items, and printed out the top 20, with:</p>
 <table class="codehilitetable"><tr>
@@ -181,7 +182,24 @@ Comment on Foolproof Yorkshire Pudding Recipe by pearl
 <p>In summary, we can now take articles, extract a set of key terms, and assign them to one or more categories. There is obviously work to be done, tuning the categories over time and adding many more. One way to determine how to adjust the key terms for existing categories is to look at the top terms across all articles assigned to that category, and add them to the category terms if they aren't already present.</p>
 <p>I'll probably be busy with this for a few days but once I have a good working system the next topic will be ranking. Ranking will work best in conjunction with crowdsourcing so I may need to build the system out as far as a simple web front end that can be used as a categorical RSS search engine. Watch this space for future developments!</p>
 </div>
-    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+    </section><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>

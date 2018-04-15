@@ -20,13 +20,14 @@ done, tower, temple and Brahmins all will vanish with a thunderclap and
 the world will vanish.
 
 So how much time do we have left?
+<!-- TEASER_END -->
 
 The romantic fable above was popularized (and possibly invented) by one
 Edouard Lucas to accompany a popular game he invented and sold in 1883,
 called the Towers of Hanoi. The game itself has only 8 disks (which is
 fortunate, as we shall see), and is still available today.
 
-[![](/images/200703_hanoi_1st_lab_375.jpg "An original Edouard Lucas puzzle. Photo courtesy of the Puzzle Museum.  (C)2009 Hordern-Dalgety Collection <http://puzzlemuseum.org>")
+![An original Edouard Lucas puzzle. Photo courtesy of the Puzzle Museum.  (C)2009 Hordern-Dalgety Collection <http://puzzlemuseum.org>)](/images/200703_hanoi_1st_lab_375.jpg)
 
 When trying to solve the problem, it helps to start small. Obviously if
 there were no discs, no moves would be needed, and with one disc, just
@@ -96,7 +97,7 @@ This  equation needs to stop somewhere to be useful; we know that one
 disc takes one move so we know that \\(S_{1} = 1\\). So we can write
 the complete recursive definition of \\(S_{n}\\) as:
 
-$S_{n} = \left\{ \begin{array}{ll} 2 S_{n-1} + 1 & \mbox{if} n>1 \\ 1 & \mbox{if } n=1 \end{array} \right.$
+$$S_{n} = \left\{ \begin{array}{ll} 2 S_{n-1} + 1 & \mbox{if} n>1 \\ 1 & \mbox{if } n=1 \end{array} \right.$$
 
 Equations like this, where we define sequence terms in terms of earlier
 sequence terms, are called ***recurrence** **relations*** or

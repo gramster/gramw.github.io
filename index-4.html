@@ -90,45 +90,9 @@ proved, taking about 350 years.</p>
 <p>The section of the book where Fermat wrote his comment was on finding
 <em>Pythagorean triples</em>: square numbers whose sums also form squares. Such
 numbers can be the sides of Pythagorean (right-angled) triangles, the
-most well know being 3-4-5.</p>
-<p>The <em>Arithmetica</em> was a book of computational methods rather than
-theoretical mathematics. In modern terms we would call it a book of
-numerical algorithms. Much of the material was not invented by
-Diophantus but was collected by him. This includes his method for
-finding Pythagorean triples, which was as follows. Take any two whole
-numbers \(a\) and \(b\). Then the following three numbers are
-the sides of a Pythagorean triangle:</p>
-<ul>
-<li>\(2ab\)</li>
-<li>\(a^2 - b^2\)</li>
-<li>\(a^2 + b^2\)</li>
-</ul>
-<p>Furthermore, any such triple can be multiplied by a constant to get
-another triple (e.g. the triple 3-4-5 can be multiplied by 3 to get the
-triple 9-12-15, etc).</p>
-<p><a href="images/image1.png" style="float:right;size:35%;margin:10px"><img alt="17th Century portrait of Pierre de Fermat" src="images/image_thumb1.png" title="17th Century portrait of Pierre de Fermat"></a></p>
-<p>Fermat’s theorem asserts that while there are an infinite number of
-Pythagorean triples, there are no solutions in whole numbers for higher
-powers. Fermat did leave a proof for the fourth power. Euler proved the
-theorem for the third power. Dirichlet proved the theorem for fifth and
-14th powers. Lame and Kummer managed to prove the theorem for all powers
-up to 100 except for 37, 59 and 67. By 1980, the theorem had been proven
-for all powers up to 125,000!</p>
-<p>It took some modern developments in elliptic functions to proceed
-further. Elliptic functions are functions in two unknowns where one
-unknown is squared and the other cubed (e.g. \(y^2 = x^3 -
-x - 1\)). It was found that if Fermat was wrong, and there is a solution
-for some power higher than two, then that solution describes a very
-unusual elliptic curve, so unusual it seems unlikely it could exist.</p>
-<p>In 1986 Kenneth Ribet showed that such an elliptic curve would violate
-the 1955 Taniyama-Shimura conjecture, which claims that every elliptic
-curve is associated with a modular function. While the Taniyama-Shimura
-conjecture was not itself proven this did provide a link between two
-fields of mathematics, and it was this conjecture that was ultimately
-proven by Andrew Wiles and a former student in 1993 and 1994, thus
-finally proving Fermat correct.</p>
-<p>If Fermat really did have a proof, though, then there is a much simpler
-proof still waiting to be found…</p>
+most well know being 3-4-5.
+</p>
+<p class="more"><a href="posts/more-on-diophantus-and-fermat.html">Read more…</a></p>
 </div>
     </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
@@ -147,41 +111,10 @@ following rules:</p>
 <li>it it lands on a black cell it turns left 90 degrees; if it lands on
     a white cell it turns right 90 degrees</li>
 <li>in each case the cell it just left changes color to its opposite
-    (white to black or vice-versa)</li>
+    (white to black or vice-versa)
+<p class="more"><a href="posts/the-wandering-ant.html">Read more…</a></p>
+</li>
 </ul>
-<p><a href="images/image2.png" style="float:right;size:35%;margin:10px"><img alt="image" src="images/image_thumb2.png" title="image"></a></p>
-<p>Running a computer simulation of this system, which was invented by
-Christopher Langton in 1986, shows that after a while the ant gets stuck
-in a cycle of 104 moves which move it two squares diagonally, after
-which point it continues building this diagonal “highway”. It is
-speculated that this will always occur (in which case we say that this
-sequence is an <em>attractor</em> for the system), regardless of the initial
-state of the grid, but so far no-one has been able to prove it (or the
-opposite).</p>
-<p>The diagram to the left shows what happens with an initial white grid
-after 11,000 moves. The ant is the red pixel near the bottom right. Note
-the diagonal highway moving down and to the right.</p>
-<p>In 2000 it was shown that Boolean circuits (AND, OR, NOT) could be
-created with the ant, and so the ant system is a universal computer or
-Turing machine.</p>
-<p>Some interesting extensions can be made to this system. For example,
-more than two colors can be used, or more than one ant can be used (as
-long as there are rules for what happens when they collide). Rules can
-be added to make the ants reproduce. One of the simplest but most
-interesting changes is to give the ant a color, and have the rules of
-the system be extended to include changing the color of the ant, as well
-as being dependent on the color of the ant (e.g. we could have the turn
-rules behave as above if the ant is white but be reversed if the ant is
-black). Such ants that have state are called <em>turmites</em>, and can
-generate some very interesting patterns (originally these were named
-tur-mites by A.K. Dewdney but Rudy Rucker shortened the name and his
-version has stuck).</p>
-<p>Further reading: <a href="http://www.amazon.com/gp/product/0465013023?ie=UTF8&amp;tag=wishwatcher-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=0465013023">Professor Stewart's Cabinet of Mathematical
-Curiosities</a>
-has a short chapter where I first learned about Langton’s Ant, and
-Stephen Wolfram discusses them briefly in a section on Turing machines
-in his opus <a href="http://www.amazon.com/gp/product/1579550088?ie=UTF8&amp;tag=wishwatcher-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=1579550088">A New Kind of
-Science</a>.</p>
 </div>
     </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
@@ -201,85 +134,9 @@ provided they wanted to continue play at different portions of the tape.
 The software they wanted me to write was meant to be able to be given a
 current position (i.e. play time) and advance to a new position. For
 example I might be told that they are at minute 8 currently and want to
-resume play at minute 12.</p>
-<p><a href="images/image4.png" style="float:right;size:45%;margin:10px"><img alt="Picture by Dvortygirl, licensed under GNU Free Documentation
-License" src="images/image_thumb4.png" title="Picture by Dvortygirl, licensed under GNU Free Documentation License"></a></p>
-<p>Without going into all the detail, I can tell you this was a Very Hard
-Problem. There was no way to tell where you were on the tape without
-actually playing, and if you are familiar with VCRs (which are rapidly
-going the way of the dinosaur) you may be aware that engaging the play
-head takes a few seconds. There were variations in motor speed, tape
-stretching, and all sorts of other variables to take into account. The
-approach I used was to try to calculate the “optimal” fast forward time,
-shorten that a bit, and then narrow down to the exact position with a
-modified binary search (or, to put it more crudely, “trial and error”).</p>
-<p>We got the system to work although it was a pretty crude affair but
-before anything shipped new VCRs came out that recorded “time code” on
-the tape and had much more precise electronics essentially supporting
-just this functionality we had duct-taped together, and so it was all
-for naught (and not long after CD-ROMs came and made it all redundant
-anyway).</p>
-<p>I don’t remember all the math that I worked out for this system, but it
-is easy enough to recall the basic parameters. There was the diameter of
-the empty plastic spools, the diameter of a full spool, and the playing
-time of the tape (typically 120 minutes), which was a linear function of
-the length (assuming an unstretched tape :-))</p>
-<p>While playback happened at a constant speed, as the tape ran through an
-independent roller mechanism unaffected by the spool state,
-fast-forwarding and rewinding happened at a variable rate, as it was
-controlled by the motors driving the spool, and the spool diameters
-changed.</p>
-<p><a href="images/image3.png" style="float:left;size:35%;margin:10px"><img alt="Picture by Barndon Blinkenberg, licensed under Creative
-Commons" src="images/image_thumb3.png" title="Picture by Barndon Blinkenberg, licensed under Creative Commons"></a></p>
-<p>All in all, a nasty business, and we are better off without tape! But
-there is still a common household item with some similar
-characteristics, namely the toilet roll. So, here are some problems
-surrounding toilet rolls to think about. To save you having to measure
-your toilet rolls here are some typical measurements from mine (Charmin
-2 ply from Costco) - spool diameter 45mm, roll diameter 120mm, 250 x
-101mm sheets = 25250mm length.</p>
-<ul>
-<li>how thick is each sheet of paper? (and thus, how many times does it
-    go around the spool?)</li>
-<li>what would the diameter of a roll be that went all the way around
-    the earth (assuming the earth’s diameter is 12,756.32km)?</li>
-<li>what if it went around the earth but 1m higher than in the example
-    before? How long would the roll be? (you may recognize this as a
-    familiar puzzle involving rope but I thought I’d sneak it in here!)</li>
-</ul>
-<p>(BTW no less a figure than Donald Knuth has considered toilet paper
-worthy of investigation, as evidenced
-<a href="http://www.jstor.org/pss/2322567">here</a>).</p>
-<p>If we call the paper thickness \(t\), the radius of the
-spool \(r_s\) and the radius of the roll (spool plus paper) \(r_r\),
-then it should be obvious that the number of winds \(n\)
-is:</p>
-<p>$$n = \frac{r_r - r_s}{t}$$</p>
-<p>If we approximate the roll as a number of concentric circles rather than
-a spiral, then the innermost roll has length \(2\pi r_s\), and
-the next roll has length \(2\pi (r_s+t)\), and so on; each
-successive roll is \(2\pi t\) longer than the prior one, and the
-final roll has length \(2\pi r_r\).</p>
-<p>Because each successive roll is longer by a constant amount, we have an
-arithmetic sequence. Recall that the sum of an arithmetic sequence is
-given by \(\frac{n}{2}(a_1 + a_n)\), where \(n\) is the
-number of terms, \(a_1\) is the first term, and \(a_n\) is
-the last term. So the length of the entire roll is given by:</p>
-<p>$$l = \frac{n}{2} ( 2\pi r_s + 2 \pi r_r) = \pi \frac{r_r^2 - r_s^2}{t}$$</p>
-<p>Thus my toilet paper is about 0.38 mm thick - quite luxurious!</p>
-<p>For the second problem it is reasonable to assume \(r_s = 0\), to
-give us the simpler formula:</p>
-<p>$$l \approx \pi \frac{r_r^2}{t}$$</p>
-<p>or:</p>
-<p>$$r_r \approx \sqrt{\frac{l t}{\pi}}$$</p>
-<p>or:</p>
-<p>$$r_r \approx \sqrt{d t}$$</p>
-<p>where \(d\) is the earth’s diameter. So for my paper this would be
-about 70 meters. If I had a cheaper brand of one ply paper this might be
-considerably less.</p>
-<p>I’ll leave the last question as an exercise but it should be fairly
-clear that the difference in \(l\) in this case is quite small and
-so the extra radius needed for the toilet roll is very small.</p>
+resume play at minute 12.
+</p>
+<p class="more"><a href="posts/the-mathematics-of-toilet-rolls.html">Read more…</a></p>
 </div>
     </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
@@ -306,24 +163,9 @@ as it has a large number of factors; in particular it can represent 1/2,
 1/3, 1/4, 1/5, and 1/6 all with whole numerators. In fact sexagesimal
 notation can be used to exactly represent any fraction in which the
 denominator has prime factors of 2, 3, and/or 5 (as these are the prime
-factors of 60), with a finite number of symbols.</p>
-<p>Interestingly, both cultures did not have 60 distinct symbols but still
-used base 10 representation for numbers in the range 0..59, with narrow
-vertical wedges for 0..9 and thicker horizontal “corner” signs for 0..5
-tens:</p>
-<p><a href="images/image5.png" style="float:right;width:35%;margin:10px"><img alt="image" src="images/image_thumb5.png" title="image"></a></p>
-<p>However, numbers were encoded as base 60 using place notation. For
-example, decimal 63.3 would be written as 1, 3 . 18.</p>
-<p>As there was no symbol for zero interpreting these numbers sometimes had
-to be done in context; often a space was used although various other
-symbols were introduced later, like slanting wedges. As far as we know
-these symbols didn’t represent “zero” as we understand it - that came
-later - but just represented a “void” position.</p>
-<p>Sumeria was invaded by the Akkadians around 2350BC, who adopted the
-Sumerian system but introduced new symbols for hundreds and thousands.</p>
-<p>This system was an improvement over the earlier Egyptian notation, which
-was base 10 but, apart from a few special cases, was limited to
-fractions with one as the numerator (i.e. reciprocals only).</p>
+factors of 60), with a finite number of symbols.
+</p>
+<p class="more"><a href="posts/babylonian-numbers-in-60-seconds.html">Read more…</a></p>
 </div>
     </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
@@ -346,189 +188,9 @@ there would be a disagreement in the morning over the coconuts. He
 decided to take his share, and divided the coconuts equally into five.
 There was one left over which he gave to the monkey, then he took his
 share and hid them away, before going back to
-sleep.<a href="images/image6.png" style="float:right;size:35%;margin:10px"><img alt="image" src="images/image_thumb6.png" title="image"></a></p>
-<p>A little later the next man woke up, and had the same fear. He too
-divided the coconuts into five, and had one left over that he gave to
-the monkey, before hiding his share and going back to sleep. And so the
-night went on, with each man waking up, dividing the remaining coconuts
-in five, hiding one share and giving the one extra to the monkey.</p>
-<p>In the morning, the men awoke and divided the remaining coconuts, which
-came out to five equal shares. No-one said anything about the missing
-coconuts as each thought he had been the first to hide a share and was
-thus the best off.</p>
-<p>How many coconuts were there in the beginning?</p>
-<p>It is not difficult to express this problem as a set of equations; what
-makes the equations hard to solve is that the solutions must be
-integers. Such equations are called Diophantine equations, after the 3rd
-century AD’s Diophantus of Alexandria, who was the first known
-algebraist to examine equations limited to rational number solutions. We
-know little of Diophantus himself other than the following puzzle left
-after his death:</p>
-<ul>
-<li>his childhood lasted 1/6 of his life</li>
-<li>he grew a beard after another 1/12</li>
-<li>after 1/7 more he married</li>
-<li>5 years later he had a son</li>
-<li>the son lived to half Diophantus’ age</li>
-<li>and Diophantus died 4 years later</li>
-</ul>
-<p>From this we can determine how long Diophantus lived, how long his
-boyhood lasted, what age he grew a beard, what age he got married, when
-he had a son, and how long his son
-lived.<a href="images/monkey1.png" style="float:right;size:35%;margin:10px"><img alt="image" src="images/monkey_thumb1.png" title="image"></a></p>
-<p>Diophantus’ great work, The Arithmetica, is a text on computational
-arithmetic rather than theoretical mathematics, closer to the
-mathematics of Egypt, Babylon and India than to Greece. Diophantus
-promised 13 books in his introduction but only ten are known, with four
-only being discovered recently in an Arabic manuscript found in Iran.
-The earliest commentaries on The Arithmetica were written by Hypatia,
-the first known Western female mathematician, who was brutally murdered
-by a mob of Christian fanatics in 415 AD as they burned Alexandria’s
-great library to the ground and destroyed much of the world’s repository
-of classical knowledge.</p>
-<p>Many people are familiar with Fermat’s famous “Last Theorem”; it was in
-the margins of a copy of Diophantus’ Arithmetica (Book 2, problem 8 ),
-in which Diophantus describes how to find solutions to 
-\(x^{2}+y^{2}=z^{2}\) for a given value of \(z\), that Fermat
-wrote his famous note asserting that there are no solutions to equations
-of this form for any powers higher than two, and that “For this I have
-discovered a truly wonderful proof, but the margin is too small to
-contain it.”</p>
-<p>Going back to the coconuts, if we call the initial number of
-coconuts \(x\) and the number hidden away by each man as \(a,
-b, c, d, e\) respectively, and the number of coconuts each sailor got on
-the next day as \(y\), we get this set of equations:</p>
-<p>$$x = 5a + 1$$
-$$4a = 5b + 1$$
-$$4b = 5c + 1$$
-$$4c = 5d + 1$$
-$$4d = 5e + 1$$
-$$4e = 5y$$</p>
-<p>We can use successive substitutions to reduce this to a single equation
-in two unknowns. The first sailor took \(\frac{1}{5}(x-1)\)
-coconuts, and left \(4\frac{1}{5}(x-1) = \frac{4}{5}(x-1)\)
-coconuts. The second sailor then took
-\(\frac{1}{5}(\frac{4}{5}(x-1)-1) = \frac{4x-9}{25}\) coconuts and
-left \(\frac{4x-9}{25} = \frac{16x-36}{25}\) coconuts. Continuing
-in this way we can find that the number of coconuts left by the third,
-fourth and fifth sailors were \(\frac{64x-244}{125}\),
-\(\frac{256x-1476}{625}\), and \(\frac{1024x-8404}{3125}\)
-respectively. Therefore:</p>
-<p>$$\frac{1024x-8404}{3125} = 5y$$</p>
-<p>or:</p>
-<p>$$1024x = 15625y + 8404$$</p>
-<p>Normally, for real numbers, we would need two equations in two unknowns,
-but because we know the solutions must be integers the possible answers
-are more constrained. Equations of the form:</p>
-<p>$$ax + by = c$$</p>
-<p>are known as linear Diophantine equations; in our case
-\(a=1024\), \(b=-15625\) and \(c=8404\), and we have:</p>
-<p>$$1024x - 15625y = 8404$$</p>
-<p>If \(a\) and \(b\) have a common denominator, then clearly for
-the equation to have integer solutions \(c\) must also be a
-multiple of this common denominator.; if it is not, then there are no
-integer solutions. So we can simplify a linear Diophantine equation by
-dividing the coefficients of x and y, and the constant, by their
-greatest common denominator (GCD). The coefficients are then relatively
-prime, the gcd is 1 and no further simplification can be done.</p>
-<p>Assuming we can simplify to the point where we have co-prime
-coefficients and still have an integer constant, we will have solutions
-– in fact, an infinity of them. This is quite easy to show. Assume we do
-have two solutions, \((x_{1},y_{1})\) and
-\((x_{2},y_{2})\). Then:</p>
-<p>$$a x_{1} + b y_{1} = c = a x_{2} + b y_{2}$$</p>
-<p>and so:</p>
-<p>$$a(x_{1}-x_{2}) = b(y_{2}-y_{1})$$</p>
-<p>So the difference between two solutions for \(x\) must satisfy:</p>
-<p>$$x_{1}-x_{2} = \frac{b}{a}(y_{2}-y_{1})$$</p>
-<p>If \(g\) is the GCD of \(a\) and \(b\), then we can
-divide both \(a\) and \(b\) on the right hand side by
-\(g\) to get a coprime numerator and denominator:</p>
-<p>$$x_{1} - x_{2} = \frac{\frac{b}{g}}{\frac{a}{g}} (y_{2} - y_{1})$$</p>
-<p>Because \(\frac{b}{g}\) and \(\frac{a}{g}\) are coprime, the
-smallest \((y_{2}-y_{1})\) that can expand the right hand side
-out to an integer value is:</p>
-<p>$$y_{2}-y_{1} = \frac{a}{g}$$</p>
-<p>And similarly:</p>
-<p>$$x_{1}-x_{2} = \frac{b}{g}$$</p>
-<p>So we have an infinite number of solutions of the form:</p>
-<p>$$x = x_{1} - \frac{b t}{g}$$</p>
-<p>$$y = y_{1} + \frac{a t}{g}$$</p>
-<p>The problem usually comes down to finding the smallest pair of positive
-integers that satisfy the equation.</p>
-<p>To solve a linear Diophantine equation such as the one above, we can
-apply Euclid’s method for finding the GCD of the coefficients (which
-will be 1, as our coefficients are coprime, but we are interested in the
-steps anyway):</p>
-<p>$$15625 = 15 \times 1024 + 265\ 1024 = 3 \times 265 + 229
-\ 265 = 1 \times 229 + 36 \ 229 = 6 \times 36 + 13 \ 36 = 2
-\times 13 + 10 \ 13 = 1 \times 10 + 3 \ 10 = 3 \times 3 + 1$$</p>
-<p>Note how the coefficients on the left of the right hand side match those
-in the continued fraction:</p>
-<p>$$\frac{15625}{1024} = 15 + \frac{265}{1024}\ = 15 +
-\frac{1}{\frac{1024}{265}}\ = 15 + \frac{1}{3 +
-\frac{229}{265}}\ = 15 + \frac{1}{3 +
-\frac{1}{\frac{265}{229}}}\ = 15 + \frac{1}{3 + \frac{1}{1 +
-\frac{36}{229}}}\ = 15 + \frac{1}{3 + \frac{1}{1 +
-\frac{1}{\frac{229}{36}}}} \ = 15 + \frac{1}{3 + \frac{1}{1 +
-\frac{1}{6 + \frac{13}{36}}}} \ \ldots\ = 15 + \frac{1}{3 +
-\frac{1}{1 + \frac{1}{6 + \frac{1}{2 + \frac{1}{1 + \frac{1}{3 +
-\frac{1}{3}}}}}}} \ = \langle 15; 3, 1, 6, 2, 1, 3, 3 \rangle$$</p>
-<p>We can invert the steps to get a solution. Starting at the bottom:</p>
-<p>$$10 = 3 \times 3 + 1 \Rightarrow 1 = 10 - 3 \times 3$$</p>
-<p>We keep expanding this, working backwards, and substituting the
-equations we have derived above for the remainders:</p>
-<p>$$1=10-3\times 3=10-3\times(13-1\times 10)=4\times 10-3\times 13$$</p>
-<p>$$1=4\times 10-3\times 13=4\times(36-2\times 13)-3\times 13=4\times 36-11\times 13$$</p>
-<p>$$1 = 4 \times 36-11 \times 13 = 4 \times 36-11 \times ( 229-6 \times 36 ) = 70 \times 36-11 \times 229$$</p>
-<p>$$1 = 70 \times 36-11 \times 229 = 70 \times ( 265-1 \times 229 )-11 \times 229 = 70 \times 265-81 \times 229$$</p>
-<p>$$1 = 70 \times 265-81 \times 229 = 70 \times 265-81 \times ( 1024-3 \times 265 ) = 313 \times 265-81 \times 1024$$</p>
-<p>$$1 = 313 \times 265-81 \times 1024 = 313 \times ( 15625-15 \times 1024 )-81 \times 1024 = 313 \times 15625-4776 \times 1024$$</p>
-<p>So we have determined that \(x=-4776\) and  \(y=-313\) is a
-solution of \(1024x-15625y=1\). This is all very well but how do we
-adjust this for the fact that the \(c\) value we actually care
-about is 8404, not 1? Simple! We just have to multiply each side by 8404
-to get a solution to our original equation, namely \(x=-4776
-\times 8404 = -40137504\) and  \(y=-313 \times 8404 = -2630452\).</p>
-<p>We know from earlier that the general solution of our equation has the
-form:</p>
-<p>$$x = -40137504 + 15625 t$$</p>
-<p>$$y = -2630452 + 1024 t$$</p>
-<p>It’s easy to see we have our first positive solution at \(t=2569\),
-namely \(x= 3121\) and  \(y=204\). So there were 3121 coconuts
-originally, and on the last division each sailor got 204 coconuts.</p>
-<p>A variant of this problem has there being a single coconut left on the
-final day as well. In this case there is a very clever trick that can be
-used, which uses the fact that if we add four coconuts to the original
-pile it is evenly divisible by 5. If we allow the use of <em>negative</em>
-coconuts it is easy to see that –4 is a solution. In this case, the
-first sailor divides the pile into 5 negative coconuts, gives one
-positive coconut to the monkey, and returns four negative coconuts to
-the pile, so there are once again –4 coconuts! Each sailor repeats the
-same process, always leaving –4 coconuts. To get to the first positive
-solution we just need to observe that since we divide the pile into 5
-six times, each successive solution must be \(5^{6} = 15625\)
-larger than the last, so the first solution is 15621.</p>
-<p>This variant appeared in a short story by Ben Ames Williams that ran in
-the Saturday Evening Post in October 1926. Williams did not include the
-answer, and the Post’s offices were flooded with letters, to the point
-where the editor sent Williams a wire: “For the love of Mike, how many
-coconuts? Hell popping around here”. Williams continued to receive
-letters requesting the answer for the next twenty years!</p>
-<p>Further reading:</p>
-<p>I first heard this problem, and learnt the method of continuous
-fractions, as a high school student when doing an extra-curricular math
-class at the University of the Witwatersrand’s Schmerenbeck Center (so
-long ago Diophantus may still have been alive).  Martin Gardner’s
-<a href="http://www.amazon.com/gp/product/0393020231?ie=UTF8&amp;tag=wishwatcher-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=0393020231">Colossal Book of
-Mathematics</a>
-discusses this problem in the first chapter, along with some unorthodox
-and general solutions. Steven Hawking’s book <a href="http://www.amazon.com/gp/product/0762430044?ie=UTF8&amp;tag=wishwatcher-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=0762430044">God created the
-Integers</a>
-includes annotated excerpts from The Arithmetica, and some biographical
-material. Clifford Pickover’s <a href="http://www.amazon.com/gp/product/1402757964?ie=UTF8&amp;tag=wishwatcher-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=1402757964">The Math
-Book</a>
-includes a chapter on Hypatia.</p>
+sleep.<a href="images/image6.png" style="float:right;size:35%;margin:10px"><img alt="image" src="images/image_thumb6.png" title="image"></a>
+</p>
+<p class="more"><a href="posts/monkeying-around.html">Read more…</a></p>
 </div>
     </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
@@ -550,135 +212,9 @@ different needle, moving only one disk at a time between needles but
 never placing a larger disk on top of a smaller one. When the task is
 done, tower, temple and Brahmins all will vanish with a thunderclap and
 the world will vanish.</p>
-<p>So how much time do we have left?</p>
-<p>The romantic fable above was popularized (and possibly invented) by one
-Edouard Lucas to accompany a popular game he invented and sold in 1883,
-called the Towers of Hanoi. The game itself has only 8 disks (which is
-fortunate, as we shall see), and is still available today.</p>
-<p>[<img alt="" src="images/200703_hanoi_1st_lab_375.jpg" title="An original Edouard Lucas puzzle. Photo courtesy of the Puzzle Museum. (C)2009 Hordern-Dalgety Collection &lt;http://puzzlemuseum.org&gt;"></p>
-<p>When trying to solve the problem, it helps to start small. Obviously if
-there were no discs, no moves would be needed, and with one disc, just
-one move is needed. What about two discs? That would require three
-moves: moving the smallest disc from the “initial” to the “spare”
-needle, then moving the largest disc to the “target” needles, and
-finally moving the small disc to the target needle.</p>
-<p>Going beyond two discs things are a little less obvious. If we think
-about the largest disc though, we can note that in order to move the
-largest disc from the initial to the target pin, we must first move all
-the other discs to the spare pin. So, if we have <em>n</em> discs, we can state
-a solution to the <em>n</em>-disc problem thus:</p>
-<ul>
-<li>
-<p>move <em>n-1</em> discs from the initial to the spare needle, using the
-target needle as a spare</p>
-</li>
-<li>
-<p>move disc <em>n</em> (the largest disc) from the initial needle to the target
-needle</p>
-</li>
-<li>
-<p>move <em>n-1</em> discs from the spare needle to the target needle, using the
-initial needle as a spare</p>
-</li>
-</ul>
-<p>So we have effectively reduced the n disc problem to an <em>n-1</em> disc
-problem. If we repeatedly apply this approach, eventually we get to a 1
-disc problem which is trivial.</p>
-<p>Even though we have “solved” the problem, it is not obvious what the
-sequence of moves should be for a large number of discs. Nonetheless,
-the method above works, and describes a formal recipe, commonly known as
-an <strong><em>algorithm</em></strong>, to solve the problem. Keeping track of the sequence
-of moves that have been done and still need to be done can be somewhat
-tedious for a human, but not for a computer, and the method above is
-often used in computer programs to solve the Towers problem. The
-algorithm could be written as:</p>
-<pre class="code literal-block"><span></span>SolveTowers(from, to, using, n)
-{
-    if (n &gt; 0)
-    {
-        SolveTowers(from, using, to, n-1);
-        print "Move disc " + n + " from needle "+from+" to needle "+to;
-        SolveTowers(using, to, from, n-1);
-    }
-}
-</pre>
-
-
-<p>If we called the needles A, B and C, and ran the algorithm above with
-“SolveTowers(A, B, C, 64)” we would get the sequence of moves needed by
-the monks. Algorithms like the one above, where we break the problem
-down using a smaller version of itself, are called <strong><em>recursive
-algorithms</em></strong>.</p>
-<p>We still haven’t answered the question of how long it would take, but
-we’re getting closer. If we call the number of moves needed to solve the
-<em>n</em>-disc Tower problem \(S_{n}\), then we can see (modeling the
-steps above):</p>
-<ul>
-<li>
-<p>we need \(S_{n-1}\) moves for the first step</p>
-</li>
-<li>
-<p>plus one move for disc n</p>
-</li>
-<li>
-<p>plus \(S_{n-1}\) moves for the last step</p>
-</li>
-</ul>
-<p>In other words \(S_{n} = 2 S_{n-1} + 1\).</p>
-<p>This  equation needs to stop somewhere to be useful; we know that one
-disc takes one move so we know that \(S_{1} = 1\). So we can write
-the complete recursive definition of \(S_{n}\) as:</p>
-<p>$S_{n} = \left{ \begin{array}{ll} 2 S_{n-1} + 1 &amp; \mbox{if} n&gt;1 \ 1 &amp; \mbox{if } n=1 \end{array} \right.$</p>
-<p>Equations like this, where we define sequence terms in terms of earlier
-sequence terms, are called <strong><em>recurrence</em>* </strong>relations<strong><em> or
-</em></strong>difference equations<strong><em>, while known values like \(S_{1} = 1\)
-that terminate the process are called </em></strong>boundary conditions***.</p>
-<p>Towers of Hanoi is just one of many recurrence relations. We’ll look at
-a few more and then look at some general techniques for dealing with
-these.</p>
-<p>For a first example, consider how many pieces you can slice the plane
-into with a number of lines, where no two lines are parallel and no
-three intersect at a single point (lines that satisfy these conditions
-are said to be in <em>general position</em>). The first line will divide the
-plane in two; the second line will divide it in four, the third in
-seven, and in general:</p>
-<p>$$P_n = P_{n-1} + n$$</p>
-<p>where \(P_n\) is the number of pieces after the n’th line. I.e.
-the \(n^{th}\) line adds \(n\) new pieces. The boundary
-condition is \(P_{0}=1\).</p>
-<p>As another example, consider a population of organisms that takes 2
-years to mature after which each pair produces another pair, and
-continues to do so each year thereafter.</p>
-<p>Each newborn pair plus offspring then has an annual population count of
-1, 1, 3, 5, 8, 13…, which may be recognized as the Fibonacci sequence:</p>
-<p>$$a_n = a_{n-1} + a_{n-2}$$</p>
-<p>with boundary conditions \(a_0 = 1, a_1 = 1\).</p>
-<p>The problem with these is that in order to compute the value for
-some \(n\), we have to calculate all values all the way from the
-boundary condition up to the \(n^{th}\). We’d prefer to just have
-some function in terms of \(n\).</p>
-<p>There are a number of approaches we can use. We can try to find the
-function by inspection, using some number of terms, and then prove the
-postulated solution by induction. A related approach is to look at
-modified versions of the sequence - for example dividing each term
-by \(n\) - to see if a pattern emerges. Adding a constant to each
-term before the division may make the pattern more obvious.</p>
-<p>If we look at Towers of Hanoi, we can see that the first few terms are
-1, 3, 7, 15, 31, 63. So a reasonable postulate is:</p>
-<p>$$S_n = 2^n - 1$$</p>
-<p>It is easy to prove this by induction:</p>
-<p>$$S_{n+1} = 2 S_n + 1 = 2 (2^n - 1) + 1 = 2^{n+1} - 1$$</p>
-<p>For the regions of the plane, we can use the second approach. Simple
-division by \(n\) doesn’t offer a clear pattern, but if we first
-subtract 1 from each term, i.e. look at the sequence
-\(\frac{P_n-1}{n}\), we get the sequence 1, 1.5, 2, 2.5, 3, 3.5, …, and
-a clear pattern emerges. It appears that:</p>
-<p>$$\frac{P_n-1}{n} = \frac{n+1}{2}$$</p>
-<p>or:</p>
-<p>$$P_n = \frac{n (n+1)}{2} + 1$$</p>
-<p>Once again by induction:</p>
-<p>$$P_{n+1} = P_n + n + 1 = (\frac{n (n+1)}{2}+1) + n + 1 = \frac{n^2 + 2 + 2n}{2} + 1 = \frac{(n+1)(n+2)}{2}+1$$</p>
-<p>As for the Fibonacci sequence, that is a topic for another day!</p>
+<p>So how much time do we have left?
+</p>
+<p class="more"><a href="posts/the-end-of-the-universe.html">Read more…</a></p>
 </div>
     </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
@@ -700,32 +236,9 @@ BCD. I had a bit of a had time getting things working again. I first
 tried using EasyBCD but this time when trying to boot Ubuntu I ended up
 at a GRUB prompt, and I could not access my Ubuntu partition (more
 precisely, while "root (hd0,2)" worked, "kernel /vmlinuz" threw errrors
-and I could not boot).</p>
-<p>In the end I got things working using the Ubuntu live CD and
-reinstalling GRUB. However, it required more than just doing a
-grub-install - for some reason the BIOS drive mappings seem to have been
-messed up. I did a web search and I found a lot of people have had this
-problem and very few found the solution so I thought it was worth
-mentioning what I did to make mine work in the hope it is useful to
-others.</p>
-<p>In my case my primary Ubuntu partition is the 3rd partition; i.e.
-/dev/sda3. After booting the live CD and opening the terminal, here is
-the set of commands I used to get things working again:</p>
-<pre class="code literal-block"><span></span>sudo mount /dev/sda3 /mnt
-sudo mount -t proc /proc /mnt/proc
-sudo mount --bind /dev /mnt/dev
-sudo chroot /mnt
-grub-install --recheck /dev/sda
-update-grub
-</pre>
-
-
-<p>Without the mounts of /proc and /dev, /dev/sda won't be found after the
-chroot. The --recheck option is necessary because somehow the BIOS drive
-mappings have gotten confused. It's possible the update-grub step is not
-necessary but I think it is safest to rebuild the grub config; I read at
-one web posting where someone omitted this step and after rebooting was
-left at the GRUB prompt again.</p>
+and I could not boot).
+</p>
+<p class="more"><a href="posts/fixing-grub-after-installing-windows-7.html">Read more…</a></p>
 </div>
     </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
@@ -759,51 +272,7 @@ and overcome limitations I have blogged about in the past:</p>
     We have a better geocoder now on the back end and are more confident
     that you will get the results you want when doing this.</li>
 </ul>
-<p>Okay, on to GeoRSS. This was my pet feature that I originally built in
-September 2006 and it finally got shipped (and if you say 'about time!'
-then I have the names of the two people who kept trying to kill this to
-give to you; go blame them ;-))</p>
-<p><a href="images/georss-image0.png"><img alt="image" src="images/georss-image0.png"></a></p>
-<p>The Collections feature is built around Virtual Earth collections, to
-make it easier for people who don't know/care about GeoRSS to use the
-feature and get some value out of it. For the more hard-core, you can
-enter GeoRSS URLs directly:</p>
-<p><a href="images/georss-image1.png"><img alt="image" src="images/georss-image1.png"></a></p>
-<p>The actual collections/feeds are stored in the application directory in
-a file called feeds.xml. You may find it instructive to look at that
-file.</p>
-<p>The cool thing about the URLs is that they can contain metatokens, which
-will expand to location-specific values:</p>
-<p><a href="images/georss-image2.png"><img alt="image" src="images/georss-image2.png"></a></p>
-<p>For example, the URL above:</p>
-<p><a href="http://www.homethinking.com/georss/@StateAbbrev@/@City@">http://www.homethinking.com/georss/@StateAbbrev@/@City@</a></p>
-<p>has two such metatokens, namely @StateAbbrev@ and @City@. These will get
-converted into appropriate values based on your search location before
-the feed is fetched.</p>
-<p>The supported metatokens are:</p>
-<ul>
-<li>@StateName@ - state name, e.g. "Washington"</li>
-<li>@StateAbbrev@ - state name abbrevaited form e.g. "WA" (outside the
-    USA this will be the same as @StateName@)</li>
-<li>@City@ - city name</li>
-<li>@Zip@ - zip or postal code</li>
-<li>@Location@ - the full text shown in the main view for the current
-    location</li>
-<li>@Latitude@, @Longitude@</li>
-<li>@StartLocation@, @StartLatitude@, @StartLongitude@, @EndLocation@,
-    @EndLatitude@, @EndLongitude@ - similar to @Location@ etc but for
-    the start and end points of the last route you calculated. The idea
-    being you could pass these up to a transit service to get, for
-    example, a bus schedule</li>
-<li>@MyLatitude@, @MyLongitude@, @MyLocationTime@ - the location and
-    time (in UTC) of the last GPS fix</li>
-</ul>
-<p>In a later post I'll describe the GeoRSS schema that the client
-understands (it is a hybrid of GeoRSS, some Yahoo extensions, some KML
-and some OASIS xADR address stuff). For now I'll just mention one
-interesting extension, namely pushpinurl, which can point to a .ico
-file. This file will be used as the pushpin icon on the map for that
-result. This can allow you to make custom pushpins.</p>
+<p class="more"><a href="posts/georss-and-live-search-for-mobile.html">Read more…</a></p>
 </div>
     </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
@@ -856,106 +325,9 @@ __FILE__ and __LINE__, just for starters).</p>
 <p>In particular, the preprocessor in C and C++ provides a very flexible
 assertion mechanism that is much more useful then System.Diagnostics.
 I'd like to cover some useful ways of using assertions in C and C++. Of
-course if you're an Eiffel programmer, you can probably stop reading ;-)</p>
-<p>In the code below, I will assume the existence of a library function
-<strong>HandleAssert(char* message</strong>), which does appropriate assertion
-handling (for example, in a GUI app it might pop up a message box,
-display the message, and give a Continue/Abort/Debug choice).</p>
-<p>Obviously, the first thing we need is a basic ASSERT macro:</p>
-<pre class="code literal-block"><span></span><span class="cp">#ifdef DEBUG</span>
-<span class="cp">#define ASSERT(condition, message)     do { if (!(condition)) HandleAssert(message); } while (0)</span>
-<span class="cp">#else</span>
-<span class="cp">#define ASSERT(condition, message)</span>
-<span class="cp">#endif</span>
-</pre>
-
-
-<p>The first rule of asserts is, of course, never put them in production
-code, hence the DEBUG conditional. The use of a do/while above
-eliminates any possible dangling else issues that might otherwise crop
-up if for some weird reason you put your ASSERTs in if statements.</p>
-<p>The above is often the only form of ASSERT that most C/C++ programmers
-encounter. But there are quite a few useful variants on the idea.
-Sometimes, just an alias is already a useful distinction:</p>
-<pre class="code literal-block"><span></span><span class="cp">#define PRECONDITION(condition, message)     ASSERT(condition, message)</span>
-<span class="cp">#define POSTCONDITION(condition, message)    ASSERT(condition, message)</span>
-</pre>
-
-
-<p>It can be useful to be able to define code that only exists in
-assertional builds:</p>
-<pre class="code literal-block"><span></span><span class="cp">#if DEBUG</span>
-<span class="cp">#define ASSERTIONAL(code)      code</span>
-<span class="cp">#else</span>
-<span class="cp">#define ASSERTIONAL(code)</span>
-<span class="cp">#endif</span>
-</pre>
-
-
-<p>Putting all of the above in an example:</p>
-<pre class="code literal-block"><span></span><span class="kt">int</span> <span class="nf">AdvanceIndex</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">ASSERTIONAL</span><span class="p">(</span><span class="kt">int</span> <span class="n">save_index</span> <span class="o">=</span> <span class="n">index</span><span class="p">);</span>
-    <span class="n">PRECONDITION</span><span class="p">(</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"Index can't be negative"</span><span class="p">);</span>
-    <span class="p">....</span>
-
-    <span class="n">POSTCONDITION</span><span class="p">(</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">save_index</span><span class="p">,</span> <span class="s">"Index must advance"</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">index</span><span class="p">;</span>
-<span class="p">}</span>
-</pre>
-
-
-<p>If we have class invariants, it is useful to define these as methods in
-the class that we can call from our asserts:</p>
-<pre class="code literal-block"><span></span><span class="k">class</span> <span class="nc">foo</span>
-<span class="p">{</span>
-<span class="cp">#if DEBUG</span>
-   <span class="kt">bool</span> <span class="n">invariant</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
-<span class="cp">#endif</span>
-<span class="p">}</span>
-</pre>
-
-
-<p>During early development, we could confine ourselves to DEBUG builds. In
-this case we may want to skip over handling of bad input, etc. We can do
-this safely using simplifying assumptions:</p>
-<pre class="code literal-block"><span></span><span class="cp">#if DEBUG</span>
-<span class="cp">#define SIMPLIFYING_ASSUMPTION(condition,  explanation)      ASSERT(condition, explanation)</span>
-<span class="cp">#else</span>
-<span class="cp">#error SIMPLIFYING_ASSUMPTION not allowed in&gt; release code</span>
-<span class="cp">#endif</span>
-</pre>
-
-
-<p>For example:</p>
-<pre class="code literal-block"><span></span><span class="kt">void</span> <span class="nf">Insert</span><span class="p">(</span><span class="n">node</span><span class="o">*</span> <span class="n">n</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">PRECONDITION</span><span class="p">(</span><span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">invariant</span><span class="p">(),</span> <span class="s">"Can't insert null"</span><span class="p">);</span>
-    <span class="n">SIMPLIFYING_ASSUMPTION</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"Not handling re-insertion of existing node yet"</span><span class="p">);</span>
-    <span class="p">...</span>
-    <span class="n">POSTCONDITION</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">invariant</span><span class="p">(),</span> <span class="s">"Node must be inserted"</span><span class="p">);</span>
-<span class="p">}</span>
-</pre>
-
-
-<p>Note, when writing unit tests for code that has pre- and
-post-conditions, you should be striving to write tests that pass the
-precondition but fail the postcondition. Thus assertions can provide
-very useful test case selection guidance. Pre- and post-conditions also
-tend to be more stable than the code inside methods, reduce the need to
-examine the internal code, and, for the hard-core, support proving
-correctness.</p>
-<p>Sometimes we may find it useful to always fire the assert:</p>
-<pre class="code literal-block"><span></span><span class="cp">#define UNREACHABLE(why)      ASSERT(0, why)</span>
-</pre>
-
-
-<p>We can have compile-time assertions on simple expressions:</p>
-<pre class="code literal-block"><span></span><span class="cp">#define COMPILE_TIME_CHECK(b)    extern int dummy[(b) ? 1: -1]</span>
-</pre>
-
-
-<p>As you can see from all of this, the lowly ASSERT can be quite flexible!</p>
+course if you're an Eiffel programmer, you can probably stop reading ;-)
+</p>
+<p class="more"><a href="posts/the-art-of-assert.html">Read more…</a></p>
 </div>
     </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 

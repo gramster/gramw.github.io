@@ -16,6 +16,7 @@ vigesimal (base 20) were not unusual - for example, this was widespread
 in native American culture, including (with a novel variation) the
 Mayans. Duodecimal (base 12) has also played a role; we still have
 remnants in the groupings of dozens and gross.
+<!-- TEASER_END -->
 
 Once the numbers in the base group are exceeded, we need to group to
 represent larger numbers - for example in decimal we have units, tens,

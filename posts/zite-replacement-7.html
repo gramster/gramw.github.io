@@ -80,7 +80,9 @@ moving from IPython notebook to a library that I">
 <li>tweaking the code to parse content better </li>
 <li>moving from IPython notebook to a library that I can use to do batch operations as well as interactive exploration modifying the code do do parallel fetches - or more precisely, to operate asynchronously; because of the Python GIL I still have just one thread for now. But I can kick off up to 40 HTTP requests at a time which speeds things up a lot, as I have about 4000 sites I'm working with now;</li>
 <li>exploring the <a href="http://textblob.readthedocs.org/en/dev/">TextBlob library</a>, a library that sits above the <a href="http://www.nltk.org/">Python NLTK</a> and can parse sentences and words (more on that below)</li>
-<li>building a GUI application with <a href="https://wiki.python.org/moin/TkInter">Tkinter</a> that lets me quickly view feeds, terms, categories and articles, delete feeds, tweak category examplars and see the results, and so on. This has been invaluable in building up and fine tuning my category examplars, although it is still a work in progress. It's been somewhat painful as I haven't used Tk in about two decades but I've mostly got it to do what I want.</li>
+<li>building a GUI application with <a href="https://wiki.python.org/moin/TkInter">Tkinter</a> that lets me quickly view feeds, terms, categories and articles, delete feeds, tweak category examplars and see the results, and so on. This has been invaluable in building up and fine tuning my category examplars, although it is still a work in progress. It's been somewhat painful as I haven't used Tk in about two decades but I've mostly got it to do what I want.
+<!-- TEASER_END -->
+</li>
 </ul>
 <p>You can see a screenshot of the GUI below to get an idea of what it looks like:</p>
 <p><a href="../images/feedme_screenshot.png"><img alt="feedme app screenshot" src="../images/feedme_screenshot.png" title="feedme app screenshot"></a></p>
@@ -203,7 +205,7 @@ moving from IPython notebook to a library that I">
 <span class="sd">    """</span>
     <span class="n">article</span> <span class="o">=</span> <span class="n">title</span> <span class="o">+</span> <span class="s1">'. '</span> <span class="o">+</span> <span class="n">strip_tags</span><span class="p">(</span><span class="n">article</span><span class="p">)</span>
     <span class="c1"># replace non-ASCII chars with space. We keep '-', '.', ',', '\''.</span>
-    <span class="n">article</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r'[^A-Za-z0-9\.,\-</span><span class="se">\'</span><span class="s1">]+'</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
+    <span class="n">article</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[^A-Za-z0-9\.,\-</span><span class="se">\'</span><span class="s1">]+'</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
     <span class="c1"># Split on '.' and check first words to see if they should be lower-cased.</span>
     <span class="n">sentences</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
     <span class="n">article</span> <span class="o">=</span> <span class="s1">''</span>
@@ -231,7 +233,7 @@ moving from IPython notebook to a library that I">
         <span class="n">article</span> <span class="o">+=</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
 
     <span class="c1"># replace non-ASCII chars with space. We keep '-' and underscore.</span>
-    <span class="n">article</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r'[^A-Za-z0-9\-_</span><span class="se">\'</span><span class="s1">]+'</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
+    <span class="n">article</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[^A-Za-z0-9\-_</span><span class="se">\'</span><span class="s1">]+'</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
     <span class="c1"># Get the non-empty words that aren't stop words, and while</span>
     <span class="c1"># we are at it, fix up underscores in noun phrases.</span>
     <span class="n">terms</span> <span class="o">=</span> <span class="p">[</span><span class="n">term</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'_'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">)</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">article</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">term</span><span class="p">)</span> \
@@ -245,7 +247,24 @@ moving from IPython notebook to a library that I">
 </tr></table>
 <p>The next step for me is to start using my category examplars to categorize new articles on a daily basis so I have a manageable quantity I can sanity check. With a bit more tuning I want to build a simple web front end to this so I can open it up for others to try and provide feedback. Watch this space!</p>
 </div>
-    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+    </section><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>

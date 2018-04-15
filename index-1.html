@@ -146,58 +146,9 @@ turn that into a <a href="http://www.djvuzone.org/">DJVu</a> document (the Sony
 Reader doesn't actually support DJVu, but I imagine that there will be
 e-book readers soon that do - or at the least there's always the Nokia
 N800).</p>
-<p>Essentially, this app needs to do the following:</p>
-<ul>
-<li>host the AxWebBrowser Active/X control</li>
-<li>have a 'Capture' button that, when clicked, will grab the entire
-    page as an image and write it to a JPEG file</li>
-</ul>
-<p>The first part is easy. The second part involves a couple of steps:</p>
-<ul>
-<li>resizing the host form so that the full page fits with no scroll
-    bars</li>
-<li>somehow grabbing the contents of this form</li>
-</ul>
-<p>It took a little while to figure out hwo to solve the first problem, but
-once you know it's easy:</p>
-<pre class="code literal-block"><span></span>IHTMLDocument2 doc = (IHTMLDocument2)webBrowser.Document;
-IHTMLElement2 body = (IHTMLElement2)doc.body;
-this.Width += (body.scrollWidth - webBrowser.Width);
-this.Height += (body.scrollHeight - webBrowser.Height);
-</pre>
-
-
-<p>However, the second problem is really hard. I already had some code I'd
-written which does window captures. The problem is that if the window is
-obscured or clipped anywhere it gets no content for that area. Given
-that I am typically resizing the form to have a height much larger than
-my display's physical resolution I'm almost always going to have
-clipping occur.</p>
-<p>In .Net 2.0 there is an alternative, namely
-<font face="Courier">Control.DrawToBitmap</font>. That actually works
-wonderfully for WinForms controls - but it does not draw anything for
-Active X controls (or at least not for AxWebBrowser). My understanding
-is that the control must be able to handle WM_PRINT messages, although
-I'm not entirely convinced of this explanation, because it is
-inconsistent with my experience with
-<font face="Courier">PrintWindow</font> (see below).</p>
-<p>I tried calling <font face="Courier">RaisePaintEvent</font> on the form
-and passing in a Graphics object created from a bitmap - but that
-doesn't work either. Only the form is drawn, not any of the child
-controls (so all you really get in most cases is a blank image with a
-border).</p>
-<p>I tried P/Invoking <font face="Courier">PrintWindow</font> from
-user32.dll, but that suffers from the same clipping problem that my
-original window grabbing code has. So I'm still stumped here. Watch this
-space to see if I find a solution. In the meanwhile, if you don't have
-Active/X controls to worry about, I recommend
-<font face="Courier">Control.DrawToBitmap</font>; it is simple and works
-well.</p>
-<p><em>Update:</em> I found my code that accesses the ActiveX control broke with
-IE7. I rewrote it using the Windows.Forms.WebBrowser classes in .Net
-2.0. They work fine. There is still no Control.DrawToBitmap though,
-presumably because these classes are just wrapping the underlying
-ActiveX control.</p>
+<p>Essentially, this app needs to do the following:
+</p>
+<p class="more"><a href="posts/capturing-the-elusive-form.html">Read more…</a></p>
 </div>
     </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
@@ -311,25 +262,9 @@ contenders seemed to be Bob Walsh's own <a href="http://safarisoftware.com/">Mas
 Professional</a>, which is very reasonably
 priced at \$25, and a Ukrainian product called <a href="http://www.mylifeorganized.net/">MyLife
 Organized</a>, which costs \$60. I
-downloaded both and tried using them.</p>
-<p>Sadly (as I like everything else I've seen from Bob Walsh) Masterlist
-Professional got eliminated almost immediately because it supports only
-flat lists (projects broken into items). MyLife Organized, on the other
-hand, supports tree structured hierarchical lists, which I find more
-appropriate. So I'm about 5 days into the trial and am using MLO daily.
-However, I find the price to be pretty exhorbitant for what is
-essentially a glorified todo list manager. I could probably write my own
-subset of MLO that does what I need in a few hours in C#, and that
-gives me the added benefits of (i) being able to customise it to my
-liking and (ii) being able to sell it later if it is good enough. Watch
-this space.</p>
-<p>So far the biggest drawback of MLO seems to be that using the Pocket PC
-version to try to keep two PCs in sync does not work; things get messed
-up quickly. The developers suggest using a USB thumb drive to carry
-thedaya file around on, but I opted for synching the data file to my
-subversion server.</p>
-<p>Unrelated note: Windows LiveWriter works great! It may make me update
-this blog a lot more regularly.</p>
+downloaded both and tried using them.
+</p>
+<p class="more"><a href="posts/organizing-life.html">Read more…</a></p>
 </div>
     </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 
@@ -367,49 +302,9 @@ that stage I had quite a bit of experience with SNMP, having recently
 implemented RMON while working for Mosaic Software. It seemed that there
 was a lack of good network management software, and what was available
 was hugely expensive (HP OpenView pretty much had the market). We felt
-that we could build a worthy competitor to OpenView based on FreeBSD.</p>
-<p>Our first job was to raise money, and for that I wrote a network-enabled
-clone of HP's advmail X400 mail client for Wooltru. HP's client had to
-run on the same machine as the server, which didn't scale at all in
-large enterprises like Wooltru. IBM had sold Wooltru a RS6000 server and
-OpenMail license, but this was just not going to work, and heads were
-about to roll. HP wouldn't commit to fixing this, but referred Wooltru
-to a British company that did a lot of OpenMail development. They said
-it would take at least 9 months and several million pounds to fix
-advmail. We told Wooltru we would write them a complete clone of advmail
-that worked over TCP/IP in six weeks, for about \$15,000 (yes, we were
-naive, at least in our pricing, but this was South Africa, and that
-seemed like a lot of money). It took me four weeks (working 16 hour
-days, 7 days a week) to deliver an almost bug-free system that Wooltru
-used for several years as a mail client for (IIRC) about 50,000 staff.
-That still ranks as one of my two greatest programming feats (my partner
-Ian thankfully wrote the text for the hypertext help system - which was
-a feature unique to our version; HP's didn't have any).</p>
-<p>I used the C++ class library I built on top of ncurses for advremote as
-the basis for the SNMP browser, which I started working on after
-advremote (our name for our client). It took about two weeks to build a
-pretty cool (albeit text mode) SNMP browser/manager app. However, IBM
-(through whom we had done the Truworths work) then kept me real busy
-writing vertical applications for the beverage retail industry for the
-next six months, and the SNMP work gathered dust, which is probably why
-I have now all but forgotten about it. Because six months later Aztec
-Information Management asked us to write a management front-end for the
-Firewall Toolkit (fwtk). And when I saw the awful code in fwtk, and
-decided to write my own toolkit in C++, we ended up with our eventual
-product, the Citadel Firewall, almost by accident. In less than a year
-we changed our names from Open Mind Solutions (oms.co.za) to Citadel
-Data Systems (cdsec.com), and the rest is history (for me, anyway). CDS
-was eventually bought out by CEQURUX Technologies BV; Ian took cash and
-went on to do an MBA in France and became a venture capitalist, while I
-took shares and stayed on at CEQURUX - who then fell victim to the dot
-com bubble burst. This left me near broke at age 37 and resulted in my
-move to the USA. Ce'st la vie.</p>
-<p>One point of note in my trawling - my CD-R's go back to 1996. The ones
-burnt then are largely unreadable now. It seems anything more than one
-directory level deep is lost, and a fair bit more beside. Those burnt in
-1998 also have problems, although they're mostly okay. Anecdotaly I
-would put the lifetime of a CD-R backup now at no more than 5 years. You
-have been warned.</p>
+that we could build a worthy competitor to OpenView based on FreeBSD.
+</p>
+<p class="more"><a href="posts/digital-reflection.html">Read more…</a></p>
 </div>
     </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
 

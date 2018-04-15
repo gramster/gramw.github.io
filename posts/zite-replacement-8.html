@@ -86,7 +86,8 @@ good day t get back to things.</p>
 the code to populate a MongoDB database rather than writing files to the file 
 system. Interestingly it seems to be quite a bit slower than the file system 
 but hopefully it will scale better and make up for things when I have ad-hoc
-queries to do.</p>
+queries to do.
+<!-- TEASER_END --></p>
 <p>I hadn't used MongoDB before so it was a learning opportunity. Mongo is a 
 no-SQL database that stores <em>collections</em> of <em>documents</em> in its databases,
 rather than tables of records, so it is well suited
@@ -175,7 +176,7 @@ things very simple. The initial code in my fetcher looks like this:</p>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">pymongo</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
     <span class="n">con</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">()</span>
     <span class="c1"># Creates DB if needed</span>
     <span class="n">db</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">feed_database</span>
@@ -252,8 +253,8 @@ uses the Python thread library, so the code continues:</p>
 <td class="code">
 <pre class="code literal-block"><span></span><span class="k">class</span> <span class="nc">Fetcher</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">articles</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">,</span> <span class="n">stop_words</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Fetcher</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">articles</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">,</span> <span class="n">stop_words</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Fetcher</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="n">queue</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_start</span> <span class="o">=</span> <span class="n">start</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_articles</span> <span class="o">=</span> <span class="n">articles</span>
@@ -279,7 +280,24 @@ uses the Python thread library, so the code continues:</p>
 </td>
 </tr></table>
 </div>
-    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+    </section><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>

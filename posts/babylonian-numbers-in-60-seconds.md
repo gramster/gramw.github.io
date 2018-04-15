@@ -24,6 +24,7 @@ as it has a large number of factors; in particular it can represent 1/2,
 notation can be used to exactly represent any fraction in which the
 denominator has prime factors of 2, 3, and/or 5 (as these are the prime
 factors of 60), with a finite number of symbols.
+<!-- TEASER_END -->
 
 Interestingly, both cultures did not have 60 distinct symbols but still
 used base 10 representation for numbers in the range 0..59, with narrow

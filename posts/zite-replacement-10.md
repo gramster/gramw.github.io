@@ -13,6 +13,7 @@ feel I need a lot more sources than the ~4000 I have right now, as well as
 more categories. The latter is more complex and will take me back to some
 of my earlier explorations in clustering, etc. The former largely involves 
 mining more of the web to find useful sites.
+<!-- TEASER_END -->
 
 Currently doing a pull of the ~4000 sites takes several minutes on my 
 low-power server. If I want to scale to 10x or more polling is not ideal.

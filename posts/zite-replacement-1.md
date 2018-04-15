@@ -7,6 +7,7 @@
 The two most used apps on my phone are [Zite](http://zite.com/) and [Pocket](https://getpocket.com/). Unfortunately last year Zite was bought by Flipboard and has slowly been getting worse. Recently the top sticky article on Zite has been a post on migrating your preferences to Flipboard, but suggests Zite is not much longer for this world.
 
 This would be okay if Flipboard was a suitable replacement, but it isn't. It's very flashy (which I don't like), and just doesn't seem to get things right when it comes to serendipitous discovery of interesting content. My feeling is that it is probably a great app for people who are interested in news and pop culture, but my interests run more specialized; I want to read about certain programming languages and fields of math, computer science and statistics.
+<!-- TEASER_END -->
 
 A few days ago Zite had a half day outage and I decided that it was time to hedge my bets. If no-one else has made the app that I want, I'll just have to do it myself.
 

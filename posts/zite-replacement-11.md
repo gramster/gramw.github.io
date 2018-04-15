@@ -11,6 +11,7 @@ Just to recap, currently this is what I am doing:
 * I have a bunch of 'category exemplars', which are sets of key terms associated with a category. These are the things which currently require some manual work;
 * for each article, I extract the plain text, normalize capitalization, remove [stop words](https://en.wikipedia.org/wiki/Stop_words), then use [tf-idf](https://en.wikipedia.org/wiki/Tf-idf) to extract the set of most significant terms (I'm not yet doing [stemming](https://en.wikipedia.org/wiki/Stemming) although I'll probably start);
 * I then use a [distance metric](https://en.wikipedia.org/wiki/Metric_(mathematics)) from the exemplars to assign category scores to the articles. Provided the score exceeds a threshold the article will be considered to be in the category.
+<!-- TEASER_END -->
 
 The manual work right now comes in when I notice [false positives and negatives](https://en.wikipedia.org/wiki/False_positives_and_false_negatives). My basic web app has the ability to show me all the common terms that led to a categorization and/or missed terms leading to a missed categorization. I can use these to tweak the category exemplars to improve classification. Its not ideal; I would far prefer to make this all be automated. The plan is to make use of Wikipedia to help with generating category exemplars. I don't think that this will solve the problem entirely but I am hoping to add one level of abstraction here to potentially reduce the amount of tweaking required.
 

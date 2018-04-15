@@ -19,6 +19,7 @@ the code to populate a MongoDB database rather than writing files to the file
 system. Interestingly it seems to be quite a bit slower than the file system 
 but hopefully it will scale better and make up for things when I have ad-hoc
 queries to do.
+<!-- TEASER_END -->
 
 I hadn't used MongoDB before so it was a learning opportunity. Mongo is a 
 no-SQL database that stores *collections* of *documents* in its databases,

@@ -16,6 +16,7 @@ with all .Net Compact Framework apps. In many cases we're the only such
 app on the phone, so users understandably think its a bug in our
 program. We wish it was - in that case we could fix it - but there
 really isn't anything we can do other than complain.
+<!-- TEASER_END -->
 
 AFAIK the full set of phones affected is:
 

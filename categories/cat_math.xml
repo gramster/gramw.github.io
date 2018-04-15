@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Math)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/cat_math.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 15 Apr 2018 17:13:36 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Some Math Magazines</title><link>https://www.grahamwheeler.com/posts/math-magazines.html</link><dc:creator>geekraver</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://www.quantamagazine.org/"&gt;Quanta&lt;/a&gt;
+ is really a science magazine but has good articles of
+interest to math fans.
+&lt;a href="http://www.mth.uct.ac.za/outreach/digest/archive.php"&gt;Mathematical Digest&lt;/a&gt;
+ is a magazine that
+has been produced for nearly 50 years now by Professor John
+Webb of the University of Cape Town. I grew up on these in high
+school and along with Martin Gardner's columns they fuelled my
+love of math. I was privileged to be instructed by Prof. Webb
+as an undergraduate math student as well; he was regularly
+awarded honors as a distinguished teacher and these were
+well-deserved.&lt;/p&gt;
+&lt;p&gt;Finally, there is &lt;a href="http://freespace.virgin.net/ianstewart.joat/MANIFOLD/manifold_main.html"&gt;Manifold&lt;/a&gt;,
+a student magazine of the University
+of Warwick, which is where the well-known math professor and
+writer Dr Ian Stewart hails from. I haven't looked at these yet
+but expect them to be interesting.&lt;/p&gt;
+&lt;p&gt;If you know of other sources of such magazines let me know in the
+comments!&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/math-magazines.html</guid><pubDate>Sat, 25 Apr 2015 07:00:00 GMT</pubDate></item><item><title>A Christmas Carroll</title><link>https://www.grahamwheeler.com/posts/a-christmas-carroll.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;On Christmas day, 1877, Lewis Carroll, author of the Alice books,
+entertained two bored young girls by inventing a new game that he called
+Word Links: given two words, change one word to the other by changing a
+single letter at a time with the intermediate steps all being valid
+words themselves. For example, to change "cold" to "warm", one can use
+the steps "cord", "card", "ward". Carroll later popularised this form of
+puzzle in a series of articles in Vanity Fair magazine, changing the
+name to Doublets - from the "double, double, toil and trouble" witches'
+incantation in Shakespeare's Macbeth.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/a-christmas-carroll.html"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/a-christmas-carroll.html</guid><pubDate>Wed, 30 Mar 2011 05:11:00 GMT</pubDate></item><item><title>The Gym Locker Paradox</title><link>https://www.grahamwheeler.com/posts/the-gym-locker-paradox.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;It happens so often - you go to your section of the gym change room, and
+there is just one other person there, and they are using the locker next
+to yours and blocking the way. I noticed this a long time ago, and
+noticed that others noticed it too, referring to Murphy’s law, or “just
+my luck”, or some such explanation. Why does it happen so often?&lt;/p&gt;
+&lt;p&gt;I call this the &lt;em&gt;Gym Locker Paradox&lt;/em&gt;. It is related to a much more well
+known paradox, the &lt;em&gt;&lt;a href="http://en.wikipedia.org/wiki/Birthday_paradox"&gt;Birthday
+Paradox&lt;/a&gt;&lt;/em&gt;, which is
+commonly formulated as a puzzle: how many people do you need to have in
+a room together before the odds are better than even that two share the
+same birthday?
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/the-gym-locker-paradox.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/the-gym-locker-paradox.html</guid><pubDate>Thu, 20 Jan 2011 14:02:00 GMT</pubDate></item><item><title>The Calculus of Democracy</title><link>https://www.grahamwheeler.com/posts/the-calculus-of-democracy.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;Earlier this year I went to a “guys movie night” at a friends house.
+Before the movie we sat around drinking Croatian Schnapps and eating
+Chinese food, and the conversation turned to politics. There was general
+agreement that our various political systems were highly suspect and not
+very democratic, but Ray, the Texan lawyer with the Croatian wife who
+had provided the schnapps, explained the Australian system of instant
+runoffs and asserted that this was at last a fair system.&lt;/p&gt;
+&lt;p&gt;For those not familiar with this system, let me explain: voters get to
+rank the candidates in order of preference. The votes for everyone’s
+first preference are counted, and the candidate who gets the least votes
+is eliminated. That candidate is also struck from the voters choices and
+the process is repeated until there is a candidate that has more than
+50% of the vote.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/the-calculus-of-democracy.html"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/the-calculus-of-democracy.html</guid><pubDate>Tue, 20 Jul 2010 12:03:00 GMT</pubDate></item><item><title>Fibonacci ties it all together</title><link>https://www.grahamwheeler.com/posts/fibonacci-ties-it-all-together.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;In the past few posts I have discussed a diverse set of topics, from
+number representation to recurrence relations, Pythagorean triples.&lt;/p&gt;
+&lt;p&gt;All of these topics are related, and this is particularly illustrated
+when we consider the work of Leonardo of Pisa, better known as Fibonacci
+(from the Latin “de filiis Bonacci”, or “of the family of Bonacci”).
+Fibonacci was born in 1175, in Pisa, Italy, shortly after the start of
+the construction of the famous leaning tower. The city of Pisa was a
+maritime republic which had its own colonies, including Bugia (in modern
+day Algeria), where Leonardo’s father moved in 1192 to be a clerk in the
+customs house. It was here that Fibonacci became acquainted with the
+Hindu numerals and zero, and where his Muslim teacher introduced him to
+the the great book &lt;em&gt;&lt;a href="http://magimathics.com/much-ado-about-nothing"&gt;Al-Jabr
+wal-Muqabalah&lt;/a&gt;&lt;/em&gt;.
+Fibonacci subsequently travelled broadly, where he learnt from
+mathematicians of different cultures. Around 1200 he returned to Pisa
+and began work on his masterpiece &lt;em&gt;Liber Abaci&lt;/em&gt;, which was published in
+1202, and begins with these words:
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/fibonacci-ties-it-all-together.html"&gt;Read more…&lt;/a&gt; (4 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/fibonacci-ties-it-all-together.html</guid><pubDate>Wed, 20 Jan 2010 13:37:00 GMT</pubDate></item><item><title>The Horn of Gabriel</title><link>https://www.grahamwheeler.com/posts/the-horn-of-gabriel.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;“&lt;a href="http://bible.cc/revelation/11-15.htm"&gt;&lt;/a&gt;&lt;em&gt;And the seventh angel sounded
+[his horn]; and there were great voices in heaven, saying, The kingdoms
+of this world are become the kingdoms of our Lord, and of his Christ;
+and he shall reign for ever and ever.”&lt;/em&gt; (Revelations 11.15, King James
+Edition)&lt;/p&gt;
+&lt;p&gt;In Christian and Islamic folklore, it is the angel Gabriel who is
+considered to be the seventh angel, who announced the coming of
+judgement day. An angel with such a huge responsibility clearly needs an
+instrument worthy of the task, and indeed there is one: Gabriel’s horn,
+also known as Torricelli’s trumpet, after its discoverer, Evangelista
+Torricelli, a student of Galileo. Gabriel’s horn has infinite surface
+area but finite volume, and is described the rotating the curve
+\(y=\frac{1}{x}\) for \(x \geq 1\) around the \(x\) axis.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/the-horn-of-gabriel.html"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/the-horn-of-gabriel.html</guid><pubDate>Mon, 18 Jan 2010 14:48:00 GMT</pubDate></item><item><title>More on Pythagoras</title><link>https://www.grahamwheeler.com/posts/more-on-pythagoras.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;Pythagoras is known for two great contributions to mathematics – he
+established the need for formal proofs instead of just conjecture and
+rules of thumb, and he established the existence of the irrationals. In
+popular culture of course, Pythagoras is more well known for the
+Pythagorean theorem – that the square of the hypotenuse of a right
+angled triangle is the sum of the squares of the other two sides – but
+this was one of the oldest known results in mathematics and in fact
+predates Pythagoras by as much as a thousand years. Nonetheless,
+Pythagoras provided a formal proof, and the result led him to ask
+whether there were rational numbers that worked in the case where the
+hypotenuse had the length two. That is, what was the fractional
+representation of the square root of two? Pythagoras managed to show
+there was none, leading to the discovery of the irrational numbers.&lt;/p&gt;
+&lt;p&gt;His proof was quite simple. Assume that \(\sqrt{2}\) can be
+expressed as a fraction \(\frac{a}{b}\) of two whole
+numbers \(a\) and \(b\). Assume these are the two smallest
+such whole numbers – that is, they have no common divisor allowing the
+fraction to be further reduced. Then:
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/more-on-pythagoras.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/more-on-pythagoras.html</guid><pubDate>Sun, 17 Jan 2010 11:12:00 GMT</pubDate></item><item><title>Much Ado about Nothing</title><link>https://www.grahamwheeler.com/posts/much-ado-about-nothing.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;Many people have heard that the number zero was introduced later than
+the other digits. Upon hearing this it seems fantastical - how could
+people have managed even elementary arithmetic without zero? However, it
+is not the concept of “nothing” that was missing, but rather the use of
+a zero in other places when representing or recording numbers. For
+example, in the number 101, zero is used as a separator, and it is this
+concept that was lacking in early number systems.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/much-ado-about-nothing.html"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/much-ado-about-nothing.html</guid><pubDate>Wed, 13 Jan 2010 13:53:00 GMT</pubDate></item><item><title>Primal Soup</title><link>https://www.grahamwheeler.com/posts/primal-soup.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/images/image9.png" style="float:right;size:35%;margin:10px"&gt;&lt;img alt="image" src="https://www.grahamwheeler.com/images/image_thumb9.png" title="image"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Number theory really began with Euclid, around 300BC, in books 7 through
+9 of his masterwork, &lt;em&gt;The Elements&lt;/em&gt;. It is here that we find the
+original definitions of odd and even numbers, prime and composite
+numbers, perfect numbers (numbers which are the sum of their factors,
+e.g. 6 = 3 + 2 + 1), and more. But the greatest achievements of all were
+his proofs that composite numbers are the products of primes, that this
+factorization is unique, and that there are an infinity of primes. Most
+introductory algebra or number theory classes cover these three great
+proofs, but they are worth revisiting for those who may have forgotten.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/primal-soup.html"&gt;Read more…&lt;/a&gt; (4 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/primal-soup.html</guid><pubDate>Wed, 06 Jan 2010 14:54:00 GMT</pubDate></item><item><title>Archimedes counts the sand</title><link>https://www.grahamwheeler.com/posts/archimedes-counts-the-sand.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;In a &lt;a href="http://www.magimathics.com/babylonian-numbers-in-60-seconds"&gt;previous
+post&lt;/a&gt;
+I described the Babylonian/Sumerian sexagesimal (base 60) counting
+system. Unlike this system, most cultures adopted a base 10 counting
+system due to the natural inclination to count with the fingers (leading
+to the term &lt;em&gt;digits&lt;/em&gt;). Less common were quinary (base 5) systems, but
+vigesimal (base 20) were not unusual - for example, this was widespread
+in native American culture, including (with a novel variation) the
+Mayans. Duodecimal (base 12) has also played a role; we still have
+remnants in the groupings of dozens and gross.
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/archimedes-counts-the-sand.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://www.grahamwheeler.com/posts/archimedes-counts-the-sand.html</guid><pubDate>Tue, 05 Jan 2010 14:48:00 GMT</pubDate></item></channel></rss>

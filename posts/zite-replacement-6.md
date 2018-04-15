@@ -17,6 +17,7 @@ Following on from last episode, I took some of the clusters that had clear cohes
             "recipe", "flour", "sugar", "butter", "cups", "cup", "teaspoon", "tablespoons", "vanilla"]}
 
 Note that these are deliberately in the same format as the articles in articles.txt, although without as many fields.
+<!-- TEASER_END -->
 
 I then modified the code that reads in the articles file and calculates the TF-IDF similarity matrix to first read this file (categories.txt) so that these become the first 4 articles, then I recomputed the matrix.
 

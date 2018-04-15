@@ -19,6 +19,7 @@ In particular, the preprocessor in C and C++ provides a very flexible
 assertion mechanism that is much more useful then System.Diagnostics.
 I'd like to cover some useful ways of using assertions in C and C++. Of
 course if you're an Eiffel programmer, you can probably stop reading ;-)
+<!-- TEASER_END -->
 
 In the code below, I will assume the existence of a library function
 **HandleAssert(char\* message**), which does appropriate assertion

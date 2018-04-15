@@ -18,6 +18,7 @@ are a bit of a joke. So I thought I'd write my own app using Window
 Image Acquisition to do this. My original plan was to write something
 that hooked the button event and then slept in the notification tray,
 waking up when the button gets pressed.
+<!-- TEASER_END -->
 
 Of course, things are never that easy. I wrote the initial code, but the
 events never came to me (I've since discovered that the Epson sends a
