@@ -96,8 +96,7 @@ This  equation needs to stop somewhere to be useful; we know that one
 disc takes one move so we know that \\(S_{1} = 1\\). So we can write
 the complete recursive definition of \\(S_{n}\\) as:
 
-$$S_{n} = \left\{ \begin{array}{ll} 2 S_{n-1} + 1 & \mbox{if
-} n>1 \\ 1 & \mbox{if } n=1 \end{array} \right.$$
+$S_{n} = \left\{ \begin{array}{ll} 2 S_{n-1} + 1 & \mbox{if} n>1 \\ 1 & \mbox{if } n=1 \end{array} \right.$
 
 Equations like this, where we define sequence terms in terms of earlier
 sequence terms, are called ***recurrence** **relations*** or
