@@ -25,6 +25,7 @@ expressed as a fraction \\(\frac{a}{b}\\) of two whole
 numbers \\(a\\) and \\(b\\). Assume these are the two smallest
 such whole numbers – that is, they have no common divisor allowing the
 fraction to be further reduced. Then:
+<!-- TEASER_END -->
 
 $$\frac{a^2}{b^2} = 2$$
 

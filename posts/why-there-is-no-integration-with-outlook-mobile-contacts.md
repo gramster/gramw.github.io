@@ -15,6 +15,7 @@ well, and we planned to ship this in our v2 release in July '07. Shortly
 before our release date, Google released an update to their Windows
 Mobile map app, and they had the feature. So we immediately decided to
 test to make sure we played nicely together.
+<!-- TEASER_END -->
 
 Unfortunately, we found that if you installed GMM and then installed
 Live Search, and then you selected the 'Map in Google Maps' menu option,

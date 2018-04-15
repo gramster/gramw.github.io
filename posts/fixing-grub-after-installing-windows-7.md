@@ -17,6 +17,7 @@ tried using EasyBCD but this time when trying to boot Ubuntu I ended up
 at a GRUB prompt, and I could not access my Ubuntu partition (more
 precisely, while "root (hd0,2)" worked, "kernel /vmlinuz" threw errrors
 and I could not boot).
+<!-- TEASER_END -->
 
 In the end I got things working using the Ubuntu live CD and
 reinstalling GRUB. However, it required more than just doing a

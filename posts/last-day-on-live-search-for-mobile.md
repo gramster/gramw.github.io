@@ -25,6 +25,7 @@ different jobs we decided to try stick together, and managed to find a
 home in local search. We had three months to get the v1.0 product out,
 and it was a hit! We got an awful lot of fan mail from that (and if you
 were a sender, thanks! We've always appreciated the love :-) ).
+<!-- TEASER_END -->
 
 After that the original monkey team gradually split up until only Ashley
 and I were left, but since December the team has been growing

@@ -13,6 +13,7 @@ documents that I can either spend some effort on normalizing to put into a SQL
 database, or simply keep them as is and put them in a database that supports 
 that form, and the obvious choice then is [MongoDB](https://www.mongodb.org/), 
 which uses a binary form of JSON.
+<!-- TEASER_END -->
 
 As for what to use to handle network requests, there I am torn between
 [Tornado](http://www.tornadoweb.org/en/stable/)

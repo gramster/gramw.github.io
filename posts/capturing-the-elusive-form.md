@@ -19,6 +19,7 @@ e-book readers soon that do - or at the least there's always the Nokia
 N800).
 
 Essentially, this app needs to do the following:
+<!-- TEASER_END -->
 
 -   host the AxWebBrowser Active/X control
 -   have a 'Capture' button that, when clicked, will grab the entire

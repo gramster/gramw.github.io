@@ -22,6 +22,7 @@ and others that may need addressing to reach our full potential.
 
 So how does this relate to teams and management? We can come up with a similar set of needs for healthy teams 
 and team members:
+<!-- TEASER_END -->
 
 * physiological - this goes without saying unless you're trying to operate in a war zone
 * safety - as a tech worker, this usually isn't an issue so I'll take it as a given too

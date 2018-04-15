@@ -19,6 +19,7 @@ first preference are counted, and the candidate who gets the least votes
 is eliminated. That candidate is also struck from the voters choices and
 the process is repeated until there is a candidate that has more than
 50% of the vote.
+<!-- TEASER_END -->
 
 ![Marquis de Condorcet](/images/Marquis_de_condorcet_hd.jpg "Marquis de Condorcet"){: style="float:right;size:35%;margin:10px"}
 This seems fair on the surface - if someone obviously gets too few votes they

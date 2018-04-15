@@ -15,6 +15,7 @@ come from a test version of the app we run on the desktop; the menus at
 the top will be on the bottom on your phone, accessible via the two
 softkeys; I just used the desktop version here as it was quicker for
 me):
+<!-- TEASER_END -->
 
 [![image](/images/address1.jpg)](/images/address1.jpg)
 

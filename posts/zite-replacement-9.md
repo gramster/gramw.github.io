@@ -13,6 +13,7 @@ to a set of category exemplars (i.e. 'pseudo-articles' for a category
 containing just key words that are typical for that category). It needs a
 lot of tuning and the earlier tkInter program was meant for that but tkInter 
 proved to have problems. So time to use some more modern techologies!
+<!-- TEASER_END -->
 
 I gave an overview of node in an earlier article; if you have no familiarity
 with node you should go read that first. I'm not going to go into 

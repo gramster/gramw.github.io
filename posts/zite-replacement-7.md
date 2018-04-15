@@ -10,6 +10,7 @@ It's been a while since the last post but I haven't been idle. Here are some of 
  - moving from IPython notebook to a library that I can use to do batch operations as well as interactive exploration modifying the code do do parallel fetches - or more precisely, to operate asynchronously; because of the Python GIL I still have just one thread for now. But I can kick off up to 40 HTTP requests at a time which speeds things up a lot, as I have about 4000 sites I'm working with now;
  - exploring the [TextBlob library](http://textblob.readthedocs.org/en/dev/), a library that sits above the [Python NLTK](http://www.nltk.org/) and can parse sentences and words (more on that below)
  - building a GUI application with [Tkinter](https://wiki.python.org/moin/TkInter) that lets me quickly view feeds, terms, categories and articles, delete feeds, tweak category examplars and see the results, and so on. This has been invaluable in building up and fine tuning my category examplars, although it is still a work in progress. It's been somewhat painful as I haven't used Tk in about two decades but I've mostly got it to do what I want.
+<!-- TEASER_END -->
 
 You can see a screenshot of the GUI below to get an idea of what it looks like:
 

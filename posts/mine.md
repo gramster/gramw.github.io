@@ -18,6 +18,7 @@ So here it is. There are no fancy graphics, the field is just printed out as a 2
 To enter a move you use coordinates using a number for the row and letter for the column. E.g. 1C is the
 first row, third column (rows are numbered from 1, not 0). You can plant a flag (or clear it) by preceding 
 your move with a '-'.
+<!-- TEASER_END -->
 
 At some point I might look at using PyQt or something to turn it into a mouse-driven more attractive looking
 game. But the interesting stuff is the recursive traversal of the board.

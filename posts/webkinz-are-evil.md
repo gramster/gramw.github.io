@@ -18,6 +18,7 @@ Meanwhile my wife starts complaining from upstairs that the network has
 slowed to a total crawl; not only can't she browse but even the LAN is
 pretty hosed, with Outlook frozen up while trying to send an e-mail to
 the local Exchange server in the next room.
+<!-- TEASER_END -->
 
 So I'm listening to this fussing from downstairs and up, and eventually
 we kill the Webkinz window - and I hear 'Finally!' from upstairs. We try

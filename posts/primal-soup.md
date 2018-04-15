@@ -17,6 +17,7 @@ his proofs that composite numbers are the products of primes, that this
 factorization is unique, and that there are an infinity of primes. Most
 introductory algebra or number theory classes cover these three great
 proofs, but they are worth revisiting for those who may have forgotten.
+<!-- TEASER_END -->
 
 Before doing so, it is worth revisiting Euclid’s clever algorithm for
 calculating the greatest common divisor (GCD) of two numbers. We made

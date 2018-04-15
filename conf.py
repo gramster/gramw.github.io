@@ -640,7 +640,7 @@ IMAGE_FOLDERS = {'images': 'images'}
 # )
 
 # Show only teasers in the index pages? Defaults to False.
-# INDEX_TEASERS = False
+INDEX_TEASERS = True
 
 # HTML fragments with the Read more... links.
 # The following tags exist and are replaced for you:
@@ -828,19 +828,19 @@ MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite', 'extra']
 # long time). Insert anything you want here, or even make it empty (which is
 # the default right now)
 # (translatable)
-# SOCIAL_BUTTONS_CODE = """
-# <!-- Social buttons -->
-# <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
-# <a class="addthis_button_more">Share</a>
-# <ul><li><a class="addthis_button_facebook"></a>
-# <li><a class="addthis_button_google_plusone_share"></a>
-# <li><a class="addthis_button_linkedin"></a>
-# <li><a class="addthis_button_twitter"></a>
-# </ul>
-# </div>
-# <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
-# <!-- End of social buttons -->
-# """
+SOCIAL_BUTTONS_CODE = """
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+<li><a class="addthis_button_google_plusone_share"></a>
+<li><a class="addthis_button_linkedin"></a>
+<li><a class="addthis_button_twitter"></a>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+"""
 
 # Show link to source for the posts?
 # Formerly known as HIDE_SOURCELINK (inverse)
@@ -855,7 +855,7 @@ MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite', 'extra']
 
 # By default, Nikola generates RSS files for the website and for tags, and
 # links to it.  Set this to False to disable everything RSS-related.
-GENERATE_RSS = False
+#GENERATE_RSS = False
 
 # By default, Nikola does not generates Atom files for indexes and links to
 # them. Generate Atom for tags by setting TAG_PAGES_ARE_INDEXES to True.

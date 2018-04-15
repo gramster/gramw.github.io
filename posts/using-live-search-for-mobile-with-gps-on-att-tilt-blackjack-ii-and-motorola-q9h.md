@@ -16,6 +16,7 @@ Driver, but Live Search does not know about these phones so by default
 GPS is not configured. Make sure you have Live Search set to use GPS
 Intermediate Driver (go to Menu-Settings from the main form to access
 the GPS settings).
+<!-- TEASER_END -->
 
 When you first say “Center on GPS” in the map, the phone needs to get
 the GPS ephemeris data (which tells it where the various satellites are

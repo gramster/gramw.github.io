@@ -9,6 +9,7 @@ It's been a long time since I last blogged. I've been meaning to for oh so long 
 Fortunately, I stumbled upon Peter Norvig's [article](http://norvig.com/sudoku.html) about solving Sudoku, and that has provided the impetus. His approach is probably the most sensible I have seen for a while; there seem to be some really bad solvers out there. I was unimpressed with the one by Skiena in the  [Algorithm Design Manual](http://www.algorist.com/),  although the truly ridiculous one has to be the so-overblown-I-took-a-whole-book approach in [Programming Sudoku](http://www.amazon.com/Programming-Sudoku-Technology-Action-Wei-Meng/dp/1590596625);  the mind simply boggles at how complex some people make trivial things.
 
 Because solving Sudoku is indeed trivial. There is nothing to it. All you need is a very simple backtracking search. I wrote the solver below originally more than 10 years ago in Javascript and it was used as a generator running on extremely low-powered Microsoft SPOT smart watches. For fun I dug it out, turned it into Python, and tested it on ["the world's hardest Sudoku puzzle"](https://www.kristanix.com/sudokuepic/worlds-hardest-sudoku.php). How fast can you blink?
+<!-- TEASER_END -->
 
 But still some people [make a big deal out of it all](https://gigaom.com/2012/10/12/meet-the-algorithm-thats-way-better-than-you-at-sudoku/)...
 

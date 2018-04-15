@@ -18,6 +18,7 @@ Paradox](http://en.wikipedia.org/wiki/Birthday_paradox)*, which is
 commonly formulated as a puzzle: how many people do you need to have in
 a room together before the odds are better than even that two share the
 same birthday?
+<!-- TEASER_END -->
 
 ![](/images/740px-TooManyPigeons.jpg){: style="float:left;width:40%;margin:10px"}
 

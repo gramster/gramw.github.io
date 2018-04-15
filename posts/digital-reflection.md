@@ -17,6 +17,7 @@ implemented RMON while working for Mosaic Software. It seemed that there
 was a lack of good network management software, and what was available
 was hugely expensive (HP OpenView pretty much had the market). We felt
 that we could build a worthy competitor to OpenView based on FreeBSD.
+<!-- TEASER_END -->
 
 Our first job was to raise money, and for that I wrote a network-enabled
 clone of HP's advmail X400 mail client for Wooltru. HP's client had to

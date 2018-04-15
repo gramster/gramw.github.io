@@ -9,6 +9,7 @@ My initial experience with clustering was somewhat disappointing. Its clear I ne
 
 For starters, using a fixed number of terms could lead to keeping a wildly different range of TF-IDF values for different articles. It makes more sense to have some threshold value and keep all terms that exceed the threshold. That may mean more than ten terms for some articles and less for others.
 
+<!-- TEASER_END -->
 Secondly, there is not much point in keeping terms that only appear in a single article. That term may be useful if we search articles based on terms, but it will not help much in computing Jacard distances. Some caution is needed here - dropping these terms does reduce the size of the term set and thus will reduce the union with any other article's term set, thus boosting the similarity that the first article has with all other articles. But as this gets boosted across the board, I don't expect it to be much of an issue.
 
 Finally, it may not be a bad idea to create some 'fake' term sets that can act as cluster centroids. I.e. for some topic, create a term set of terms that are particularly relevant and if possible unique to that topic. Using these as centroids we could simply assign each article to the closest centroid which is a straightforward task. Furthermore, we don't have to compute the $n ^ 2$ matrix of distances; if we have $m$ centroids we need only compute $n \times m$ distances, and if $m$ is fixed we essentially have a linear scaling approach.

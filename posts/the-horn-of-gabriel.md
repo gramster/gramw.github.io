@@ -20,6 +20,7 @@ also known as Torricelli’s trumpet, after its discoverer, Evangelista
 Torricelli, a student of Galileo. Gabriel’s horn has infinite surface
 area but finite volume, and is described the rotating the curve
 \\(y=\frac{1}{x}\\) for \\(x \geq 1\\) around the \\(x\\) axis.
+<!-- TEASER_END -->
 
 [![image](/images/image_thumb13.png "image")](/images/image13.png){: style="float:right;size:35%;margin:10px"}
 

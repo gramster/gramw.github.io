@@ -20,6 +20,7 @@ consists of:
 -   a desktop PC and a Tablet PC for me with Vista Ultimate
 -   an oldish Mac Mini G4 which was running Leopard
 
+<!-- TEASER_END -->
 I'm mostly pretty happy with Vista. I love the Media Center especially
 now with an HDHR attached (we only get \$15 limited cable). My kids have
 pretty good success running old games; I'd say about 90% of their games

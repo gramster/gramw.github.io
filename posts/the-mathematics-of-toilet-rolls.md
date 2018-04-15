@@ -17,6 +17,7 @@ The software they wanted me to write was meant to be able to be given a
 current position (i.e. play time) and advance to a new position. For
 example I might be told that they are at minute 8 currently and want to
 resume play at minute 12.
+<!-- TEASER_END -->
 
 [![Picture by Dvortygirl, licensed under GNU Free Documentation
 License](/images/image_thumb4.png "Picture by Dvortygirl, licensed under GNU Free Documentation License")](/images/image4.png){: style="float:right;size:45%;margin:10px"}

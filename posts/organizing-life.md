@@ -23,6 +23,7 @@ Professional](http://safarisoftware.com/), which is very reasonably
 priced at \$25, and a Ukrainian product called [MyLife
 Organized](http://www.mylifeorganized.net/), which costs \$60. I
 downloaded both and tried using them.
+<!-- TEASER_END -->
 
 Sadly (as I like everything else I've seen from Bob Walsh) Masterlist
 Professional got eliminated almost immediately because it supports only
