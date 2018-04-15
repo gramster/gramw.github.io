@@ -97,7 +97,10 @@ This  equation needs to stop somewhere to be useful; we know that one
 disc takes one move so we know that \\(S_{1} = 1\\). So we can write
 the complete recursive definition of \\(S_{n}\\) as:
 
-$$S_{n} = \left\{ \begin{array}{ll} 2 S_{n-1} + 1 & \mbox{if} n>1 \\ 1 & \mbox{if } n=1 \end{array} \right.$$
+$$ S_n = \begin{cases} 
+2S_{n-1} + 1 & \text{if } n > 1, \\\\
+1 & \text{if } n = 1. 
+\end{cases} $$
 
 Equations like this, where we define sequence terms in terms of earlier
 sequence terms, are called ***recurrence** **relations*** or
@@ -167,6 +170,11 @@ $$P_n = \frac{n (n+1)}{2} + 1$$
 
 Once again by induction:
 
-$$P_{n+1} = P_n + n + 1 = (\frac{n (n+1)}{2}+1) + n + 1 = \frac{n^2 + 2 + 2n}{2} + 1 = \frac{(n+1)(n+2)}{2}+1$$
+$$\begin{align}
+P_{n+1} & = P_n + n + 1 \\\\
+        & = (\frac{n (n+1)}{2}+1) + n + 1 \\\\
+        & = \frac{n^2 + 2 + 2n}{2} + 1 \\\\
+        & = \frac{(n+1)(n+2)}{2}+1
+\end{align}$$
 
 As for the Fibonacci sequence, that is a topic for another day!

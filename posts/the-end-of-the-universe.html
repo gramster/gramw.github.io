@@ -166,7 +166,10 @@ steps above):</p>
 <p>This  equation needs to stop somewhere to be useful; we know that one
 disc takes one move so we know that \(S_{1} = 1\). So we can write
 the complete recursive definition of \(S_{n}\) as:</p>
-<p>$$S_{n} = \left{ \begin{array}{ll} 2 S_{n-1} + 1 &amp; \mbox{if} n&gt;1 \ 1 &amp; \mbox{if } n=1 \end{array} \right.$$</p>
+<p>$$ S_n = \begin{cases} 
+2S_{n-1} + 1 &amp; \text{if } n &gt; 1, \\
+1 &amp; \text{if } n = 1. 
+\end{cases} $$</p>
 <p>Equations like this, where we define sequence terms in terms of earlier
 sequence terms, are called <strong><em>recurrence</em>* </strong>relations<strong><em> or
 </em></strong>difference equations<strong><em>, while known values like \(S_{1} = 1\)
@@ -215,7 +218,12 @@ a clear pattern emerges. It appears that:</p>
 <p>or:</p>
 <p>$$P_n = \frac{n (n+1)}{2} + 1$$</p>
 <p>Once again by induction:</p>
-<p>$$P_{n+1} = P_n + n + 1 = (\frac{n (n+1)}{2}+1) + n + 1 = \frac{n^2 + 2 + 2n}{2} + 1 = \frac{(n+1)(n+2)}{2}+1$$</p>
+<p>$$\begin{align}
+P_{n+1} &amp; = P_n + n + 1 \\
+        &amp; = (\frac{n (n+1)}{2}+1) + n + 1 \\
+        &amp; = \frac{n^2 + 2 + 2n}{2} + 1 \\
+        &amp; = \frac{(n+1)(n+2)}{2}+1
+\end{align}$$</p>
 <p>As for the Fibonacci sequence, that is a topic for another day!</p>
 </div>
     </section><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
@@ -258,8 +266,18 @@ a clear pattern emerges. It appears that:</p>
 
 
         </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
-        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-        </script></footer></article><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+    },
+    displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    }
+});
+</script></footer></article><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
 
     <script type="text/javascript" src="../assets/js/jquery.js"></script><script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../assets/js/index.js"></script><script>
