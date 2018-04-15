@@ -128,6 +128,19 @@
 <h4 id="Python-2.7-or-Python-3.x?">Python 2.7 or Python 3.x?<a class="anchor-link" href="posts/python-crash-course.html#Python-2.7-or-Python-3.x?">¶</a>
 </h4>
 <p>You can use conda to create a Python 2.7 virtual environment for when you have to use 2.7, but all new projects should be Python 3.5 or later. Python 2.7 is the end of the 2.x line and will be end-of-lifed on Jan 1, 2020; pandas, the main Python package for data science work, will drop 2.7 support at the end of 2018.</p>
+<h4 id="What-IDE-Should-I-Use?">What IDE Should I Use?<a class="anchor-link" href="posts/python-crash-course.html#What-IDE-Should-I-Use?">¶</a>
+</h4>
+<p>Many IDEs and editors have support for Python usually through plugins. If yours does, that's probably the best option. Examples are Atom, Visual Studio Code and Sublime Text. My personal go-to IDE is <a href="https://www.jetbrains.com/pycharm/">PyCharm</a> from JetBrains; it's not lightweight but it is arguably the most powerful option. There is a free community edition and a commercial version. You may also find <a href="https://www.techradar.com/news/best-ide-for-python">this article</a> comparing and recommending IDEs interesting, but strangely they never included PyCharm.</p>
+<h4 id="Installing-Python">Installing Python<a class="anchor-link" href="posts/python-crash-course.html#Installing-Python">¶</a>
+</h4>
+<p>If you're going to be doing data science, my recommendation is to use the <a href="https://www.anaconda.com/download/#macos">Anaconda distribution of Python</a>. It comes with most of the packages you will need already compiled and ready to use. If you don't need all of those extras you could install the <a href="https://conda.io/miniconda.html">stripped-down "Miniconda" version</a>. I suggest that you install for yourself only, which on Mac or Linux will put the installation in a subdirectory of your home directory.</p>
+<p>Note that Macs come with Python already installed. I still recommend installing Anaconda. You will need to add the Anaconda bin directory to your path before the system-installed Python path. On my Mac this means adding:</p>
+
+<pre><code>export PATH=/Users/gram/anaconda/bin:$PATH
+
+</code></pre>
+<p>to my .zshrc file (I use zsh as my shell). I've seen some recent installations use anaconda3 instead of anaconda as the directory name. If you install for all users then the directory would be relative to the root, not your home directory; i.e. /anaconda/bin or /anaconda3/bin. On Windows, Anaconda will add some commands to the start menu to allow you to launch a console with Python accessible, so you don't need to fiddle with paths. You can read more about installing <a href="https://conda.io/docs/user-guide/install/index.html">here</a>.</p>
+<p>If you prefer to get Python from the source, then on a Mac or Windows you should download and install from <a href="https://www.python.org/downloads/">here</a>. On Linux, follow the instructions <a href="http://docs.python-guide.org/en/latest/starting/install3/linux/">here</a>.</p>
 <h3 id="Python-docs">Python docs<a class="anchor-link" href="posts/python-crash-course.html#Python-docs">¶</a>
 </h3>
 <p><a href="https://docs.python.org/3/">https://docs.python.org/3/</a> has very detailed documentation.</p>
@@ -482,6 +495,16 @@
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>While it is true that Python is an OOPL in that everything is an object, Python does not impose OOP on you, unlike many other OOPLs. As you have seen so far, you can simply write and run one or more statements or expressions. Your code might consist of some top level statements and functions. There is no need to encapsulate everything explicitly inside a class. In that regard, Python can be considered a multi-paradigm language. You can write your code in an imperative, an object-oriented, or even, to some extent, a functional manner.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -7570,6 +7593,24 @@ Disassembly of print_my_class:
 <h4 id="Making-HTTP-Requests-and-Parsing-Responses">Making HTTP Requests and Parsing Responses<a class="anchor-link" href="posts/python-crash-course.html#Making-HTTP-Requests-and-Parsing-Responses">¶</a>
 </h4>
 <p>There are numerous ways to do this in Python, but the most commonly used libraries for these are <code>requests</code> (<a href="http://docs.python-requests.org/en/master/">http://docs.python-requests.org/en/master/</a>) and Beautiful Soup (<a href="https://www.crummy.com/software/BeautifulSoup/">https://www.crummy.com/software/BeautifulSoup/</a>); look at those first before considering anything else as they are powerful, stable, mature and easy to use. Kenneth Reitz, who wrote <code>requests</code>, has recently implemented a new library on top of both <code>requests</code> and Beautiful Soup: <a href="https://github.com/kennethreitz/requests-html">https://github.com/kennethreitz/requests-html</a></p>
+<h4 id="Packaging-your-Code-for-Distribution">Packaging your Code for Distribution<a class="anchor-link" href="posts/python-crash-course.html#Packaging-your-Code-for-Distribution">¶</a>
+</h4>
+<p>This guide has been written for people who are going to be writing most of their Python code in the Jupyter environment in which case distribution is not an issue. If you're wanting to build an installable package you can distribute, however, I think your best option is <a href="https://www.pyinstaller.org/">PyInstaller</a>. You should also structure your code files appropriately; you can find details of the recommended directory layout and necessary files that should be included <a href="http://docs.python-guide.org/en/latest/writing/structure/">here</a>.</p>
+<h3 id="So-you-want-to-write-a...">So you want to write a...<a class="anchor-link" href="posts/python-crash-course.html#So-you-want-to-write-a...">¶</a>
+</h3>
+<p>My use of Python is mostly scripting repetitive tasks and data science so I am not an expert in any of the below, but these pointers should get you headed in the right direction:</p>
+<h4 id="...Web-App">...Web App<a class="anchor-link" href="posts/python-crash-course.html#...Web-App">¶</a>
+</h4>
+<p>Wow! You are spoiled for choice! How on earth will be pick between the myriad options? Let me narrow it down for you: if you want a bare-bones framework a-la node.js, try <a href="http://flask.pocoo.org/">flask</a> (or if even that is too heavyweight, <a href="https://bottlepy.org/docs/dev/">bottle</a>). If you want everything plus the kitchen sink and a very opinionated chef, you will love <a href="https://www.djangoproject.com/">Django</a>; many big-name websites do. If you want something in-between, look at <a href="https://trypyramid.com/">Pyramid</a>, which would be my choice. If you're just building some REST server, take a look at <a href="http://python-eve.org/">Eve</a> or <a href="http://www.hug.rest/">Hug</a>.</p>
+<h4 id="...Mobile-Game-or-App">...Mobile Game or App<a class="anchor-link" href="posts/python-crash-course.html#...Mobile-Game-or-App">¶</a>
+</h4>
+<p>Python isn't your best bet for mobile, unfortunately, but people are trying. On an iPad, take a look at <a href="http://omz-software.com/pythonista/">Pythonista</a>, which is fantastic. Else your best bet is probably <a href="https://kivy.org/">Kivy</a>, but keep an eye on the up-and-coming <a href="https://pybee.org/">BeeWare</a>.</p>
+<h4 id="...Desktop-Game">...Desktop Game<a class="anchor-link" href="posts/python-crash-course.html#...Desktop-Game">¶</a>
+</h4>
+<p>Your two main choices here are <a href="https://www.pygame.org/">PyGame</a> (a wrapper over the very mature game library SDL), or <a href="http://arcade.academy/">PyArcade</a>, a newer library without the SDL dependency. If it was me I'd probably go with PyArcade; it's a more modern library and has some <a href="http://arcade-book.readthedocs.io/en/latest/">great teaching material</a>.</p>
+<h4 id="...Desktop-GUI-App">...Desktop GUI App<a class="anchor-link" href="posts/python-crash-course.html#...Desktop-GUI-App">¶</a>
+</h4>
+<p>There are three main options here: <a href="https://riverbankcomputing.com/software/pyqt/intro">PyQt</a>, which requires a license for the commercial Qt library so I wouldn't recommend this for most cases, <a href="https://www.wxpython.org/">wxPython</a> which is free and open source, and would be my recommendation, and <a href="https://wiki.python.org/moin/TkInter">TkIntr</a>, which is the "official" way to write GUI apps but IMO the results are ugly unless you take a lot of care. For something quick and dirty, TkIntr is the way to go, but if you want a native-looking polished cross-platform app, you should use one of the other two.</p>
 <h3 id="Great-Python-Books-and-Courses">Great Python Books and Courses<a class="anchor-link" href="posts/python-crash-course.html#Great-Python-Books-and-Courses">¶</a>
 </h3>
 <p>Michael Kennedy hosts two great podcasts (<a href="https://talkpython.fm/">https://talkpython.fm/</a>, and <a href="https://pythonbytes.fm/">https://pythonbytes.fm/</a>, with Brian Okken). He also has some high quality courses available at <a href="https://training.talkpython.fm/courses/all">https://training.talkpython.fm/courses/all</a></p>
