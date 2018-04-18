@@ -1,5 +1,592 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Programming)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/cat_programming.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 15 Apr 2018 17:13:36 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>A Python Crash Course</title><link>https://www.grahamwheeler.com/posts/python-crash-course.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Programming)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/cat_programming.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 18 Apr 2018 05:40:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Using Jupyter</title><link>https://www.grahamwheeler.com/posts/using-jupyter.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+    &lt;div class="container" id="notebook-container"&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;em&gt;(This is the second post in a series based off my Python for Data Science bootcamp I run at eBay occasionally). The first post was &lt;a href="https://www.grahamwheeler.com/posts/python-crash-course.html"&gt;a Python crash course&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jupyter.org/"&gt;Jupyter&lt;/a&gt; is an interactive computing environment that allows users to create heterogeneous documents called &lt;em&gt;notebooks&lt;/em&gt; that can mix executable code, &lt;a href="https://en.wikipedia.org/wiki/Markdown"&gt;markdown&lt;/a&gt; text with &lt;a href="https://www.mathjax.org/"&gt;MathJax&lt;/a&gt;, multimedia, static and interactive charts, and more. A notebook is typically a complete and self-contained record of a computation, and can be converted to various formats and shared with others. Jupyter thus supports a form of &lt;a href="https://en.wikipedia.org/wiki/Literate_programming"&gt;literate programming&lt;/a&gt;. Several of the posts on this blog started out as Jupyter notebooks. Jupyter is an extremely popular tool for doing data science in Python due to its interactive nature, good support for iterative and experimental computation, and ability to create a finished artifact combining both scientific text (with math) and code.&lt;/p&gt;
+&lt;p&gt;Jupyter the application combines three components:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;The notebook application&lt;/strong&gt;: An front-end interactive application for writing and running code interactively and authoring notebook documents. There are multiple different front-ends available, running on the CLI, natively, or in a browser. The most commonly used front-end is &lt;a href="http://jupyter.org/"&gt;Jupyter Notebook&lt;/a&gt; which runs in the browser, although it is due to be replaced by the newer &lt;a href="https://github.com/jupyterlab/jupyterlab"&gt;JupyterLab&lt;/a&gt; which is currently in beta. As of this writing (April 2018) I recommend using JupyterLab on Mac and Linux but Jupyter Notebook on Windows, as there seem to be some issues still with getting JupyterLab running on Windows. &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Kernels&lt;/strong&gt;: These are separate processes started by the notebook application that runs the user’s code in a given language and returns output back to the notebook application. The kernel also handles things like computations for interactive widgets, tab completion and introspection. The original kernel was Python and the old version of Jupyter that was for Python only was called IPython; the name was changed to Jupyter to remove the language dependency as kernels exist for a number of different languages now.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Notebook documents&lt;/strong&gt;: Self-contained documents (JSON text in files with .ipynb extension) that contain a representation of all content visible in the notebook application, including inputs and outputs of the computations, text, images, and more. A notebook can be &lt;em&gt;running&lt;/em&gt; which means it is attached to a kernel. Each notebook document has its own kernel.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Notebooks consist of a linear sequence of cells of various types:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Code cells&lt;/strong&gt;: live code that is run in the kernel, and the output from running that code&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Markdown cells&lt;/strong&gt;: text cells formatted with mrkdown with embedded LaTeX (MathJax) equations&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Heading cells&lt;/strong&gt;: Up to 6 hierarchical levels of header text (I usually don't use these and just put my headings in markdown cells, but using heading cells can be useful for outline views of a document or table of contents)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Raw cells&lt;/strong&gt;: Unformatted text that is included, without modification, when notebooks are converted to different formats using the conversion utility &lt;a href="https://nbconvert.readthedocs.io/en/latest/index.html"&gt;nbconvert&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Jupyter documentation is available at &lt;a href="https://jupyter-notebook.readthedocs.io/en/stable/"&gt;https://jupyter-notebook.readthedocs.io/en/stable/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="Installing-and-Running-JupyterLab-(Mac/Linux)"&gt;Installing and Running JupyterLab (Mac/Linux)&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Installing-and-Running-JupyterLab-(Mac/Linux)"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;On Mac and Linux, if you have the Anaconda distribution of Python, install JupyterLab with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;conda install -c conda-forge jupyterlab
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or with pip:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pip install jupyterlab
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and run with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;jupyter lab
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Jupyter Lab will open in a web browser tab displaying a main menu along the top, a file browser on the left listing the notebooks and files in the current directory, and a tabbed interface on the right for open notebooks, terminals, etc.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://jupyterlab.readthedocs.io/en/stable/_images/interface_jupyterlab.png" alt="https://jupyterlab.readthedocs.io/en/stable/_images/interface_jupyterlab.png"&gt;&lt;/p&gt;
+&lt;h3 id="Running-Jupyter-Notebook-(Windows)"&gt;Running Jupyter Notebook (Windows)&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Running-Jupyter-Notebook-(Windows)"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;On Windows, use Jupyter Notebook, which is installed as part of the Anaconda distribution, and can be launched directly from Anaconda Navigator or from an Anaconda Python console with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;jupyter notebook
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This should open a web browser pointing at the notebook dashboard, which displays the notebooks and files in the current directory.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://jupyter-notebook.readthedocs.io/en/stable/_images/dashboard_files_tab.png" alt="https://jupyter-notebook.readthedocs.io/en/stable/_images/dashboard_files_tab.png"&gt;&lt;/p&gt;
+&lt;p&gt;Jupyter Notebook uses separate browser tabs for each notebook and the filebrowser rather than integrating everything within one browser tab like JupyterLab; nonetheless is should be fairly straightforward to follow along).&lt;/p&gt;
+&lt;h3 id="Basic-Usage"&gt;Basic Usage&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Basic-Usage"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The top of the notebook list displays clickable breadcrumbs of the current directory. By clicking on these breadcrumbs or on sub-directories in the notebook list, you can navigate your file system.&lt;/p&gt;
+&lt;p&gt;To create a new notebook, use the menu option "File - New - Notebook" (JupyterLab), click on the “New” button at the top of the list and select a kernel from the dropdown menu. Which kernels are listed depend on what’s installed on the server.&lt;/p&gt;
+&lt;p&gt;The file manager shows a green dot next to running notebooks (as seen below). Notebooks remain running until you explicitly shut them down; closing the notebook’s page is not sufficient.&lt;/p&gt;
+&lt;p&gt;To view the running notebooks and shutdown a notebook, click the "Running" tab on the left side of the window, and then the "Shutdown" button next to the notebook in question.&lt;/p&gt;
+&lt;p&gt;To delete, duplicate, or rename a notebook right-click on it in the file browser; a context menu will show with these options along with others.&lt;/p&gt;
+&lt;p&gt;If you create a new notebook or open an existing one, you will be taken to the notebook user interface within a tab, which allows you to run code and author notebook documents interactively. The notebook UI has a toolbar at the top, followed by the notebook area below, which consists of one or more &lt;em&gt;cells&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The notebook UI is modal. If you click in a cell or press ENTER you enter "edit mode" and can type into the cell. If you click outside a cell or press ESC you will be in "command mode" which allows you to edit the notebook structure.&lt;/p&gt;
+&lt;p&gt;You can execute a code cell or render a markdown cell by pressing Shift-ESC. Focus will move to the next cell (a new cell will be created if you executed the last cell).&lt;/p&gt;
+&lt;p&gt;If for some reason your notebook kernel hangs (e.g. waiting on some I/O that never happens, or due to a long running process), you can interrupt the execution by selecting "Interrupt Kernel" from the Kernel menu.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Tutorial"&gt;Tutorial&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Tutorial"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;These tutorials are for the old Jupyter Notebook UX, not Jupyter Lab, but are still useful as there is much in common.&lt;/p&gt;
+&lt;p&gt;Basics: &lt;a href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html"&gt;https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jakevdp.github.io/blog/2017/03/03/reproducible-data-analysis-in-jupyter/"&gt;http://jakevdp.github.io/blog/2017/03/03/reproducible-data-analysis-in-jupyter/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="Markdown"&gt;Markdown&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Markdown"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Jupyter supports GitHub-flavored markdown; see &lt;a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf"&gt;https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf&lt;/a&gt; for a quick reference.&lt;/p&gt;
+&lt;h3 id="Re-ordering,-Inserting,-Deleting-and-Executing-Cells"&gt;Re-ordering, Inserting, Deleting and Executing Cells&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Re-ordering,-Inserting,-Deleting-and-Executing-Cells"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;img src="https://jupyter-notebook.readthedocs.io/en/stable/_images/menubar_toolbar.png" alt="https://jupyter-notebook.readthedocs.io/en/stable/_images/menubar_toolbar.png"&gt;&lt;/p&gt;
+&lt;p&gt;The notebook toolbar, shown above for Jupyter Notebook but similar in Jupyter Lab, has options to save the notebook, add (+), delete (cut) cells, copy cells, paste cells, move cells up or down in the notebook, run the cell, interrupt or restart the kernel, and change the cell type.&lt;/p&gt;
+&lt;p&gt;To run a cell that has focus, use Shift-Enter. The output of the execution will be added to the notebook. Try it now:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;More generally, you can use Python &lt;code&gt;print&lt;/code&gt; statements to print info to the cell output, or you can put a Python expression (often just a variable name) at the end of the code cell and have that print automatically. It's possible to extend this latter functionality to multiple expressions by executing this code in a cell:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.core.interactiveshell&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;InteractiveShell&lt;/span&gt;
+&lt;span class="n"&gt;InteractiveShell&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ast_node_interactivity&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"all"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or, if you want this to happen automatically every time you start Jupyter, you can edit or create the file &lt;code&gt;~/.ipython/profile_default/ipython_config.py&lt;/code&gt; and add the contents:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_config&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Run all nodes interactively&lt;/span&gt;
+&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;InteractiveShell&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ast_node_interactivity&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"all"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;If you end the last line with a semi-colon the output will be suppressed:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The result of execution of the most recently executed cell is assigned to a special variable, '_':&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;You can put a semicolon at the end of code in a cell to suppress the output. Try it:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Note how the cells are marked with &lt;code&gt;In&lt;/code&gt; and &lt;code&gt;Out&lt;/code&gt;, and a count. The count allows you to keep track of the order in which cells were executed. &lt;code&gt;Out&lt;/code&gt; is the result of execution, unless the execution of the cell resulted in some output to &lt;code&gt;stdout&lt;/code&gt;/&lt;code&gt;stderr&lt;/code&gt;; in this case that is shown instead with no &lt;code&gt;Out&lt;/code&gt; label. Output to &lt;code&gt;stderr&lt;/code&gt; is shown in red:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'hello'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;code&gt;In&lt;/code&gt; and &lt;code&gt;Out&lt;/code&gt; are also variables that contain the history of execution (&lt;code&gt;In&lt;/code&gt; is a list/array of strings, while &lt;code&gt;Out&lt;/code&gt; is a dictionary/hash table):&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;In&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Out&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Executing-Shell-Commands"&gt;Executing Shell Commands&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Executing-Shell-Commands"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;You can execute a shell command in a cell by starting it with '!'. For example, if your notebook relies on certain packages, you may want to start with a cell that uses shell commands to pip install the dependencies.&lt;/p&gt;
+&lt;p&gt;Try it:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# On Mac or Linux&lt;/span&gt;
+&lt;span class="o"&gt;!&lt;/span&gt;ls -l
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# On Windows&lt;/span&gt;
+&lt;span class="o"&gt;!&lt;/span&gt;dir
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;It's possible to assign this to a variable:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# On Mac or Linux&lt;/span&gt;
+&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;ls -l
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# On Windows&lt;/span&gt;
+&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;dir
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Checkpoints-and-Saving"&gt;Checkpoints and Saving&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Checkpoints-and-Saving"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The notebook is saved automatically periodically. Expplicitly saving the notebook from the toolbar or file menu actually creates a time-stamped "checkpoint", and you can revert to a saved checkpoint from the file menu.&lt;/p&gt;
+&lt;h3 id="Tips-and-Tricks"&gt;Tips and Tricks&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Tips-and-Tricks"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;You can write math with MathJax. Double-click on the mathematical formula below to edit the associated MathJax and Markdown:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;$$ P(A \mid B) = \frac{P(B \mid A) \, P(A)}{P(B)} $$&lt;/p&gt;
+&lt;p&gt;Pi is $\pi$ okay?&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;You can get help on a Python function (view its &lt;em&gt;docstring&lt;/em&gt;) by following it with &lt;code&gt;?&lt;/code&gt; in Jupyter:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+
+os.path.exists&lt;span class="o"&gt;?&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;That requires you to execute the code; you can do the same without executing the whole cell by typing Shift-TAB after the function name. You can also use the built-in Python function &lt;code&gt;help&lt;/code&gt;:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;help&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;help&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exists&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;This works on your own functions too so writing docstrings is always recommended.&lt;/p&gt;
+&lt;p&gt;You can go a step further and use two ?? to get the source code of a function.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+pd.concat&lt;span class="o"&gt;??&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Jupyter supports tab-completion; try it below:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;itertools&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;combinatio&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Cell-and-Line-Magics"&gt;Cell and Line Magics&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Cell-and-Line-Magics"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;There are numerous special commands called Ipython Magics that can be used to control things in Jupyter. These are either &lt;em&gt;line magics&lt;/em&gt; that start with &lt;code&gt;%&lt;/code&gt; or &lt;em&gt;cell magics&lt;/em&gt; that start with &lt;code&gt;%%&lt;/code&gt;. A line magic consists of a single line, while a cel magic consists of everything from the &lt;code&gt;%%&lt;/code&gt; to the end of the cell.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;%load&lt;/code&gt; can load code from external scripts. We will use that for hiding the answers to some exercises.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;%run&lt;/code&gt; will let you run an external script or another notebook.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;%%time&lt;/code&gt; at the start of a cell will time the execution of the cell and print a summary when done.  &lt;code&gt;%%timeit&lt;/code&gt; will run the code repeatedly (100,000 times by default) and then show the mean of the top 3 times.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;%env&lt;/code&gt; can be used to set environment variable values.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;%%writefile&lt;/code&gt; writes the contents of a cell tro a file.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;%pycat&lt;/code&gt; shows the syntax-highlighted contents of the specirfied Python file in a pop-up window.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;%%pdb&lt;/code&gt; runs the contents of the cell under control of the Python debugger.&lt;/p&gt;
+&lt;p&gt;You can use &lt;code&gt;%lsmagic&lt;/code&gt; to see all availble magics.&lt;/p&gt;
+&lt;p&gt;More documentation on magics is available here: &lt;a href="http://ipython.readthedocs.io/en/stable/interactive/magics.html"&gt;http://ipython.readthedocs.io/en/stable/interactive/magics.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;A very common one for data science is &lt;code&gt;%matplotlib inline&lt;/code&gt;; this is necessary if using the matplotlib or Seaborn plottting libraries to make sure the plots appear as cell outputs in the notebook. If you have a retina Mac you can use retina-resolution for plots by executing &lt;code&gt;%config InlineBackend.figure_format = 'retina'&lt;/code&gt;.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Custom-Magics"&gt;Custom Magics&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Custom-Magics"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;You can easily create your own magics; they are just Python functions. You just need to import the appropriate Python decorators and then annotate your function. We're getting ahead of ourselves but a quick example should illustrate:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.core.magic&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;register_line_magic&lt;/span&gt;
+
+&lt;span class="nd"&gt;@register_line_magic&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s1"&gt;'Hello &lt;/span&gt;&lt;span class="si"&gt;{line}&lt;/span&gt;&lt;span class="s1"&gt;!'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;greet&lt;/span&gt; Dave
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Read more here: &lt;a href="http://ipython.readthedocs.io/en/stable/config/custommagics.html"&gt;http://ipython.readthedocs.io/en/stable/config/custommagics.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="The-Jupyter-Display-System"&gt;The Jupyter Display System&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#The-Jupyter-Display-System"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Jupyter can display many different types of output from cells, not just text. This can be determined by the MIME type of the result, but you can use expplicit control too with the &lt;code&gt;IPython.display&lt;/code&gt; module:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.display&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Image&lt;/span&gt;
+
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'https://www.python.org/static/community_logos/python-logo.png'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.display&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;YouTubeVideo&lt;/span&gt;
+&lt;span class="c1"&gt;# a talk about IPython at Sage Days at U. Washington, Seattle.&lt;/span&gt;
+&lt;span class="n"&gt;YouTubeVideo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'1j_HxD4iLn8'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Extensions"&gt;Extensions&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Extensions"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Jupyter is highly extensible and there are many extensions available. To start using extensions, install the main contributed ones. With conda, run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;conda install -c conda-forge jupyter_contrib_nbextensions
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;else with pip, run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pip install jupyter_contrib_nbextensions
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Restart Jupyter. In Jupyter Notebook, in the Edit menu you should see a new option &lt;code&gt;nbextensions config&lt;/code&gt;. This will open up a new tab where you can easily enable or disable extensions with a checkbox. There doesn't yet seem to be an equivelent option in JupyterLab for setting these so for now just use Jupyter Notebook for changing which extensions you want enabled.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Going-Further"&gt;Going Further&lt;a class="anchor-link" href="https://www.grahamwheeler.com/posts/using-jupyter.html#Going-Further"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;More good tips here: &lt;a href="https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/"&gt;https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;RISE is an extension that allows you to create a slide deck in Jupyter and present it. Your deck can include live code that you execute, so it is great for Python programming talks :-). See &lt;a href="https://github.com/damianavila/RISE"&gt;https://github.com/damianavila/RISE&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;p&gt;Here's an example, which is an overview of Jupyter :-) &lt;a href="http://quasiben.github.io/dfwmeetup_2014/#/"&gt;http://quasiben.github.io/dfwmeetup_2014/#/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For more advanced users, Jupyter can be extended and customized in multiple ways; you can read about them here: &lt;a href="https://mindtrove.info/4-ways-to-extend-jupyter-notebook/"&gt;https://mindtrove.info/4-ways-to-extend-jupyter-notebook/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Diffing notebooks for use with SCMs like git can be tricky as they are complex JSON files. A tool to help is nbdime: &lt;a href="http://nbdime.readthedocs.io/en/stable/"&gt;http://nbdime.readthedocs.io/en/stable/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can find a gallery of interesting notebooks at &lt;a href="https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks"&gt;https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;An excellent book on Jupyter is this one by Cyrille Rossant (affiliat link):&lt;/p&gt;
+&lt;p&gt;&lt;a target="_blank" href="https://www.amazon.com/gp/product/1785888633/ref=as_li_tl?ie=UTF8&amp;amp;camp=1789&amp;amp;creative=9325&amp;amp;creativeASIN=1785888633&amp;amp;linkCode=as2&amp;amp;tag=grahamwheel0b-20&amp;amp;linkId=3c96d963204e1751eb22c6f6e5a36889"&gt;&lt;img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=US&amp;amp;ASIN=1785888633&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=grahamwheel0b-20"&gt;&lt;/a&gt;&lt;img src="//ir-na.amazon-adsystem.com/e/ir?t=grahamwheel0b-20&amp;amp;l=am2&amp;amp;o=1&amp;amp;a=1785888633" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;"&gt;&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</description><category>Data Science</category><category>Python</category><guid>https://www.grahamwheeler.com/posts/using-jupyter.html</guid><pubDate>Wed, 18 Apr 2018 04:35:00 GMT</pubDate></item><item><title>A Python Crash Course</title><link>https://www.grahamwheeler.com/posts/python-crash-course.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
     &lt;div class="container" id="notebook-container"&gt;
 
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
@@ -78,5 +665,4 @@ which uses a binary form of JSON.
 &lt;p&gt;Note that these are deliberately in the same format as the articles in articles.txt, although without as many fields.
 &lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/zite-replacement-6.html"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/zite-replacement-6.html</guid><pubDate>Fri, 25 Sep 2015 03:31:00 GMT</pubDate></item><item><title>Building a Zite Replacement (Part 5)</title><link>https://www.grahamwheeler.com/posts/zite-replacement-5.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;My initial experience with clustering was somewhat disappointing. Its clear I need to do some tuning of the approach. The first thing I did was to rerun the article download process, but instead of just keeping the top ten terms and dropping their TF-IDF values, I kept them all. I think there are better ways to select the terms to use for Jacard similarity.&lt;/p&gt;
 &lt;p&gt;For starters, using a fixed number of terms could lead to keeping a wildly different range of TF-IDF values for different articles. It makes more sense to have some threshold value and keep all terms that exceed the threshold. That may mean more than ten terms for some articles and less for others.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/zite-replacement-5.html"&gt;Read more…&lt;/a&gt; (9 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/zite-replacement-5.html</guid><pubDate>Thu, 24 Sep 2015 05:21:00 GMT</pubDate></item><item><title>Building a Zite Replacement (Part 4)</title><link>https://www.grahamwheeler.com/posts/zite-replacement-4.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;Following my &lt;a href="http://www.grahamwheeler.com/posts/zite-replacement-3.html"&gt;last post&lt;/a&gt;, I started gathering URLs of feeds to use for sample data. First I scraped the links that I had saved in Pocket (a scarily large number). It didn't seem like Pocket had an easy way to export this, so I loaded up Pocket in Chrome, scrolled and scrolled and scrolled until I could scroll no more, then saved the resulting web page once it was done loading. It was pretty easy to then scrape that to get the links. After sorting and uniq-ing those, and running them through &lt;a href="http://www.aaronsw.com/2002/feedfinder/"&gt;feedfinder&lt;/a&gt;, I had somewhere north of 1000 feeds. However, these were very skewed to my interests and I wanted diversity so I pressed on and scraped a bunch of blog rolls and other link collections covering many other areas. In the end I got about 2,500 feed URLs to start with, in a file named 'feeds.txt'.
-&lt;/p&gt;&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/zite-replacement-4.html"&gt;Read more…&lt;/a&gt; (5 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/zite-replacement-4.html</guid><pubDate>Wed, 23 Sep 2015 04:01:00 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;a href="https://www.grahamwheeler.com/posts/zite-replacement-5.html"&gt;Read more…&lt;/a&gt; (9 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><guid>https://www.grahamwheeler.com/posts/zite-replacement-5.html</guid><pubDate>Thu, 24 Sep 2015 05:21:00 GMT</pubDate></item></channel></rss>

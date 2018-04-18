@@ -2,24 +2,32 @@
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="description" content="Stuff about stuff">
 <meta name="viewport" content="width=device-width">
-<title>Graham Wheeler's Random Forest</title>
-<link href="assets/css/rst.css" rel="stylesheet" type="text/css">
-<link href="assets/css/code.css" rel="stylesheet" type="text/css">
-<link href="assets/css/theme.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="assets/css/screen.css">
-<link rel="stylesheet" type="text/css" href="assets/css/nav.css">
-<link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+<title>Using Jupyter | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/custom.css">
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
-<link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
-<link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
-<link rel="canonical" href="https://www.grahamwheeler.com/index.html">
-<link rel="next" href="index-7.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/using-jupyter.html" type="text/html">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/using-jupyter.html">
+<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]--><meta name="author" content="Graham Wheeler">
+<link rel="prev" href="personality-and-relationships1.html" title="The 5-Factor Model of Personality" type="text/html">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="Using Jupyter">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/using-jupyter.html">
+<meta property="og:description" content="(This is the second post in a series based off my Python for Data Science bootcamp I run at eBay occasionally). The first post was a Python crash course.
+Jupyter is an interactive computing environmen">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2018-04-17T21:35:00-07:00">
+<meta property="article:tag" content="Data Science">
+<meta property="article:tag" content="Python">
 </head>
 <body class="nav-closed">
 
@@ -29,17 +37,17 @@
         <span class="hidden">Close</span>
     </a>
     <ul>
-<li class="nav-opened nav-current" role="presentation">
-            <a href="#">Home</a>
+<li class="nav-opened" role="presentation">
+            <a href="../index.html">Home</a>
         </li>
         <li class="nav-opened" role="presentation">
-            <a href="archive.html">Archives</a>
+            <a href="../archive.html">Archives</a>
         </li>
         <li class="nav-opened" role="presentation">
-            <a href="categories/index.html">Tags</a>
+            <a href="../categories/index.html">Tags</a>
         </li>
         <li class="nav-opened" role="presentation">
-            <a href="rss.xml">RSS</a>
+            <a href="../rss.xml">RSS</a>
         </li>
         <li class="nav-opened" role="presentation">
             <a href="https://twitter.com/gramnix">My Twitter</a>
@@ -57,28 +65,17 @@
 <span class="nav-cover"></span>
 
 <div class="site-wrapper">
-    <header class="main-header" style="background-image: url(images/autumn-3295747_1280.jpg)"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://www.grahamwheeler.com/"><img src="https://getnikola.com/assets/img/logo.svg" alt="Blog Logo"></a>
+    <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://www.grahamwheeler.com/"><img src="https://getnikola.com/assets/img/logo.svg" alt="Blog Logo"></a>
             <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
-        </nav><div class="vertical">
-            <div class="main-header-content inner">
-                <a href="https://github.com/gramster" target="_blank">
-                    <span class="icon-github" style="color:white;font-size:2em"></span>
-                </a>
-                 
-                <a class="bloglogo" href="https://twitter.com/gramnix" target="_blank">
-                    <span class="icon-twitter" style="color:white;font-size:2em"></span>
-                </a>
-                 
-                <h1 class="page-title">Graham Wheeler's Random Forest</h1>
-                <h2 class="page-description">Stuff about stuff</h2>
-            </div>
-        </div>
-        <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
-    </header><main id="content" class="content" role="main"><div class="postindex">
-
-
-<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/using-jupyter.html">Using Jupyter</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
+        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">Using Jupyter</h1>
+        <section class="post-meta"> by
+            <a href="../authors/graham-wheeler.html">Graham Wheeler</a>
+            on
+                <a href="../categories/data-science.html">#Data Science</a>,
+                <a href="../categories/python.html">#Python</a>,
+            <time class="post-date" datetime="2018-04-17T21:35:00-07:00">
+                2018-04-17 21:35
+            </time></section></header><section class="post-content"><div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
 <div class="cell border-box-sizing text_cell rendered">
@@ -110,7 +107,7 @@
 </li>
 </ul>
 <p>Jupyter documentation is available at <a href="https://jupyter-notebook.readthedocs.io/en/stable/">https://jupyter-notebook.readthedocs.io/en/stable/</a></p>
-<h3 id="Installing-and-Running-JupyterLab-(Mac/Linux)">Installing and Running JupyterLab (Mac/Linux)<a class="anchor-link" href="posts/using-jupyter.html#Installing-and-Running-JupyterLab-(Mac/Linux)">¶</a>
+<h3 id="Installing-and-Running-JupyterLab-(Mac/Linux)">Installing and Running JupyterLab (Mac/Linux)<a class="anchor-link" href="using-jupyter.html#Installing-and-Running-JupyterLab-(Mac/Linux)">¶</a>
 </h3>
 <p>On Mac and Linux, if you have the Anaconda distribution of Python, install JupyterLab with:</p>
 
@@ -129,7 +126,7 @@
 </code></pre>
 <p>Jupyter Lab will open in a web browser tab displaying a main menu along the top, a file browser on the left listing the notebooks and files in the current directory, and a tabbed interface on the right for open notebooks, terminals, etc.</p>
 <p><img src="https://jupyterlab.readthedocs.io/en/stable/_images/interface_jupyterlab.png" alt="https://jupyterlab.readthedocs.io/en/stable/_images/interface_jupyterlab.png"></p>
-<h3 id="Running-Jupyter-Notebook-(Windows)">Running Jupyter Notebook (Windows)<a class="anchor-link" href="posts/using-jupyter.html#Running-Jupyter-Notebook-(Windows)">¶</a>
+<h3 id="Running-Jupyter-Notebook-(Windows)">Running Jupyter Notebook (Windows)<a class="anchor-link" href="using-jupyter.html#Running-Jupyter-Notebook-(Windows)">¶</a>
 </h3>
 <p>On Windows, use Jupyter Notebook, which is installed as part of the Anaconda distribution, and can be launched directly from Anaconda Navigator or from an Anaconda Python console with:</p>
 
@@ -139,7 +136,7 @@
 <p>This should open a web browser pointing at the notebook dashboard, which displays the notebooks and files in the current directory.</p>
 <p><img src="https://jupyter-notebook.readthedocs.io/en/stable/_images/dashboard_files_tab.png" alt="https://jupyter-notebook.readthedocs.io/en/stable/_images/dashboard_files_tab.png"></p>
 <p>Jupyter Notebook uses separate browser tabs for each notebook and the filebrowser rather than integrating everything within one browser tab like JupyterLab; nonetheless is should be fairly straightforward to follow along).</p>
-<h3 id="Basic-Usage">Basic Usage<a class="anchor-link" href="posts/using-jupyter.html#Basic-Usage">¶</a>
+<h3 id="Basic-Usage">Basic Usage<a class="anchor-link" href="using-jupyter.html#Basic-Usage">¶</a>
 </h3>
 <p>The top of the notebook list displays clickable breadcrumbs of the current directory. By clicking on these breadcrumbs or on sub-directories in the notebook list, you can navigate your file system.</p>
 <p>To create a new notebook, use the menu option "File - New - Notebook" (JupyterLab), click on the “New” button at the top of the list and select a kernel from the dropdown menu. Which kernels are listed depend on what’s installed on the server.</p>
@@ -159,15 +156,15 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Tutorial">Tutorial<a class="anchor-link" href="posts/using-jupyter.html#Tutorial">¶</a>
+<h3 id="Tutorial">Tutorial<a class="anchor-link" href="using-jupyter.html#Tutorial">¶</a>
 </h3>
 <p>These tutorials are for the old Jupyter Notebook UX, not Jupyter Lab, but are still useful as there is much in common.</p>
 <p>Basics: <a href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html">https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html</a></p>
 <p><a href="http://jakevdp.github.io/blog/2017/03/03/reproducible-data-analysis-in-jupyter/">http://jakevdp.github.io/blog/2017/03/03/reproducible-data-analysis-in-jupyter/</a></p>
-<h3 id="Markdown">Markdown<a class="anchor-link" href="posts/using-jupyter.html#Markdown">¶</a>
+<h3 id="Markdown">Markdown<a class="anchor-link" href="using-jupyter.html#Markdown">¶</a>
 </h3>
 <p>Jupyter supports GitHub-flavored markdown; see <a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf</a> for a quick reference.</p>
-<h3 id="Re-ordering,-Inserting,-Deleting-and-Executing-Cells">Re-ordering, Inserting, Deleting and Executing Cells<a class="anchor-link" href="posts/using-jupyter.html#Re-ordering,-Inserting,-Deleting-and-Executing-Cells">¶</a>
+<h3 id="Re-ordering,-Inserting,-Deleting-and-Executing-Cells">Re-ordering, Inserting, Deleting and Executing Cells<a class="anchor-link" href="using-jupyter.html#Re-ordering,-Inserting,-Deleting-and-Executing-Cells">¶</a>
 </h3>
 <p><img src="https://jupyter-notebook.readthedocs.io/en/stable/_images/menubar_toolbar.png" alt="https://jupyter-notebook.readthedocs.io/en/stable/_images/menubar_toolbar.png"></p>
 <p>The notebook toolbar, shown above for Jupyter Notebook but similar in Jupyter Lab, has options to save the notebook, add (+), delete (cut) cells, copy cells, paste cells, move cells up or down in the notebook, run the cell, interrupt or restart the kernel, and change the cell type.</p>
@@ -342,7 +339,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Executing-Shell-Commands">Executing Shell Commands<a class="anchor-link" href="posts/using-jupyter.html#Executing-Shell-Commands">¶</a>
+<h3 id="Executing-Shell-Commands">Executing Shell Commands<a class="anchor-link" href="using-jupyter.html#Executing-Shell-Commands">¶</a>
 </h3>
 <p>You can execute a shell command in a cell by starting it with '!'. For example, if your notebook relies on certain packages, you may want to start with a cell that uses shell commands to pip install the dependencies.</p>
 <p>Try it:</p>
@@ -434,10 +431,10 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Checkpoints-and-Saving">Checkpoints and Saving<a class="anchor-link" href="posts/using-jupyter.html#Checkpoints-and-Saving">¶</a>
+<h3 id="Checkpoints-and-Saving">Checkpoints and Saving<a class="anchor-link" href="using-jupyter.html#Checkpoints-and-Saving">¶</a>
 </h3>
 <p>The notebook is saved automatically periodically. Expplicitly saving the notebook from the toolbar or file menu actually creates a time-stamped "checkpoint", and you can revert to a saved checkpoint from the file menu.</p>
-<h3 id="Tips-and-Tricks">Tips and Tricks<a class="anchor-link" href="posts/using-jupyter.html#Tips-and-Tricks">¶</a>
+<h3 id="Tips-and-Tricks">Tips and Tricks<a class="anchor-link" href="using-jupyter.html#Tips-and-Tricks">¶</a>
 </h3>
 <p>You can write math with MathJax. Double-click on the mathematical formula below to edit the associated MathJax and Markdown:</p>
 
@@ -569,7 +566,7 @@ pd.concat<span class="o">??</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Cell-and-Line-Magics">Cell and Line Magics<a class="anchor-link" href="posts/using-jupyter.html#Cell-and-Line-Magics">¶</a>
+<h3 id="Cell-and-Line-Magics">Cell and Line Magics<a class="anchor-link" href="using-jupyter.html#Cell-and-Line-Magics">¶</a>
 </h3>
 <p>There are numerous special commands called Ipython Magics that can be used to control things in Jupyter. These are either <em>line magics</em> that start with <code>%</code> or <em>cell magics</em> that start with <code>%%</code>. A line magic consists of a single line, while a cel magic consists of everything from the <code>%%</code> to the end of the cell.</p>
 <p><code>%load</code> can load code from external scripts. We will use that for hiding the answers to some exercises.</p>
@@ -591,7 +588,7 @@ pd.concat<span class="o">??</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Custom-Magics">Custom Magics<a class="anchor-link" href="posts/using-jupyter.html#Custom-Magics">¶</a>
+<h3 id="Custom-Magics">Custom Magics<a class="anchor-link" href="using-jupyter.html#Custom-Magics">¶</a>
 </h3>
 <p>You can easily create your own magics; they are just Python functions. You just need to import the appropriate Python decorators and then annotate your function. We're getting ahead of ourselves but a quick example should illustrate:</p>
 
@@ -643,7 +640,7 @@ pd.concat<span class="o">??</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="The-Jupyter-Display-System">The Jupyter Display System<a class="anchor-link" href="posts/using-jupyter.html#The-Jupyter-Display-System">¶</a>
+<h3 id="The-Jupyter-Display-System">The Jupyter Display System<a class="anchor-link" href="using-jupyter.html#The-Jupyter-Display-System">¶</a>
 </h3>
 <p>Jupyter can display many different types of output from cells, not just text. This can be determined by the MIME type of the result, but you can use expplicit control too with the <code>IPython.display</code> module:</p>
 
@@ -685,7 +682,7 @@ pd.concat<span class="o">??</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Extensions">Extensions<a class="anchor-link" href="posts/using-jupyter.html#Extensions">¶</a>
+<h3 id="Extensions">Extensions<a class="anchor-link" href="using-jupyter.html#Extensions">¶</a>
 </h3>
 <p>Jupyter is highly extensible and there are many extensions available. To start using extensions, install the main contributed ones. With conda, run:</p>
 
@@ -707,7 +704,7 @@ pd.concat<span class="o">??</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Going-Further">Going Further<a class="anchor-link" href="posts/using-jupyter.html#Going-Further">¶</a>
+<h3 id="Going-Further">Going Further<a class="anchor-link" href="using-jupyter.html#Going-Further">¶</a>
 </h3>
 <p>More good tips here: <a href="https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/">https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/</a></p>
 <p>RISE is an extension that allows you to create a slide deck in Jupyter and present it. Your deck can include live code that you execute, so it is great for Python programming talks :-). See <a href="https://github.com/damianavila/RISE">https://github.com/damianavila/RISE</a> for more details.</p>
@@ -724,224 +721,46 @@ pd.concat<span class="o">??</span>
     </div>
   </div>
 
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-                <a href="categories/data-science.html">#Data Science</a>,
-                <a href="categories/python.html">#Python</a>,
-
-        <time class="post-date" datetime="2018-04-17T21:35:00-07:00">
-            2018-04-17 21:35
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/personality-and-relationships1.html">The 5-Factor Model of Personality</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Shankar Vedantam has a great NPR show/podcast, <a href="https://www.npr.org/podcasts/510308/hidden-brain">"The Hidden Brain"</a>, and occasional appearances on NPR's All Things Considered.  In December he had a show on Evaluating Personality Tests. It was enjoyable, especially the Harry Potter Sorting Hat references, but I felt it was a missed opportunity because of the focus on Myers-Briggs, and the fact that he mentioned the Big-5 model only in passing.</p>
-<p>In fact, Myers-Briggs is not taken very seriously in the psychology world, and Vedantam surprised me with spending so much time on it, given his show's focus on research in psychology. On the other hand, the Big-5 model is taken quite seriously, with many studies and papers based on it and evaluating it in various contexts (take a look, for example, at the Oxford University Press book I link to at the end of this post).</p>
-<p>In the <a href="https://www.npr.org/2017/12/11/569815338/evaluating-personality-tests">short form NPR segment</a>, this was the section on Big-5 in its entirety:</p>
-<blockquote>
-<p>VEDANTAM: Many personality researchers put greater stock in a test known as the Big Five [vs Myers-Briggs]. Grant says the Big Five has lots of peer reviewed data to back it up.</p>
-<p>GRANT: We can predict your job performance, your effectiveness in a team with different collaborators, your likelihood of sticking around in a job versus leaving as well as your probability of your marriage surviving, depending on the personality fit between you and your spouse.</p>
-</blockquote>
-<p></p>
-<p class="more"><a href="posts/personality-and-relationships1.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2018-04-15T21:35:00-07:00">
-            2018-04-15 21:35
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/python-crash-course.html">A Python Crash Course</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I've been teaching <a href="https://github.com/gramster/pythonbootcamp">a crash course in data science with Python</a>, which starts off with learning Python itself. The target audience is Java programmers (generally senior level) so its assumed that things like classes and methods are well understood. The focus is mostly on what is different with Python. I teach it using Jupyter notebooks but the content is useful as a blog post too so here we go:</p>
-<h3 id="Introduction">Introduction<a class="anchor-link" href="posts/python-crash-course.html#Introduction">¶</a>
-</h3>
-<h4 id="Python's-Origins">Python's Origins<a class="anchor-link" href="posts/python-crash-course.html#Python's-Origins">¶</a>
-</h4>
-<p>Python was conceived in the late 1980s, and its implementation began in December 1989 by Guido van Rossum at Centrum Wiskunde &amp; Informatica (CWI) in the Netherlands as a successor to the ABC language. It takes its name from Monty Python's Flying Circus.</p>
-<p>Python is a dynamic language but is strongly typed (i.e. variables are untyped but refer to objects of fixed type).
-</p>
-<p class="more"><a href="posts/python-crash-course.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2018-04-12T20:10:00-07:00">
-            2018-04-12 20:10
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/blogagain.html">Blogging again</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>Well, it's been quite a while since I last blogged. My Zite project is not dead; it's actually up and 
-running well as a personal aggregator but not ready for multi-user access, and I'm not sure when it
-might be. But I've been feeling a bit of an itch to start blogging again so here goes.</p>
-<p>I have some material already lined up: I've been teaching an introductory data science bootcamp at
-work and thought the notebooks from that could be useful blog posts in and of themselves. So I'll
-start slowly publishing those while I write some new material. I'm also going to expand the scope 
-of this blog; I'll still cover some tech topics but I',m going to fold in the content from my
-dormant math blog and retire it; this may inspire me to do some math blogging again. And I'll be 
-throwing in some stuff on management and psychology too. So this will be a mishmash living up to 
-the random forest name. I'll use categories to make it more accessible for those only interested
-in specific topics.</p>
-<p>More soon!</p>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2018-04-11T21:00:00-07:00">
-            2018-04-11 21:00
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-11.html">Building a Zite Replacement (Part 11)</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>It's been a while since I worked on this but it is still on my mind a lot. I've been mulling over ways to improve categorization without the semi-supervised tweaking I've had to do.</p>
-<p>Just to recap, currently this is what I am doing:</p>
+    </section><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
 <ul>
-<li>I have a bunch of 'category exemplars', which are sets of key terms associated with a category. These are the things which currently require some manual work;</li>
-<li>for each article, I extract the plain text, normalize capitalization, remove <a href="https://en.wikipedia.org/wiki/Stop_words">stop words</a>, then use <a href="https://en.wikipedia.org/wiki/Tf-idf">tf-idf</a> to extract the set of most significant terms (I'm not yet doing <a href="https://en.wikipedia.org/wiki/Stemming">stemming</a> although I'll probably start);</li>
-<li>I then use a <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">distance metric</a> from the exemplars to assign category scores to the articles. Provided the score exceeds a threshold the article will be considered to be in the category.
-<p class="more"><a href="posts/zite-replacement-11.html">Read more…</a></p>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
 </li>
 </ul>
 </div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/using-jupyter.html",
+        disqus_title="Using Jupyter",
+        disqus_identifier="cache/posts/using-jupyter.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
-        on
 
-        <time class="post-date" datetime="2016-04-23T09:15:00-07:00">
-            2016-04-23 09:15
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/using-jupyter-as-a-music-notebook.html">Using Jupyter as a Music Notebook</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I recently started playing guitar again after a long absence and wanted to start making some notes in a digital form. Unfortunately, I didn't find any good tools. There is TeX of course, which can do anything, but I was hoping for something a bit more WYSIWYGy. There are some very good tools available for musical scores (MuseScore, Frescobaldi), but I want something that is more like a traditional notebook with lots of notes interspersed with occasional musical notation (in both traditional and tablature forms).</p>
-<p>So an obvious potential candidate is Jupyter (nee IPython), but it has no support for musical notation out of the box. But it is doable and in this post I'll walk through how I got it to work on my Mac. This is also my first attempt at using a Jupyter notebook as my blog post in Nikola so I'm kiling two birds with one stone.
-</p>
-<p class="more"><a href="posts/using-jupyter-as-a-music-notebook.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2016-02-27T20:00:00Z">
-            2016-02-27 20:00
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-10.html">Building a Zite Replacement (Part 10)</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>I've spent the past few days refining the web server, largely for diagnostic
-purposes, so it can replace the old TkInter app. I can seen articles for 
-categories or feeds, their rank, and detailed information on why they 
-received particular categories and ranks. This has enabled me to improve
-the categorization and ranking algorithms. I'm at a point now where I 
-feel I need a lot more sources than the ~4000 I have right now, as well as
-more categories. The latter is more complex and will take me back to some
-of my earlier explorations in clustering, etc. The former largely involves 
-mining more of the web to find useful sites.
-</p>
-<p class="more"><a href="posts/zite-replacement-10.html">Read more…</a></p>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2015-11-07T08:30:00-08:00">
-            2015-11-07 08:30
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-9.html">Building a Zite Replacement (Part 9)</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>Well, I hope you've all brushed your teeth after all that Halloween candy.</p>
-<p>Today I'm going to show how I build a simple web server to view my feed
-articles using node.js and Express, along with MongoDB. I have a simple 
-category classifier which finds the best Jacard similarity (described earlier)
-to a set of category exemplars (i.e. 'pseudo-articles' for a category
-containing just key words that are typical for that category). It needs a
-lot of tuning and the earlier tkInter program was meant for that but tkInter 
-proved to have problems. So time to use some more modern techologies!
-</p>
-<p class="more"><a href="posts/zite-replacement-9.html">Read more…</a></p>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2015-11-01T22:07:00-08:00">
-            2015-11-01 22:07
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-8.html">Building a Zite Replacement (Part 8)</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>Happy Halloween, all!</p>
-<p>I'm sitting here handing out candy and glow necklaces to all comers so its a
-good time to write a new post.</p>
-<p>It's been a while since much happened as I've been really busy with the beta 
-release of Google Cloud Datalab, which is my day job. But now that is out and
-it's the weekend and lousy weather here in the Pacific Northwest it's been a 
-good day t get back to things.</p>
-<p>Today I did something I've been meaning to do for a while, which is to change
-the code to populate a MongoDB database rather than writing files to the file 
-system. Interestingly it seems to be quite a bit slower than the file system 
-but hopefully it will scale better and make up for things when I have ad-hoc
-queries to do.
-</p>
-<p class="more"><a href="posts/zite-replacement-8.html">Read more…</a></p>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2015-10-31T20:21:00-07:00">
-            2015-10-31 20:21
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/node-npm-express.html">Node, npm and Express</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>Things have been slow on the blogging front but there has been progress on the
-Zite replacement. I'll write more about that soon but part of what I have been 
-doing is looking into what server-side technology to use.</p>
-<p>As far as a database goes, this seems like a no-brainer. I'm dealing with JSON
-documents that I can either spend some effort on normalizing to put into a SQL 
-database, or simply keep them as is and put them in a database that supports 
-that form, and the obvious choice then is <a href="https://www.mongodb.org/">MongoDB</a>, 
-which uses a binary form of JSON.
-</p>
-<p class="more"><a href="posts/node-npm-express.html">Read more…</a></p>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2015-10-26T21:53:00-07:00">
-            2015-10-26 21:53
-        </time></footer></article>
-</div>
-
-        <nav class="postindexpager"><ul class="pager">
-<li class="next">
-                <a href="index-7.html" rel="next">Older posts</a>
-            </li>
-        </ul></nav><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     tex2jax: {
         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -953,10 +772,10 @@ MathJax.Hub.Config({
         styles: {'.MathJax_Display': {"margin": 0}}
     }
 });
-</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+</script></footer></article><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
 
-    <script type="text/javascript" src="assets/js/jquery.js"></script><script type="text/javascript" src="assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="assets/js/index.js"></script><script>
+    <script type="text/javascript" src="../assets/js/jquery.js"></script><script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../assets/js/index.js"></script><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

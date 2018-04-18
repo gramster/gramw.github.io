@@ -43,11 +43,11 @@
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/2018/index.html</loc>
-  <lastmod>2018-04-17T03:42:00Z</lastmod>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/archive.html</loc>
-  <lastmod>2018-04-16T04:43:00Z</lastmod>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/authors/geekraver.html</loc>
@@ -55,11 +55,11 @@
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/authors/graham-wheeler.html</loc>
-  <lastmod>2018-04-17T03:42:00Z</lastmod>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/authors/index.html</loc>
-  <lastmod>2018-04-16T04:43:00Z</lastmod>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/categories/cat_computers.html</loc>
@@ -87,19 +87,27 @@
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/categories/cat_programming.html</loc>
-  <lastmod>2018-04-15T22:53:00Z</lastmod>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/categories/cat_psychology.html</loc>
   <lastmod>2018-04-17T03:42:00Z</lastmod>
  </url>
  <url>
+  <loc>https://www.grahamwheeler.com/categories/data-science.html</loc>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://www.grahamwheeler.com/categories/index.html</loc>
-  <lastmod>2018-04-16T04:43:00Z</lastmod>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/categories/mathjax.html</loc>
   <lastmod>2018-04-15T23:30:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://www.grahamwheeler.com/categories/python.html</loc>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/galleries/index.html</loc>
@@ -127,11 +135,15 @@
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/index-6.html</loc>
-  <lastmod>2018-04-16T04:43:00Z</lastmod>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://www.grahamwheeler.com/index-7.html</loc>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/index.html</loc>
-  <lastmod>2018-04-17T03:42:00Z</lastmod>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/listings/index.html</loc>
@@ -279,7 +291,7 @@
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/posts/personality-and-relationships1.html</loc>
-  <lastmod>2018-04-17T03:42:00Z</lastmod>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/posts/presenting-at-medc.html</loc>
@@ -291,7 +303,7 @@
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/posts/python-crash-course.html</loc>
-  <lastmod>2018-04-16T04:43:00Z</lastmod>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/posts/scanner-printer-photocopier-eventually.html</loc>
@@ -344,6 +356,10 @@
  <url>
   <loc>https://www.grahamwheeler.com/posts/using-jupyter-as-a-music-notebook.html</loc>
   <lastmod>2018-04-15T22:53:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://www.grahamwheeler.com/posts/using-jupyter.html</loc>
+  <lastmod>2018-04-18T05:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/posts/using-live-search-for-mobile-with-gps-on-att-tilt-blackjack-ii-and-motorola-q9h.html</loc>

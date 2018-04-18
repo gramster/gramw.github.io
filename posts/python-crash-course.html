@@ -92,12 +92,11 @@
 </h4>
 <p>Python evolves in a fairly straightforward way, more-or-less like this:</p>
 <ul>
-<li>people propose changes by writing <em>Python Enhancement Proposals</em> (PEPs): <a href="https://www.python.org/dev/peps/">https://www.python.org/dev/peps/</a>
-</li>
+<li>people propose changes by writing <em>Python Enhancement Proposals</em> (<a href="https://www.python.org/dev/peps/">PEPs</a>)</li>
 <li>the Python core committee will assign a 'dictator' who will decide whether the PEP is worthy of becoming part of the standard, and if so it does, after some amount of discussion and revision</li>
 <li>disagreements are finally settled by Guido van Rossum, Python's inventor and the 'Benevolent Dictator for Life' (BDFL)</li>
 </ul>
-<p>An important standard PEP is the Style Guide, PEP-8 (<a href="https://www.python.org/dev/peps/pep-0008/">https://www.python.org/dev/peps/pep-0008/</a>). By default, PyCharm will warn of any PEP-8 violations. There are external tools such as <code>flake8</code> (<a href="https://gitlab.com/pycqa/flake8">https://gitlab.com/pycqa/flake8</a>) that can be used to check code for compliance in other environments.</p>
+<p>An important standard PEP is the Style Guide, <a href="https://www.python.org/dev/peps/pep-0008/">PEP-8</a>. By default, PyCharm will warn of any PEP-8 violations. There are external tools such as <a href="https://gitlab.com/pycqa/flake8">flake8</a> that can be used to check code for compliance in other environments, or you can use a code formatter like <a href="https://github.com/ambv/black">Black</a>.</p>
 </blockquote>
 
 </div>
@@ -110,10 +109,8 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="StackOverflow-is-your-friend!">StackOverflow is your friend!<a class="anchor-link" href="python-crash-course.html#StackOverflow-is-your-friend!">¶</a>
 </h4>
-<p>For Python questions and Python data science questions, make use of StackOverflow. Pay attention to comments on suggested answers; the "accepted answer" is often not the best. Look for comments about whether it is the "most Pythonic". Python has an idiomatic style different to many other languages and so a novice coming from another language will often accept an answer that is closer to idiomatic in that other language rather than Python.</p>
-<p><a href="https://stackoverflow.com/questions/tagged/python">https://stackoverflow.com/questions/tagged/python</a></p>
-<p>Also, if you're struggling to understand some code in your early days with Python, you may find this 'execution visualizer' helpful:</p>
-<p><a href="http://pythontutor.com/">http://pythontutor.com/</a></p>
+<p>For Python questions and Python data science questions, make use of <a href="https://stackoverflow.com/questions/tagged/python">StackOverflow</a>. Pay attention to comments on suggested answers; the "accepted answer" is often not the best. Look for comments about whether it is the "most Pythonic". Python has an idiomatic style different to many other languages and so a novice coming from another language will often accept an answer that is closer to idiomatic in that other language rather than Python.</p>
+<p>Also, if you're struggling to understand some code in your early days with Python, you may find this '<a href="http://pythontutor.com/">execution visualizer</a>' helpful.</p>
 <h4 id='"Batteries-Included"'>"Batteries Included"<a class="anchor-link" href="python-crash-course.html#%22Batteries-Included%22">¶</a>
 </h4>
 <p>Python is often described as having "batteries included". This is a reference to the rich set of libraries (packages)included in the standard distribution as well as the vast collection of freely available packages that can be used to bootstrap your development. Or, as Randall Munroe puts it:</p>
@@ -139,7 +136,7 @@
 </h3>
 <p><a href="https://docs.python.org/3/">https://docs.python.org/3/</a> has very detailed documentation.</p>
 <p>Most Python packages have good documentation at <a href="https://readthedocs.org/">https://readthedocs.org/</a></p>
-<p>If you use Python a lot on a Mac you may find Dash useful; it is a utility that gives you fast access to context-sensitive help for many libraries: <a href="https://kapeli.com/dash">https://kapeli.com/dash</a></p>
+<p>If you use Python a lot on a Mac you may find <a href="https://kapeli.com/dash">Dash</a> useful; it is a utility that gives you fast access to context-sensitive help for many libraries.</p>
 <p>That said, Python has a help() function that is very useful.</p>
 
 </div>
@@ -163,8 +160,7 @@
 <blockquote>
 <h4 id="A-better-REPL:-bpython">A better REPL: bpython<a class="anchor-link" href="python-crash-course.html#A-better-REPL:-bpython">¶</a>
 </h4>
-<p>bpython is an alternative REPL that adds a number of useful features at the command line, like syntax highlighting and auto-completion.</p>
-<p><a href="https://www.bpython-interpreter.org/">https://www.bpython-interpreter.org/</a></p>
+<p><a href="https://www.bpython-interpreter.org/">bpython</a> is an alternative REPL that adds a number of useful features at the command line, like syntax highlighting and auto-completion.</p>
 <p>You can install with <code>pip install bpython</code>.</p>
 <p>If you're going to use the command line repl I recommend it, although there are other options too that I haven't tried:</p>
 <ul>
@@ -684,7 +680,7 @@
         <span class="n">main</span><span class="p">()</span>
 </pre></div>
 <p>The <code>__name__</code> variable is set to the name of the executing module, or <code>"__main__"</code> if this is the top-level module. The pattern shown, where we test <code>__name__</code> before executing any code, is a common one; it allows other Python scripts to safely import this one, improving reuse.</p>
-<p>If you want to parse command-line arguments like flags etc, there is an <code>argparse</code> library as part of the standard distribution but a much easier way IMO is to use <code>docopt</code>: just write the help string and <code>docopt</code> generates the parse for you: <a href="http://docopt.org/">http://docopt.org/</a>. Another option to look at is <code>click</code>; it seems to be gaining popularity but I have not used it: <a href="http://click.pocoo.org/5/">http://click.pocoo.org/5/</a></p>
+<p>If you want to parse command-line arguments like flags etc, there is an <code>argparse</code> library as part of the standard distribution but a much easier way IMO is to use <a href="http://docopt.org/">docopt</a>: just write the help string and <code>docopt</code> generates the parse for you. Another option to look at is <a href="http://click.pocoo.org/5/">click</a>; it seems to be gaining popularity but I have not used it.</p>
 
 </div>
 </div>
@@ -7102,7 +7098,7 @@ s
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="async/await">async/await<a class="anchor-link" href="python-crash-course.html#async/await">¶</a>
 </h3>
-<p>Python runs as a single-threaded process. That means things like I/O can slow things down a lot. It is possible to use multiple threads - there are several libraries for that - but even with a single thread big improvements are possible with async code. The details are beyond the scope of the bootcamp, but more info is available here: <a href="https://docs.python.org/3/library/asyncio-task.html">https://docs.python.org/3/library/asyncio-task.html</a>. Recent changes in Python have made this much more powerful, flexible and easy to use.</p>
+<p>Python runs as a single-threaded process. That means things like I/O can slow things down a lot. It is possible to use multiple threads - there are several libraries for that - but even with a single thread big improvements are possible with async code. The details are beyond the scope of the bootcamp, but more info is available here: <a href="https://docs.python.org/3/library/asyncio-task.html">https://docs.python.org/3/library/asyncio-task.html</a>. Recent changes in Python have made this much more powerful, flexible and easy to use, and there are some interesting third-party libraries like <a href="https://trio.readthedocs.io/en/latest/index.html">Trio</a> that build on top of it. And if you don't like the standard way of doing this, there are alternatives like <a href="https://curio.readthedocs.io/en/latest/">Curio</a>.</p>
 
 </div>
 </div>
