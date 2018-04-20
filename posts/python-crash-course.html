@@ -138,6 +138,7 @@
 <p>Most Python packages have good documentation at <a href="https://readthedocs.org/">https://readthedocs.org/</a></p>
 <p>If you use Python a lot on a Mac you may find <a href="https://kapeli.com/dash">Dash</a> useful; it is a utility that gives you fast access to context-sensitive help for many libraries.</p>
 <p>That said, Python has a help() function that is very useful.</p>
+<p>The <a href="http://docs.python-guide.org/en/latest/">Hitchhiker's Guide</a> is a very useful, extremely comprehensive opinionated guide.</p>
 
 </div>
 </div>
@@ -992,7 +993,8 @@ False
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">2.5</span><span class="p">))</span> <span class="c1"># Convert to int with truncation</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mf">2.5</span><span class="p">))</span>  <span class="c1"># Convert to int with rounding (this one is odd; I'd expect it to round up)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mf">2.5</span><span class="p">))</span>  <span class="c1"># Convert to int with rounding (oddly, round() with 0 </span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mf">3.5</span><span class="p">))</span>  <span class="c1">#   decimal places rounds to even number, not up).</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mf">2.5001</span><span class="p">))</span>  <span class="c1"># Convert to int with rounding</span>
 </pre></div>
 
@@ -1013,6 +1015,40 @@ False
 <pre>2
 2
 3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># round can take an additional argument for a power of 10 specifying precision</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mf">9876.54321</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># round to 2 decimal places</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mf">9876.54321</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># round to nearest 100 (10^2)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>9876.54
+9900.0
 </pre>
 </div>
 </div>
@@ -7601,10 +7637,12 @@ Disassembly of print_my_class:
 <h4 id="...Desktop-GUI-App">...Desktop GUI App<a class="anchor-link" href="python-crash-course.html#...Desktop-GUI-App">¶</a>
 </h4>
 <p>There are three main options here: <a href="https://riverbankcomputing.com/software/pyqt/intro">PyQt</a>, which requires a license for the commercial Qt library so I wouldn't recommend this for most cases, <a href="https://www.wxpython.org/">wxPython</a> which is free and open source, and would be my recommendation, and <a href="https://wiki.python.org/moin/TkInter">TkIntr</a>, which is the "official" way to write GUI apps but IMO the results are ugly unless you take a lot of care. For something quick and dirty, TkIntr is the way to go, but if you want a native-looking polished cross-platform app, you should use one of the other two.</p>
-<h3 id="Great-Python-Books-and-Courses">Great Python Books and Courses<a class="anchor-link" href="python-crash-course.html#Great-Python-Books-and-Courses">¶</a>
+<h3 id="Great-Python-Articles,-Books-and-Courses">Great Python Articles, Books and Courses<a class="anchor-link" href="python-crash-course.html#Great-Python-Articles,-Books-and-Courses">¶</a>
 </h3>
 <p>Michael Kennedy hosts two great podcasts (<a href="https://talkpython.fm/">https://talkpython.fm/</a>, and <a href="https://pythonbytes.fm/">https://pythonbytes.fm/</a>, with Brian Okken). He also has some high quality courses available at <a href="https://training.talkpython.fm/courses/all">https://training.talkpython.fm/courses/all</a></p>
-<p>These are affiliate links and I may earn a small commission:</p>
+<p>There is a great collection of Python articles at <a href="https://medium.freecodecamp.org/python-collection-of-my-favorite-articles-8469b8455939">https://medium.freecodecamp.org/python-collection-of-my-favorite-articles-8469b8455939</a></p>
+<p>Below are a few of the best books on Python. 
+These are affiliate links and I may earn a small commission:</p>
 <div>
 <a target="_blank" href="https://www.amazon.com/gp/product/1491946008/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1491946008&amp;linkCode=as2&amp;tag=grahamwheel0b-20&amp;linkId=3dfc19e408c94e94f7fd3a5841c39b87" style="float:left;margin:50px"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=US&amp;ASIN=1491946008&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=grahamwheel0b-20"></a><img src="//ir-na.amazon-adsystem.com/e/ir?t=grahamwheel0b-20&amp;l=am2&amp;o=1&amp;a=1491946008" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;"><a target="_blank" href="https://www.amazon.com/gp/product/1449340377/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1449340377&amp;linkCode=as2&amp;tag=grahamwheel0b-20&amp;linkId=19717b8c5fe27b22d5b0b1c4b9bc5770" style="float:left;margin:50px"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=US&amp;ASIN=1449340377&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=grahamwheel0b-20"></a><img src="//ir-na.amazon-adsystem.com/e/ir?t=grahamwheel0b-20&amp;l=am2&amp;o=1&amp;a=1449340377" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;"><a target="_blank" href="https://www.amazon.com/gp/product/1775093301/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1775093301&amp;linkCode=as2&amp;tag=grahamwheel0b-20&amp;linkId=dd7f499aedb5be7000cde0988298a932" style="float:left;margin:50px"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=US&amp;ASIN=1775093301&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=grahamwheel0b-20"></a><img src="//ir-na.amazon-adsystem.com/e/ir?t=grahamwheel0b-20&amp;l=am2&amp;o=1&amp;a=1775093301" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;">
 </div>
