@@ -2,24 +2,29 @@
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="description" content="Stuff about stuff">
 <meta name="viewport" content="width=device-width">
-<title>Graham Wheeler's Random Forest</title>
-<link href="assets/css/rst.css" rel="stylesheet" type="text/css">
-<link href="assets/css/code.css" rel="stylesheet" type="text/css">
-<link href="assets/css/theme.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="assets/css/screen.css">
-<link rel="stylesheet" type="text/css" href="assets/css/nav.css">
-<link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+<title>Exploratory Data Analysis with NumPy and Pandas | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/custom.css">
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
-<link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
-<link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
-<link rel="canonical" href="https://www.grahamwheeler.com/index.html">
-<link rel="next" href="index-7.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html" type="text/html">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/exploratory-data-analysis-with-numpy-and-pandas.html">
+<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]--><meta name="author" content="Graham Wheeler">
+<link rel="prev" href="using-jupyter.html" title="Using Jupyter" type="text/html">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="Exploratory Data Analysis with NumPy and Pandas">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/exploratory-data-analysis-with-numpy-and-pandas.html">
+<meta property="og:description" content="This is an introduction to the NumPy and Pandas libraries that form the foundation of data science in Python. These libraries, especially Pandas, have a large API surface and many powerful features. T">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2018-04-28T12:40:00-07:00">
 </head>
 <body class="nav-closed">
 
@@ -29,17 +34,17 @@
         <span class="hidden">Close</span>
     </a>
     <ul>
-<li class="nav-opened nav-current" role="presentation">
-            <a href="#">Home</a>
+<li class="nav-opened" role="presentation">
+            <a href="../index.html">Home</a>
         </li>
         <li class="nav-opened" role="presentation">
-            <a href="archive.html">Archives</a>
+            <a href="../archive.html">Archives</a>
         </li>
         <li class="nav-opened" role="presentation">
-            <a href="categories/index.html">Tags</a>
+            <a href="../categories/index.html">Tags</a>
         </li>
         <li class="nav-opened" role="presentation">
-            <a href="rss.xml">RSS</a>
+            <a href="../rss.xml">RSS</a>
         </li>
         <li class="nav-opened" role="presentation">
             <a href="https://twitter.com/gramnix">My Twitter</a>
@@ -57,28 +62,15 @@
 <span class="nav-cover"></span>
 
 <div class="site-wrapper">
-    <header class="main-header" style="background-image: url(images/autumn-3295747_1280.jpg)"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://www.grahamwheeler.com/"><img src="https://getnikola.com/assets/img/logo.svg" alt="Blog Logo"></a>
+    <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://www.grahamwheeler.com/"><img src="https://getnikola.com/assets/img/logo.svg" alt="Blog Logo"></a>
             <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
-        </nav><div class="vertical">
-            <div class="main-header-content inner">
-                <a href="https://github.com/gramster" target="_blank">
-                    <span class="icon-github" style="color:white;font-size:2em"></span>
-                </a>
-                 
-                <a class="bloglogo" href="https://twitter.com/gramnix" target="_blank">
-                    <span class="icon-twitter" style="color:white;font-size:2em"></span>
-                </a>
-                 
-                <h1 class="page-title">Graham Wheeler's Random Forest</h1>
-                <h2 class="page-description">Stuff about stuff</h2>
-            </div>
-        </div>
-        <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
-    </header><main id="content" class="content" role="main"><div class="postindex">
-
-
-<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html">Exploratory Data Analysis with NumPy and Pandas</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
+        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">Exploratory Data Analysis with NumPy and Pandas</h1>
+        <section class="post-meta"> by
+            <a href="../authors/graham-wheeler.html">Graham Wheeler</a>
+            on
+            <time class="post-date" datetime="2018-04-28T12:40:00-07:00">
+                2018-04-28 12:40
+            </time></section></header><section class="post-content"><div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
 <div class="cell border-box-sizing text_cell rendered">
@@ -87,7 +79,7 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is an introduction to the NumPy and Pandas libraries that form the foundation of data science in Python. These libraries, especially Pandas, have a large API surface and many powerful features. There is now way in a short amount of time to cover every topic; in many cases we will just scratch the surface. But after this you should understand the fundamentals, have an idea of the overall scope, and have some pointers for extending your learning as you need more functionality.</p>
-<h3 id="Introduction">Introduction<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Introduction">¶</a>
+<h3 id="Introduction">Introduction<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Introduction">¶</a>
 </h3>
 <p>We'll start by importing the numpy and pandas packages. Note the "as" aliases; it is conventional to use "np" for numpy and "pd" for pandas. If you are using Anaconda Python distribution, as recommended for data science, these packages should already be available:</p>
 
@@ -201,7 +193,7 @@ conda install seaborn
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="NumPy---the-Foundation-of-Data-Science-in-Python">NumPy - the Foundation of Data Science in Python<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#NumPy---the-Foundation-of-Data-Science-in-Python">¶</a>
+<h3 id="NumPy---the-Foundation-of-Data-Science-in-Python">NumPy - the Foundation of Data Science in Python<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#NumPy---the-Foundation-of-Data-Science-in-Python">¶</a>
 </h3>
 <p>Data science is largely about the manipulation of (often large) collections of numbers. To support effective data science a language needs a way to do this efficiently. Python lists are suboptimal because they are heterogeneous collections of object references; the objects in turn have reference counts for garbage collection, type info, size info, and the actual data. Thus storing (say) a list of a four 32-bit integers, rather than requiring just 16 bytes requires much more. Furthermore there is typically poor locality of the items referenced from the list, leading to cache misses and other performance problems. Python does offer an <code>array</code> type which is homogeneous and improves on lists as far as storage goes, but it offers limited operations on that data.</p>
 <p>NumPy bridges the gap, offering both efficient storage of homogeneous data in single or multi-dimensional arrays, and a rich set of computationally -efficient operations on that data.</p>
@@ -859,7 +851,7 @@ Middle two elements of a are [2 3]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="UFuncs">UFuncs<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#UFuncs">¶</a>
+<h4 id="UFuncs">UFuncs<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#UFuncs">¶</a>
 </h4>
 <p>NumPy supports highly efficient low-level operations on arrays called UFuncs (Universal Functions).</p>
 
@@ -940,7 +932,7 @@ Middle two elements of a are [2 3]
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can get the details on UFuncs here: <a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/ufuncs.html">https://docs.scipy.org/doc/numpy-1.13.0/reference/ufuncs.html</a></p>
-<h4 id="Dates-and-Times-in-NumPy">Dates and Times in NumPy<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Dates-and-Times-in-NumPy">¶</a>
+<h4 id="Dates-and-Times-in-NumPy">Dates and Times in NumPy<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Dates-and-Times-in-NumPy">¶</a>
 </h4>
 <p>NumPy uses 64-bit integers to represent datetimes:</p>
 
@@ -1114,10 +1106,10 @@ Middle two elements of a are [2 3]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pandas">Pandas<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Pandas">¶</a>
+<h3 id="Pandas">Pandas<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Pandas">¶</a>
 </h3>
 <p>NumPy is primarily aimed at scientific computation e.g. linear algebra. As such, 2D data is in the form of arrays of arrays. In data science applications, we are more often dealing with tabular data; that is, collections of records (samples, observations) where each record may be heterogeneous but the schema is consistent from record to record. The Pandas library is built on top of NumPy to provide this type of representation of data, along with the types of operations more typical in data science applications, like indexing, filtering and aggregation. There are two primary classes it provides for this, Series and DataFrame.</p>
-<h4 id="Pandas-Series">Pandas Series<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Pandas-Series">¶</a>
+<h4 id="Pandas-Series">Pandas Series<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Pandas-Series">¶</a>
 </h4>
 <p>A Pandas Series is a one-dimensional array of indexed data. It wraps a sequence of values (a NumPy array) and a sequence of indices (a <code>pd.Index</code> object), along with a name. Pandas indexes can be thought of as immutable dictionaries mapping keys to locations/offsets in the value array; the dictionary implementation is very efficient and there are specialized versions for each type of index (int, float, etc).</p>
 <blockquote>
@@ -1834,7 +1826,7 @@ dtype: float64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Exercise-1">Exercise 1<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Exercise-1">¶</a>
+<h4 id="Exercise-1">Exercise 1<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Exercise-1">¶</a>
 </h4>
 <p>Given the list below, create a Series that has the list as both the index and the values, and then display the first 3 rows:</p>
 
@@ -2305,7 +2297,7 @@ True
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Vectorized-Operations">Vectorized Operations<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Vectorized-Operations">¶</a>
+<h4 id="Vectorized-Operations">Vectorized Operations<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Vectorized-Operations">¶</a>
 </h4>
 <p>You can iterate over a Series or Dataframe, but in many cases there are much more efficient vectorized UFuncs available; these are implemented in native code exploiting parallel processor operations and are much faster. Some examples are <code>.sum()</code>, <code>.median()</code>, <code>.mode()</code>, and <code>.mean()</code>:</p>
 
@@ -2429,7 +2421,7 @@ dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Exercise-2">Exercise 2<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Exercise-2">¶</a>
+<h4 id="Exercise-2">Exercise 2<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Exercise-2">¶</a>
 </h4>
 <p>Delete the row 'k' from the earlier series you created in exercise 1, then display the rows from 'f' through 'l'.</p>
 
@@ -2656,7 +2648,7 @@ dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="DataFrames">DataFrames<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#DataFrames">¶</a>
+<h4 id="DataFrames">DataFrames<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#DataFrames">¶</a>
 </h4>
 <p>A DataFrame is like a dictionary where the values are Series that share the same index and the keys are names for those series. If you think of a DataFrame as a table of data, the columns are the series, the column names are the dictionary keys, and the first "column" is actually the index (there are some exceptions to this where the index can be multi-level and span more than one column but in most cases it is flat).</p>
 
@@ -3877,7 +3869,7 @@ Name: Name, dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Exercise-3">Exercise 3<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Exercise-3">¶</a>
+<h4 id="Exercise-3">Exercise 3<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Exercise-3">¶</a>
 </h4>
 <p>Create a DataFrame from the dictionary below:</p>
 
@@ -3918,7 +3910,7 @@ Name: Name, dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="More-on-Indexing">More on Indexing<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#More-on-Indexing">¶</a>
+<h4 id="More-on-Indexing">More on Indexing<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#More-on-Indexing">¶</a>
 </h4>
 <p>The Pandas Index type can be thought of as an immutable ordered multiset (multiset as indices need not be unique). The immutability makes it safe to share an index between multiple columns of a DataFrame. The set-like properties are useful for things like joins (a join is like an intersection between Indexes). There are dict-like properties (index by label) and list-like properties too (index by location).</p>
 <p>Indexes are complicated but understanding them is key to leveraging the power of pandas. Let's look at some example operations to get more familiar with how they work:</p>
@@ -4249,7 +4241,7 @@ dtype: object
 <div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">row_indexer</span><span class="p">][</span><span class="n">column_indexer</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 </pre></div>
 <p>That <em>chained indexing</em> can result in copies being made which will not have the effect you expect. You want to do all your indexing in one operation. See the details at <a href="https://pandas.pydata.org/pandas-docs/stable/indexing.html">https://pandas.pydata.org/pandas-docs/stable/indexing.html</a></p>
-<h4 id="Exercise-4">Exercise 4<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Exercise-4">¶</a>
+<h4 id="Exercise-4">Exercise 4<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Exercise-4">¶</a>
 </h4>
 <p>Using the same DataFrame from Exercise 3:</p>
 <ul>
@@ -4264,7 +4256,7 @@ dtype: object
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Loading/Saving-CSV,-JSON-and-Excel-Files">Loading/Saving CSV, JSON and Excel Files<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Loading/Saving-CSV,-JSON-and-Excel-Files">¶</a>
+<h4 id="Loading/Saving-CSV,-JSON-and-Excel-Files">Loading/Saving CSV, JSON and Excel Files<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Loading/Saving-CSV,-JSON-and-Excel-Files">¶</a>
 </h4>
 <p>Use <code>Pandas.read_csv</code> to read a CSV file into a dataframe. There are many optional argumemts that you can provide, for example to set or override column headers, skip initial rows, treat first row as containing column headers, specify the type of columns (Pandas will try to infer these otherwise), skip columns, and so on. The <code>parse_dates</code> argument is especially useful for specifying which columns have date fields as Pandas doesn't infer these.</p>
 <p>Full docs are at <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html</a></p>
@@ -4585,14 +4577,14 @@ dtype: object
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Sorting">Sorting<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Sorting">¶</a>
+<h4 id="Sorting">Sorting<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Sorting">¶</a>
 </h4>
 <p>You can sort a DataFrame using the <code>sort_values</code> method:</p>
 <div class="highlight"><pre><span></span><span class="n">DataFrame</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">na_position</span><span class="o">=</span><span class="s1">'last'</span><span class="p">)</span>
 </pre></div>
 <p>The <code>by</code> argument should be a column name or list of column names in priority order (if axis=0, i.e. we are sorting the rows, which is typically the case).</p>
 <p>See <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.sort_values.html">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.sort_values.html</a> for the details.</p>
-<h4 id="Filtering">Filtering<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Filtering">¶</a>
+<h4 id="Filtering">Filtering<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Filtering">¶</a>
 </h4>
 </div>
 </div>
@@ -5054,7 +5046,7 @@ Name: survived, Length: 1309, dtype: bool</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Handling-Missing-Data">Handling Missing Data<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Handling-Missing-Data">¶</a>
+<h4 id="Handling-Missing-Data">Handling Missing Data<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Handling-Missing-Data">¶</a>
 </h4>
 <p>To see if there are missing values, we can use isnull() to get a DataFrame where there are null values:</p>
 
@@ -5767,7 +5759,7 @@ dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Exercise-5">Exercise 5<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Exercise-5">¶</a>
+<h4 id="Exercise-5">Exercise 5<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Exercise-5">¶</a>
 </h4>
 <p>Using the previous DataFrame from exercise 3, do the following:</p>
 <ul>
@@ -5789,7 +5781,7 @@ dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Concatenation">Concatenation<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Concatenation">¶</a>
+<h4 id="Concatenation">Concatenation<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Concatenation">¶</a>
 </h4>
 <p><code>pandas.concat</code> can be used to concatenate Series and DataFrames:</p>
 
@@ -6401,7 +6393,7 @@ dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Merging-and-Joining">Merging and Joining<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Merging-and-Joining">¶</a>
+<h4 id="Merging-and-Joining">Merging and Joining<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Merging-and-Joining">¶</a>
 </h4>
 <p>We have already seen how we can add a new column to a DataFrame when it is a fixed scalar value:</p>
 
@@ -7206,7 +7198,7 @@ dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Exploring-the-Data">Exploring the Data<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Exploring-the-Data">¶</a>
+<h4 id="Exploring-the-Data">Exploring the Data<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Exploring-the-Data">¶</a>
 </h4>
 <p>There are some more useful ways to explore the data in our DataFrame. Let's return to the Titanic data set, but this time we will use the sample dataset that comes with Seaborn, which is a bit different to the one we loaded before:</p>
 
@@ -7614,7 +7606,7 @@ Name: deck, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Aggregating,-Pivot-Tables,-and-Multi-indexes">Aggregating, Pivot Tables, and Multi-indexes<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Aggregating,-Pivot-Tables,-and-Multi-indexes">¶</a>
+<h4 id="Aggregating,-Pivot-Tables,-and-Multi-indexes">Aggregating, Pivot Tables, and Multi-indexes<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Aggregating,-Pivot-Tables,-and-Multi-indexes">¶</a>
 </h4>
 <p>There is a common set of operations known as the <em>split-apply-combine</em> pattern:</p>
 <ul>
@@ -8218,7 +8210,7 @@ Categories (2, interval[int64]): [(0, 18] &lt; (18, 100]]</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Applying-Functions">Applying Functions<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Applying-Functions">¶</a>
+<h4 id="Applying-Functions">Applying Functions<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Applying-Functions">¶</a>
 </h4>
 <p>We saw earlier that we can add new columns to a DataFrame easily. The new column can be a function of an existing column. For example, we could add an 'is_adult' field to the Titanic data:</p>
 
@@ -8570,7 +8562,7 @@ Categories (2, interval[int64]): [(0, 18] &lt; (18, 100]]</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Exercise-6">Exercise 6<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Exercise-6">¶</a>
+<h4 id="Exercise-6">Exercise 6<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Exercise-6">¶</a>
 </h4>
 <p>Use the same DataFrame from exercise 5:</p>
 <ul>
@@ -8588,7 +8580,7 @@ Categories (2, interval[int64]): [(0, 18] &lt; (18, 100]]</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="String-Operations">String Operations<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#String-Operations">¶</a>
+<h4 id="String-Operations">String Operations<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#String-Operations">¶</a>
 </h4>
 <p>Pandas has <a href="https://pandas.pydata.org/pandas-docs/stable/text.html">vectorized string operations</a> that will skip over missing values. Looks look at some examples:</p>
 
@@ -8957,7 +8949,7 @@ Name: home.dest, dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Ordinal-and-Categorical-Data">Ordinal and Categorical Data<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Ordinal-and-Categorical-Data">¶</a>
+<h4 id="Ordinal-and-Categorical-Data">Ordinal and Categorical Data<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Ordinal-and-Categorical-Data">¶</a>
 </h4>
 <p>So far we have mostly seen numeric, date-related, and "object" or string data. When loading data Pandas will try to infer if it is numeric and then fall back to string/object. Loading functions like <code>read_csv</code> take arguments that can let us explicitly tell Pandas what the type of a column is, or whether it should try to parse the values in a column as dates. However, there are other types that are common where Pandas will need more help.</p>
 <p><em>Categorical</em> data is data where the values fall into a finite set of non-numeric values. Examples could be month names, department names, or occupations. It's possible to represent these as strings but generally much more space and time efficient to map the values to some more compact underlying representation. <em>Ordinal</em> data is categorical data where the values are also ordered; for example, exam grades like 'A', 'B', 'C', etc, or statements of preference ('Dislike', 'Neutral', 'Like'). In terms of use, the main difference is that it is valid to compare categorical data for equality only, while for ordinal values sorting, or comparing with relational operators like '&gt;', is meaningful (of course in practice we often sort categorical values alphabetically, but that is mostly a convenience and doesn't usually imply relative importance or weight). It's useful to think of ordinal and categorical data as being similar to enumerations in programming languages that support these.</p>
@@ -9998,7 +9990,7 @@ dtype: int8</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Aligned-Operations">Aligned Operations<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Aligned-Operations">¶</a>
+<h4 id="Aligned-Operations">Aligned Operations<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Aligned-Operations">¶</a>
 </h4>
 <p>Pandas will align DataFrames on indexes when performing operations. Consider for example two DataFrames, one with number of transactions by day of week, and one with number of customers by day of week, and say we want to know average transactions per customer by date:</p>
 
@@ -10173,7 +10165,7 @@ dtype: int8</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Chaining-Methods-and-.pipe()">Chaining Methods and .pipe()<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Chaining-Methods-and-.pipe()">¶</a>
+<h4 id="Chaining-Methods-and-.pipe()">Chaining Methods and .pipe()<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Chaining-Methods-and-.pipe()">¶</a>
 </h4>
 <p>Many operations on Series and DataFrames return modified copies of the Series or Dataframe, unless the <code>inplace=True</code> argument is included. Even in that case there is usually a copy made and then the reference is just replaced at the end, so using inplace operations generally isn't faster. Because a Series or Dataframe reference is returned, you can chain multiple operations, for example:</p>
 <div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data.csv'</span><span class="p">)</span>
@@ -10202,7 +10194,7 @@ dtype: int8</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Statistical-Significance-and-Hypothesis-Testing">Statistical Significance and Hypothesis Testing<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Statistical-Significance-and-Hypothesis-Testing">¶</a>
+<h3 id="Statistical-Significance-and-Hypothesis-Testing">Statistical Significance and Hypothesis Testing<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Statistical-Significance-and-Hypothesis-Testing">¶</a>
 </h3>
 <p>In exploring the data, we may come up with hypotheses about relationships between different values. We can get an indication of whether our hypothesis is correct or the relationship is coincidental using <a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_testing">tests of statistical significance</a>.</p>
 <p>We may have a simple hypothesis, like "All X are Y". For phenomena in the real world, we usually we can't explore all possible X, and so we can't usually prove all X are Y. To prove the opposite, on the other hand, only requires a single counter-example. The well-known illustration is the <em>black swan</em>: to prove that all swans are white you would have to find every swan that exists (and possibly that has ever existed and may ever exist) and check its color, but to prove not all swans are white you need to find just a single swan that is not white and you can stop there. For these kinds of hypotheses we can often just look at our historical data and try to find a counterexample.</p>
@@ -10520,7 +10512,7 @@ dtype: int8</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Plotting">Plotting<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Plotting">¶</a>
+<h3 id="Plotting">Plotting<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Plotting">¶</a>
 </h3>
 <p>Pandas includes the ability to do simple plots. For a Series, this typically means plotting the values in the series as the Y values, and then index as the X values; for a DataFrame this would be a multiplot. You can use <code>x</code> and <code>y</code> named arguments to select specific columns to plot, and you can use a <code>kind</code> argument to specify the type of plot.</p>
 <p>See <a href="https://pandas.pydata.org/pandas-docs/stable/visualization.html">https://pandas.pydata.org/pandas-docs/stable/visualization.html</a> for details.</p>
@@ -10728,7 +10720,7 @@ dtype: int8</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Charting-with-Seaborn">Charting with Seaborn<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Charting-with-Seaborn">¶</a>
+<h3 id="Charting-with-Seaborn">Charting with Seaborn<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Charting-with-Seaborn">¶</a>
 </h3>
 <p>See the <a href="https://python-graph-gallery.com/">Python Graph Gallery</a> for many examples of different types of charts including the code used to create them. As you learn to use the plotting libraries in many cases the fastest way to get results is just find an example from there and copy/paste/edit it.</p>
 <p>There are a number of plotting libraries for Python; the most well known are matplotlib, Seaborn, Bokeh, and Plotly. Some offer more interactivity than others. Matplotlib is the most commonly used; it is very flexible but requires a fair amount of boilerplate code. There is a good tutorial on matplotlib <a href="https://www.datacamp.com/community/tutorials/matplotlib-tutorial-python">here</a>. We will instead use <a href="https://seaborn.pydata.org/">Seaborn</a>, which is built on top of matplotlib and simplifies its usage so that many plots just take one line of code.</p>
@@ -11136,7 +11128,7 @@ dtype: int8</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Working-with-Dates-and-Time-Series">Working with Dates and Time Series<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Working-with-Dates-and-Time-Series">¶</a>
+<h3 id="Working-with-Dates-and-Time-Series">Working with Dates and Time Series<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Working-with-Dates-and-Time-Series">¶</a>
 </h3>
 <p>Pandas provides several classes for dealing with datetimes: <code>Timestamp</code>, <code>Period</code>, and <code>Timedelta</code>, and corresponding index types based off these, namely <code>DatetimeIndex</code>, <code>PeriodIndex</code> and <code>TimedeltaIndex</code>.</p>
 <p>For parsing dates we can use <code>pd.to_datetime</code> which can parse dates in many formats, or <code>pd.to_timedelta</code> to get a time delta. For formatting dates as strings the <code>Timestamp.strftime</code> method can be used.</p>
@@ -12125,7 +12117,7 @@ Name: close, dtype: float64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Summarizing-Data-with-pandas_profiling-and-facets">Summarizing Data with pandas_profiling and facets<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Summarizing-Data-with-pandas_profiling-and-facets">¶</a>
+<h3 id="Summarizing-Data-with-pandas_profiling-and-facets">Summarizing Data with pandas_profiling and facets<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Summarizing-Data-with-pandas_profiling-and-facets">¶</a>
 </h3>
 <p><code>pandas_profiling</code> is a Python package that can produce much more detailed summaries of data than the <code>.describe()</code> method. In this case we must install with <code>pip</code> and the right way to do this from the notebook is:</p>
 
@@ -12458,19 +12450,19 @@ Name: close, dtype: float64</pre>
         <p class="h4">Warnings</p>
         <ul class="list-unstyled">
 <li>
-<a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#pp_var_age"><code>age</code></a> has 177 / 19.9% missing values <span class="label label-default">Missing</span>
+<a href="exploratory-data-analysis-with-numpy-and-pandas.html#pp_var_age"><code>age</code></a> has 177 / 19.9% missing values <span class="label label-default">Missing</span>
 </li>
 <li>
-<a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#pp_var_deck"><code>deck</code></a> has 688 / 77.2% missing values <span class="label label-default">Missing</span>
+<a href="exploratory-data-analysis-with-numpy-and-pandas.html#pp_var_deck"><code>deck</code></a> has 688 / 77.2% missing values <span class="label label-default">Missing</span>
 </li>
 <li>
-<a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#pp_var_fare"><code>fare</code></a> has 15 / 1.7% zeros <span class="label label-info">Zeros</span>
+<a href="exploratory-data-analysis-with-numpy-and-pandas.html#pp_var_fare"><code>fare</code></a> has 15 / 1.7% zeros <span class="label label-info">Zeros</span>
 </li>
 <li>
-<a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#pp_var_parch"><code>parch</code></a> has 678 / 76.1% zeros <span class="label label-info">Zeros</span>
+<a href="exploratory-data-analysis-with-numpy-and-pandas.html#pp_var_parch"><code>parch</code></a> has 678 / 76.1% zeros <span class="label label-info">Zeros</span>
 </li>
 <li>
-<a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#pp_var_sibsp"><code>sibsp</code></a> has 608 / 68.2% zeros <span class="label label-info">Zeros</span>
+<a href="exploratory-data-analysis-with-numpy-and-pandas.html#pp_var_sibsp"><code>sibsp</code></a> has 608 / 68.2% zeros <span class="label label-info">Zeros</span>
 </li>
 <li>Dataset has 107 duplicate rows <span class="label label-warning">Warning</span>
 </li> </ul>
@@ -12636,10 +12628,10 @@ Name: close, dtype: float64</pre>
 </div>
 <div class="row collapse col-md-12" id="descriptives-1342918219323889572">
     <ul class="nav nav-tabs" role="tablist">
-<li role="presentation" class="active"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#quantiles-1342918219323889572" aria-controls="quantiles-1342918219323889572" role="tab" data-toggle="tab">Statistics</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#histogram-1342918219323889572" aria-controls="histogram-1342918219323889572" role="tab" data-toggle="tab">Histogram</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#common-1342918219323889572" aria-controls="common-1342918219323889572" role="tab" data-toggle="tab">Common Values</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#extreme-1342918219323889572" aria-controls="extreme-1342918219323889572" role="tab" data-toggle="tab">Extreme Values</a></li>
+<li role="presentation" class="active"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#quantiles-1342918219323889572" aria-controls="quantiles-1342918219323889572" role="tab" data-toggle="tab">Statistics</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#histogram-1342918219323889572" aria-controls="histogram-1342918219323889572" role="tab" data-toggle="tab">Histogram</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#common-1342918219323889572" aria-controls="common-1342918219323889572" role="tab" data-toggle="tab">Common Values</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#extreme-1342918219323889572" aria-controls="extreme-1342918219323889572" role="tab" data-toggle="tab">Extreme Values</a></li>
 
     </ul>
 <div class="tab-content">
@@ -13659,10 +13651,10 @@ Name: close, dtype: float64</pre>
 </div>
 <div class="row collapse col-md-12" id="descriptives4687572810488355711">
     <ul class="nav nav-tabs" role="tablist">
-<li role="presentation" class="active"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#quantiles4687572810488355711" aria-controls="quantiles4687572810488355711" role="tab" data-toggle="tab">Statistics</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#histogram4687572810488355711" aria-controls="histogram4687572810488355711" role="tab" data-toggle="tab">Histogram</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#common4687572810488355711" aria-controls="common4687572810488355711" role="tab" data-toggle="tab">Common Values</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#extreme4687572810488355711" aria-controls="extreme4687572810488355711" role="tab" data-toggle="tab">Extreme Values</a></li>
+<li role="presentation" class="active"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#quantiles4687572810488355711" aria-controls="quantiles4687572810488355711" role="tab" data-toggle="tab">Statistics</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#histogram4687572810488355711" aria-controls="histogram4687572810488355711" role="tab" data-toggle="tab">Histogram</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#common4687572810488355711" aria-controls="common4687572810488355711" role="tab" data-toggle="tab">Common Values</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#extreme4687572810488355711" aria-controls="extreme4687572810488355711" role="tab" data-toggle="tab">Extreme Values</a></li>
 
     </ul>
 <div class="tab-content">
@@ -14024,10 +14016,10 @@ Name: close, dtype: float64</pre>
 </div>
 <div class="row collapse col-md-12" id="descriptives-3800232419192143097">
     <ul class="nav nav-tabs" role="tablist">
-<li role="presentation" class="active"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#quantiles-3800232419192143097" aria-controls="quantiles-3800232419192143097" role="tab" data-toggle="tab">Statistics</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#histogram-3800232419192143097" aria-controls="histogram-3800232419192143097" role="tab" data-toggle="tab">Histogram</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#common-3800232419192143097" aria-controls="common-3800232419192143097" role="tab" data-toggle="tab">Common Values</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#extreme-3800232419192143097" aria-controls="extreme-3800232419192143097" role="tab" data-toggle="tab">Extreme Values</a></li>
+<li role="presentation" class="active"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#quantiles-3800232419192143097" aria-controls="quantiles-3800232419192143097" role="tab" data-toggle="tab">Statistics</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#histogram-3800232419192143097" aria-controls="histogram-3800232419192143097" role="tab" data-toggle="tab">Histogram</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#common-3800232419192143097" aria-controls="common-3800232419192143097" role="tab" data-toggle="tab">Common Values</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#extreme-3800232419192143097" aria-controls="extreme-3800232419192143097" role="tab" data-toggle="tab">Extreme Values</a></li>
 
     </ul>
 <div class="tab-content">
@@ -14357,10 +14349,10 @@ Name: close, dtype: float64</pre>
 </div>
 <div class="row collapse col-md-12" id="descriptives-5116643510275862970">
     <ul class="nav nav-tabs" role="tablist">
-<li role="presentation" class="active"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#quantiles-5116643510275862970" aria-controls="quantiles-5116643510275862970" role="tab" data-toggle="tab">Statistics</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#histogram-5116643510275862970" aria-controls="histogram-5116643510275862970" role="tab" data-toggle="tab">Histogram</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#common-5116643510275862970" aria-controls="common-5116643510275862970" role="tab" data-toggle="tab">Common Values</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#extreme-5116643510275862970" aria-controls="extreme-5116643510275862970" role="tab" data-toggle="tab">Extreme Values</a></li>
+<li role="presentation" class="active"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#quantiles-5116643510275862970" aria-controls="quantiles-5116643510275862970" role="tab" data-toggle="tab">Statistics</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#histogram-5116643510275862970" aria-controls="histogram-5116643510275862970" role="tab" data-toggle="tab">Histogram</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#common-5116643510275862970" aria-controls="common-5116643510275862970" role="tab" data-toggle="tab">Common Values</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#extreme-5116643510275862970" aria-controls="extreme-5116643510275862970" role="tab" data-toggle="tab">Extreme Values</a></li>
 
     </ul>
 <div class="tab-content">
@@ -14706,10 +14698,10 @@ Name: close, dtype: float64</pre>
 </div>
 <div class="row collapse col-md-12" id="descriptives5797978996952062835">
     <ul class="nav nav-tabs" role="tablist">
-<li role="presentation" class="active"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#quantiles5797978996952062835" aria-controls="quantiles5797978996952062835" role="tab" data-toggle="tab">Statistics</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#histogram5797978996952062835" aria-controls="histogram5797978996952062835" role="tab" data-toggle="tab">Histogram</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#common5797978996952062835" aria-controls="common5797978996952062835" role="tab" data-toggle="tab">Common Values</a></li>
-        <li role="presentation"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#extreme5797978996952062835" aria-controls="extreme5797978996952062835" role="tab" data-toggle="tab">Extreme Values</a></li>
+<li role="presentation" class="active"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#quantiles5797978996952062835" aria-controls="quantiles5797978996952062835" role="tab" data-toggle="tab">Statistics</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#histogram5797978996952062835" aria-controls="histogram5797978996952062835" role="tab" data-toggle="tab">Histogram</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#common5797978996952062835" aria-controls="common5797978996952062835" role="tab" data-toggle="tab">Common Values</a></li>
+        <li role="presentation"><a href="exploratory-data-analysis-with-numpy-and-pandas.html#extreme5797978996952062835" aria-controls="extreme5797978996952062835" role="tab" data-toggle="tab">Extreme Values</a></li>
 
     </ul>
 <div class="tab-content">
@@ -15309,7 +15301,7 @@ Name: close, dtype: float64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Handling-Data-that-Exceeds-Your-System's-RAM">Handling Data that Exceeds Your System's RAM<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Handling-Data-that-Exceeds-Your-System's-RAM">¶</a>
+<h3 id="Handling-Data-that-Exceeds-Your-System's-RAM">Handling Data that Exceeds Your System's RAM<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Handling-Data-that-Exceeds-Your-System's-RAM">¶</a>
 </h3>
 <p>Pandas is an in-memory system. The use of NumPy means it uses memory very efficiently but you are still limited by the RAM you have available. If your data is too large, there are several options available, including:</p>
 <ul>
@@ -15343,7 +15335,7 @@ Name: close, dtype: float64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Adding-Interactivity-with-ipywidgets">Adding Interactivity with ipywidgets<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Adding-Interactivity-with-ipywidgets">¶</a>
+<h3 id="Adding-Interactivity-with-ipywidgets">Adding Interactivity with ipywidgets<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Adding-Interactivity-with-ipywidgets">¶</a>
 </h3>
 <p><code>ipywidgets</code> is an extension package for Jupyter that allows output cells to include interactive HTML elements. To install, you will need to run a command to enable the extension from a terminal and then restart Jupyter. First, install the package; the code below shows the right way to do this from within the notebook:</p>
 
@@ -15450,7 +15442,7 @@ var element = $('#2352e467-f346-4b8a-a2ec-720180ce6ed5');
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Some-Useful-Packages-and-Resources">Some Useful Packages and Resources<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Some-Useful-Packages-and-Resources">¶</a>
+<h3 id="Some-Useful-Packages-and-Resources">Some Useful Packages and Resources<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Some-Useful-Packages-and-Resources">¶</a>
 </h3>
 <ul>
 <li>
@@ -15469,7 +15461,7 @@ var element = $('#2352e467-f346-4b8a-a2ec-720180ce6ed5');
 <p>Video tutorials on Pandas: <a href="http://www.dataschool.io/easier-data-analysis-with-pandas/">http://www.dataschool.io/easier-data-analysis-with-pandas/</a></p>
 <p>Jake VanderPlas' excellent Python Data Science Handbook: <a href="https://jakevdp.github.io/PythonDataScienceHandbook/">https://jakevdp.github.io/PythonDataScienceHandbook/</a></p>
 <p>Tom Augspurger has a great <a href="http://tomaugspurger.github.io/modern-1-intro">multi-part series</a> on Pandas aimed at intermediate to advanced users.</p>
-<h3 id="Example:-Loading-JSON-into-a-DataFrame-and-Expanding-Complex-Fields">Example: Loading JSON into a DataFrame and Expanding Complex Fields<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Example:-Loading-JSON-into-a-DataFrame-and-Expanding-Complex-Fields">¶</a>
+<h3 id="Example:-Loading-JSON-into-a-DataFrame-and-Expanding-Complex-Fields">Example: Loading JSON into a DataFrame and Expanding Complex Fields<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Example:-Loading-JSON-into-a-DataFrame-and-Expanding-Complex-Fields">¶</a>
 </h3>
 <p>In this example we'll see how we can load some structured data and process it into a flat table form better suited to machine learning.</p>
 
@@ -17138,230 +17130,46 @@ dtype: object</pre>
     </div>
   </div>
 
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2018-04-28T12:40:00-07:00">
-            2018-04-28 12:40
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/using-jupyter.html">Using Jupyter</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><em>(This is the second post in a series based off my Python for Data Science bootcamp I run at eBay occasionally. The first post was <a href="https://www.grahamwheeler.com/posts/python-crash-course.html">a Python crash course</a>.)</em></p>
-<p><a href="http://jupyter.org/">Jupyter</a> is an interactive computing environment that allows users to create heterogeneous documents called <em>notebooks</em> that can mix executable code, <a href="https://en.wikipedia.org/wiki/Markdown">markdown</a> text with <a href="https://www.mathjax.org/">MathJax</a>, multimedia, static and interactive charts, and more. A notebook is typically a complete and self-contained record of a computation, and can be converted to various formats and shared with others. Jupyter thus supports a form of <a href="https://en.wikipedia.org/wiki/Literate_programming">literate programming</a>. Several of the posts on this blog, including this one, were written as Jupyter notebooks. Jupyter is an extremely popular tool for doing data science in Python due to its interactive nature, good support for iterative and experimental computation, and ability to create a finished artifact combining both scientific text (with math) and code. It's easiest to start to understand this by looking at an <a href="http://nbviewer.jupyter.org/url/norvig.com/ipython/Economics.ipynb">example</a> of a finished notebook.</p>
-<p>Jupyter the application combines three components:
-</p>
-<p class="more"><a href="posts/using-jupyter.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-                <a href="categories/data-science.html">#Data Science</a>,
-                <a href="categories/python.html">#Python</a>,
-
-        <time class="post-date" datetime="2018-04-17T21:35:00-07:00">
-            2018-04-17 21:35
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/personality-and-relationships1.html">The 5-Factor Model of Personality</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Shankar Vedantam has a great NPR show/podcast, <a href="https://www.npr.org/podcasts/510308/hidden-brain">"The Hidden Brain"</a>, and occasional appearances on NPR's All Things Considered.  In December he had a show on Evaluating Personality Tests. It was enjoyable, especially the Harry Potter Sorting Hat references, but I felt it was a missed opportunity because of the focus on Myers-Briggs, and the fact that he mentioned the Big-5 model only in passing.</p>
-<p>In fact, Myers-Briggs is not taken very seriously in the psychology world, and Vedantam surprised me with spending so much time on it, given his show's focus on research in psychology. On the other hand, the Big-5 model is taken quite seriously, with many studies and papers based on it and evaluating it in various contexts (take a look, for example, at the Oxford University Press book I link to at the end of this post).</p>
-<p>In the <a href="https://www.npr.org/2017/12/11/569815338/evaluating-personality-tests">short form NPR segment</a>, this was the section on Big-5 in its entirety:</p>
-<blockquote>
-<p>VEDANTAM: Many personality researchers put greater stock in a test known as the Big Five [vs Myers-Briggs]. Grant says the Big Five has lots of peer reviewed data to back it up.</p>
-<p>GRANT: We can predict your job performance, your effectiveness in a team with different collaborators, your likelihood of sticking around in a job versus leaving as well as your probability of your marriage surviving, depending on the personality fit between you and your spouse.</p>
-</blockquote>
-<p></p>
-<p class="more"><a href="posts/personality-and-relationships1.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2018-04-15T21:35:00-07:00">
-            2018-04-15 21:35
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/python-crash-course.html">A Python Crash Course</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I've been teaching <a href="https://github.com/gramster/pythonbootcamp">a crash course in data science with Python</a>, which starts off with learning Python itself. The target audience is Java programmers (generally senior level) so its assumed that things like classes and methods are well understood. The focus is mostly on what is different with Python. I teach it using Jupyter notebooks but the content is useful as a blog post too so here we go:</p>
-<h3 id="Introduction">Introduction<a class="anchor-link" href="posts/python-crash-course.html#Introduction">¶</a>
-</h3>
-<h4 id="Python's-Origins">Python's Origins<a class="anchor-link" href="posts/python-crash-course.html#Python's-Origins">¶</a>
-</h4>
-<p>Python was conceived in the late 1980s, and its implementation began in December 1989 by Guido van Rossum at Centrum Wiskunde &amp; Informatica (CWI) in the Netherlands as a successor to the ABC language. It takes its name from Monty Python's Flying Circus.</p>
-<p>Python is a dynamic language but is strongly typed (i.e. variables are untyped but refer to objects of fixed type).
-</p>
-<p class="more"><a href="posts/python-crash-course.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2018-04-12T20:10:00-07:00">
-            2018-04-12 20:10
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/blogagain.html">Blogging again</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>Well, it's been quite a while since I last blogged. My Zite project is not dead; it's actually up and 
-running well as a personal aggregator but not ready for multi-user access, and I'm not sure when it
-might be. But I've been feeling a bit of an itch to start blogging again so here goes.</p>
-<p>I have some material already lined up: I've been teaching an introductory data science bootcamp at
-work and thought the notebooks from that could be useful blog posts in and of themselves. So I'll
-start slowly publishing those while I write some new material. I'm also going to expand the scope 
-of this blog; I'll still cover some tech topics but I',m going to fold in the content from my
-dormant math blog and retire it; this may inspire me to do some math blogging again. And I'll be 
-throwing in some stuff on management and psychology too. So this will be a mishmash living up to 
-the random forest name. I'll use categories to make it more accessible for those only interested
-in specific topics.</p>
-<p>More soon!</p>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2018-04-11T21:00:00-07:00">
-            2018-04-11 21:00
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-11.html">Building a Zite Replacement (Part 11)</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>It's been a while since I worked on this but it is still on my mind a lot. I've been mulling over ways to improve categorization without the semi-supervised tweaking I've had to do.</p>
-<p>Just to recap, currently this is what I am doing:</p>
+    </section><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
 <ul>
-<li>I have a bunch of 'category exemplars', which are sets of key terms associated with a category. These are the things which currently require some manual work;</li>
-<li>for each article, I extract the plain text, normalize capitalization, remove <a href="https://en.wikipedia.org/wiki/Stop_words">stop words</a>, then use <a href="https://en.wikipedia.org/wiki/Tf-idf">tf-idf</a> to extract the set of most significant terms (I'm not yet doing <a href="https://en.wikipedia.org/wiki/Stemming">stemming</a> although I'll probably start);</li>
-<li>I then use a <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">distance metric</a> from the exemplars to assign category scores to the articles. Provided the score exceeds a threshold the article will be considered to be in the category.
-<p class="more"><a href="posts/zite-replacement-11.html">Read more…</a></p>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
 </li>
 </ul>
 </div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/exploratory-data-analysis-with-numpy-and-pandas.html",
+        disqus_title="Exploratory Data Analysis with NumPy and Pandas",
+        disqus_identifier="cache/posts/exploratory-data-analysis-with-numpy-and-pandas.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
-        on
 
-        <time class="post-date" datetime="2016-04-23T09:15:00-07:00">
-            2016-04-23 09:15
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/using-jupyter-as-a-music-notebook.html">Using Jupyter as a Music Notebook</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I recently started playing guitar again after a long absence and wanted to start making some notes in a digital form. Unfortunately, I didn't find any good tools. There is TeX of course, which can do anything, but I was hoping for something a bit more WYSIWYGy. There are some very good tools available for musical scores (MuseScore, Frescobaldi), but I want something that is more like a traditional notebook with lots of notes interspersed with occasional musical notation (in both traditional and tablature forms).</p>
-<p>So an obvious potential candidate is Jupyter (nee IPython), but it has no support for musical notation out of the box. But it is doable and in this post I'll walk through how I got it to work on my Mac. This is also my first attempt at using a Jupyter notebook as my blog post in Nikola so I'm kiling two birds with one stone.
-</p>
-<p class="more"><a href="posts/using-jupyter-as-a-music-notebook.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2016-02-27T20:00:00Z">
-            2016-02-27 20:00
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-10.html">Building a Zite Replacement (Part 10)</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>I've spent the past few days refining the web server, largely for diagnostic
-purposes, so it can replace the old TkInter app. I can seen articles for 
-categories or feeds, their rank, and detailed information on why they 
-received particular categories and ranks. This has enabled me to improve
-the categorization and ranking algorithms. I'm at a point now where I 
-feel I need a lot more sources than the ~4000 I have right now, as well as
-more categories. The latter is more complex and will take me back to some
-of my earlier explorations in clustering, etc. The former largely involves 
-mining more of the web to find useful sites.
-</p>
-<p class="more"><a href="posts/zite-replacement-10.html">Read more…</a></p>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2015-11-07T08:30:00-08:00">
-            2015-11-07 08:30
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-9.html">Building a Zite Replacement (Part 9)</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>Well, I hope you've all brushed your teeth after all that Halloween candy.</p>
-<p>Today I'm going to show how I build a simple web server to view my feed
-articles using node.js and Express, along with MongoDB. I have a simple 
-category classifier which finds the best Jacard similarity (described earlier)
-to a set of category exemplars (i.e. 'pseudo-articles' for a category
-containing just key words that are typical for that category). It needs a
-lot of tuning and the earlier tkInter program was meant for that but tkInter 
-proved to have problems. So time to use some more modern techologies!
-</p>
-<p class="more"><a href="posts/zite-replacement-9.html">Read more…</a></p>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2015-11-01T22:07:00-08:00">
-            2015-11-01 22:07
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-8.html">Building a Zite Replacement (Part 8)</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>Happy Halloween, all!</p>
-<p>I'm sitting here handing out candy and glow necklaces to all comers so its a
-good time to write a new post.</p>
-<p>It's been a while since much happened as I've been really busy with the beta 
-release of Google Cloud Datalab, which is my day job. But now that is out and
-it's the weekend and lousy weather here in the Pacific Northwest it's been a 
-good day t get back to things.</p>
-<p>Today I did something I've been meaning to do for a while, which is to change
-the code to populate a MongoDB database rather than writing files to the file 
-system. Interestingly it seems to be quite a bit slower than the file system 
-but hopefully it will scale better and make up for things when I have ad-hoc
-queries to do.
-</p>
-<p class="more"><a href="posts/zite-replacement-8.html">Read more…</a></p>
-</div>
-    </section><footer class="post-meta"><a href="authors/graham-wheeler.html">Graham Wheeler</a>
-
-        on
-
-        <time class="post-date" datetime="2015-10-31T20:21:00-07:00">
-            2015-10-31 20:21
-        </time></footer></article>
-</div>
-
-        <nav class="postindexpager"><ul class="pager">
-<li class="next">
-                <a href="index-7.html" rel="next">Older posts</a>
-            </li>
-        </ul></nav><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     tex2jax: {
         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -17373,10 +17181,10 @@ MathJax.Hub.Config({
         styles: {'.MathJax_Display': {"margin": 0}}
     }
 });
-</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+</script></footer></article><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
 
-    <script type="text/javascript" src="assets/js/jquery.js"></script><script type="text/javascript" src="assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="assets/js/index.js"></script><script>
+    <script type="text/javascript" src="../assets/js/jquery.js"></script><script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../assets/js/index.js"></script><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
