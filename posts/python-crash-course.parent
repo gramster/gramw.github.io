@@ -1,0 +1,2870 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Python Overview\n",
+    "\n",
+    "## Introduction\n",
+    "\n",
+    "### Python's Origins\n",
+    "\n",
+    "Python was conceived in the late 1980s, and its implementation began in December 1989 by Guido van Rossum at Centrum Wiskunde & Informatica (CWI) in the Netherlands as a successor to the ABC language. It takes its name from Monty Python's Flying Circus.\n",
+    "\n",
+    "Python is a dynamic language but is strongly typed (i.e. variables are untyped but refer to objects of fixed type).\n",
+    "\n",
+    "### How Python Evolves\n",
+    "\n",
+    "Python evolves in a fairly straightforward way, more-or-less like this:\n",
+    "\n",
+    "- people propose changes by writing *Python Enhancement Proposals* (PEPs)\n",
+    "- the Python core committee will assign a 'dictator' who will decide whether the PEP is worthy of becoming part of the standard, and if so it does, after some amount of discussion and revision\n",
+    "- disagreements are finally settled by Guido van Rossum, Python's inventor and the 'Benevolent Dictator for Life' (BDFL)\n",
+    "\n",
+    "An important standard PEP is the Style Guide, PEP-8 (https://www.python.org/dev/peps/pep-0008/). By default, PyCharm will warn of any PEP-8 violations. There are external tools such as `flake8` (https://gitlab.com/pycqa/flake8) that can be used to check code for compliance in other environments.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### StackOverflow is your friend!\n",
+    "\n",
+    "For Python questions and Python data science questions, make use of StackOverflow. Pay attention to comments on suggested answers; the \"accepted answer\" is not always the best. Look for comments about whether it is the \"most Pythonic\".\n",
+    "\n",
+    "https://stackoverflow.com/questions/tagged/python\n",
+    "\n",
+    "Also, if you're struggling to understand some code in your early days with Python, you may find this 'execution visualizer' helpful:\n",
+    "\n",
+    "http://pythontutor.com/\n",
+    "\n",
+    "### \"Batteries Included\"\n",
+    "\n",
+    "Python is often described as having \"batteries included\". This is a reference to the rich set of libraries (packages)included in the standard distribution as well as the vast collection of freely available packages that can be used to bootstrap your development.\n",
+    "\n",
+    "### Python 2.7 or Python 3.x?\n",
+    "\n",
+    "You can use conda to create a Python 2.7 virtual environment for when you have to use 2.7, but all new projects should be Python 3.5 or later. Python 2.7 is the end of the 2.x line and is supposed to be end-of-lifed in 2020. Avoid it; the only reason to use it is if there is a package you really need that hasn't been ported yet.\n",
+    "\n",
+    "## Python docs\n",
+    "\n",
+    "https://docs.python.org/3/ has very detailed documentation.\n",
+    "\n",
+    "Most Python packages have good documentation at https://readthedocs.org/\n",
+    "\n",
+    "If you use Python a lot on a Mac you may find Dash useful: https://kapeli.com/dash\n",
+    "\n",
+    "That said, Python has a help() function that is very useful.\n",
+    "\n",
+    "## Installing Packages\n",
+    "\n",
+    "The standard way to install packages is with `pip install`. However, if you have installed `conda` you should use `conda install` first and only if that fails use `pip install`. Conda has a smaller set of packages which is why it doesn't always succeed, but the ones it does have have been built for Conda so installing that way is preferred.\n",
+    "\n",
+    "Use `conda uninstall` or `pip uninstall` to remove packages.\n",
+    "\n",
+    "To see what packages are installed use `pip freeze`.\n",
+    "\n",
+    "There's a lot more to package installation than this but this is enough for 90%+ of what you will do.\n",
+    "\n",
+    "\n",
+    "## Using the REPL\n",
+    "\n",
+    "To start the REPL, just type `python` at the command line.\n",
+    "\n",
+    "Use the `help()` function to read the documentation for a module/class/function. As a standalone invocation, you enter the help system and can explore various topics.\n",
+    "\n",
+    "Python scripts are stored in plain text files with `.py` extensions. You can run the script `foo.py` at the command line by invoking `python foo.py`. When you do so the Python interpreter will compile the script to an intermediate bytecode, and the result will be stored in a file with the same base name and a `.pyc` extension. As an optimisation, the interpreter will look to see if a `.pyc` file with a more recent file modification date exists when you invoke it to run a script and use that if it does.\n",
+    "\n",
+    "> ### A better REPL: bpython\n",
+    "> \n",
+    "> https://www.bpython-interpreter.org/\n",
+    "> \n",
+    "> You can install with `pip install bpython`.\n",
+    "> \n",
+    "> bpython adds a number of useful features at the command line, like syntax highlighting and auto-completion. If you're going to use the command line > repl I recommend it, although there are other options too that I haven't tried:\n",
+    "> \n",
+    "> - ptpython https://github.com/jonathanslenders/ptpython\n",
+    "> - DreamPie http://dreampie.sourceforge.net/\n",
+    "> \n",
+    "> Yet another alternative to the REPL, of course, is Jupyter.\n",
+    "> \n",
+    "> For the hard-core Pythonista, you can replace your entire shell with one based on Python; see http://xon.sh/.\n",
+    "\n",
+    "## Python is an OOPL\n",
+    "\n",
+    "Python is a pure object-oriented language. Operators like `+` are simply methods on a class. The Python interpreter will convert an infix operator to an instance method call.\n",
+    "\n",
+    "For example, there is an `int` class for integers. The operation `int(3)` boxes the literal 3 up into an `int` object instance. There is an `__add__` method defined on that class for addition. So:    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "3 + 4"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "is the same as:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(3).__add__(4)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The double underscore in Python is called *dunder* and is used extensively internally; `__add__` is called a *dunder-method*. Dunder-methods are important to understand if you want to take full advantage of Python hence this early introduction.\n",
+    "\n",
+    "You can see the methods on a class by using the `dir` function, for example `dir(int)`.\n",
+    "\n",
+    "We will discuss how to define new classes later. A key takeaway here is that this use of dunder-methods allows us to override many operators simply by overriding the associated dunder-method. Two particularly useful ones are `__str__` (cast to string) and `__repr__` (cast to text representation); these are typically the same for a class but need not be. For example, notice the differences here:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a = \"abc\"\n",
+    "print(a.__str__())  # Equivalent to str(a)\n",
+    "print(a.__repr__())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Indentation and Comments\n",
+    "\n",
+    "Python does not use {} for demarcating blocks of code; instead it uses indentation. This distinguishes it from most other programming languages and can take some getting used to. In particular, it requires care when pasting code in an editor (most Python editors are smart about this but other editors are not). The reason for this choice is that Guido originally designed Python as a teaching language and favored readability.\n",
+    "\n",
+    "The convention in Python is to indent with spaces, not tabs (this avoids tab settings causing misnterpretation of code). Indentation standard is 4 spaces at a time, although some companies have different conventions (usually 2, if not 4).\n",
+    "\n",
+    "Comments start with # and continue to the end of the line. By convention if # is used on the same line as code it should be preceded by at least two spaces."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Simple Functions\n",
+    "\n",
+    "Python named functions are defined with `def`:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def add(a, b):\n",
+    "    return a + b\n",
+    "\n",
+    "add(2, 3)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## An Overview of Python Types\n",
+    "\n",
+    "See https://docs.python.org/3/library/stdtypes.html for detailed documentation.\n",
+    "\n",
+    "The main types are:\n",
+    "\n",
+    "| TYPE      | GROUP     | MUTABLE? |\n",
+    "|-----------|-----------|----------|\n",
+    "| int       | Numerics  | N        |\n",
+    "| float     | Numerics  | N        |\n",
+    "| complex   | Numerics  | N        |\n",
+    "| str       | Sequences | N        |\n",
+    "| bytes     | Sequences | N        |\n",
+    "| bytearray | Sequences | Y        |\n",
+    "| list      | Sequences | Y        |\n",
+    "| tuple     | Sequences | N        |\n",
+    "| range     | Sequences | N        |\n",
+    "| set       | Sets      | Y        |\n",
+    "| frozenset | Sets      | N        |\n",
+    "| dict      | Mapping   | Y        |\n",
+    "\n",
+    "In addition, modules, classes, instances, methods, and functions are all types. The Boolean constants `True` and `False`, and the value `None`, are instances of their own special types, and there are several other special cases like this. See the link above for more. Note that there is a string type but not a character type; characters are not treated any differently from other strings.\n",
+    "\n",
+    "### The Boolean Truth Value of Types\n",
+    "\n",
+    "Any object can be tested for truth value, for use in an `if` or `while` condition or as operand in a Boolean expression.\n",
+    "\n",
+    "By default, an object is considered true unless its class defines either a `__bool__()` method that returns False or a `__len__()` method that returns zero, when called with the object. Zero numeric values are considered False, as are empty collections or sequences, and vice-versa.\n",
+    "\n",
+    "Operations and built-in functions that have a Boolean result always return `0` or `False` for false and `1` or `True` for true, unless otherwise stated.\n",
+    "\n",
+    "Important exception: the Boolean operations `or` and `and` always return one of their operands. This allows for useful defaults using Boolean expressions with `or`:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "s = None\n",
+    "\n",
+    "name = s or \"N/A\"\n",
+    "\n",
+    "print(name)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### None\n",
+    "\n",
+    "Python has no null object, but has a special object `None`.\n",
+    "\n",
+    "To test if an object is `None`, use `is` or `is not`, not `==` or `!=`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a = None\n",
+    "print(a is None)\n",
+    "print(a is not None)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Numbers\n",
+    "\n",
+    "Most of the typical operators you know from other languages are supported. Here are some more-specific to Python:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(bool(3))  # Convert to Boolean\n",
+    "print(str(3))  # Convert to string\n",
+    "print(bool(0))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(3 // 2)  # Integer division with truncation\n",
+    "print(3 / 2)  # Float division"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(int(2.5)) # Convert to int with truncation\n",
+    "print(round(2.5))  # Convert to int with rounding (this one is odd; I'd expect it to round up)\n",
+    "print(round(2.5001))  # Convert to int with rounding"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(2 ** 3)  # Exponentiation\n",
+    "print(~3)  # Bitwise inverse\n",
+    "print(2**120)  # Python ints are arbitrary precision, not 64-bit"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(2.0.is_integer())\n",
+    "print(2.5.as_integer_ratio())  # Convert to fraction tuple; we'll cover tuples later"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Note that += and -= (and *=, etc) are supported but ++ and -- are not."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Strings\n",
+    "\n",
+    "Python 3 strings are unicode. String literals can use single our double quotes (but must use same type to close as to open). Multi-line strings are most easily written using triple quotes."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print('foo')\n",
+    "print(\"bar\")\n",
+    "print('\"foo\"')\n",
+    "print(\"'bar'\")\n",
+    "print(\"\"\"I am a \n",
+    "multiline string\"\"\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You can use the usual suspects of `\\n`, `\\t`, etc in strings, and use `\\` to escape special characters like quotes and `\\` itself."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a = \"the cat sat on the mat\"\n",
+    "print(len(a))  # len gets the length of the string; implemented by __len__"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(\"cat\" in a)  # 'in' is implemented by __contains__\n",
+    "print(\"dog\" in a)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(a[0])  # Implemented by __getitem__\n",
+    "a[0] = \"t\"  # No can do; strings are immutable."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Some useful functions. Note these all return copies of the string; strings are immutable!\n",
+    "print(a.lower())\n",
+    "print(a.upper())\n",
+    "print(a.capitalize())  # Capitalize first letter"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Like any object that supports __len__ and __getitem__, strings are sliceable.\n",
+    "# Slicing uses [start:end] or [start:end:increment] where any of these are optional\n",
+    "# start defaults to 0, end to __len__(), and increment to 1. \n",
+    "# start and end can be positive (from start of string) or negative (from end of string).\n",
+    "\n",
+    "print(a[2:])   # skip first two characters\n",
+    "print(a[-7:])  # the last 7 characters\n",
+    "print(a[2:6])  # 4 characters starting after 2nd character\n",
+    "print(a[::2])  # Every second character"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use find and rfind to find first/last occurence of a string; return offset or -1 if not found\n",
+    "# You can also use index/rindex which are similar but raise ValueError exception if not found.\n",
+    "\n",
+    "print(a.find('he'))\n",
+    "print(a.rfind('he'))\n",
+    "print(a.find('cat'))\n",
+    "print(a.find('dog'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# You can convert from character to ordinal or vice-versa with ord() and chr()\n",
+    "print(chr(65))\n",
+    "print(ord('A'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Python has no character type, just string. So functions that would apply to just \n",
+    "# a character in other languages apply to entire string in Python.\n",
+    "print(\"123\".isdigit())\n",
+    "print(\"1X3\".isdigit())\n",
+    "print(\"NOOOOooo\".isupper())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "There are many more string operations available; these are just the basics."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Lists\n",
+    "\n",
+    "Lists are ordered, mutable sequences. They can be indexed, sliced (more on that below), appended to, have elements deleted, and sorted. They are heterogeneous. Examples:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a = [1, 2, 3, \"cat\"]\n",
+    "\n",
+    "print(a)\n",
+    "print(len(a))  # len() gives the length of the list\n",
+    "print(a[1])  # [] can be used to index in to the list; implemented by list.__getitem__; assignment uses list.__setitem__\n",
+    "print(a[-1])  # negative indices can be used to index from the end of the list (-1 for last element)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# * can be used to create multiple concanenated copies of a list; implemented by list.__mul__\n",
+    "    \n",
+    "print(a)\n",
+    "a = a * 2 \n",
+    "print(a)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# `in` can be used to check for membership; implemented by list.__contains__\n",
+    "\n",
+    "print(a)\n",
+    "print('cat' in a)  \n",
+    "print('dog' in a)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(a)\n",
+    "print(['dog'] + a)  # + can be used to concanetenate lists; implemented by list.__add__\n",
+    "a.append('dog')  # append() can be used for concatenating elements\n",
+    "print(a)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(a)\n",
+    "print(a.index('dog')) # Get index of first matching entry; throws exception if not found\n",
+    "print(a.count('cat'))  # Count the number of instances of an element"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(a)\n",
+    "a.remove('dog')  # Remove first matching instance of element\n",
+    "print(a)\n",
+    "del a[-1]  # Remove element at index; implementedby list.__del__"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# reverse() reverses the order of the list in place; implemented by list.__reversed__\n",
+    "print(a)\n",
+    "a.reverse()  \n",
+    "print(a)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# for..in iterates over elements\n",
+    "    \n",
+    "print(a)\n",
+    "for elt in a: \n",
+    "    print(elt)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# enumerate() will return tuples of index, value\n",
+    "print(a)\n",
+    "for i, v in enumerate(a):\n",
+    "    print(f'Value at index {i} is {v}')  # f'' is a format string that can contain code in {}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "b = list(a)  # Makes a shallow copy; can also use b = a.copy()\n",
+    "print(b)\n",
+    "print(a == b)  # Elementwise comparison; implemented by list.__eq__\n",
+    "b[-1] += 1  # Add 1 to last element\n",
+    "print(a == b)\n",
+    "print(a > b)  # Compares starting from first element; implemented by list.__gt__\n",
+    "print(a < b)  # Compares starting from first element; implemented by list.__lt__"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(a)\n",
+    "a.pop()  # Removes last element\n",
+    "print(a)\n",
+    "a.pop(0)  # removes element at index\n",
+    "print(a)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# You can join a list of words into a string\n",
+    "','.join(['cat', 'dog'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Like any object that supports __len__ and __getitem__, lists are sliceable.\n",
+    "# Slicing uses [start:end] or [start:end:increment] where any of these are optional\n",
+    "# start defaults to 0, end to __len__(), and increment to 1. \n",
+    "# start and end can be positive (from start of string) or negative (from end of string).\n",
+    "x = [1, 2, 3, 4, 5, 6]\n",
+    "print(x[2:])\n",
+    "print(x[1:3])\n",
+    "print(x[-3:])\n",
+    "print(x[::2])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use insert() to insert at some position. This is done in-place.\n",
+    "x.insert(2, 'A')\n",
+    "print(x)\n",
+    "x.insert(3, [1, 2])  # Note: insert() is for elements, so [1, 2] is a single element, not expanded\n",
+    "print(x)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a.clear()  # empty the list\n",
+    "print(a)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Dicts\n",
+    "\n",
+    "Dictionaries are mutable mappings of keys to values. Keys must be hashable, but values can be any object. \n",
+    "\n",
+    "---\n",
+    "_Under the hood_\n",
+    "\n",
+    "A hashable object is one that defines a `__hash__` dunder-method, and an `__eq__` dunder method; if two objects are equal their hashes must be the same or the results may be unpredictable. \n",
+    "\n",
+    "---\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# dict literals (actually a list of dicts in this example)\n",
+    "\n",
+    "contacts = [\n",
+    "    {\n",
+    "        'name': 'Alice',\n",
+    "        'phone': '555-123-4567'\n",
+    "    },\n",
+    "    {\n",
+    "        'name': 'Bob',\n",
+    "        'phone': '555-987-6543'        \n",
+    "    }\n",
+    "]\n",
+    "contacts"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use [key] to get an item; this calls dict.__getitem__\n",
+    "contacts[0]['name']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use dict[key] = value to change an item; this calls dict.__setitem__\n",
+    "contacts[0]['name'] = 'Carol'\n",
+    "contacts[0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Trying to use a non-existent key raises an exception\n",
+    "contacts[0]['address']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# You can avoid above and return a default value by using .get()\n",
+    "print(contacts[0].get('name', 'No name'))\n",
+    "print(contacts[0].get('address', 'No address'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use 'in' to see if a key exists in a dict; this calls dict.__contains__\n",
+    "print('name' in contacts[0])\n",
+    "print('address' in contacts[0])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Test for equality with '==' and !=; this calls dict.__eq__ and dict.__ne__\n",
+    "print(contacts[0] == contacts[1])\n",
+    "print(contacts[0] == { 'name': 'Carol', 'phone': '555-123-4567'})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use for-in to iterate over items; this calls dict.__iter__\n",
+    "\n",
+    "for x in contacts[0]:\n",
+    "    print(x)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use len() to get number of items; this calls dict.__len__\n",
+    "\n",
+    "print(len(contacts[0]))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use 'del' to delete a key from a dict; this calls dict.__delitem__"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use .clear() to empty dict (without changing references)\n",
+    "\n",
+    "a = {'name': 'me'}\n",
+    "b = a\n",
+    "a.clear()\n",
+    "b"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Contrast above with assigning empty dict\n",
+    "a = {'name': 'me'}\n",
+    "b = a\n",
+    "a = {}\n",
+    "b"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use .keys(), .values() or .items() to get the keys, values, or both"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "There are some alternative implementations in the `collections` module; you won't need these now but they may come in handy in the future, especially the first two:\n",
+    "\n",
+    "* `collections.OrderedDict`s remember the order of insertion so this is preserved when iterating over the entries or keys\n",
+    "* `collections.defaultdict`s can specify a type in the constructor whose return vaslue will be used if an entry can't be found\n",
+    "* `collections.ChainMap`s group multiple dictionaries into a single item for lookups; inserts go in the first dictionary"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Sets\n",
+    "\n",
+    "A set is a mutable unordered collection that cannot contain duplicates. Sets are used to remove duplicates and test for membership. One use for sets is to quickly see differences. For example, if you have two dicts and want to see what keys are in one but not the other:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a = {'food': 'ham', 'drink': 'soda', 'desert': 'ice cream'}\n",
+    "b = {'food': 'tofu', 'desert': 'cake'}\n",
+    "\n",
+    "set(a) - set(b)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Sets are less commonly used than lists and dicts and we will not discuss them further here. You can read more here: https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Tuples\n",
+    "\n",
+    "Tuples are immutable sequences. Typically they are used to store record type data, or to return multiple values from a function. Tuples behave a lot like lists and support many of the same operations with similar behavior, aside from their immutability. We'll consider them briefly here.\n",
+    "\n",
+    "The `collections` package defines a variant `namedtuple` which allows each field to be given a name; we won't go into that here other than to point out its existence."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "('dog', 'canine')  # tuple"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "('dog')  # Not a tuple! This is just a string in parens"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "('dog',)  # For a single-valued tuple, use a trailing comma to avoid above issue"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "'dog',  # Parentheses are often optional"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Indexing can be used to get at elements, much like lists\n",
+    "print(('dog', 'canine')[0])\n",
+    "print(('dog', 'canine')[1])\n",
+    "print(('dog', 'canine')[-2])\n",
+    "print(('dog',)[0])\n",
+    "print(('dog',)[1])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# We can unpack a tuple through assignment to multiple variables\n",
+    "a = ('dog', 'bone')\n",
+    "animal, toy = a\n",
+    "print(animal)\n",
+    "print(toy)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# But need to ensure we use the right number of variables\n",
+    "a = ('dog', 'bone')\n",
+    "animal, toy, place = a"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a = ('dog', 'bone', 'house')\n",
+    "animal, toy = a"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Tuples allow us to do a neat trick in Python that is harder in many languages - swap two values without using a\n",
+    "# temporary intermediate.\n",
+    "# Note what is going on here: the RHS of the assignment is creating a tuple; the LHS is unpacking the tuple.\n",
+    "\n",
+    "a = 1\n",
+    "b = 2\n",
+    "print(a,b)\n",
+    "a, b = b, a\n",
+    "print(a,b)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Some built-in Functions\n",
+    "\n",
+    "See https://docs.python.org/3.6/library/functions.html for a full list and more details.\n",
+    "\n",
+    "`abs(num)` - Return absolute value"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(abs(3))\n",
+    "print(abs(-3))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`all(iterable)` - returns True if all items in the iterable are True"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(all([True, True, True]))\n",
+    "print(all([True, False, True]))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`any(iterable)` - returns True is any item in the iterable is True."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(any([False, False]))\n",
+    "print(any([False, True]))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`filter` - construct an iterator from the elements of iterable for which a function returns true."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "names = [\"John Smith\", \"Alan Alda\"]\n",
+    "\n",
+    "# Get the names that start and end with same letter\n",
+    "for i in filter(lambda s: s[0].upper() == s[-1].upper(), names):\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`input` - get input from the console"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "n = input(\"What is your name?\")\n",
+    "print(f'Hello {n}!')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`isinstance` - check if an object has a certain type"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "s = 'abc'\n",
+    "n = 123\n",
+    "print(isinstance(s, int))\n",
+    "print(isinstance(s, str))\n",
+    "print(isinstance(n, int))\n",
+    "print(isinstance(n, str))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`iter` - create an sequential iterable from an object; we will discuss iterables later"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x = iter([1, 2, 3, 4])\n",
+    "print(x)\n",
+    "print(\"Before first next()\")\n",
+    "print(next(x))  # returns first item and advances\n",
+    "print(\"Before second next()\")\n",
+    "print(next(x))  # returns second item and advances\n",
+    "print(\"After second next()\")\n",
+    "for v in x:  # iterates through remaining items\n",
+    "    print(v)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`len` - calls the object's `__len__` method to get the length.\n",
+    "\n",
+    "`map` - similar to `filter` but returns an iterable with the results of applying the function"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "names = [\"John Smith\", \"Alan Alda\"]\n",
+    "\n",
+    "print(list(map(lambda s: s[0].upper() == s[-1].upper(), names)))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`max(arg1,...)` - returns the largest arg. If a single iterable arg is given it will iterate.\n",
+    "\n",
+    "`min(arg1, ...)` - returns the smallest arg"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(max(2, 3, 1))  # Multiple scalar args\n",
+    "print(max([3, 2, 1])) # Single list arg\n",
+    "print(max([3, 2, 1], 4))  # Not allowed"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`next` - gets next item from an iterable; see the section on iterables and example for `iter` above.\n",
+    "\n",
+    "`repr` - calls the object `__repr__` method to get a string representation\n",
+    "\n",
+    "`reversed` - makes a copy of the object with items in reversed order (object must support `__len__` and `__getitem__`)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`round` - rounds number to some number of decimal places (default 0)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pi = 3.1415927\n",
+    "print(round(pi))\n",
+    "print(round(pi, 3))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`sorted(list)` - returns a sorted version of the list."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(sorted([3, 1, 3]))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`sum(iterable)` - returns the sum of the iterable"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(sum([1, 2, 3]))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`type(obj)` - return the type of an object"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(type('foo'))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`zip(list, ...)` - combines multiple lists into a single list of tuples. Note this returns a lazy iterable, not a list"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(zip(['a', 'b', 'c'], [1, 2, 3]))\n",
+    "print(list(zip(['a', 'b', 'c'], [1, 2, 3])))  # instantiates the iterable as a list"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## String Formatting\n",
+    "\n",
+    "String formatting has evolved over time with Python. Python 3.6 introduced \"format strings\" which allow code to be directly embedded in the string. This is an improvement over older approaches and we will use it extensively.\n",
+    "Format strings have an `f` prefix and include code in `{}`. For example:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a = 10\n",
+    "print(f\"2 x {a} = {2*a}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "If you need to use the old approaches, there are a lot of details here: https://pyformat.info/ (this doesn't seem to cover format strings yet though). That site covers things like padding, justification, truncation, leading zeroes, fixing number of decimal places, etc. We won't cover these here except the latter:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a = 1.23456\n",
+    "print(a)\n",
+    "print(f'{a:.2f}')  # Float restricted to two decimal places\n",
+    "print(f'{a:06.2f}')  # Float restricted to two decimal places and padded with leading zeroes if less than 6 chars"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "When you use `f'{a}'`, Python will look in turn for a `__format__`, a `__repr__` or a `__str__` method to call to get the string representation of `a`. You can force it to use `__repr__` with `f'{a!r}'` or to use `__str__` with `f'{a!s}'`."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Sorting\n",
+    "\n",
+    "We've already seen the `sorted` function, that can create a sorted list from any iterable:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "d = [3,5,2,4,1,7]\n",
+    "for i in sorted(d):\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You can do a descending sort by adding a `reverse=True` argument:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for i in sorted(d, reverse=True):\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You can sort a list in place with `sort`, but this only applies to lists:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(d)\n",
+    "d.sort()\n",
+    "print(d)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You can read more about sorting here, including how to sort composite objects like dictionaries, tuples and nested lists, and by multiple keys: https://docs.python.org/3/howto/sorting.html"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Statements\n",
+    "\n",
+    "Here we will consider statements. We'll leave some statements to when we get to exceptions, functions and classes.\n",
+    "\n",
+    "For more info on statements see https://docs.python.org/3/reference/simple_stmts.html\n",
+    "\n",
+    "### import\n",
+    "\n",
+    "Python code is packaged in the form of _packages_ consisting of one of more _modules_. A module is a single Python file, while a package is a directory of Python modules containing an additional `__init__.py` file, to distinguish a package from a directory that just happens to contain a bunch of Python scripts.\n",
+    "\n",
+    "You install a package with `pip` or `conda`. Once installed, to use the package you must import it. You can also import modules although this is less common. \n",
+    "\n",
+    "There are several common ways of importing. Let's say we want to import a package `foo` that defines a class `Widget`:\n",
+    "\n",
+    "* `import foo` will import the `foo` package; any reference to modules/classes/functions will need to be prefixed with `foo.`; e.g. `foo.Widget`\n",
+    "* `import foo as bar` will import the `foo` package with the alias `bar`; any reference to modules/classes/functions will need to be prefixed with `bar.`; e.g. `bar.Widget`\n",
+    "* `from foo import Widget` can be used to import a specific module/class/function from `foo` and it will be available as `Widget`\n",
+    "* `from foo import *` will import every item in `foo` into the current namespace; this is bad practice, don't do it."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### pass\n",
+    "\n",
+    "The `pass` statement is a no-op. This is needed in Python as the language doesn't use braces, so it is the equivalent of `{}` in Java- or C-like languages.\n",
+    "\n",
+    "### del\n",
+    "\n",
+    "`del` is used to delete an object; it isn't used much but can be useful if the object uses a lot of memory to allow it to be garbage-collected.\n",
+    "\n",
+    "### for, break and continue\n",
+    "\n",
+    "You can loop over any iterable with `for...in`. `break` and `continue` are supported, and behave in the expected fashion."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for i in ['green eggs', 'ham']:\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for i in 'green eggs':\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for i in {'a': 1, 'b': 2}: # This will loop over keys\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for i in {'a': 1, 'b': 2}.values(): # This will loop over values\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for i in {'a': 1, 'b': 2}.items():  # This will loop over key-value pairs as tuples\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for i in [1, 2, 3]:\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for i in enumerate([1, 2, 3]):  # Returns (index, value) tuples\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for index, value in enumerate([1, 2, 3]):  # We can unpack the (index, value) tuples\n",
+    "    print(f'At position {index} we have value {value}')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for i in range(1, 10):\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for i in range(1, 10, 2):\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Python has an unusual construct: for..else. The else part is executed if there was no early break from the loop.\n",
+    "\n",
+    "This is a common construct in other languages:\n",
+    "\n",
+    "    has_even_number = False\n",
+    "    for elt in [1, 2, 3]:\n",
+    "        if elt % 2 == 0:\n",
+    "            has_even_number = True\n",
+    "            break\n",
+    "    if not has_even_number:\n",
+    "        print \"list has no even numbers\"\n",
+    "\n",
+    "but in Python, we can just do:\n",
+    "\n",
+    "    for elt in [1, 2, 3]:\n",
+    "        if elt % 2 == 0:\n",
+    "            break\n",
+    "    else:\n",
+    "        print \"list has no even numbers\"\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### while\n",
+    "\n",
+    "`while` loops are very straighforward:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "i = 0\n",
+    "while i < 10:\n",
+    "    print(i)\n",
+    "    i += 2"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`while...else` is supported:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "i = 0\n",
+    "while i < 10:\n",
+    "    print(i)\n",
+    "    i += 2\n",
+    "else:\n",
+    "    print('Done')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "i = 0\n",
+    "while i < 10:\n",
+    "    print(i)\n",
+    "    if i % 2 == 0:\n",
+    "        print('Found an even number!')\n",
+    "        break\n",
+    "    i += 2\n",
+    "else:\n",
+    "    print('No even numbers!')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "i = 1\n",
+    "while i < 10:\n",
+    "    print(i)\n",
+    "    if i % 2 == 0:\n",
+    "        print('Found an even number!')\n",
+    "        break\n",
+    "    i += 2\n",
+    "else:\n",
+    "    print('No even numbers!')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### if Statement and Boolean Expressions\n",
+    "\n",
+    "Python uses `if...elif...else` syntax:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "grade = 75\n",
+    "if grade > 90:\n",
+    "    print('A')\n",
+    "elif grade > 80:\n",
+    "    print('B')\n",
+    "elif grade > 70:\n",
+    "    print('C')\n",
+    "else:\n",
+    "    print('D')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`and`, `or` and `not` are Boolean operators, while `&`, `|` and `^` are bitwise-operators. Short-circuiting rules apply:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "1 and 1/0"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "1 or 1/0"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "0 and 1/0"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "0 or 1/0"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You can combine multiple range comparisons into a single one:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(0 < 2 < 4)\n",
+    "print(2 < 0 < 4)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Note that the Boolean literals are `True` and `False`, with capitalized first letters."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(0 < 2 < 4 < 6)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "If an instance of a class is used in a Boolean expression, it is evaluated by calling its `__bool__` method if it has one, else its `__len__` method (where non-zero is `True`), else it is considered `True`.\n",
+    "\n",
+    "Python doesn't support conditional expressions like `:?` but does support ternary expressions with `if...else`:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for count in range(0, 3):\n",
+    "    print(f'{count} {\"Widget\" if count == 1 else \"Widgets\"}')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### with\n",
+    "\n",
+    "`with` is used for scoped use of classes that need to clean up when they are no longer used (e.g. file objects that need to release underlying file handles). \n",
+    "\n",
+    "The most common place you'll see this is with file reading and writing, which we conver in the next section.\n",
+    "\n",
+    "---\n",
+    "_Under the Hood_\n",
+    "\n",
+    "When the “with” statement is executed, Python evaluates the following expression, calls the `__enter__` method on the resulting value (a “context guard”), and assigns whatever `__enter__` returns to the variable given by as. Python will then execute the code body, and no matter what happens in that code, call the guard object’s `__exit__` method.\n",
+    "\n",
+    "As an extra bonus, the `__exit__` method can look at the exception, if any, and suppress it or act on it as necessary (to suppress it, it just needs to return `True`).\n",
+    "\n",
+    "We're getting ahead of ourselves here with classes, but here is an example:\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Wither:\n",
+    "    def __enter__(self):\n",
+    "        return 'green eggs'\n",
+    "    def __exit__(self,  type, value, traceback):\n",
+    "        print('ham')\n",
+    "    \n",
+    "with Wither() as x:\n",
+    "    print(x)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "\n",
+    "## Reading and Writing Files\n",
+    "\n",
+    "Python has a built-in `open` function for opening files for reading and writing: https://docs.python.org/3.6/library/functions.html#open\n",
+    "\n",
+    "The simplest for of reading a file is just:\n",
+    "\n",
+    "```python\n",
+    "with open('myfile.txt') as f:\n",
+    "    for line in f:\n",
+    "        print(line)\n",
+    "```\n",
+    "\n",
+    "and writing a file, assuming we have a list of strings `data`:\n",
+    "\n",
+    "```python\n",
+    "with open('myfile.txt', 'w') as f:\n",
+    "    for line in data:\n",
+    "        f.write(line)\n",
+    "```\n",
+    "\n",
+    "You can see more detailed examples in the tutorial, section 7.2, here: https://docs.python.org/3/tutorial/inputoutput.html"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Functions and Lambdas\n",
+    "\n",
+    "Recall that Python named functions are defined with `def`:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def add(a, b):\n",
+    "    return a + b\n",
+    "\n",
+    "add(2, 3)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Default arguments are allowed. If a default argument is specified, then all following arguments must have defaults as well:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def add(a, b=1):\n",
+    "    print(f'a={a}, b={b}')\n",
+    "    return a + b\n",
+    "\n",
+    "print(add(2, 3))\n",
+    "print(add(2))\n",
+    "print(add())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Arguments with no defaults are \"positional\" arguments and must be specified in order _except_ if they are named explicitly when calling the function:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(add(b=2, a=1))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Variables referenced in a function are either local or arguments. To access a global variable you must explicitly declare it global (but it is better to avoid using globals):"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x = 2\n",
+    "\n",
+    "def foo():\n",
+    "    x = 1  # This is local\n",
+    "    \n",
+    "print(x)  # This is the global\n",
+    "foo()\n",
+    "print(x)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x = 2\n",
+    "\n",
+    "def foo():\n",
+    "    global x\n",
+    "    x = 1\n",
+    "    \n",
+    "print(x)\n",
+    "foo()\n",
+    "print(x)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Functions can be nested. In Python 3 you can declare a variable as \"nonlocal\" to access an outer but non-global scope."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def outside():\n",
+    "    msg = \"Outside!\"\n",
+    "    def inside():\n",
+    "        msg = \"Inside!\"  # This is different to the one in outside()\n",
+    "        print(msg)\n",
+    "    inside()\n",
+    "    print(msg)\n",
+    "    \n",
+    "outside()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def outside():\n",
+    "    msg = \"Outside!\"\n",
+    "    def inside():\n",
+    "        nonlocal msg  # This is the same as the one in outside()\n",
+    "        msg = \"Inside!\"\n",
+    "        print(msg)\n",
+    "    inside()\n",
+    "    print(msg)\n",
+    "    \n",
+    "outside()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "It is good practice to follow the `def` line with a _docstring_ to document the function. There are different conventions for how this should be formatted; I like the Google style: http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def add(a, b):\n",
+    "    \"\"\"Adds two objects and returns the result.\n",
+    "\n",
+    "    Args:\n",
+    "        a: The first parameter.\n",
+    "        b: The second parameter.\n",
+    "\n",
+    "    Returns:\n",
+    "        The result of adding a and b.\n",
+    "    \"\"\"\n",
+    "    return a + b\n",
+    "\n",
+    "# Now we can use help() to get the docstring.\n",
+    "help(add)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You can return multiple values from a function (really just a tuple):"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def sum_diff(a, b):\n",
+    "    return a+b, a-b\n",
+    "\n",
+    "print(sum_diff(3, 2))\n",
+    "x, y = sum_diff(4, 5)\n",
+    "print(x)\n",
+    "print(y)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Python supports continuations with yield (this returns a generator which we will dicuss later):"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def get_next_even_number(l):\n",
+    "    for v in l:\n",
+    "        if v % 2 == 0:\n",
+    "            yield v\n",
+    "    \n",
+    "x = [1, 2, 3, 4, 5, 6]\n",
+    "for e in get_next_even_number(x):\n",
+    "    print(e)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You can use `*args` for a variable number of non-keyword arguments, which will be available internally as a list:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def multiply(*args):\n",
+    "    z = 1\n",
+    "    for num in args:\n",
+    "        z *= num\n",
+    "    return z\n",
+    "    \n",
+    "print(multiply(1, 2, 3, 4))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def foo(*args):\n",
+    "    for i in range(0, len(args)):\n",
+    "        print(f'Argument {i} is {args[i]}')\n",
+    "\n",
+    "        \n",
+    "foo(1, 2, 'cat')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "For keyword arguments, you can use `**kwargs`, which will be available internally as a dictionary:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def foo(*args, **kwargs):\n",
+    "    for i in range(0, len(args)):\n",
+    "        print(f'Positional argument {i} is {args[i]}')\n",
+    "    for k, v in kwargs.items():\n",
+    "        print(f'Keyword argument {k} is {v}')\n",
+    "        \n",
+    "foo('cat', 1, clothing='hat', location='mat')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You can mix all types of arguments but the order is important:\n",
+    "* Formal positional arguments\n",
+    "* `*args`\n",
+    "* Keyword arguments\n",
+    "* `**kwargs`\n",
+    "\n",
+    "You can do the opposite as well - pass a list instead of several positional arguments, and a dictionary instead of several keyword arguments, by using `*` and `**`:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def foo(pos1, pos2, named1='a', named2='b'):\n",
+    "    print(f\"Positional 1 is {pos1}\")\n",
+    "    print(f\"Positional 2 is {pos2}\")\n",
+    "    print(f\"Named1 is {named1}\")\n",
+    "    print(f\"Named1 is {named2}\")    \n",
+    "    \n",
+    "p = [1, 2]\n",
+    "n = {'named1': 'cat', 'named2': 'hat'}\n",
+    "foo(*p, **n)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Finally, you can use `lambda` to define anonymous functions. These will be very useful when we get to using Pandas for data manipulation:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "adder = lambda a, b: a + b\n",
+    "\n",
+    "adder(1, 2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Classes\n",
+    "\n",
+    "In Python, we can declare a class with `class(base)`. If the base class is omitted then `object` is assumed.\n",
+    "\n",
+    "There is a very simple mechanism used to determine whether a method is a class method or an instance method: the this-reference (actually `self` in Python) is declared explictly:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Widget:  # same as \"class Widget(object):\"\n",
+    "    \"\"\" This is a Widget class. \"\"\"  # Classes have docstrings too.\n",
+    "    \n",
+    "    def print_my_class(self):  # Instance method as it has a 'self' parameter\n",
+    "        \"\"\" Print the instance class. \"\"\"\n",
+    "        print(self.__class__)  # __class__ is the easy way to get at an object's class\n",
+    "        \n",
+    "    def print_class():  # Class method as it has no 'self' parameter\n",
+    "        \"\"\" Print the class class. \"\"\"\n",
+    "        print(Widget)\n",
+    "        \n",
+    "        \n",
+    "x = Widget()  # We don't use 'new' in Python\n",
+    "x.__doc__  # __doc__ has the docstring"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "help(x)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x.print_my_class()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x.print_class()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Widget.print_class()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Widget.print_my_class()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Constructors and visibility\n",
+    "\n",
+    "A class does not require a constructor, but can have (at most) one. The constructor is an instance method named `__init__`. It can take additional parameters other than `self`.\n",
+    "\n",
+    "Python does not support private or protected members. By convention, private members should be named starting with an underscore, but this is an 'honor system'; everything is public. Also by convention, you should avoid double underscores; that should be reerved for dunder-methods."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Bug:\n",
+    "    \"\"\" A class for creepy crawly things. \"\"\"\n",
+    "    \n",
+    "    heads = 1  # This is a class variable\n",
+    "    \n",
+    "    def __init__(self, legs=6, name='bug'):\n",
+    "        self.legs = legs  # Any variable assigned to with self.var = ... in constructor is an instance variable\n",
+    "        self.name = name\n",
+    "        \n",
+    "    def _article(name):  # 'private' class method\n",
+    "        \"\"\" Return the English article for the given name. \"\"\"\n",
+    "        return 'an'if 'aeiouAEIOU'.find(name[0]) >= 0 else 'a'\n",
+    "\n",
+    "    def article(self):  # 'public' instance method\n",
+    "        \"\"\" Return the English article for the given name. \"\"\"\n",
+    "        return Bug._article(self.name)\n",
+    "    \n",
+    "    def __repr__(self):  # __repr__ is called to get a printable representation of an object\n",
+    "        return f\"I'm {Bug._article(self.name)} {self.name} with {self.legs} legs\"\n",
+    "\n",
+    "# Notice how help() will show help for article() but not _article().\n",
+    "# It respects the '_' convention for 'privacy'.\n",
+    "help(Bug)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Bug()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Bug(legs=8)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "It is recommended to always define a `__repr__` method on your classes."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Inheritance\n",
+    "\n",
+    "Python supports both single and multiple inheritance (which we won't discuss). To up-call to a base method we use `super()`:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Insect(Bug):\n",
+    "    \n",
+    "    def __init__(self):\n",
+    "        super().__init__(name='insect')\n",
+    "        \n",
+    "Insect()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Spider(Bug):\n",
+    "    \n",
+    "    def __init__(self):\n",
+    "        super().__init__(legs=8, name='spider')\n",
+    "        \n",
+    "Spider()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Under the Hood\n",
+    "\n",
+    "You can skip this section if you're not interested, but it can be useful to have some understanding of how classes work in Python.\n",
+    "\n",
+    "Classes and class instances both have a `.__dict__` attribute that holds their methods and variables/attributes. For example:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Example:\n",
+    "    \"\"\" this is a class docopt string. \"\"\"\n",
+    "    \n",
+    "    class_var = 'this is a class variable'\n",
+    "    \n",
+    "    def __init__(self):\n",
+    "        \"\"\" This is an instance docopt string. \"\"\"\n",
+    "        self.instance_var = 'this is an instance var'\n",
+    "        \n",
+    "    def class_method():\n",
+    "        \"\"\" This is a class method docopt string. \"\"\"\n",
+    "        pass\n",
+    "    \n",
+    "    def instance_method(self):\n",
+    "        return self.instance_var\n",
+    "    \n",
+    "Example.__dict__"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In the case of classes we really have a special object, a `mappingproxy`; this is a wrapper around a dictionary that makes it read-only and enforces that all keys are strings."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Similarly for an instance, although this really is a dict, not a mappingproxy.\n",
+    "e = Example()\n",
+    "print(e.__dict__)\n",
+    "print(e.__dict__.__class__)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Instances have a .__class__ attribute that points to their class.\n",
+    "e.__class__"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# To change a class variable, qualify with the class name:\n",
+    "\n",
+    "e2 = Example()\n",
+    "print(e.class_var)\n",
+    "print(e2.class_var)\n",
+    "\n",
+    "Example.class_var = 'Changed class var'\n",
+    "\n",
+    "# Note how it is changed for all instances\n",
+    "print(e.class_var)\n",
+    "print(e2.class_var)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# If you qualify with an instance instead, you'll end up creating an instance variable instead!\n",
+    "e2.class_var = 'e2 class var is actually an instance var'\n",
+    "print(e.class_var)\n",
+    "print(e2.class_var)\n",
+    "print(e.__dict__)\n",
+    "print(e2.__dict__)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# When we dereference an instance method, we get a *bound method*; the instance method bound to the instance:\n",
+    "e.instance_method"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# We can save a reference to the bound method and call it later and it will use the right instance\n",
+    "\n",
+    "f = e.instance_method\n",
+    "e.instance_var = 'e\\'s instance var'\n",
+    "f()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "There's a lot more to it than this, but this should give you some idea of how Python can support monkey-patching at run-time and other flexibility."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Exceptions\n",
+    "\n",
+    "You can raise an exception with the `raise` statememt. You can give an instance of any class that derives from the `BaseException` class. You can catch exceptions using `try: except:`. If you want to get a reference to the exception, use `catch..as..`:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "try:\n",
+    "    raise Exception('The dude minds, man!')\n",
+    "except Exception as x:  # Exception is the type of exception to catch, x is the variable to catch it with.\n",
+    "    print(x)\n",
+    "    \n",
+    "# You can catch different types of exceptions, and you can use 'raise' on its own in the exception handling\n",
+    "# block to rethrow the exception.\n",
+    "\n",
+    "def average(seq):\n",
+    "    \"Compute the average of an iterable. \"\n",
+    "    try:\n",
+    "        result = sum(seq) / len(seq)\n",
+    "    except ZeroDivisionError as e:\n",
+    "        return None\n",
+    "    except Exception:\n",
+    "        raise\n",
+    "    return result\n",
+    "\n",
+    "print(average([]))\n",
+    "print(average(['cat']))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Comprehensions\n",
+    "\n",
+    "Comprehensions are a powerful feature in Python, allowing lists, dictionaries and tuples to be constructed from iterative computations with minimal code. These are best illustrated by examples:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# A list of all squares from 1 to 25\n",
+    "[x*x for x in range(1, 6)]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# A list of all squares from 1 to 1024 except those divisble by 5\n",
+    "[x*x for x in range(1, 33) if (x*x) % 5 != 0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Comprehensions can be nested\n",
+    "t = [\n",
+    "    ['1', '2'],\n",
+    "    ['3', '4']\n",
+    "]\n",
+    "\n",
+    "# Make a list of lists from t where we convert the strings to floats\n",
+    "[[float(y) for y in x] for x in t]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [],
+   "source": [
+    "# Dictionary comprehension\n",
+    "{ f'Square of {x}': x*x for x in range(1, 6)}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Iterators and Generators\n",
+    "\n",
+    "A Python iterator is an object with a `__next__` method for sequential access, that raises a StopIteration when done.\n",
+    "\n",
+    "A Python iterable is an object that defines a `__getitem__` method that can take sequential integer indices starting from 0 (so not necessarily random access) and raises an IndexError when done, or that has an `__iter__` method which returns an iterator.\n",
+    "\n",
+    "See https://docs.python.org/3/tutorial/classes.html#iterators for more; here's an example from that link:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Reverse:\n",
+    "    \"\"\"Iterator for looping over a sequence backwards.\"\"\"\n",
+    "    def __init__(self, data):\n",
+    "        self.data = data\n",
+    "        self.index = len(data)\n",
+    "\n",
+    "    def __iter__(self):\n",
+    "        return self\n",
+    "\n",
+    "    def __next__(self):\n",
+    "        if self.index == 0:\n",
+    "            raise StopIteration\n",
+    "        self.index = self.index - 1\n",
+    "        return self.data[self.index]\n",
+    "    \n",
+    "for char in Reverse(\"spam\"):\n",
+    "    print(char)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "*TODO* add more here, inclduing generators. Worth noting that using these is very idiomatic to Python normally (see the *Fluent Python* book for example), but in the data science domain, this idiom is more commonly replaced by vectorising. This web-based book goes deep into this different way of thinking: http://www.labri.fr/perso/nrougier/from-python-to-numpy/"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## async/await\n",
+    "\n",
+    "Python runs as a single-threaded process. That means things like I/O can slow things down a lot. It is possible to use multiple threads - there are several libaries for that - but even with a single thread big improvements are possible with async code. The details are beyond the scope of the bootcamp, but more info is available here: https://docs.python.org/3/library/asyncio-task.html. Recent changes in Python have made this much more powerful, flexible and easy to use."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Type Annotations\n",
+    "\n",
+    "Python has some mechanisms for doing optional type annotations. These can improve execution speed and there are some packages that can enforce type checking at run-time. It's not a bad idea to start using these but they're out of scope of this bootcamp. \n",
+    "\n",
+    "See https://docs.python.org/3/library/typing.html and http://mypy-lang.org/ for more.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Logging\n",
+    "\n",
+    "See https://opensource.com/article/17/9/python-logging for detals on Python logging.\n",
+    "\n",
+    "I recommend looking at Daiquiri, which biulds on top of the standard logging library and make things easy:\n",
+    "\n",
+    "https://julien.danjou.info/blog/python-logging-easy-with-daiquiri"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "!pip install daiquiri"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import logging\n",
+    "import daiquiri\n",
+    "\n",
+    "daiquiri.setup(level=logging.INFO)\n",
+    "\n",
+    "logger = daiquiri.getLogger(\"bootcamp\")\n",
+    "logger.info(\"It works and logs to stderr by default with color!\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Converting between Lists/Dictionaries and JSON\n",
+    "\n",
+    "Non-tabular data can be stored in dictionaries, which may be nested and contain lists. This is similar to JSON data on the web and in Javascript, and Python provides a `json` package for converting between these formats."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import json\n",
+    "\n",
+    "my_albums = [\n",
+    "    {\n",
+    "        'title': 'Tales of the Inexpressible',\n",
+    "        'artist': 'Shpongle',\n",
+    "        'year': 2001,\n",
+    "        'tracks': [\n",
+    "            { 'title': 'Dorset Perception', 'time': '8:12' },\n",
+    "            { 'title': 'Star Shpongled Banner', 'time': '8:23' },\n",
+    "            { 'title': 'A New Way to Say Hooray!', 'time': '8:32' },\n",
+    "            { 'title': 'Room 2ॐ', 'time': '5:05' },\n",
+    "            { 'title': 'My Head Feels Like a Frisbee', 'time': '8:52' },\n",
+    "            { 'title': 'Shpongleyes', 'time': '8:56' },\n",
+    "            { 'title': 'Once Upon the Sea of Blissful Awareness', 'time': '7:30' },\n",
+    "            { 'title': 'Around the World in a Tea Daze', 'time': '11:21' },\n",
+    "            { 'title': 'Flute Fruit', 'time': '2:09' },\n",
+    "        ],\n",
+    "    }\n",
+    "]\n",
+    "\n",
+    "j = json.dumps(my_albums)  # Convert to JSON string\n",
+    "print(type(j))\n",
+    "j"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "p = json.loads(j)  # Convert from JSON string to Python object\n",
+    "print(type(p))\n",
+    "p"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Cool Stuff\n",
+    "\n",
+    "See https://github.com/tukkek/notablepython\n",
+    "\n",
+    "Finding good packages: https://python.libhunt.com/ and https://awesome-python.com/\n",
+    "\n",
+    "Concise reference: https://github.com/mattharrison/Tiny-Python-3.6-Notebook\n",
+    "\n",
+    "The Hitchhikers Guide to Python documents many best practices: http://docs.python-guide.org/en/latest/\n",
+    "\n",
+    "Easily progress bars to outer loops (works in Jupyter and console): https://pypi.python.org/pypi/tqdm\n",
+    "\n",
+    "For anyone who wants to get really serious about Python, Mark Lutz's and David Beazley's books are good but some are dated, but the best book on the language itself is IMO \"Fluent Python\" by Luciano Ramalho. There are also many excellent talks at http://pyvideo.org/.  \n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Going Deeper\n",
+    "\n",
+    "### The sys module\n",
+    "\n",
+    "`sys.modules` is a dictionary of the currently imported modules:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import sys\n",
+    "\n",
+    "sys.modules"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`sys.path` is the path to look for imports:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "sys.path"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The `sys` module also lets us access command line arguments; see next section.\n",
+    "\n",
+    "### Writing a main function and handling command line arguments\n",
+    "\n",
+    "    #!/usr/bin/python\n",
+    "\n",
+    "    import sys\n",
+    "\n",
+    "    def main():\n",
+    "        # print command line arguments\n",
+    "        for arg in sys.argv[1:]:\n",
+    "            print arg\n",
+    "\n",
+    "    if __name__ == \"__main__\":\n",
+    "        main()\n",
+    "        \n",
+    "        \n",
+    "If you want to parse command-line arguments like flags etc, there is an `argparse` library as part of the standard distribution but a much easier way IMO is to use `docopt`: just write the help string and `docopt` generates the parse for you.\n",
+    "\n",
+    "http://docopt.org/"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Using Threads and Processes\n",
+    "\n",
+    "See https://medium.com/@bfortuner/python-multithreading-vs-multiprocessing-73072ce5600b\n",
+    "\n",
+    "### Extending Python with C code\n",
+    "\n",
+    "See https://dbader.org/blog/python-ctypes-tutorial#.\n",
+    "\n",
+    "### Functional Programming in Python\n",
+    "\n",
+    "See https://docs.python.org/dev/howto/functional.html#iterators and http://coconut-lang.org/\n",
+    "\n",
+    "### Making HTTP Requests and Parsing Responses\n",
+    "\n",
+    "There are numerous ways to do this in Python, but the most commonly used libraries for these are `requests` (http://docs.python-requests.org/en/master/) and Beautiful Soup (https://www.crummy.com/software/BeautifulSoup/); look at those first before considering anything else as they are powerful, stable, mature and easy to use. Kenneth Reitz, who wrote `requests`, has recently implemented a new library on top of both `requests` and Beautiful Soup: https://github.com/kennethreitz/requests-html\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Exercise - write a function to count the number of characters, words and lines in a file"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Exercise - write a function to count the number occurences of each word in a file"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Exercise - building a find function that works on 2-dimensional sorted arrays\n",
+    "\n",
+    "Consider a 2-dimensional array which is sorted on primary, secondary, and possibly more columns. E.g.:\n",
+    "\n",
+    "    [\n",
+    "        [2, 3, 7],\n",
+    "        [2, 5, 2],\n",
+    "        [2, 6, -1],\n",
+    "        [3, 1, 0],\n",
+    "        [3, 9, 1],\n",
+    "        [8, 0, -2]\n",
+    "    ]\n",
+    "    \n",
+    "which is sorted first on column 0 and then on column 1. We want to write a function that will help us to locate a particular \n",
+    "value in this table given a set of keys. E.g. given keys (2, 6), it will return -1, and given (3, 9) it will return 1.\n",
+    "\n",
+    "Python has a library function `bisect` that can do this on single-dimensional lists (https://docs.python.org/3.6/library/bisect.html) but not on 2-d lists.\n",
+    "\n",
+    "One way to do this is to generalize it and pass in the start and end indices of the list, the index of the column that is the key, and the key value, and return the new start and end indices of the subrange, and then call that function on successive keys. E.g. if we passed in start=0, end=len(data), index=0, and key=2, it should return (0,3), while for start=0, end=len(data), index=0, key=8 it should return (5, 6), and for start=0, end=3, index=1, key=5 it should return (1,1). If the value is not found it should return (-1, -1).\n",
+    "\n",
+    "Write a function `2dbisect` to do this. A binary search can be used. For reference, here is pseudo-code for binary search:\n",
+    "\n",
+    "    binary_search(A, target):\n",
+    "        lo = 1, hi = size(A)\n",
+    "        while lo <= hi:\n",
+    "           mid = lo + (hi-lo)/2\n",
+    "           if A[mid] == target:\n",
+    "              return mid            \n",
+    "           else if A[mid] < target: \n",
+    "              lo = mid+1\n",
+    "           else:\n",
+    "              hi = mid-1\n",
+    "            \n",
+    "        // target was not found\n",
+    "        \n",
+    "        "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
