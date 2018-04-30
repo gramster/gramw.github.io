@@ -9,7 +9,7 @@ consists of:
 
 -   an SBS2003 server mostly for Exchange mail, which also runs FreeBSD
     in a virtual machine to keep some older services running on Apache
-    (primarily the redirector from geekraver.com to Live Spaces and my
+    (primarily the redirector from my domain to Live Spaces and my
     subversion repository).
 -   a Windows Home Server, which has taken over the file server
     functionality from SBS2003, as I like its more flexible file
