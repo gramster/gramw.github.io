@@ -6,20 +6,12 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
-  <loc>https://www.grahamwheeler.com/authors/geekraver.xml</loc>
-  <lastmod>2018-04-15T16:57:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://www.grahamwheeler.com/authors/graham-wheeler.xml</loc>
-  <lastmod>2018-04-29T05:56:00Z</lastmod>
- </sitemap>
- <sitemap>
   <loc>https://www.grahamwheeler.com/categories/cat_computers.xml</loc>
   <lastmod>2018-04-30T00:13:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/categories/cat_data-science.xml</loc>
-  <lastmod>2018-04-30T00:13:00Z</lastmod>
+  <lastmod>2018-04-30T00:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/categories/cat_general.xml</loc>
@@ -43,7 +35,7 @@
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/categories/cat_programming.xml</loc>
-  <lastmod>2018-04-30T00:13:00Z</lastmod>
+  <lastmod>2018-04-30T00:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/categories/cat_psychology.xml</loc>
@@ -51,15 +43,15 @@
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/categories/data-science.xml</loc>
-  <lastmod>2018-04-30T00:13:00Z</lastmod>
+  <lastmod>2018-04-30T00:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/categories/jupyter.xml</loc>
-  <lastmod>2018-04-30T00:13:00Z</lastmod>
+  <lastmod>2018-04-30T00:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/categories/machine-learning.xml</loc>
-  <lastmod>2018-04-30T00:13:00Z</lastmod>
+  <lastmod>2018-04-30T00:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/categories/management.xml</loc>
@@ -71,11 +63,11 @@
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/categories/pandas.xml</loc>
-  <lastmod>2018-04-29T05:56:00Z</lastmod>
+  <lastmod>2018-04-30T00:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/categories/programming.xml</loc>
-  <lastmod>2018-04-29T05:56:00Z</lastmod>
+  <lastmod>2018-04-30T00:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/categories/psychology.xml</loc>
@@ -83,7 +75,7 @@
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/categories/python.xml</loc>
-  <lastmod>2018-04-30T00:13:00Z</lastmod>
+  <lastmod>2018-04-30T00:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/galleries/rss.xml</loc>
@@ -91,10 +83,10 @@
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/rss.xml</loc>
-  <lastmod>2018-04-30T00:13:00Z</lastmod>
+  <lastmod>2018-04-30T00:21:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://www.grahamwheeler.com/sitemap.xml</loc>
-  <lastmod>2018-04-30T00:13:00Z</lastmod>
+  <lastmod>2018-04-30T00:21:00Z</lastmod>
  </sitemap>
 </sitemapindex>
