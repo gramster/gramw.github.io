@@ -11,9 +11,8 @@ mentioning a couple of changes in this version that are less obvious,
 and overcome limitations I have blogged about in the past:
 
 -   we now have Outlook contact integration. From Outlook contacts you
-    can select the "Show on Map" menu option to map a contact. [Google
-    Maps contacts integration is still
-    broken](http://geekraver.spaces.live.com/blog/cns!3690236EA2D48605!203.entry),
+    can select the "Show on Map" menu option to map a contact. Google
+    Maps contacts integration is still broken,
     but we can't let that hold us back any longer; we gave them nearly a
     year as well as explicit instructions on what their bug was; if they
     can't get their house in order with all that then too bad for them.
@@ -22,8 +21,7 @@ and overcome limitations I have blogged about in the past:
     installs menu extensions that is installed after them; if the other
     apps are well-behaved then you can install them before GMM and you
     should be okay.
--   [we have put back the ability to enter addresses in the search
-    box](http://geekraver.spaces.live.com/blog/cns!3690236EA2D48605!181.entry).
+-   we have put back the ability to enter addresses in the search box.
     We have a better geocoder now on the back end and are more confident
     that you will get the results you want when doing this.
 

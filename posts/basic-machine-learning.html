@@ -2,24 +2,43 @@
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="description" content="Stuff about stuff">
 <meta name="viewport" content="width=device-width">
-<title>Graham Wheeler's Random Forest</title>
-<link href="assets/css/rst.css" rel="stylesheet" type="text/css">
-<link href="assets/css/code.css" rel="stylesheet" type="text/css">
-<link href="assets/css/theme.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="assets/css/screen.css">
-<link rel="stylesheet" type="text/css" href="assets/css/nav.css">
-<link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+<title>Basic Machine Learning with SciKit-Learn | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/custom.css">
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
-<link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
-<link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
-<link rel="canonical" href="https://www.grahamwheeler.com/index.html">
-<link rel="next" href="index-7.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/basic-machine-learning.html" type="text/html">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/basic-machine-learning.html">
+<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]--><meta name="author" content="Graham Wheeler">
+<link rel="prev" href="exploratory-data-analysis-with-numpy-and-pandas.html" title="Exploratory Data Analysis with NumPy and Pandas" type="text/html">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="Basic Machine Learning with SciKit-Learn">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/basic-machine-learning.html">
+<meta property="og:description" content="This is the fourth post in a series based off my Python for Data Science bootcamp I run at eBay occasionally. The other posts are:
+
+a Python crash course
+using Jupyter
+exploratory data analysis.
+
+
+
+
+
+">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2018-04-29T16:40:00-07:00">
+<meta property="article:tag" content="Data Science">
+<meta property="article:tag" content="Jupyter">
+<meta property="article:tag" content="Machine Learning">
+<meta property="article:tag" content="Python">
 </head>
 <body class="nav-closed">
 
@@ -29,17 +48,17 @@
         <span class="hidden">Close</span>
     </a>
     <ul>
-<li class="nav-opened nav-current" role="presentation">
-            <a href="#">Home</a>
+<li class="nav-opened" role="presentation">
+            <a href="../index.html">Home</a>
         </li>
         <li class="nav-opened" role="presentation">
-            <a href="archive.html">Archives</a>
+            <a href="../archive.html">Archives</a>
         </li>
         <li class="nav-opened" role="presentation">
-            <a href="categories/index.html">Tags</a>
+            <a href="../categories/index.html">Tags</a>
         </li>
         <li class="nav-opened" role="presentation">
-            <a href="rss.xml">RSS</a>
+            <a href="../rss.xml">RSS</a>
         </li>
         <li class="nav-opened" role="presentation">
             <a href="https://twitter.com/gramnix">My Twitter</a>
@@ -57,28 +76,19 @@
 <span class="nav-cover"></span>
 
 <div class="site-wrapper">
-    <header class="main-header" style="background-image: url(images/autumn-3295747_1280.jpg)"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://www.grahamwheeler.com/"><img src="https://getnikola.com/assets/img/logo.svg" alt="Blog Logo"></a>
+    <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://www.grahamwheeler.com/"><img src="https://getnikola.com/assets/img/logo.svg" alt="Blog Logo"></a>
             <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
-        </nav><div class="vertical">
-            <div class="main-header-content inner">
-                <a href="https://github.com/gramster" target="_blank">
-                    <span class="icon-github" style="color:white;font-size:2em"></span>
-                </a>
-                 
-                <a class="bloglogo" href="https://twitter.com/gramnix" target="_blank">
-                    <span class="icon-twitter" style="color:white;font-size:2em"></span>
-                </a>
-                 
-                <h1 class="page-title">Graham Wheeler's Random Forest</h1>
-                <h2 class="page-description">Stuff about stuff</h2>
-            </div>
-        </div>
-        <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
-    </header><main id="content" class="content" role="main"><div class="postindex">
-
-
-<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/basic-machine-learning.html">Basic Machine Learning with SciKit-Learn</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
+        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">Basic Machine Learning with SciKit-Learn</h1>
+        <section class="post-meta"> by
+            Graham Wheeler
+            on
+                <a href="../categories/data-science.html">#Data Science</a>,
+                <a href="../categories/jupyter.html">#Jupyter</a>,
+                <a href="../categories/machine-learning.html">#Machine Learning</a>,
+                <a href="../categories/python.html">#Python</a>,
+            <time class="post-date" datetime="2018-04-29T16:40:00-07:00">
+                2018-04-29 16:40
+            </time></section></header><section class="post-content"><div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
 <div class="cell border-box-sizing text_cell rendered">
@@ -123,7 +133,7 @@ with map-reduce. <a href="https://users.soe.ucsc.edu/~niejiazhong/slides/chandra
 typically done by an ML engineer, but in order to do that, as mentioned above, it generally needs a massive dataset and
 often days or weeks of compute time.</p>
 </blockquote>
-<h3 id="ML-Terminology">ML Terminology<a class="anchor-link" href="posts/basic-machine-learning.html#ML-Terminology">¶</a>
+<h3 id="ML-Terminology">ML Terminology<a class="anchor-link" href="basic-machine-learning.html#ML-Terminology">¶</a>
 </h3>
 <p><em>Machine Learning</em> is the process of building models from data, either to gain insight into the data or to make predictions for new data (generalization). There are two main categories:</p>
 <ul>
@@ -135,7 +145,7 @@ often days or weeks of compute time.</p>
 </ul>
 <p>The data used in ML is typically tabular. The columns are called <em>features</em> while the rows are <em>instances</em> or <em>observations</em>. For supervised learning, we call the  output the <em>target</em> or <em>label</em>. We'll often refer to the vector if features as X and the output (label) as y, and say that we're trying to find a function that approximates f(X)=y; this function is our <em>model</em> and is characterized by some <em>model parameters</em>. We usually choose the type or class of model, and then use ML techniques to learn the model parameters that minimize the <em>error</em> (the difference between the predicted and actual output). More generally we can think of this as an optimization problem, where we are trying to learn the parameters that minimize a <em>loss function</em>; that loss function is typically going to be some cumulative function of the errors; a common loss function is RMSE (root mean square of errors).</p>
 <p>While we learn the model parameters, there are some other parameters we need to specify as inputs to the model too; these are called <em>hyperparameters</em>. For example, if we learn a decision tree model, the parameters might be the features being tested at each branch and the values they are being tested against, while the hyperparameters would include the depth that we want to limit the tree to. For a polynomial regression model, the parameters would be the coefficients of the polynomial, while the hyperparameters could include the degree of polynomial we want to learn.</p>
-<h3 id="ML-Workflow">ML Workflow<a class="anchor-link" href="posts/basic-machine-learning.html#ML-Workflow">¶</a>
+<h3 id="ML-Workflow">ML Workflow<a class="anchor-link" href="basic-machine-learning.html#ML-Workflow">¶</a>
 </h3>
 <p>A typical machine learning workflow begins with:</p>
 <ul>
@@ -162,7 +172,7 @@ often days or weeks of compute time.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exploring-the-Iris-Dataset">Exploring the Iris Dataset<a class="anchor-link" href="posts/basic-machine-learning.html#Exploring-the-Iris-Dataset">¶</a>
+<h3 id="Exploring-the-Iris-Dataset">Exploring the Iris Dataset<a class="anchor-link" href="basic-machine-learning.html#Exploring-the-Iris-Dataset">¶</a>
 </h3>
 <p>We'll explore the famous iris flower dataset in this example. We'll eventually be trying to predict the species, so it will be a focus even in our initial exploratory work. The Seaborn plotting library includes this as a sample so we can load it that way:</p>
 
@@ -461,7 +471,7 @@ dtype: int64
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="A-Simple-Classification-Model-to-Predict-the-Species">A Simple Classification Model to Predict the Species<a class="anchor-link" href="posts/basic-machine-learning.html#A-Simple-Classification-Model-to-Predict-the-Species">¶</a>
+<h3 id="A-Simple-Classification-Model-to-Predict-the-Species">A Simple Classification Model to Predict the Species<a class="anchor-link" href="basic-machine-learning.html#A-Simple-Classification-Model-to-Predict-the-Species">¶</a>
 </h3>
 <p>In practice, we would usually store the data in the form of a Pandas DataFrame or NumPy array, the <em>features matrix</em>, and assign it to a variable <code>X</code>. Lets get the data into the X/y form we need for training a model:</p>
 
@@ -866,7 +876,7 @@ Name: species, dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="How-Confused-is-the-Model?">How Confused is the Model?<a class="anchor-link" href="posts/basic-machine-learning.html#How-Confused-is-the-Model?">¶</a>
+<h4 id="How-Confused-is-the-Model?">How Confused is the Model?<a class="anchor-link" href="basic-machine-learning.html#How-Confused-is-the-Model?">¶</a>
 </h4>
 <p>Another way to see how well we have done is to use a <em>confusion matrix</em> that plots counts of predicted vs actual values. This is usually only useful for a small number of classes or it becomes hard to understand. For our model:</p>
 
@@ -980,7 +990,7 @@ Name: species, dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Unsupervised-Learning---Dimensionality-Reduction-with-PCA-on-Iris-Dataset">Unsupervised Learning - Dimensionality Reduction with PCA on Iris Dataset<a class="anchor-link" href="posts/basic-machine-learning.html#Unsupervised-Learning---Dimensionality-Reduction-with-PCA-on-Iris-Dataset">¶</a>
+<h3 id="Unsupervised-Learning---Dimensionality-Reduction-with-PCA-on-Iris-Dataset">Unsupervised Learning - Dimensionality Reduction with PCA on Iris Dataset<a class="anchor-link" href="basic-machine-learning.html#Unsupervised-Learning---Dimensionality-Reduction-with-PCA-on-Iris-Dataset">¶</a>
 </h3>
 <p>We'll now look at an example of unsupervised learning, doing Principal Component Analysis to do dimensionality reduction on the dataset so we can reduce it to two dimensions (which we'll call PCA1 and PCA2) for visualization.</p>
 
@@ -1168,7 +1178,7 @@ Name: species, dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Unsupervised-Learning---Clustering-on-Iris-Dataset">Unsupervised Learning - Clustering on Iris Dataset<a class="anchor-link" href="posts/basic-machine-learning.html#Unsupervised-Learning---Clustering-on-Iris-Dataset">¶</a>
+<h3 id="Unsupervised-Learning---Clustering-on-Iris-Dataset">Unsupervised Learning - Clustering on Iris Dataset<a class="anchor-link" href="basic-machine-learning.html#Unsupervised-Learning---Clustering-on-Iris-Dataset">¶</a>
 </h3>
 <p>Now let's look at clustering. We'll use k-means clustering:</p>
 
@@ -1251,18 +1261,18 @@ Name: species, dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Metrics-for-Evaluating-Supervised-Models">Metrics for Evaluating Supervised Models<a class="anchor-link" href="posts/basic-machine-learning.html#Metrics-for-Evaluating-Supervised-Models">¶</a>
+<h3 id="Metrics-for-Evaluating-Supervised-Models">Metrics for Evaluating Supervised Models<a class="anchor-link" href="basic-machine-learning.html#Metrics-for-Evaluating-Supervised-Models">¶</a>
 </h3>
 <p>So far we have used classification accuracy, i.e. the percentage of correct predictions made, to evaluate models. This is really only suitable when there are an equal number of observations in each class, which is rarely the case, and that all predictions and prediction errors are equally important, which is often not the case. However, there are other metrics we can use; we've already mentioned precision and recall and we'll look at some more here and then show how they can be used in the next couple of examples.</p>
-<h4 id="Classification-Metrics">Classification Metrics<a class="anchor-link" href="posts/basic-machine-learning.html#Classification-Metrics">¶</a>
+<h4 id="Classification-Metrics">Classification Metrics<a class="anchor-link" href="basic-machine-learning.html#Classification-Metrics">¶</a>
 </h4>
-<h5 id="Log(arithmic)-Loss">Log(arithmic) Loss<a class="anchor-link" href="posts/basic-machine-learning.html#Log(arithmic)-Loss">¶</a>
+<h5 id="Log(arithmic)-Loss">Log(arithmic) Loss<a class="anchor-link" href="basic-machine-learning.html#Log(arithmic)-Loss">¶</a>
 </h5>
 <p>For multi-class classification where the model outputs a probability for each class we can use log-loss. This is commonly used in Kaggle competitions. It is defined as:</p>
 <p>$LL = - \frac{1}{N} \sum_{i=1}^N \sum_{j=1}^M y_{ij} \log \, p_{ij}$</p>
 <p>where $N$ is the number of samples or instances, $M$ is the number of possible labels, $y_{ij}$ is a binary indicator of whether or not label $j$ is the correct classification for instance $i$, and $p_{ij}$ is the model probability of assigning label $j$ to instance $i$.</p>
 <p>Smaller logloss is better with 0 representing a perfect classification.</p>
-<h5 id="Classification-Report">Classification Report<a class="anchor-link" href="posts/basic-machine-learning.html#Classification-Report">¶</a>
+<h5 id="Classification-Report">Classification Report<a class="anchor-link" href="basic-machine-learning.html#Classification-Report">¶</a>
 </h5>
 <p>This shows precision, recall, and F1 score (the harmonic mean of precision and recall).</p>
 
@@ -1319,22 +1329,22 @@ avg / total       0.97      0.97      0.97        30
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Area-under-ROC-Curve">Area under ROC Curve<a class="anchor-link" href="posts/basic-machine-learning.html#Area-under-ROC-Curve">¶</a>
+<h5 id="Area-under-ROC-Curve">Area under ROC Curve<a class="anchor-link" href="basic-machine-learning.html#Area-under-ROC-Curve">¶</a>
 </h5>
 <p>Area under ROC Curve (or AUC) represents a binary classifier’s ability to discriminate between positive and negative classes. Many binary classifiers output probabilities rather than 0/1, and it may be that the optimal split is not at 0.5; in fact it usually isn't. In this case we would want to know what probability value to pick as a threshold to distinguish between 0/1 with maximum accuracy. There is a trade-off - as we move the threshold we may get more true positives but we're also going to get more false positives. The AUC shows this trade-off this accuracy for different thresholds. We're not going to go into the details here; if you're interested there is good explanation at <a href="http://fastml.com/what-you-wanted-to-know-about-auc/">http://fastml.com/what-you-wanted-to-know-about-auc/</a> and a deep discussion at <a href="http://mlwiki.org/index.php/ROC_Analysis">http://mlwiki.org/index.php/ROC_Analysis</a></p>
-<h4 id="Regression-Metrics">Regression Metrics<a class="anchor-link" href="posts/basic-machine-learning.html#Regression-Metrics">¶</a>
+<h4 id="Regression-Metrics">Regression Metrics<a class="anchor-link" href="basic-machine-learning.html#Regression-Metrics">¶</a>
 </h4>
-<h5 id="Mean-Absolute-Error">Mean Absolute Error<a class="anchor-link" href="posts/basic-machine-learning.html#Mean-Absolute-Error">¶</a>
+<h5 id="Mean-Absolute-Error">Mean Absolute Error<a class="anchor-link" href="basic-machine-learning.html#Mean-Absolute-Error">¶</a>
 </h5>
 <p>This is just the sum of the absolute values of the prediction errors; i.e.:</p>
 <p>$MAE = \frac{\sum\limits_{i=1}^n |y_i - \hat{y_i}|}{n}$</p>
 <p>where $y_i$ is the actual value for the $i$th sample and $\hat{y_i}$ is the predicted value.</p>
-<h5 id="(Root)-Mean-Squared-Error">(Root) Mean Squared Error<a class="anchor-link" href="posts/basic-machine-learning.html#(Root)-Mean-Squared-Error">¶</a>
+<h5 id="(Root)-Mean-Squared-Error">(Root) Mean Squared Error<a class="anchor-link" href="basic-machine-learning.html#(Root)-Mean-Squared-Error">¶</a>
 </h5>
 <p>This is the mean value of the square of the errors:</p>
 <p>$MSE = \frac{\sum\limits_{i=1}^n (y_i - \hat{y_i})^2}{n}$</p>
 <p>To reduce the size of the value we can take the square root at the end; this gives us the Root Mean Squared Error or RMSE.</p>
-<h5 id="$R^2$">$R^2$<a class="anchor-link" href="posts/basic-machine-learning.html#%24R%5E2%24">¶</a>
+<h5 id="$R^2$">$R^2$<a class="anchor-link" href="basic-machine-learning.html#%24R%5E2%24">¶</a>
 </h5>
 <p>$r^2$ is also known as the coefficient of determination and is 0 for no fit and 1 for a perfect fit. It is the proportion of the variation in the dependent variable that is predictable from the independent variable(s). See <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">https://en.wikipedia.org/wiki/Coefficient_of_determination</a> for more details.</p>
 
@@ -1346,10 +1356,10 @@ avg / total       0.97      0.97      0.97        30
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Model-Validation">Model Validation<a class="anchor-link" href="posts/basic-machine-learning.html#Model-Validation">¶</a>
+<h3 id="Model-Validation">Model Validation<a class="anchor-link" href="basic-machine-learning.html#Model-Validation">¶</a>
 </h3>
 <p>We've seen one way of doing model validation; namely, splitting the data into a training set and a test set. In this section we'll look at a more sophisticated approach, namely cross-validation. We'll also see how we can use run into the problem of overfitting the data, and discuss the two concepts of bias and variance, and how these are traded-off.</p>
-<h4 id="Overfitting-the-Training-Data">Overfitting the Training Data<a class="anchor-link" href="posts/basic-machine-learning.html#Overfitting-the-Training-Data">¶</a>
+<h4 id="Overfitting-the-Training-Data">Overfitting the Training Data<a class="anchor-link" href="basic-machine-learning.html#Overfitting-the-Training-Data">¶</a>
 </h4>
 <p>Imagine that for our model, we just hashed the input features to the output label. If we ran this as a model, and passed the same training data in as test data, we would get an exact match every time, suggesting we have a 100% accurate model! But if we gave the model new data it hadn't seen, it would fail dismally, not even being able to predict a result. We could address this by using some kind of fuzzy matching of hash keys, so at least we could get predictions out, but the result is likely to be a poor model. This illustrates two problems:</p>
 <ul>
@@ -1357,7 +1367,7 @@ avg / total       0.97      0.97      0.97        30
 <li>the model may 'fit' the training data very well but not generalize well to new data; we call this 'overfitting'</li>
 </ul>
 <p>On the other hand, if we split into test and training data (where the test data is what we call a 'holdout set'), we lose some of our training data. What to do? Fortunately, there is a way we can use all of our data for training <em>and</em> for testing, using <em>cross-validation</em>!</p>
-<h4 id="Cross-Validation">Cross Validation<a class="anchor-link" href="posts/basic-machine-learning.html#Cross-Validation">¶</a>
+<h4 id="Cross-Validation">Cross Validation<a class="anchor-link" href="basic-machine-learning.html#Cross-Validation">¶</a>
 </h4>
 <p>Let's say we split the data in half; call the two halves H1 and H2. We could train a model on H1 and test it on H2, and get an accuracy A1. We could train a second model on H2 and test it on H1, and get an accuracy of A2. This suggests that if we train a model using all the data, the accuracy when tested on new data should be somewhere between A1 and A2.</p>
 <p>In practice, we don't split in half. More generally, we will split the data into k pieces of <em>folds</em>, $F_1$, $F_2$, ..., $F_k$, and then build $k$ models, where the $n$th model uses $F_n$ as the test set and the remaining pieces excluding $F_n$ as the training set. The $k$ individual scores are then combined into a final score (mean and standard deviation). This is called <em>k-fold cross validation</em>. The size of each fold must  be large enough to be a reasonable sample of the problem, while allowing enough repetitions of the train-test evaluation of the algorithm to provide a fair estimate of the algorithms performance on new data. Commonly-used values for k are 5 or 10, although we can go all the way to the extreme where $k$ is the size of the training set; this is called <em>leave-one-out cross validation</em>.  It is computationally expensive and the results have high variance.</p>
@@ -1407,7 +1417,7 @@ avg / total       0.97      0.97      0.97        30
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="The-Bias-Variance-Trade-Off">The Bias-Variance Trade-Off<a class="anchor-link" href="posts/basic-machine-learning.html#The-Bias-Variance-Trade-Off">¶</a>
+<h4 id="The-Bias-Variance-Trade-Off">The Bias-Variance Trade-Off<a class="anchor-link" href="basic-machine-learning.html#The-Bias-Variance-Trade-Off">¶</a>
 </h4>
 <p><em>Bias</em> is a measure of error, or how far off predictions are from reality, due to erroneous assumptions; high bias is a sign of underfitting. <em>Variance</em> is an error from sensitivity to small fluctuations in the training set, and can be thought of as how closely the model fits to random noise in the training data (overfitting).</p>
 <p>What can we do if our model performs poorly? Assuming it is not just due to the data being completely random or having no actual dependence on our chosen features (in which case we will never be successful), we have several possible strategies:</p>
@@ -1418,7 +1428,7 @@ avg / total       0.97      0.97      0.97        30
 <li>add more features (we'll talk about this later)</li>
 </ul>
 <p>If we increased the complexity of our model, it would do better and better at fitting the training data, but at some point would start getting worse and worse at fitting the validation data. This is the <em>bias-variance trade-off</em>; you can see it in the plot below where the vertical dashes line is the sweet spot we want to find.</p>
-<p><img src="posts/images/bias-variance.png" alt="Bias-Variance Trade-Off"></p>
+<p><img src="images/bias-variance.png" alt="Bias-Variance Trade-Off"></p>
 
 </div>
 </div>
@@ -1428,11 +1438,11 @@ avg / total       0.97      0.97      0.97        30
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Learning-Curves">Learning Curves<a class="anchor-link" href="posts/basic-machine-learning.html#Learning-Curves">¶</a>
+<h4 id="Learning-Curves">Learning Curves<a class="anchor-link" href="basic-machine-learning.html#Learning-Curves">¶</a>
 </h4>
 <p>The first two options we have, around model complexity, assume that the data is a fixed size. The third option is to add more data. As we add more data the optimal model will change. Assuming we capture the complexity of the data we are modeling, at some point we should have diminishing returns where adding more data doesn't significantly improve the model. This means that if we have a lot of data, it can be useful to measure how well the model is doing as we are training it, so we can stop when we reach the point where the further improvements are negligible. If we plot the training and validation scores as a function of the size of the data set we get the <em>learning curve</em>.</p>
 <p>We would expect that a model will overfit a small dataset and underfit a large dataset, where 'small' and 'large' are dependent on the complexity of the model. We would also expect in almost every case that the training score is better than the validation score(or equivalently the training error is lower than the validation error). So a typical learning curve will look like:</p>
-<p><img src="posts/images/learning-curve.png" alt="Learning Curve"></p>
+<p><img src="images/learning-curve.png" alt="Learning Curve"></p>
 
 </div>
 </div>
@@ -1443,7 +1453,7 @@ avg / total       0.97      0.97      0.97        30
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Note that the curve converges to some score as the amount of data increases.</p>
-<h4 id="Grid-Search">Grid Search<a class="anchor-link" href="posts/basic-machine-learning.html#Grid-Search">¶</a>
+<h4 id="Grid-Search">Grid Search<a class="anchor-link" href="basic-machine-learning.html#Grid-Search">¶</a>
 </h4>
 <p>Drawing plots of validation and learning curves can be useful except that in many cases models have multiple knobs (hyperparameters) to adjust; this makes using such visual aids more difficult. Instead, we can just train multiple versions of the model and have SciKit-Learn do the work, using a <em>grid search</em>.</p>
 <p>To do this, we need to create a dictionary, where the keys are the different model constructor arguments, and the values are lists of values that we want to try. Then we can have SciKit-Learn find the best values for the parameters with cross-validation using <code>GridSearchCV</code>:</p>
@@ -1468,11 +1478,11 @@ final_model = grid.best_estimator_
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Feature-Engineering-and-Data-Transforms">Feature Engineering and Data Transforms<a class="anchor-link" href="posts/basic-machine-learning.html#Feature-Engineering-and-Data-Transforms">¶</a>
+<h3 id="Feature-Engineering-and-Data-Transforms">Feature Engineering and Data Transforms<a class="anchor-link" href="basic-machine-learning.html#Feature-Engineering-and-Data-Transforms">¶</a>
 </h3>
 <p>Apart from changing the model complexity, the main other strategies we have for improving our models are adding more data or adding more features and/or improving the existing features. We may be able to get more data from the problem domain, but in many cases we don't have that option. All is not lost though, as we can use other sources of data for dependent features, as well as sometimes synthesize new features from the features we are given. We will look at this in this section, along with ways of transforming our data to be more usable by our models.</p>
 <p>SciKit-Learn helps us out here too; it supports a rich set of data transforms. The general approach is: create a transform, <em>fit</em> it to the data, and then apply it to <em>transform</em> the data. When new data arrives the previously fit transform can be applied to that for consistency. For the training data fit and transform can usually be combined into a call to <code>.fit_transform()</code>.</p>
-<h4 id="Rescaling-Data-to-a-Min/Max-Range">Rescaling Data to a Min/Max Range<a class="anchor-link" href="posts/basic-machine-learning.html#Rescaling-Data-to-a-Min/Max-Range">¶</a>
+<h4 id="Rescaling-Data-to-a-Min/Max-Range">Rescaling Data to a Min/Max Range<a class="anchor-link" href="basic-machine-learning.html#Rescaling-Data-to-a-Min/Max-Range">¶</a>
 </h4>
 <p>This can be done easily with:</p>
 
@@ -1484,7 +1494,7 @@ X2 = scaler.fit_transform(X)
 </code></pre>
 <p>It applies the transform $x' = \frac{x - min(\bf{x})}{max(\bf{x}) - min(\bf{x})}$.</p>
 <p>Rescaling to [0, 1] is the most common use case.</p>
-<h4 id="Standardizing-Distributions">Standardizing Distributions<a class="anchor-link" href="posts/basic-machine-learning.html#Standardizing-Distributions">¶</a>
+<h4 id="Standardizing-Distributions">Standardizing Distributions<a class="anchor-link" href="basic-machine-learning.html#Standardizing-Distributions">¶</a>
 </h4>
 <p>To convert a Gaussian-distributed value to have mean 0 and standard deviation 1 we use z-score normalization:</p>
 <p>$x' = \frac{x - E(\bf{x})}{\sqrt{Var(\bf{x})}}$</p>
@@ -1496,7 +1506,7 @@ scaler = StandardScaler().fit(X)
 X2 = scaler.transform(X)
 
 </code></pre>
-<h4 id="Normalizing-to-Unit-Length-Vectors">Normalizing to Unit Length Vectors<a class="anchor-link" href="posts/basic-machine-learning.html#Normalizing-to-Unit-Length-Vectors">¶</a>
+<h4 id="Normalizing-to-Unit-Length-Vectors">Normalizing to Unit Length Vectors<a class="anchor-link" href="basic-machine-learning.html#Normalizing-to-Unit-Length-Vectors">¶</a>
 </h4>
 <p>Normalized data has each row/observation have length 1 when treated as an n-dimensional vector.</p>
 
@@ -1506,7 +1516,7 @@ scaler = Normalizer().fit(X)
 X2 = scaler.transform(X)
 
 </code></pre>
-<h4 id="Binarizing/Thresholding">Binarizing/Thresholding<a class="anchor-link" href="posts/basic-machine-learning.html#Binarizing/Thresholding">¶</a>
+<h4 id="Binarizing/Thresholding">Binarizing/Thresholding<a class="anchor-link" href="basic-machine-learning.html#Binarizing/Thresholding">¶</a>
 </h4>
 <pre><code>from sklearn.preprocessing import Binarizer
 
@@ -1514,7 +1524,7 @@ binarizer = Binarizer(threshold=0.0).fit(X)
 binaryX = binarizer.transform(X)
 
 </code></pre>
-<h4 id="Handling-Categorical-Data">Handling Categorical Data<a class="anchor-link" href="posts/basic-machine-learning.html#Handling-Categorical-Data">¶</a>
+<h4 id="Handling-Categorical-Data">Handling Categorical Data<a class="anchor-link" href="basic-machine-learning.html#Handling-Categorical-Data">¶</a>
 </h4>
 <p>Many ML algorithms rely on the inputs being numeric quantities. So how should we deal with categorical data? We could use a simple mapping of categories to numbers, but this is a bad idea, as the models assume that the values have some numerical significance.</p>
 <p>A better approach is to use <em>1-hot encoding</em>. We saw this briefly in the Pandas notebook. The idea is to add a new column for every unique value of that categorical variable, and then encode the values in those columns as zeroes except for the column corresponding to the original value.</p>
@@ -1628,7 +1638,7 @@ binaryX = binarizer.transform(X)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Handling-Text">Handling Text<a class="anchor-link" href="posts/basic-machine-learning.html#Handling-Text">¶</a>
+<h4 id="Handling-Text">Handling Text<a class="anchor-link" href="basic-machine-learning.html#Handling-Text">¶</a>
 </h4>
 <p>For text, there are a few different options. Most commonly we will split the text up into a sequence of words. In many cases we will remove <em>stop words</em> (common words like 'and' and 'the'), and may perform operations such as 'stemming', 'named entity recognition', 'parts of speech tagging', etc. We're not going to go into these here; see the SpaCy NLP library for examples (<a href="https://spacy.io/">https://spacy.io/</a>).</p>
 <p>We can use a similar approach to the categorical data, and turn each unique word into a new column. We can encode with 0/1 like one-hot, or use word counts. Let's look at the latter. In this case <code>fit_transform</code> returns a sparse array so we turn it back into a DataFrame:</p>
@@ -1959,7 +1969,7 @@ binaryX = binarizer.transform(X)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Handling-Missing-Data">Handling Missing Data<a class="anchor-link" href="posts/basic-machine-learning.html#Handling-Missing-Data">¶</a>
+<h4 id="Handling-Missing-Data">Handling Missing Data<a class="anchor-link" href="basic-machine-learning.html#Handling-Missing-Data">¶</a>
 </h4>
 <p>We saw a bit about handling missing data in the Pandas notebook. SciKit-Learn has some useful functionality to help us here too, namely the <code>Imputer</code>:</p>
 
@@ -1969,7 +1979,7 @@ X = Imputer(strategy='mean').fit_transform(X)
 
 </code></pre>
 <p>The above code will replace any <code>nan</code> values in the original array X with the mean of the non-NaN values in that column. Other strategies are <code>median</code> and <code>most_frequent</code>.</p>
-<h4 id="Synthesizing-and-Adding-Features">Synthesizing and Adding Features<a class="anchor-link" href="posts/basic-machine-learning.html#Synthesizing-and-Adding-Features">¶</a>
+<h4 id="Synthesizing-and-Adding-Features">Synthesizing and Adding Features<a class="anchor-link" href="basic-machine-learning.html#Synthesizing-and-Adding-Features">¶</a>
 </h4>
 <p>In many cases, we will want to create features that are not directly available in the data, but are derived or synthesized from these. For example, the data may have city names, which we may want to turn into latitude/longitude, or perhaps include data like the population of the city. In such cases we would need to include the necessary tables to look up these features from the input features before fitting or predicting with the model.</p>
 <p>Another common case is to improve the power of regression. Regression fits a line in 2D, or a plane in higher dimensions, but this is linear. What if a polynomial of higher order would be a much better fit? We can still use linear regression, all we need to do is add features that are higher-order powers of the input features!</p>
@@ -2170,7 +2180,7 @@ X = Imputer(strategy='mean').fit_transform(X)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Reducing-Features">Reducing Features<a class="anchor-link" href="posts/basic-machine-learning.html#Reducing-Features">¶</a>
+<h4 id="Reducing-Features">Reducing Features<a class="anchor-link" href="basic-machine-learning.html#Reducing-Features">¶</a>
 </h4>
 <p>Sometimes the right thing to do is to reduce the number of features. For example, we may have performance constraints (memory/CPU) that mean we need to shrink the model. Or we may have extraneous features that aren't adding any value.</p>
 <p>We've already seen one approach to this, namely PCA. There are other approaches too:</p>
@@ -2337,7 +2347,7 @@ Feature Ranking: [2 1 1 1]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pipelines">Pipelines<a class="anchor-link" href="posts/basic-machine-learning.html#Pipelines">¶</a>
+<h3 id="Pipelines">Pipelines<a class="anchor-link" href="basic-machine-learning.html#Pipelines">¶</a>
 </h3>
 <p>Sometimes we need to chain computations in SciKit. For example, when we looked at adding polynomial synthetic features, we produced a transformed feature vector before applying the linear model. This is a common enough operation that there is a mechanism available for it, namely pipelines.</p>
 <p>In that example, the code had a form similar to:</p>
@@ -2382,7 +2392,7 @@ Feature Ranking: [2 1 1 1]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="A-Classification-Example---Breast-Cancer">A Classification Example - Breast Cancer<a class="anchor-link" href="posts/basic-machine-learning.html#A-Classification-Example---Breast-Cancer">¶</a>
+<h3 id="A-Classification-Example---Breast-Cancer">A Classification Example - Breast Cancer<a class="anchor-link" href="basic-machine-learning.html#A-Classification-Example---Breast-Cancer">¶</a>
 </h3>
 <p>A description of this data is at <a href="http://scikit-learn.org/stable/datasets/index.html#datasets">http://scikit-learn.org/stable/datasets/index.html#datasets</a>, section 5.14. The columns are mean, standard error, and "worst" values of the following ten features, making 30 features in all,
 followed by the class (malignant or benign).</p>
@@ -2559,7 +2569,7 @@ followed by the class (malignant or benign).</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="A-Regression-Example---Boston-Housing-Prices">A Regression Example - Boston Housing Prices<a class="anchor-link" href="posts/basic-machine-learning.html#A-Regression-Example---Boston-Housing-Prices">¶</a>
+<h3 id="A-Regression-Example---Boston-Housing-Prices">A Regression Example - Boston Housing Prices<a class="anchor-link" href="basic-machine-learning.html#A-Regression-Example---Boston-Housing-Prices">¶</a>
 </h3>
 <p>A description of this data is at <a href="http://scikit-learn.org/stable/datasets/index.html#datasets">http://scikit-learn.org/stable/datasets/index.html#datasets</a>, section 5.13. The columns are:</p>
 <ul>
@@ -2751,7 +2761,7 @@ followed by the class (malignant or benign).</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Combining-Model-Predictions-with-Ensembles">Combining Model Predictions with Ensembles<a class="anchor-link" href="posts/basic-machine-learning.html#Combining-Model-Predictions-with-Ensembles">¶</a>
+<h3 id="Combining-Model-Predictions-with-Ensembles">Combining Model Predictions with Ensembles<a class="anchor-link" href="basic-machine-learning.html#Combining-Model-Predictions-with-Ensembles">¶</a>
 </h3>
 <p>One way to improve performance is to combine the results of several models. There are several ways this can be done; for example:</p>
 <ul>
@@ -2770,13 +2780,13 @@ followed by the class (malignant or benign).</p>
 <span class="o">...</span>
 </pre></div>
 <p>Random forests are another example of bagging. <a href="http://scikit-learn.org/stable/modules/ensemble.html#adaboost">AdaBoost</a> is an example of a popular boosting algorithm.</p>
-<h3 id="Interpreting-Models">Interpreting Models<a class="anchor-link" href="posts/basic-machine-learning.html#Interpreting-Models">¶</a>
+<h3 id="Interpreting-Models">Interpreting Models<a class="anchor-link" href="basic-machine-learning.html#Interpreting-Models">¶</a>
 </h3>
 <p>Once we have a good model, how do we interpret the results? That is, how can we justify the prediction when it is questioned?</p>
 <p>For decision trees, this is not that difficult - the path through the decision tree illustrates the "reasoning" behind the decision. However, for many other models there is no intuitive interpretation. Getting a ranking of feature importance is helpful but not complete.</p>
 <p>There has been some interesting work in this area for classification models. The approach is to rely on a form of sensitivity analysis - ask, "what small changes in the inputs would result in different outputs?". This can be done one a case by case basis, with the learnings often being generalizable to cover more cases.</p>
 <p>This is really out of scope for this notebook, but if you are interested in learning more, the seminal work is <a href="https://homes.cs.washington.edu/~marcotcr/blog/lime/">LIME</a>, and other popular approaches are <a href="https://github.com/slundberg/shap">SHAP</a> and <a href="https://www.datascience.com/resources/tools/skater">Skater</a>.</p>
-<h3 id="Taking-It-Further">Taking It Further<a class="anchor-link" href="posts/basic-machine-learning.html#Taking-It-Further">¶</a>
+<h3 id="Taking-It-Further">Taking It Further<a class="anchor-link" href="basic-machine-learning.html#Taking-It-Further">¶</a>
 </h3>
 <p><em>Data leakage</em> is something to look out for. A good explanation can be found here: <a href="https://medium.com/@colin.fraser/the-treachery-of-leakage-56a2d7c4e931">https://medium.com/@colin.fraser/the-treachery-of-leakage-56a2d7c4e931</a></p>
 <p>High-dimensional data introduces some interesting effects that you should be aware of: <a href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">https://en.wikipedia.org/wiki/Curse_of_dimensionality</a></p>
@@ -2808,296 +2818,46 @@ followed by the class (malignant or benign).</p>
     </div>
   </div>
 
-    </section><footer class="post-meta">
-                Graham Wheeler
-
-        on
-                <a href="categories/data-science.html">#Data Science</a>,
-                <a href="categories/jupyter.html">#Jupyter</a>,
-                <a href="categories/machine-learning.html">#Machine Learning</a>,
-                <a href="categories/python.html">#Python</a>,
-
-        <time class="post-date" datetime="2018-04-29T16:40:00-07:00">
-            2018-04-29 16:40
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html">Exploratory Data Analysis with NumPy and Pandas</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><em>(This is the third post in a series based off my Python for Data Science bootcamp I run at eBay occasionally. The first post was <a href="https://www.grahamwheeler.com/posts/python-crash-course.html">a Python crash course</a> and the second was on <a href="https://www.grahamwheeler.com/posts/using-jupyter.html">Jupyter</a>).</em></p>
-<p>This is an introduction to the NumPy and Pandas libraries that form the foundation of data science in Python. These libraries, especially Pandas, have a large API surface and many powerful features. There is now way in a short amount of time to cover every topic; in many cases we will just scratch the surface. But after this you should understand the fundamentals, have an idea of the overall scope, and have some pointers for extending your learning as you need more functionality.</p>
-<h3 id="Introduction">Introduction<a class="anchor-link" href="posts/exploratory-data-analysis-with-numpy-and-pandas.html#Introduction">¶</a>
-</h3>
-<p>We'll start by importing the numpy and pandas packages. Note the "as" aliases; it is conventional to use "np" for numpy and "pd" for pandas. If you are using Anaconda Python distribution, as recommended for data science, these packages should already be available:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We are going to do some plotting with the matplotlib and Seaborn packages. We want the plots to appear as cell outputs inline in Jupyter.
-To do that we need to run this next line:
-</p>
-<p class="more"><a href="posts/exploratory-data-analysis-with-numpy-and-pandas.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta">
-                Graham Wheeler
-
-        on
-                <a href="categories/data-science.html">#Data Science</a>,
-                <a href="categories/jupyter.html">#Jupyter</a>,
-                <a href="categories/pandas.html">#Pandas</a>,
-                <a href="categories/python.html">#Python</a>,
-
-        <time class="post-date" datetime="2018-04-28T12:40:00-07:00">
-            2018-04-28 12:40
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/using-jupyter.html">Using Jupyter</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><em>This is the second post in a series based off my Python for Data Science bootcamp I run at eBay occasionally. The other posts are:</em></p>
+    </section><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
 <ul>
-<li><em><a href="https://www.grahamwheeler.com/posts/python-crash-course.html">a Python crash course</a></em></li>
-<li><em><a href="https://www.grahamwheeler.com/posts/exploratory-data-analysis-with-numpy-and-pandas.html">exploratory data analysis</a>.</em></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="http://jupyter.org/">Jupyter</a> is an interactive computing environment that allows users to create heterogeneous documents called <em>notebooks</em> that can mix executable code, <a href="https://en.wikipedia.org/wiki/Markdown">markdown</a> text with <a href="https://www.mathjax.org/">MathJax</a>, multimedia, static and interactive charts, and more. A notebook is typically a complete and self-contained record of a computation, and can be converted to various formats and shared with others. Jupyter thus supports a form of <a href="https://en.wikipedia.org/wiki/Literate_programming">literate programming</a>. Several of the posts on this blog, including this one, were written as Jupyter notebooks. Jupyter is an extremely popular tool for doing data science in Python due to its interactive nature, good support for iterative and experimental computation, and ability to create a finished artifact combining both scientific text (with math) and code. It's easiest to start to understand this by looking at an <a href="http://nbviewer.jupyter.org/url/norvig.com/ipython/Economics.ipynb">example</a> of a finished notebook.</p>
-<p>Jupyter the application combines three components:
-</p>
-<p class="more"><a href="posts/using-jupyter.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta">
-                Graham Wheeler
-
-        on
-                <a href="categories/data-science.html">#Data Science</a>,
-                <a href="categories/jupyter.html">#Jupyter</a>,
-                <a href="categories/python.html">#Python</a>,
-
-        <time class="post-date" datetime="2018-04-17T21:35:00-07:00">
-            2018-04-17 21:35
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/personality-and-relationships1.html">The 5-Factor Model of Personality</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Shankar Vedantam has a great NPR show/podcast, <a href="https://www.npr.org/podcasts/510308/hidden-brain">"The Hidden Brain"</a>, and occasional appearances on NPR's All Things Considered.  In December he had a show on Evaluating Personality Tests. It was enjoyable, especially the Harry Potter Sorting Hat references, but I felt it was a missed opportunity because of the focus on Myers-Briggs, and the fact that he mentioned the Big-5 model only in passing.</p>
-<p>In fact, Myers-Briggs is not taken very seriously in the psychology world, and Vedantam surprised me with spending so much time on it, given his show's focus on research in psychology. On the other hand, the Big-5 model is taken quite seriously, with many studies and papers based on it and evaluating it in various contexts (take a look, for example, at the Oxford University Press book I link to at the end of this post).</p>
-<p>In the <a href="https://www.npr.org/2017/12/11/569815338/evaluating-personality-tests">short form NPR segment</a>, this was the section on Big-5 in its entirety:</p>
-<blockquote>
-<p>VEDANTAM: Many personality researchers put greater stock in a test known as the Big Five [vs Myers-Briggs]. Grant says the Big Five has lots of peer reviewed data to back it up.</p>
-<p>GRANT: We can predict your job performance, your effectiveness in a team with different collaborators, your likelihood of sticking around in a job versus leaving as well as your probability of your marriage surviving, depending on the personality fit between you and your spouse.</p>
-</blockquote>
-<p></p>
-<p class="more"><a href="posts/personality-and-relationships1.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta">
-                Graham Wheeler
-
-        on
-                <a href="categories/management.html">#Management</a>,
-                <a href="categories/psychology.html">#Psychology</a>,
-
-        <time class="post-date" datetime="2018-04-15T21:35:00-07:00">
-            2018-04-15 21:35
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/python-crash-course.html">A Python Crash Course</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I've been teaching <a href="https://github.com/gramster/pythonbootcamp">a crash course in data science with Python</a>, which starts off with learning Python itself. The target audience is Java programmers (generally senior level) so its assumed that things like classes and methods are well understood. The focus is mostly on what is different with Python. I teach it using Jupyter notebooks but the content is useful as a blog post too so here we go (you can find the second part on Jupyter <a href="https://www.grahamwheeler.com/posts/using-jupyter.html">here</a> and the third part on exploratory data analysis <a href="https://www.grahamwheeler.com/posts/exploratory-data-analysis-with-numpy-and-pandas.html">here</a>):</p>
-<h3 id="Introduction">Introduction<a class="anchor-link" href="posts/python-crash-course.html#Introduction">¶</a>
-</h3>
-<h4 id="Python's-Origins">Python's Origins<a class="anchor-link" href="posts/python-crash-course.html#Python's-Origins">¶</a>
-</h4>
-<p>Python was conceived in the late 1980s, and its implementation began in December 1989 by Guido van Rossum at Centrum Wiskunde &amp; Informatica (CWI) in the Netherlands as a successor to the ABC language. It takes its name from Monty Python's Flying Circus.</p>
-<p>Python is a dynamic language but is strongly typed (i.e. variables are untyped but refer to objects of fixed type).
-</p>
-<p class="more"><a href="posts/python-crash-course.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta">
-                Graham Wheeler
-
-        on
-                <a href="categories/programming.html">#Programming</a>,
-                <a href="categories/python.html">#Python</a>,
-
-        <time class="post-date" datetime="2018-04-12T20:10:00-07:00">
-            2018-04-12 20:10
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/blogagain.html">Blogging again</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>Well, it's been quite a while since I last blogged. My Zite project is not dead; it's actually up and 
-running well as a personal aggregator but not ready for multi-user access, and I'm not sure when it
-might be. But I've been feeling a bit of an itch to start blogging again so here goes.</p>
-<p>I have some material already lined up: I've been teaching an introductory data science bootcamp at
-work and thought the notebooks from that could be useful blog posts in and of themselves. So I'll
-start slowly publishing those while I write some new material. I'm also going to expand the scope 
-of this blog; I'll still cover some tech topics but I',m going to fold in the content from my
-dormant math blog and retire it; this may inspire me to do some math blogging again. And I'll be 
-throwing in some stuff on management and psychology too. So this will be a mishmash living up to 
-the random forest name. I'll use categories to make it more accessible for those only interested
-in specific topics.</p>
-<p>More soon!</p>
-</div>
-    </section><footer class="post-meta">
-                Graham Wheeler
-
-        on
-
-        <time class="post-date" datetime="2018-04-11T21:00:00-07:00">
-            2018-04-11 21:00
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-11.html">Building a Zite Replacement (Part 11)</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>It's been a while since I worked on this but it is still on my mind a lot. I've been mulling over ways to improve categorization without the semi-supervised tweaking I've had to do.</p>
-<p>Just to recap, currently this is what I am doing:</p>
-<ul>
-<li>I have a bunch of 'category exemplars', which are sets of key terms associated with a category. These are the things which currently require some manual work;</li>
-<li>for each article, I extract the plain text, normalize capitalization, remove <a href="https://en.wikipedia.org/wiki/Stop_words">stop words</a>, then use <a href="https://en.wikipedia.org/wiki/Tf-idf">tf-idf</a> to extract the set of most significant terms (I'm not yet doing <a href="https://en.wikipedia.org/wiki/Stemming">stemming</a> although I'll probably start);</li>
-<li>I then use a <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">distance metric</a> from the exemplars to assign category scores to the articles. Provided the score exceeds a threshold the article will be considered to be in the category.
-<p class="more"><a href="posts/zite-replacement-11.html">Read more…</a></p>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
 </li>
 </ul>
 </div>
-    </section><footer class="post-meta">
-                Graham Wheeler
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/basic-machine-learning.html",
+        disqus_title="Basic Machine Learning with SciKit-Learn",
+        disqus_identifier="cache/posts/basic-machine-learning.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
-        on
 
-        <time class="post-date" datetime="2016-04-23T09:15:00-07:00">
-            2016-04-23 09:15
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/using-jupyter-as-a-music-notebook.html">Using Jupyter as a Music Notebook</a></h2>
-    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I recently started playing guitar again after a long absence and wanted to start making some notes in a digital form. Unfortunately, I didn't find any good tools. There is TeX of course, which can do anything, but I was hoping for something a bit more WYSIWYGy. There are some very good tools available for musical scores (MuseScore, Frescobaldi), but I want something that is more like a traditional notebook with lots of notes interspersed with occasional musical notation (in both traditional and tablature forms).</p>
-<p>So an obvious potential candidate is Jupyter (nee IPython), but it has no support for musical notation out of the box. But it is doable and in this post I'll walk through how I got it to work on my Mac. This is also my first attempt at using a Jupyter notebook as my blog post in Nikola so I'm kiling two birds with one stone.
-</p>
-<p class="more"><a href="posts/using-jupyter-as-a-music-notebook.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta">
-                Graham Wheeler
-
-        on
-                <a href="categories/jupyter.html">#Jupyter</a>,
-                <a href="categories/python.html">#Python</a>,
-
-        <time class="post-date" datetime="2016-02-27T20:00:00Z">
-            2016-02-27 20:00
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-10.html">Building a Zite Replacement (Part 10)</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>I've spent the past few days refining the web server, largely for diagnostic
-purposes, so it can replace the old TkInter app. I can seen articles for 
-categories or feeds, their rank, and detailed information on why they 
-received particular categories and ranks. This has enabled me to improve
-the categorization and ranking algorithms. I'm at a point now where I 
-feel I need a lot more sources than the ~4000 I have right now, as well as
-more categories. The latter is more complex and will take me back to some
-of my earlier explorations in clustering, etc. The former largely involves 
-mining more of the web to find useful sites.
-</p>
-<p class="more"><a href="posts/zite-replacement-10.html">Read more…</a></p>
-</div>
-    </section><footer class="post-meta">
-                Graham Wheeler
-
-        on
-
-        <time class="post-date" datetime="2015-11-07T08:30:00-08:00">
-            2015-11-07 08:30
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-9.html">Building a Zite Replacement (Part 9)</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>Well, I hope you've all brushed your teeth after all that Halloween candy.</p>
-<p>Today I'm going to show how I build a simple web server to view my feed
-articles using node.js and Express, along with MongoDB. I have a simple 
-category classifier which finds the best Jacard similarity (described earlier)
-to a set of category exemplars (i.e. 'pseudo-articles' for a category
-containing just key words that are typical for that category). It needs a
-lot of tuning and the earlier tkInter program was meant for that but tkInter 
-proved to have problems. So time to use some more modern techologies!
-</p>
-<p class="more"><a href="posts/zite-replacement-9.html">Read more…</a></p>
-</div>
-    </section><footer class="post-meta">
-                Graham Wheeler
-
-        on
-
-        <time class="post-date" datetime="2015-11-01T22:07:00-08:00">
-            2015-11-01 22:07
-        </time></footer></article>
-</div>
-
-        <nav class="postindexpager"><ul class="pager">
-<li class="next">
-                <a href="index-7.html" rel="next">Older posts</a>
-            </li>
-        </ul></nav><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     tex2jax: {
         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -3109,10 +2869,10 @@ MathJax.Hub.Config({
         styles: {'.MathJax_Display': {"margin": 0}}
     }
 });
-</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+</script></footer></article><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
 
-    <script type="text/javascript" src="assets/js/jquery.js"></script><script type="text/javascript" src="assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="assets/js/index.js"></script><script>
+    <script type="text/javascript" src="../assets/js/jquery.js"></script><script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../assets/js/index.js"></script><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

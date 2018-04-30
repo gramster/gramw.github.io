@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Mobile)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/cat_mobile.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 15 Apr 2018 17:13:36 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GeoRSS and Live Search for Mobile</title><link>https://www.grahamwheeler.com/posts/georss-and-live-search-for-mobile.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;Hopefully by now you all have v3.0 of the Live Search client, and are
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Mobile)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/cat_mobile.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 30 Apr 2018 00:13:21 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GeoRSS and Live Search for Mobile</title><link>https://www.grahamwheeler.com/posts/georss-and-live-search-for-mobile.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;Hopefully by now you all have v3.0 of the Live Search client, and are
 enjoying the new features (web search, weather, and collections). I'd
 like to talk about collections in this post, but first it is worth
 mentioning a couple of changes in this version that are less obvious,
 and overcome limitations I have blogged about in the past:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;we now have Outlook contact integration. From Outlook contacts you
-    can select the "Show on Map" menu option to map a contact. &lt;a href="http://geekraver.spaces.live.com/blog/cns!3690236EA2D48605!203.entry"&gt;Google
-    Maps contacts integration is still
-    broken&lt;/a&gt;,
+    can select the "Show on Map" menu option to map a contact. Google
+    Maps contacts integration is still broken,
     but we can't let that hold us back any longer; we gave them nearly a
     year as well as explicit instructions on what their bug was; if they
     can't get their house in order with all that then too bad for them.
@@ -17,8 +16,7 @@ and overcome limitations I have blogged about in the past:&lt;/p&gt;
     installs menu extensions that is installed after them; if the other
     apps are well-behaved then you can install them before GMM and you
     should be okay.&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://geekraver.spaces.live.com/blog/cns!3690236EA2D48605!181.entry"&gt;we have put back the ability to enter addresses in the search
-    box&lt;/a&gt;.
+&lt;li&gt;we have put back the ability to enter addresses in the search box.
     We have a better geocoder now on the back end and are more confident
     that you will get the results you want when doing this.&lt;/li&gt;
 &lt;/ul&gt;

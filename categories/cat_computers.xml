@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Computers)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/cat_computers.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 15 Apr 2018 17:13:36 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Fixing Grub after installing Windows 7</title><link>https://www.grahamwheeler.com/posts/fixing-grub-after-installing-windows-7.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;I have an MSI Wind on which I run both Windows 7 and Ubuntu. I rarely
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Computers)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/cat_computers.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 30 Apr 2018 00:13:21 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Fixing Grub after installing Windows 7</title><link>https://www.grahamwheeler.com/posts/fixing-grub-after-installing-windows-7.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div&gt;&lt;p&gt;I have an MSI Wind on which I run both Windows 7 and Ubuntu. I rarely
 use the latter but I like to keep it around and with a 320GB hard drive
 its affordable. I have used both the Windows BCD loader and GRUB as my
 bootloader at various times (and for those using BCD I highly recommend
@@ -38,7 +38,7 @@ consists of:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;an SBS2003 server mostly for Exchange mail, which also runs FreeBSD
     in a virtual machine to keep some older services running on Apache
-    (primarily the redirector from geekraver.com to Live Spaces and my
+    (primarily the redirector from my domain to Live Spaces and my
     subversion repository).&lt;/li&gt;
 &lt;li&gt;a Windows Home Server, which has taken over the file server
     functionality from SBS2003, as I like its more flexible file
