@@ -128,8 +128,8 @@ We are going to focus on practical ML, and will not be going much into the inter
 you choose to use. The performance of the different types of ML model techniques is often similar. It's commonly
 said in ML circles that 80% of time is spent on getting data cleaned up and doing <em>feature engineering</em> and only 20%
 is spent on modeling. For example, until around 2014 when deep learning started taking off, most ML models at Google 
-were trained using the same system (Sibyl), a form of boosted logistic regression that could be run on large data sets 
-with map-reduce. <a href="https://users.soe.ucsc.edu/~niejiazhong/slides/chandra.pdf">https://users.soe.ucsc.edu/~niejiazhong/slides/chandra.pdf</a>. Deep learning has an advantage that it can
+were trained using the same system (<a href="https://users.soe.ucsc.edu/~niejiazhong/slides/chandra.pdf">Sibyl</a>), a form of boosted logistic regression that could be run on large data sets 
+with map-reduce. Deep learning has an advantage that it can
 <em>learn</em> features that would otherwise need to be engineered by hand, and can thus automate some of the manual work
 typically done by an ML engineer, but in order to do that, as mentioned above, it generally needs a massive dataset and
 often days or weeks of compute time.</p>
@@ -457,7 +457,7 @@ dtype: int64
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Sepal length and sepal width are approximately Gaussian; petal length and petal width not so much; in fact, these are <em>bimodal</em> (see <a href="https://en.wikipedia.org/wiki/Multimodal_distribution">https://en.wikipedia.org/wiki/Multimodal_distribution</a>).</p>
-<p>If the distributions are not Gaussian, we may want to normalize them, which we can do with a Box Cox transformation. That is beyond the scope of this notebook; Google it if you need it. For this particular case of bimodal distributions, we would instead favor Gaussian mixture models (<a href="http://scikit-learn.org/stable/modules/mixture.html">http://scikit-learn.org/stable/modules/mixture.html</a>). For now we will ignore these complexities. We will discuss some options for cleaning the dataset by rescaling features later.</p>
+<p>If the distributions are not Gaussian, we may want to normalize them, which we can do with a Box Cox transformation. That is beyond the scope of this notebook; Google it if you need it. For this particular case of bimodal distributions, we would instead favor <a href="http://scikit-learn.org/stable/modules/mixture.html">Gaussian mixture models</a>. For now we will ignore these complexities. We will discuss some options for cleaning the dataset by rescaling features later.</p>
 <p>We're not going to remove any observations here, but its worth discussing ways in which we can detect and remove outliers. There's no one solution but there are several techniques that can be used, such as:</p>
 <ul>
 <li>looking at the distribution of values for a feature, and removing the top and bottom percentiles</li>
@@ -1332,7 +1332,7 @@ avg / total       0.97      0.97      0.97        30
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Area-under-ROC-Curve">Area under ROC Curve<a class="anchor-link" href="basic-machine-learning.html#Area-under-ROC-Curve">¶</a>
 </h5>
-<p>Area under ROC Curve (or AUC) represents a binary classifier’s ability to discriminate between positive and negative classes. Many binary classifiers output probabilities rather than 0/1, and it may be that the optimal split is not at 0.5; in fact it usually isn't. In this case we would want to know what probability value to pick as a threshold to distinguish between 0/1 with maximum accuracy. There is a trade-off - as we move the threshold we may get more true positives but we're also going to get more false positives. The AUC shows this trade-off this accuracy for different thresholds. We're not going to go into the details here; if you're interested there is good explanation at <a href="http://fastml.com/what-you-wanted-to-know-about-auc/">http://fastml.com/what-you-wanted-to-know-about-auc/</a> and a deep discussion at <a href="http://mlwiki.org/index.php/ROC_Analysis">http://mlwiki.org/index.php/ROC_Analysis</a></p>
+<p>Area under ROC Curve (or AUC) represents a binary classifier’s ability to discriminate between positive and negative classes. Many binary classifiers output probabilities rather than 0/1, and it may be that the optimal split is not at 0.5; in fact it usually isn't. In this case we would want to know what probability value to pick as a threshold to distinguish between 0/1 with maximum accuracy. There is a trade-off - as we move the threshold we may get more true positives but we're also going to get more false positives. The AUC shows this trade-off this accuracy for different thresholds. We're not going to go into the details here; if you're interested see this <a href="http://fastml.com/what-you-wanted-to-know-about-auc/">explanation</a> and this <a href="http://mlwiki.org/index.php/ROC_Analysis">deep discussion</a>.</p>
 <h4 id="Regression-Metrics">Regression Metrics<a class="anchor-link" href="basic-machine-learning.html#Regression-Metrics">¶</a>
 </h4>
 <h5 id="Mean-Absolute-Error">Mean Absolute Error<a class="anchor-link" href="basic-machine-learning.html#Mean-Absolute-Error">¶</a>
@@ -1347,7 +1347,7 @@ avg / total       0.97      0.97      0.97        30
 <p>To reduce the size of the value we can take the square root at the end; this gives us the Root Mean Squared Error or RMSE.</p>
 <h5 id="$R^2$">$R^2$<a class="anchor-link" href="basic-machine-learning.html#%24R%5E2%24">¶</a>
 </h5>
-<p>$r^2$ is also known as the coefficient of determination and is 0 for no fit and 1 for a perfect fit. It is the proportion of the variation in the dependent variable that is predictable from the independent variable(s). See <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">https://en.wikipedia.org/wiki/Coefficient_of_determination</a> for more details.</p>
+<p>$r^2$ is also known as the <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">coefficient of determination</a> and is 0 for no fit and 1 for a perfect fit. It is the proportion of the variation in the dependent variable that is predictable from the independent variable(s).</p>
 
 </div>
 </div>
@@ -1456,7 +1456,7 @@ avg / total       0.97      0.97      0.97        30
 <p>Note that the curve converges to some score as the amount of data increases.</p>
 <h4 id="Grid-Search">Grid Search<a class="anchor-link" href="basic-machine-learning.html#Grid-Search">¶</a>
 </h4>
-<p>Drawing plots of validation and learning curves can be useful except that in many cases models have multiple knobs (hyperparameters) to adjust; this makes using such visual aids more difficult. Instead, we can just train multiple versions of the model and have SciKit-Learn do the work, using a <em>grid search</em>.</p>
+<p>Drawing plots of validation and learning curves can be useful except that in many cases models have multiple knobs (hyperparameters) to adjust; this makes using such visual aids more difficult. Instead, we can just train multiple versions of the model and have SciKit-Learn do the work, using a <em><a href="http://scikit-learn.org/stable/modules/grid_search.html">grid search</a></em>.</p>
 <p>To do this, we need to create a dictionary, where the keys are the different model constructor arguments, and the values are lists of values that we want to try. Then we can have SciKit-Learn find the best values for the parameters with cross-validation using <code>GridSearchCV</code>:</p>
 
 <pre><code>from sklearn.grid_search import GridSearchCV
@@ -1469,7 +1469,6 @@ final_model = grid.best_estimator_
 
 </code></pre>
 <p>It's also possible to use a list of dictionaries. SciKit-Learn will do an exhaustive search of the entire parameter space by default. <code>RandomizedSearchCV</code> can be used for a randomized search instead.</p>
-<p>You can read more here: <a href="http://scikit-learn.org/stable/modules/grid_search.html">http://scikit-learn.org/stable/modules/grid_search.html</a></p>
 
 </div>
 </div>
@@ -1641,7 +1640,7 @@ binaryX = binarizer.transform(X)
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Handling-Text">Handling Text<a class="anchor-link" href="basic-machine-learning.html#Handling-Text">¶</a>
 </h4>
-<p>For text, there are a few different options. Most commonly we will split the text up into a sequence of words. In many cases we will remove <em>stop words</em> (common words like 'and' and 'the'), and may perform operations such as 'stemming', 'named entity recognition', 'parts of speech tagging', etc. We're not going to go into these here; see the SpaCy NLP library for examples (<a href="https://spacy.io/">https://spacy.io/</a>).</p>
+<p>For text, there are a few different options. Most commonly we will split the text up into a sequence of words. In many cases we will remove <em>stop words</em> (common words like 'and' and 'the'), and may perform operations such as 'stemming', 'named entity recognition', 'parts of speech tagging', etc. We're not going to go into these here; see the <a href="https://spacy.io/">SpaCy NLP library</a> for examples.</p>
 <p>We can use a similar approach to the categorical data, and turn each unique word into a new column. We can encode with 0/1 like one-hot, or use word counts. Let's look at the latter. In this case <code>fit_transform</code> returns a sparse array so we turn it back into a DataFrame:</p>
 
 </div>
@@ -2364,7 +2363,7 @@ Feature Ranking: [2 1 1 1]
 <span class="n">yfit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">trainy</span><span class="p">)</span>
 </pre></div>
 <p>Pipelines can help avoid a common mistake of leaking information from the test data set into the training data set. E.g. if we scale all data to be in range [0..1] but include the test data when determining the scale factors, this could be problematic. By doing the scaling in a pipeline along with model fitting this is less likely to occur.</p>
-<p>A more advanced feature of pipelines is the FeatureUnion. This is beyond the scope of this notebook but worth knowing about. See <a href="http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.FeatureUnion.html">http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.FeatureUnion.html</a>.</p>
+<p>A more advanced feature of pipelines is the <a href="http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.FeatureUnion.html">FeatureUnion</a>. This is beyond the scope of this notebook but worth learning about later.</p>
 <p>Using a regression model with polynomial synthetic features is a useful and common enough approach that we can define a utility function for this; we will use this later:</p>
 
 </div>
@@ -2638,7 +2637,7 @@ followed by the class (malignant or benign).</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's apply a polynomial regression model and see how the model validation changes as we use different degrees of polynomials:</p>
+<p>Let's apply a polynomial regression model and see how the model validation changes as we use different degrees of polynomials. We'll use the utility function we defined earlier:</p>
 
 </div>
 </div>
@@ -2789,13 +2788,12 @@ followed by the class (malignant or benign).</p>
 <p>This is really out of scope for this notebook, but if you are interested in learning more, the seminal work is <a href="https://homes.cs.washington.edu/~marcotcr/blog/lime/">LIME</a>, and other popular approaches are <a href="https://github.com/slundberg/shap">SHAP</a> and <a href="https://www.datascience.com/resources/tools/skater">Skater</a>.</p>
 <h3 id="Taking-It-Further">Taking It Further<a class="anchor-link" href="basic-machine-learning.html#Taking-It-Further">¶</a>
 </h3>
-<p><em>Data leakage</em> is something to look out for. A good explanation can be found here: <a href="https://medium.com/@colin.fraser/the-treachery-of-leakage-56a2d7c4e931">https://medium.com/@colin.fraser/the-treachery-of-leakage-56a2d7c4e931</a></p>
-<p>High-dimensional data introduces some interesting effects that you should be aware of: <a href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">https://en.wikipedia.org/wiki/Curse_of_dimensionality</a></p>
+<p><em><a href="https://medium.com/@colin.fraser/the-treachery-of-leakage-56a2d7c4e931">Data leakage</a></em> is something to look out for, and <a href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">high-dimensional data</a>  introduces some interesting effects that you should be aware of.</p>
 <p>A good practical online course can be found here: <a href="https://www.coursera.org/specializations/data-science-python">https://www.coursera.org/specializations/data-science-python</a> while <a href="https://www.coursera.org/specializations/machine-learning">https://www.coursera.org/specializations/machine-learning</a> covers more theory but in a gentle way.</p>
 <p>If you want to learn about deep learning, I recommend the courses at <a href="http://www.fast.ai/">http://www.fast.ai/</a> and <a href="https://www.deeplearning.ai/">https://www.deeplearning.ai/</a></p>
 <p>There are a number of machine learning newsletters if you want to keep up with new developments, but the best is probably this one: <a href="https://www.getrevue.co/profile/wildml">https://www.getrevue.co/profile/wildml</a></p>
-<p>Google's Martin Zinkevich maintains a document with a lot of good hard-won advice: <a href="http://martin.zinkevich.org/rules_of_ml/rules_of_ml.pdf">http://martin.zinkevich.org/rules_of_ml/rules_of_ml.pdf</a></p>
-<p>Pedro Domingos of University of Washington wrote a great article with some similar lessons in CACM: <a href="https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf">https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf</a>; there is a good restatement of the content here: <a href="https://medium.com/@james_aka_yale/12-useful-things-to-know-about-machine-learning-c599be92c98d">https://medium.com/@james_aka_yale/12-useful-things-to-know-about-machine-learning-c599be92c98d</a></p>
+<p>Google's Martin Zinkevich maintains a document with a <a href="http://martin.zinkevich.org/rules_of_ml/rules_of_ml.pdf">lot of good hard-won advice</a>.</p>
+<p>Pedro Domingos of University of Washington wrote a <a href="https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf">great article</a> with some similar lessons in CACM: ; there is a good restatement of the content here: <a href="https://medium.com/@james_aka_yale/12-useful-things-to-know-about-machine-learning-c599be92c98d">https://medium.com/@james_aka_yale/12-useful-things-to-know-about-machine-learning-c599be92c98d</a></p>
 
 </div>
 </div>
@@ -2805,7 +2803,7 @@ followed by the class (malignant or benign).</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Below are some good books I recommend. I have avoided books that use R instead of Python as I have not covered it, with one exception - "Applied Predictive Modeling" has a lot of good real-world advice and so is worth considering. I've also included Chollet's book on deep learning even though I didn't cover it, as it is an excellent book once y9ou are ready to learn more about that. These are affiliate links and I may earn a small commission:</p>
+<p>Below are some good books I recommend. I have avoided books that use R instead of Python as I have not covered R, with one exception - "Applied Predictive Modeling" has a lot of good real-world advice and so is worth considering. I've also included Chollet's book on deep learning even though I didn't cover it, as it is an excellent book once y9ou are ready to learn more about that. These are affiliate links and I may earn a small commission:</p>
 <div>
 
 <a target="_blank" style="float:left;margin:50px" href="https://www.amazon.com/gp/product/1787125939/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1787125939&amp;linkCode=as2&amp;tag=grahamwheel0b-20&amp;linkId=0c6a367b042f6d53f853d3267f08a789"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=US&amp;ASIN=1787125939&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=grahamwheel0b-20"></a><img src="//ir-na.amazon-adsystem.com/e/ir?t=grahamwheel0b-20&amp;l=am2&amp;o=1&amp;a=1787125939" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;"><a target="_blank" style="float:left;margin:50px" href="https://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_il?ie=UTF8&amp;tag=grahamwheel0b-20&amp;keywords=1491962291&amp;index=aps&amp;camp=1789&amp;creative=9325&amp;linkCode=ur2&amp;linkId=f775c1e6a1ef90d5652762a61ef31083"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=US&amp;ASIN=1491962291&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=grahamwheel0b-20"></a><img src="//ir-na.amazon-adsystem.com/e/ir?t=grahamwheel0b-20&amp;l=ur2&amp;o=1&amp;camp=1789" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;">
