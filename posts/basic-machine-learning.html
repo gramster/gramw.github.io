@@ -1429,7 +1429,7 @@ avg / total       0.97      0.97      0.97        30
 <li>add more features (we'll talk about this later)</li>
 </ul>
 <p>If we increased the complexity of our model, it would do better and better at fitting the training data, but at some point would start getting worse and worse at fitting the validation data. This is the <em>bias-variance trade-off</em>; you can see it in the plot below where the vertical dashes line is the sweet spot we want to find.</p>
-<p><img src="images/bias-variance.png" alt="Bias-Variance Trade-Off"></p>
+<p><img src="../images/bias-variance.png" alt="Bias-Variance Trade-Off"></p>
 
 </div>
 </div>
@@ -1443,7 +1443,7 @@ avg / total       0.97      0.97      0.97        30
 </h4>
 <p>The first two options we have, around model complexity, assume that the data is a fixed size. The third option is to add more data. As we add more data the optimal model will change. Assuming we capture the complexity of the data we are modeling, at some point we should have diminishing returns where adding more data doesn't significantly improve the model. This means that if we have a lot of data, it can be useful to measure how well the model is doing as we are training it, so we can stop when we reach the point where the further improvements are negligible. If we plot the training and validation scores as a function of the size of the data set we get the <em>learning curve</em>.</p>
 <p>We would expect that a model will overfit a small dataset and underfit a large dataset, where 'small' and 'large' are dependent on the complexity of the model. We would also expect in almost every case that the training score is better than the validation score(or equivalently the training error is lower than the validation error). So a typical learning curve will look like:</p>
-<p><img src="images/learning-curve.png" alt="Learning Curve"></p>
+<p><img src="../images/learning-curve.png" alt="Learning Curve"></p>
 
 </div>
 </div>
