@@ -90,6 +90,14 @@
 <li><em><a href="https://www.grahamwheeler.com/posts/exploratory-data-analysis-with-numpy-and-pandas.html">exploratory data analysis</a>.</em></li>
 <li><em><a href="https://www.grahamwheeler.com/posts/basic-machine-learning.html">introductory machine learning</a>.</em></li>
 </ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Introduction">Introduction<a class="anchor-link" href="python-crash-course.html#Introduction">¶</a>
 </h3>
 <h4 id="Python's-Origins">Python's Origins<a class="anchor-link" href="python-crash-course.html#Python's-Origins">¶</a>
@@ -357,7 +365,16 @@
 <p>The standard way to install packages is with <code>pip install</code>. However, if you have installed <code>conda</code> you should use <code>conda install</code> first and only if that fails use <code>pip install</code>. Conda has a smaller set of packages which is why it doesn't always succeed, but the ones it does have have been built for Conda so installing that way is preferred.</p>
 <p>Use <code>conda uninstall</code> or <code>pip uninstall</code> to remove packages.</p>
 <p>To see what packages are installed use <code>pip freeze</code>.</p>
-<p>There's a lot more to package installation than this but this is enough for 90%+ of what you will do.</p>
+<p>When installing packages with pip or conda you can specify the version number; e.g.:</p>
+
+<pre><code>conda install ipython=6.3.1
+
+</code></pre>
+<p>There may be times when you want to install a particular version of a package for one application, and a different version for some other application. To handle this, you would create <em>virtual environments</em> - pseudo-installations of Python and the supporting packages that use links instead of physical files, that point to appropriate versions. We won't do that here, but it is worth knowing about, and it is a recommended best practice when starting a new application. You can also use this to create a Python 2 environment after installing Python 3, and vice-versa.</p>
+<p>For Conda: <a href="https://conda.io/docs/using/envs.html">https://conda.io/docs/using/envs.html</a></p>
+<p>For pip: <a href="https://packaging.python.org/guides/installing-using-pip-and-virtualenv/">https://packaging.python.org/guides/installing-using-pip-and-virtualenv/</a></p>
+<p>If you are not in a Conda environment, the recommended practice now is to use the virtual environment manager <code>pipenv</code>: <a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/">http://docs.python-guide.org/en/latest/dev/virtualenvs/</a>. <code>pipenv</code> did not play nice with Conda until recently but it appears that may be fixed now; you can read more at <a href="https://docs.pipenv.org/advanced/#pipenv-and-other-python-distributions">https://docs.pipenv.org/advanced/#pipenv-and-other-python-distributions</a>.</p>
+<p>There's a lot more to package management than this but this is enough for most of what you will do.</p>
 
 </div>
 </div>
@@ -651,7 +668,7 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="import">import<a class="anchor-link" href="python-crash-course.html#import">¶</a>
 </h4>
-<p>Python code is packaged in the form of <em>packages</em> consisting of one of more <em>modules</em>. A module is a single Python file, while a package is a directory of Python modules containing an additional <code>__init__.py</code> file, to distinguish a package from a directory that just happens to contain a bunch of Python scripts.</p>
+<p>Python code is packaged in the form of <em>packages</em> consisting of one of more <em>modules</em>. A module is a single Python file, while a package is a directory of Python modules containing an additional <code>__init__.py</code> file, to distinguish a package from a directory that just happens to contain a bunch of Python scripts. The <code>__init__.py</code> file can be empty, but often contains code which is executed upon the initial import of a module in the package.</p>
 <p>You install a package with <code>pip</code> or <code>conda</code>. Once installed, to use the package you must import it. You can also import modules although this is less common.</p>
 <p>There are several common ways of importing. Let's say we want to import a package <code>foo</code> that defines a class <code>Widget</code>:</p>
 <ul>
@@ -667,6 +684,111 @@
 <li>
 <code>from foo import *</code> will import every item in <code>foo</code> into the current namespace; this is bad practice, don't do it.</li>
 </ul>
+<p>When resolving an import, the Python interpreter will look for it in (in-order):</p>
+<ul>
+<li>the directory from which the main script was run</li>
+<li>the list of directories specified by the <code>PYTHONPATH</code> environment variable, if any</li>
+<li>the directories used for packages including in the Python installation</li>
+</ul>
+<p>You can see the full set of directories that will be searched by looking at the <code>sys.path</code> variable:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[1]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>['',
+ '/Users/gram/anaconda/lib/python36.zip',
+ '/Users/gram/anaconda/lib/python3.6',
+ '/Users/gram/anaconda/lib/python3.6/lib-dynload',
+ '/Users/gram/.local/lib/python3.6/site-packages',
+ '/Users/gram/anaconda/lib/python3.6/site-packages',
+ '/Users/gram/anaconda/lib/python3.6/site-packages/aeosa',
+ '/Users/gram/anaconda/lib/python3.6/site-packages/IPython/extensions',
+ '/Users/gram/.ipython']</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If the module being imported cannot be found, an <code>ImportError</code> exception will be raised. This gives a safe way to do importing of optional modules:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">nonexistent</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Please install the nonexistent module!'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Please install the nonexistent module!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Imports don't have to happen at the top level; they can be done within the bodies of functions. This enables lazy/just-in-time importing and can help speed up initial load time of scripts.</p>
+
 </div>
 </div>
 </div>
@@ -3017,6 +3139,19 @@ bone
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise">Exercise<a class="anchor-link" href="python-crash-course.html#Exercise">¶</a>
+</h4>
+<p>Earlier we defined a function <code>add</code> that takes two parameters and applies the + operator to them, which in turn calls the <code>__add__</code> dunder-method on the first argument, passing the second argument as a parameter.</p>
+<p>Try some experiments with calling add on different types and mixtures of arguments so you get some idea of what types have and <code>__add__</code> dunder method and what types of arguments each can sensibly handle.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Some-built-in-Functions">Some built-in Functions<a class="anchor-link" href="python-crash-course.html#Some-built-in-Functions">¶</a>
 </h3>
 <p>See <a href="https://docs.python.org/3.6/library/functions.html">https://docs.python.org/3.6/library/functions.html</a> for a full list and more details.</p>
@@ -3773,6 +3908,18 @@ Format strings have an <code>f</code> prefix and include code in <code>{}</code>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise">Exercise<a class="anchor-link" href="python-crash-course.html#Exercise">¶</a>
+</h4>
+<p>Define a function that takes an argument, and sees if the results of calling <code>__repr__</code> vs <code>__str__</code> are the same; if not, the function should print a message showing the difference. Experiment with calling this function with a few different types of arguments.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Sorting">Sorting<a class="anchor-link" href="python-crash-course.html#Sorting">¶</a>
 </h3>
 <p>We've already seen the <code>sorted</code> function, that can create a sorted list from any iterable:</p>
@@ -3915,6 +4062,18 @@ Format strings have an <code>f</code> prefix and include code in <code>{}</code>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can read more about sorting here, including how to sort composite objects like dictionaries, tuples and nested lists, and by multiple keys: <a href="https://docs.python.org/3/howto/sorting.html">https://docs.python.org/3/howto/sorting.html</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exercise">Exercise<a class="anchor-link" href="python-crash-course.html#Exercise">¶</a>
+</h4>
+<p>Define a function that takes a single argument, and returns <code>True</code> if the argument is already sorted. Stretch: if not sorted, print out the first mismatch. Note: if you are struggling skip this exercise for now and return to it later after we have covered things like Python statements and exceptions.</p>
 
 </div>
 </div>
@@ -5046,7 +5205,7 @@ a=2, b=1
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Arguments with no defaults are "positional" arguments and must be specified in order <em>except</em> if they are named explicitly when calling the function:</p>
+<p>Arguments with no defaults are <em>positional arguments</em> and must be specified in order <em>except</em> if they are named explicitly when calling the function:</p>
 
 </div>
 </div>
@@ -5075,6 +5234,395 @@ a=2, b=1
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>a=1, b=2
 3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When arguments are named as in the above example they are called <em>keyword arguments</em>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can use <code>*args</code> for a variable number of non-keyword arguments, which will be available internally as a list:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [116]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="n">z</span> <span class="o">*=</span> <span class="n">num</span>
+    <span class="k">return</span> <span class="n">z</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">multiply</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>24
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [117]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'Argument </span><span class="si">{i}</span><span class="s1"> is </span><span class="si">{args[i]}</span><span class="s1">'</span><span class="p">)</span>
+
+        
+<span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'cat'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Argument 0 is 1
+Argument 1 is 2
+Argument 2 is cat
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When capturing positional arguments like this, all following arguments <em>must</em> be keyword arguments:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    
+<span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1, 2, 3, 4]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-8-e7dbf56a0506&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> 
+<span class="ansi-green-intense-fg ansi-bold">      6</span> foo<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">,</span> a<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">,</span> b<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 7</span><span class="ansi-red-fg"> </span>foo<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">,</span> b<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">TypeError</span>: foo() missing 1 required keyword-only argument: 'a'</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In Python 3, you can require keyword-only arguments without having to capture positional arguments by using <code>*</code> on its own:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">pos1</span><span class="p">,</span> <span class="n">pos2</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key1</span><span class="p">,</span> <span class="n">key2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">([</span><span class="n">pos1</span><span class="p">,</span> <span class="n">pos2</span><span class="p">,</span> <span class="n">key1</span><span class="p">,</span> <span class="n">key2</span><span class="p">])</span>
+    
+<span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">key1</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">key2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">key2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1, 2, 3, 4]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-11-3fa2d715c035&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> 
+<span class="ansi-green-intense-fg ansi-bold">      4</span> foo<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">,</span> key1<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">,</span> key2<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span>foo<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">,</span> key2<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">TypeError</span>: foo() takes 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Of course, you don't have to have any positional arguments above if you want just keyword arguments.</p>
+<p>For capturing multiple keyword arguments, you can use <code>**kwargs</code>, which will be available internally as a dictionary:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [118]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'Positional argument </span><span class="si">{i}</span><span class="s1"> is </span><span class="si">{args[i]}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'Keyword argument </span><span class="si">{k}</span><span class="s1"> is </span><span class="si">{v}</span><span class="s1">'</span><span class="p">)</span>
+        
+<span class="n">foo</span><span class="p">(</span><span class="s1">'cat'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">clothing</span><span class="o">=</span><span class="s1">'hat'</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">'mat'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Positional argument 0 is cat
+Positional argument 1 is 1
+Keyword argument clothing is hat
+Keyword argument location is mat
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can mix all types of arguments but the order is important:</p>
+<ul>
+<li>Formal positional arguments</li>
+<li><code>*args</code></li>
+<li>Keyword arguments</li>
+<li><code>**kwargs</code></li>
+</ul>
+<p>You can do the opposite as well - pass a list instead of several positional arguments, and a dictionary instead of several keyword arguments, by using <code>*</code> and <code>**</code>:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [119]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">pos1</span><span class="p">,</span> <span class="n">pos2</span><span class="p">,</span> <span class="n">named1</span><span class="o">=</span><span class="s1">'a'</span><span class="p">,</span> <span class="n">named2</span><span class="o">=</span><span class="s1">'b'</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"Positional 1 is </span><span class="si">{pos1}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"Positional 2 is </span><span class="si">{pos2}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"Named1 is </span><span class="si">{named1}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"Named1 is </span><span class="si">{named2}</span><span class="s2">"</span><span class="p">)</span>    
+    
+<span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'named1'</span><span class="p">:</span> <span class="s1">'cat'</span><span class="p">,</span> <span class="s1">'named2'</span><span class="p">:</span> <span class="s1">'hat'</span><span class="p">}</span>
+<span class="n">foo</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Positional 1 is 1
+Positional 2 is 2
+Named1 is cat
+Named1 is hat
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The above is actually a common pattern in Python when writing wrapper functions that need to support arbitrary arguments that they are just going to pass on to some other function. For example, say we wanted to write a wrapper that timed the execution of a function:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [120]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+
+
+<span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'a=</span><span class="si">{a}</span><span class="s1">, b=</span><span class="si">{b}</span><span class="s1">, c=</span><span class="si">{c}</span><span class="s1">'</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">log_time</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"</span><span class="si">{fn}</span><span class="s2"> took {(end-start).microseconds} microseconds"</span><span class="p">)</span>
+    
+<span class="n">log_time</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">'hello'</span><span class="p">)</span>
+    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>a=1, b=None, c=hello
+&lt;function foo at 0x10ff6dae8&gt; took 58 microseconds
 </pre>
 </div>
 </div>
@@ -5432,256 +5980,6 @@ add(a, b)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>You can use <code>*args</code> for a variable number of non-keyword arguments, which will be available internally as a list:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [116]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-        <span class="n">z</span> <span class="o">*=</span> <span class="n">num</span>
-    <span class="k">return</span> <span class="n">z</span>
-    
-<span class="nb">print</span><span class="p">(</span><span class="n">multiply</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>24
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [117]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'Argument </span><span class="si">{i}</span><span class="s1"> is </span><span class="si">{args[i]}</span><span class="s1">'</span><span class="p">)</span>
-
-        
-<span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'cat'</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Argument 0 is 1
-Argument 1 is 2
-Argument 2 is cat
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>For keyword arguments, you can use <code>**kwargs</code>, which will be available internally as a dictionary:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [118]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'Positional argument </span><span class="si">{i}</span><span class="s1"> is </span><span class="si">{args[i]}</span><span class="s1">'</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'Keyword argument </span><span class="si">{k}</span><span class="s1"> is </span><span class="si">{v}</span><span class="s1">'</span><span class="p">)</span>
-        
-<span class="n">foo</span><span class="p">(</span><span class="s1">'cat'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">clothing</span><span class="o">=</span><span class="s1">'hat'</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">'mat'</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Positional argument 0 is cat
-Positional argument 1 is 1
-Keyword argument clothing is hat
-Keyword argument location is mat
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>You can mix all types of arguments but the order is important:</p>
-<ul>
-<li>Formal positional arguments</li>
-<li><code>*args</code></li>
-<li>Keyword arguments</li>
-<li><code>**kwargs</code></li>
-</ul>
-<p>You can do the opposite as well - pass a list instead of several positional arguments, and a dictionary instead of several keyword arguments, by using <code>*</code> and <code>**</code>:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [119]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">pos1</span><span class="p">,</span> <span class="n">pos2</span><span class="p">,</span> <span class="n">named1</span><span class="o">=</span><span class="s1">'a'</span><span class="p">,</span> <span class="n">named2</span><span class="o">=</span><span class="s1">'b'</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"Positional 1 is </span><span class="si">{pos1}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"Positional 2 is </span><span class="si">{pos2}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"Named1 is </span><span class="si">{named1}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"Named1 is </span><span class="si">{named2}</span><span class="s2">"</span><span class="p">)</span>    
-    
-<span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="n">n</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'named1'</span><span class="p">:</span> <span class="s1">'cat'</span><span class="p">,</span> <span class="s1">'named2'</span><span class="p">:</span> <span class="s1">'hat'</span><span class="p">}</span>
-<span class="n">foo</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">n</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Positional 1 is 1
-Positional 2 is 2
-Named1 is cat
-Named1 is hat
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The above is actually a common pattern in Python when writing wrapper functions that need to support arbitrary arguments that they are just going to pass on to some other function. For example, say we wanted to write a wrapper that timed the execution of a function:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [120]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
-
-
-<span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'a=</span><span class="si">{a}</span><span class="s1">, b=</span><span class="si">{b}</span><span class="s1">, c=</span><span class="si">{c}</span><span class="s1">'</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">log_time</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-    <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="n">end</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"</span><span class="si">{fn}</span><span class="s2"> took {(end-start).microseconds} microseconds"</span><span class="p">)</span>
-    
-<span class="n">log_time</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">'hello'</span><span class="p">)</span>
-    
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>a=1, b=None, c=hello
-&lt;function foo at 0x10ff6dae8&gt; took 58 microseconds
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <p>Note that <code>def</code> statements are executed at their level of indentation, and they create function objects that can be called later, including evaluating the default argument values. This means you should be careful when specifying default values for arguments; stick to scalar variables. In particular avoid using things like empty lists! Look at how this can go wrong:</p>
 
 </div>
@@ -5824,8 +6122,193 @@ Named1 is hat
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Comprehensions">Comprehensions<a class="anchor-link" href="python-crash-course.html#Comprehensions">¶</a>
+</h3>
+<p>Comprehensions are a powerful feature in Python, allowing lists, dictionaries and tuples to be constructed from iterative computations with minimal code. These are best illustrated by examples:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [144]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A list of all squares from 1 to 25</span>
+<span class="p">[</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[144]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[1, 4, 9, 16, 25]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [145]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A list of all squares from 1 to 1024 except those divisble by 5</span>
+<span class="p">[</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[145]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[1,
+ 4,
+ 9,
+ 16,
+ 36,
+ 49,
+ 64,
+ 81,
+ 121,
+ 144,
+ 169,
+ 196,
+ 256,
+ 289,
+ 324,
+ 361,
+ 441,
+ 484,
+ 529,
+ 576,
+ 676,
+ 729,
+ 784,
+ 841,
+ 961,
+ 1024]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [146]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Comprehensions can be nested</span>
+<span class="n">t</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'3'</span><span class="p">,</span> <span class="s1">'4'</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="c1"># Make a list of lists from t where we convert the strings to floats</span>
+<span class="p">[[</span><span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[146]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[[1.0, 2.0], [3.0, 4.0]]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [147]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Dictionary comprehension</span>
+<span class="p">{</span> <span class="n">f</span><span class="s1">'Square of </span><span class="si">{x}</span><span class="s1">'</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[147]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'Square of 1': 1,
+ 'Square of 2': 4,
+ 'Square of 3': 9,
+ 'Square of 4': 16,
+ 'Square of 5': 25}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Classes">Classes<a class="anchor-link" href="python-crash-course.html#Classes">¶</a>
 </h3>
+<p>We'll now turn to defining your own Python classes. If you are in a hurry to move to the next post in this series, you can skip this now and come back to it later.</p>
+
 </div>
 </div>
 </div>
@@ -6809,189 +7292,6 @@ None
 
 <span class="ansi-red-fg">TypeError</span>: unsupported operand type(s) for +: 'int' and 'str'</pre>
 </div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Comprehensions">Comprehensions<a class="anchor-link" href="python-crash-course.html#Comprehensions">¶</a>
-</h3>
-<p>Comprehensions are a powerful feature in Python, allowing lists, dictionaries and tuples to be constructed from iterative computations with minimal code. These are best illustrated by examples:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [144]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A list of all squares from 1 to 25</span>
-<span class="p">[</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[144]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[1, 4, 9, 16, 25]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [145]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A list of all squares from 1 to 1024 except those divisble by 5</span>
-<span class="p">[</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[145]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[1,
- 4,
- 9,
- 16,
- 36,
- 49,
- 64,
- 81,
- 121,
- 144,
- 169,
- 196,
- 256,
- 289,
- 324,
- 361,
- 441,
- 484,
- 529,
- 576,
- 676,
- 729,
- 784,
- 841,
- 961,
- 1024]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [146]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Comprehensions can be nested</span>
-<span class="n">t</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">],</span>
-    <span class="p">[</span><span class="s1">'3'</span><span class="p">,</span> <span class="s1">'4'</span><span class="p">]</span>
-<span class="p">]</span>
-
-<span class="c1"># Make a list of lists from t where we convert the strings to floats</span>
-<span class="p">[[</span><span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[146]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[[1.0, 2.0], [3.0, 4.0]]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [147]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Dictionary comprehension</span>
-<span class="p">{</span> <span class="n">f</span><span class="s1">'Square of </span><span class="si">{x}</span><span class="s1">'</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[147]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>{'Square of 1': 1,
- 'Square of 2': 4,
- 'Square of 3': 9,
- 'Square of 4': 16,
- 'Square of 5': 25}</pre>
-</div>
-
 </div>
 
 </div>
