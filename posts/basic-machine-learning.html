@@ -365,7 +365,7 @@ often days or weeks of compute time.</p>
 <li>are there features which seem correlated but our intuition or domain knowledge tells us should not be? In this case we may be missing features that are important to the model (these are called <em>confounding variables</em>). For example, we may see a correlation between daily ice cream consumption and drive-by shooting rates. We shouldn't expect this. It may be that the confounding variable is weather - in hotter weather people are more likely to be outside, resulting in an increase in both ice cream consumption and drive-by shootings.</li>
 <li>looking at the diagonal, are the distributions Gaussian (normal)? Some modeling techniques (e.g. Gaussian naive Bayes, logistic regression, and Linear Discriminant Analysis (LDA)) depend on the features having such a distribution.</li>
 </ul>
-<p>For classification, we want a dataset that is balanced in the number of observations of each category. We can check this with:</p>
+<p>For classification, we ideally want a dataset that is balanced in the number of observations of each category. We can check this with:</p>
 
 </div>
 </div>
@@ -410,7 +410,7 @@ dtype: int64
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If the dataset is not balanced we can resample it, over-sampling from items from less common classes (if we don't have a lot of data) or undersampling from items with more common classes (if we have plenty of data).</p>
+<p>If the dataset is not balanced we can resample it, over-sampling from items from less common classes (if we don't have a lot of data) or undersampling from items with more common classes (if we have plenty of data). For more strategies to deal with this see <a href="https://machinelearningmastery.com/tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset/">here</a>.</p>
 <p>Aside from the frequency histograms on the diagonal of the scatter plot, another way of looking at the distributions is with density plots:</p>
 
 </div>
@@ -457,7 +457,7 @@ dtype: int64
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Sepal length and sepal width are approximately Gaussian; petal length and petal width not so much; in fact, these are <em>bimodal</em> (see <a href="https://en.wikipedia.org/wiki/Multimodal_distribution">https://en.wikipedia.org/wiki/Multimodal_distribution</a>).</p>
-<p>If the distributions are not Gaussian, we may want to normalize them, which we can do with a Box Cox transformation. That is beyond the scope of this notebook; Google it if you need it. For this particular case of bimodal distributions, we would instead favor <a href="http://scikit-learn.org/stable/modules/mixture.html">Gaussian mixture models</a>. For now we will ignore these complexities. We will discuss some options for cleaning the dataset by rescaling features later.</p>
+<p>If the distributions are not Gaussian, we may want to normalize them, which we can do with a Box Cox transformation. That is beyond the scope of this notebook; Google it if you need it. For this particular case of bimodal distributions, we would instead favor <a href="http://scikit-learn.org/stable/modules/mixture.html">Gaussian mixture models</a>. As this is a simple dataset, we will ignore these complexities for now; we will discuss some options for cleaning the dataset by rescaling features later.</p>
 <p>We're not going to remove any observations here, but its worth discussing ways in which we can detect and remove outliers. There's no one solution but there are several techniques that can be used, such as:</p>
 <ul>
 <li>looking at the distribution of values for a feature, and removing the top and bottom percentiles</li>
@@ -879,7 +879,7 @@ Name: species, dtype: object</pre>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="How-Confused-is-the-Model?">How Confused is the Model?<a class="anchor-link" href="basic-machine-learning.html#How-Confused-is-the-Model?">¶</a>
 </h4>
-<p>Another way to see how well we have done is to use a <em>confusion matrix</em> that plots counts of predicted vs actual values. This is usually only useful for a small number of classes or it becomes hard to understand. For our model:</p>
+<p>Another way to see how well we have done is to use a <em><a href="https://en.wikipedia.org/wiki/Confusion_matrix">confusion matrix</a></em> that plots counts of predicted vs actual values. This is usually only useful for a small number of classes or it becomes hard to understand. For our model:</p>
 
 </div>
 </div>
@@ -993,7 +993,7 @@ Name: species, dtype: object</pre>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Unsupervised-Learning---Dimensionality-Reduction-with-PCA-on-Iris-Dataset">Unsupervised Learning - Dimensionality Reduction with PCA on Iris Dataset<a class="anchor-link" href="basic-machine-learning.html#Unsupervised-Learning---Dimensionality-Reduction-with-PCA-on-Iris-Dataset">¶</a>
 </h3>
-<p>We'll now look at an example of unsupervised learning, doing Principal Component Analysis to do dimensionality reduction on the dataset so we can reduce it to two dimensions (which we'll call PCA1 and PCA2) for visualization.</p>
+<p>We'll now look at an example of unsupervised learning, doing <a href="https://en.wikipedia.org/wiki/Principal_component_analysis">Principal Component Analysis</a> on the dataset so we can reduce it to two dimensions (which we'll call PCA1 and PCA2) for visualization.</p>
 
 </div>
 </div>
@@ -1181,7 +1181,7 @@ Name: species, dtype: object</pre>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Unsupervised-Learning---Clustering-on-Iris-Dataset">Unsupervised Learning - Clustering on Iris Dataset<a class="anchor-link" href="basic-machine-learning.html#Unsupervised-Learning---Clustering-on-Iris-Dataset">¶</a>
 </h3>
-<p>Now let's look at clustering. We'll use k-means clustering:</p>
+<p>Now let's look at clustering. We'll use [k-means clustering](<a href="https://en.wikipedia.org/wiki/K-means_clustering">https://en.wikipedia.org/wiki/K-means_clustering</a>:</p>
 
 </div>
 </div>
@@ -1420,7 +1420,11 @@ avg / total       0.97      0.97      0.97        30
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-Bias-Variance-Trade-Off">The Bias-Variance Trade-Off<a class="anchor-link" href="basic-machine-learning.html#The-Bias-Variance-Trade-Off">¶</a>
 </h4>
-<p><em>Bias</em> is a measure of error, or how far off predictions are from reality, due to erroneous assumptions; high bias is a sign of underfitting. <em>Variance</em> is an error from sensitivity to small fluctuations in the training set, and can be thought of as how closely the model fits to random noise in the training data (overfitting).</p>
+<p><em>Bias</em> is a measure of error, or how far off predictions are from reality, due to erroneous assumptions; high bias is a sign of underfitting. <em>Variance</em> is an error from sensitivity to small fluctuations in the training set, and can be thought of as how closely the model fits to random noise in the training data (overfitting). Informally:</p>
+<ul>
+<li>bias is a measure of the error of the model against the training set</li>
+<li>variance is a measure of how much worse the model does with the test set versus the training set</li>
+</ul>
 <p>What can we do if our model performs poorly? Assuming it is not just due to the data being completely random or having no actual dependence on our chosen features (in which case we will never be successful), we have several possible strategies:</p>
 <ul>
 <li>use a more complex model to get a better fit to training data, but at the risk of overfitting (reduce bias, increase variance)</li>
@@ -1453,7 +1457,7 @@ avg / total       0.97      0.97      0.97        30
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Note that the curve converges to some score as the amount of data increases.</p>
+<p>Note that the curve converges to some score as the amount of data increases. If the error score for the training set is high, that is high bias; if the scores for test and training are similar we have low variance, but a large gap between them is high variance.</p>
 <h4 id="Grid-Search">Grid Search<a class="anchor-link" href="basic-machine-learning.html#Grid-Search">¶</a>
 </h4>
 <p>Drawing plots of validation and learning curves can be useful except that in many cases models have multiple knobs (hyperparameters) to adjust; this makes using such visual aids more difficult. Instead, we can just train multiple versions of the model and have SciKit-Learn do the work, using a <em><a href="http://scikit-learn.org/stable/modules/grid_search.html">grid search</a></em>.</p>
@@ -1518,6 +1522,8 @@ X2 = scaler.transform(X)
 </code></pre>
 <h4 id="Binarizing/Thresholding">Binarizing/Thresholding<a class="anchor-link" href="basic-machine-learning.html#Binarizing/Thresholding">¶</a>
 </h4>
+<p><em>Binarizing</em> sets each value to either zero or one, splitting the input at some threshold value.</p>
+
 <pre><code>from sklearn.preprocessing import Binarizer
 
 binarizer = Binarizer(threshold=0.0).fit(X)
@@ -1809,7 +1815,7 @@ binaryX = binarizer.transform(X)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The problem with word counts, especially if we don't remove stop words, is that common words get scored highly, which may not always be desirable. What we want to score highly are words that are common <em>in this row</em> that are not common <em>across all rows</em>. That should weight words that are significant to the particular row. We can do this with <em><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">Term Frequency-Inverse Document Frequency</a></em> or TF-IDF scores. In our small example this doesn't quite have the desired effect but the code is useful to show:</p>
+<p>The problem with word counts, especially if we don't remove stop words, is that common words get scored highly, which may not always be desirable. What we want to score highly are words that are common <em>in this row</em> that are not common <em>across all rows</em>. That should weight words that are significant to the particular row. We can do this with <em><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">Term Frequency - Inverse Document Frequency</a></em> or TF-IDF scores. In our small example this doesn't quite have the desired effect but the code is useful to show:</p>
 
 </div>
 </div>
@@ -1969,6 +1975,9 @@ binaryX = binarizer.transform(X)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<blockquote>
+<p>There is a recent paper discussing an alternative to TF-IDF, <em><a href="https://arxiv.org/abs/1803.08493">Contextual Salience</a></em>, that may be interesting.</p>
+</blockquote>
 <h4 id="Handling-Missing-Data">Handling Missing Data<a class="anchor-link" href="basic-machine-learning.html#Handling-Missing-Data">¶</a>
 </h4>
 <p>We saw a bit about handling missing data in the Pandas notebook. SciKit-Learn has some useful functionality to help us here too, namely the <code>Imputer</code>:</p>
@@ -2174,6 +2183,16 @@ X = Imputer(strategy='mean').fit_transform(X)
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There is a package that can do some feature synthesis for you: <a href="https://www.featuretools.com/">https://www.featuretools.com/</a></p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2793,7 +2812,7 @@ followed by the class (malignant or benign).</p>
 <p>If you want to learn about deep learning, I recommend the courses at <a href="http://www.fast.ai/">http://www.fast.ai/</a> and <a href="https://www.deeplearning.ai/">https://www.deeplearning.ai/</a></p>
 <p>There are a number of machine learning newsletters if you want to keep up with new developments, but the best is probably this one: <a href="https://www.getrevue.co/profile/wildml">https://www.getrevue.co/profile/wildml</a></p>
 <p>Google's Martin Zinkevich maintains a document with a <a href="http://martin.zinkevich.org/rules_of_ml/rules_of_ml.pdf">lot of good hard-won advice</a>.</p>
-<p>Pedro Domingos of University of Washington wrote a <a href="https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf">great article</a> with some similar lessons in CACM: ; there is a good restatement of the content here: <a href="https://medium.com/@james_aka_yale/12-useful-things-to-know-about-machine-learning-c599be92c98d">https://medium.com/@james_aka_yale/12-useful-things-to-know-about-machine-learning-c599be92c98d</a></p>
+<p>Pedro Domingos of University of Washington wrote a <a href="https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf">great article</a> with some similar lessons in CACM: ; there is a good restatement of the content here: <a href="https://medium.com/@james_aka_yale/12-useful-things-to-know-about-machine-learning-c599be92c98d">https://medium.com/@james_aka_yale/12-useful-things-to-know-about-machine-learning-c599be92c98d</a>.</p>
 
 </div>
 </div>

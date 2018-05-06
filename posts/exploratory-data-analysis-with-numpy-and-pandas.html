@@ -1374,7 +1374,7 @@ Name: Fox, dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Above, we have assigned a name to the series, and note that the data type is now <code>object</code>.</p>
+<p>Above, we have assigned a name to the series, and note that the data type is now <code>object</code>. Think of Pandas <code>object</code> as being strings/text and/or <code>None</code> rather than generic Python objects; this is the predominant usage.</p>
 <p>What if we combine integers and strings?</p>
 
 </div>
@@ -1517,7 +1517,7 @@ dtype: float64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As you can see, the special float value <em>NaN</em> (<code>np.nan</code>) is used in this case. This is also why the series has type float64 and not int64; floating point numbers have special values for NaN while ints don't.</p>
+<p>As you can see, the special float value <em>NaN</em> (<code>np.nan</code>, for 'not a number') is used in this case. This is also why the series has been changed to have type float64 and not int64; floating point numbers have special reserved values to represent NaN while ints don't.</p>
 <p>Be careful with NaN; it will fail equality tests:</p>
 
 </div>
@@ -1604,7 +1604,7 @@ True
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Normal indexing and slicing operations are available:</p>
+<p>Normal indexing and slicing operations are available, much like Python lists:</p>
 
 </div>
 </div>
@@ -1692,7 +1692,8 @@ dtype: int64</pre>
 <div class="prompt input_prompt">In [40]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">squares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'square of 1'</span><span class="p">,</span> <span class="s1">'square of 2'</span><span class="p">,</span> <span class="s1">'square of 3'</span><span class="p">,</span> <span class="s1">'square of 4'</span><span class="p">,</span> <span class="s1">'square of 5'</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">squares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span> 
+                    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'square of 1'</span><span class="p">,</span> <span class="s1">'square of 2'</span><span class="p">,</span> <span class="s1">'square of 3'</span><span class="p">,</span> <span class="s1">'square of 4'</span><span class="p">,</span> <span class="s1">'square of 5'</span><span class="p">])</span>
 <span class="n">squares</span>
 </pre></div>
 
@@ -1764,7 +1765,7 @@ dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As you can see, a Series is a lot like a Python dict (with additional slicing), and we can construct one from a Python dict:</p>
+<p>As you can see, a Series is a lot like a Python dict (with additional slicing like a list). In fact, we can construct one from a Python dict:</p>
 
 </div>
 </div>
@@ -2030,7 +2031,7 @@ dtype: float64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Unlike with a Python dict, <code>.values</code> is an array attribute, not a function returning an iterable, so we don't use <code>()</code>:</p>
+<p>However, unlike with a Python dict, <code>.values</code> is an array attribute, not a function returning an iterable, so we use <code>.values</code>, not <code>.values()</code>:</p>
 
 </div>
 </div>
@@ -2222,7 +2223,7 @@ dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Iteration (<code>__iter__</code>) iterates over the values in a Series, while membership testing (<code>__contains__</code>) checks the indices. <code>iteritems()</code> will iterate over (index, value) tuples:</p>
+<p>Iteration (<code>.__iter__</code>) iterates over the values in a Series, while membership testing (<code>.__contains__</code>) checks the indices. <code>.iteritems()</code> will iterate over (index, value) tuples, similar to list's <code>.enumerate()</code>:</p>
 
 </div>
 </div>
@@ -2232,7 +2233,7 @@ dtype: int64</pre>
 <div class="prompt input_prompt">In [53]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">squares</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">squares</span><span class="p">:</span>  <span class="c1"># calls .__iter__()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 </pre></div>
 
@@ -2269,7 +2270,7 @@ dtype: int64</pre>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">16</span> <span class="ow">in</span> <span class="n">squares</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'square of 4'</span> <span class="ow">in</span> <span class="n">squares</span><span class="p">)</span>  <span class="c1"># calls __contains__()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'square of 4'</span> <span class="ow">in</span> <span class="n">squares</span><span class="p">)</span>  <span class="c1"># calls .__contains__()</span>
 </pre></div>
 
 </div>
@@ -2731,7 +2732,7 @@ dtype: object</pre>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="DataFrames">DataFrames<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#DataFrames">¶</a>
 </h4>
-<p>A DataFrame is like a dictionary where the values are Series that share the same index and the keys are names for those series. If you think of a DataFrame as a table of data, the columns are the series, the column names are the dictionary keys, and the first "column" is actually the index (there are some exceptions to this where the index can be multi-level and span more than one column but in most cases it is flat).</p>
+<p>A DataFrame is like a dictionary where the keys are column names and the values are Series that share the same index and hold the column values. The first "column" is actually the shared Series index (there are some exceptions to this where the index can be multi-level and span more than one column but in most cases it is flat).</p>
 
 </div>
 </div>
@@ -2952,7 +2953,7 @@ dtype: object</pre>
 <div class="prompt input_prompt">In [69]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">staff</span><span class="p">[</span><span class="s1">'Name'</span><span class="p">]</span>  <span class="c1"># Acts similar to dictionary; returns Series</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">staff</span><span class="p">[</span><span class="s1">'Name'</span><span class="p">]</span>  <span class="c1"># Acts similar to dictionary; returns the Series for a column</span>
 </pre></div>
 
 </div>
@@ -4406,7 +4407,7 @@ dtype: object
 <li>a Boolean array (see Filtering section below for why this is very useful)</li>
 <li>a function with one argument (the calling object) that returns one of the above</li>
 </ul>
-<p>Selecing outside of the bounds of the object will raise an IndexError except when using slicing.</p>
+<p>Selecting outside of the bounds of the object will raise an IndexError except when using slicing.</p>
 <p>When using <code>.loc</code>, the expression in <code>[]</code> can be:</p>
 <ul>
 <li>an label, a list of labels, or a slice object with labels (e.g. <code>'a':'f'</code>; unlike normal slices the stop label is included in the slice)</li>
@@ -4600,7 +4601,7 @@ dtype: object
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [93]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic3.xls'</span><span class="p">)</span>
@@ -4617,7 +4618,7 @@ dtype: object
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[93]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -5042,8 +5043,8 @@ Name: survived, Length: 1309, dtype: bool</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>You can combine these with &amp; and | for and and or. Pandas must use these normally bitwise operators because Python allows them to be overloaded while 'and' and 'or' cannot be, and in any event they arguably make sense as they are operating on Boolean series which are similar to bit vectors.</p>
-<p>As these have higher operator precedence than relational operators, the subexpressions we use with them need to be enclosed in parentheses:</p>
+<p>You can combine these with <code>&amp;</code> (and) and <code>|</code> (or). Pandas uses these bitwise operators because Python allows them to be overloaded while 'and' and 'or' cannot be, and in any event they arguably make sense as they are operating on Boolean series which are similar to bit vectors.</p>
+<p>As <code>&amp;</code> and <code>|</code> have higher operator precedence than relational operators like <code>&gt;</code> and <code>==</code>, the subexpressions we use with them need to be enclosed in parentheses:</p>
 
 </div>
 </div>
@@ -5555,11 +5556,163 @@ dtype: bool</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [101]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">filter</span> <span class="o">=</span> <span class="n">titanic</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span>
-<span class="n">titanic</span><span class="p">[</span><span class="nb">filter</span><span class="o">.</span><span class="n">ticket</span> <span class="o">&amp;</span> <span class="nb">filter</span><span class="o">.</span><span class="n">cabin</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="nb">filter</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>pclass</th>
+      <th>survived</th>
+      <th>name</th>
+      <th>sex</th>
+      <th>age</th>
+      <th>sibsp</th>
+      <th>parch</th>
+      <th>ticket</th>
+      <th>fare</th>
+      <th>cabin</th>
+      <th>embarked</th>
+      <th>boat</th>
+      <th>body</th>
+      <th>home.dest</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [101]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">titanic</span><span class="p">[</span><span class="nb">filter</span><span class="o">.</span><span class="n">ticket</span> <span class="o">&amp;</span> <span class="nb">filter</span><span class="o">.</span><span class="n">cabin</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -6084,7 +6237,7 @@ dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If you don't want this behavior use the <code>ignore_index</code> argument:</p>
+<p>If you don't want this behavior use the <code>ignore_index</code> argument; a new index will be generated:</p>
 
 </div>
 </div>
@@ -6774,7 +6927,7 @@ dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can also give an array of values or provided it has the same length, or we can use a Series keyed on the index if it is not the same length:</p>
+<p>We can also give an array of values provided it has the same length, or we can use a Series keyed on the index if it is not the same length:</p>
 
 </div>
 </div>
@@ -6945,7 +7098,7 @@ dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [118]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">d1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'city'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Seattle'</span><span class="p">,</span> <span class="s1">'Boston'</span><span class="p">,</span> <span class="s1">'New York'</span><span class="p">],</span> <span class="s1">'population'</span><span class="p">:</span> <span class="p">[</span><span class="mi">704352</span><span class="p">,</span> <span class="mi">673184</span><span class="p">,</span> <span class="mi">8537673</span><span class="p">]})</span>
@@ -6963,7 +7116,7 @@ dtype: object</pre>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[118]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -7031,7 +7184,7 @@ dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [119]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'city'</span><span class="p">)</span>
@@ -7047,7 +7200,7 @@ dtype: object</pre>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[119]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -7108,7 +7261,178 @@ dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If the column names don't match you can specify the names to use:</p>
+<p>If there is more than one column in common, only items where the column values match in all cases will be included. Let's add a common column <code>x</code> and see what happens:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d10</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'city'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Seattle'</span><span class="p">,</span> <span class="s1">'Boston'</span><span class="p">,</span> <span class="s1">'New York'</span><span class="p">],</span> 
+                    <span class="s1">'x'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">],</span> 
+                    <span class="s1">'population'</span><span class="p">:</span> <span class="p">[</span><span class="mi">704352</span><span class="p">,</span> <span class="mi">673184</span><span class="p">,</span> <span class="mi">8537673</span><span class="p">]})</span>
+<span class="n">d11</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'city'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Boston'</span><span class="p">,</span> <span class="s1">'New York'</span><span class="p">,</span> <span class="s1">'Seattle'</span><span class="p">],</span> 
+                    <span class="s1">'x'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">],</span> 
+                    <span class="s1">'area'</span><span class="p">:</span> <span class="p">[</span><span class="mf">48.42</span><span class="p">,</span> <span class="mf">468.48</span><span class="p">,</span> <span class="mf">142.5</span><span class="p">]})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">d10</span><span class="p">,</span> <span class="n">d11</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>city</th>
+      <th>population</th>
+      <th>x</th>
+      <th>area</th>
+    </tr></thead>
+<tbody><tr>
+<th>0</th>
+      <td>New York</td>
+      <td>8537673</td>
+      <td>c</td>
+      <td>468.48</td>
+    </tr></tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can see that Pandas avoided ambiguous cases by just dropping them.</p>
+<p>However, if we specify the column for the join, Pandas will just treat the other common columns (if any) as distinct, and add suffixes to disambiguate the names:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">d10</span><span class="p">,</span> <span class="n">d11</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'city'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>city</th>
+      <th>population</th>
+      <th>x_x</th>
+      <th>area</th>
+      <th>x_y</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Seattle</td>
+      <td>704352</td>
+      <td>a</td>
+      <td>142.50</td>
+      <td>b</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Boston</td>
+      <td>673184</td>
+      <td>b</td>
+      <td>48.42</td>
+      <td>a</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>New York</td>
+      <td>8537673</td>
+      <td>c</td>
+      <td>468.48</td>
+      <td>c</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If the column names to join on don't match you can specify the names to use explicitly:</p>
 
 </div>
 </div>
@@ -7436,7 +7760,7 @@ dtype: object</pre>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><code>merge</code> can take a <code>how</code> argument that can be <code>inner</code> (intersection), <code>outer</code> (union), <code>left</code> (first augmented by second) or <code>right</code> (second augmented by first)  to control the type of join. <code>inner</code> joins are the default.</p>
 <p>If there are other columns with the same name between the two DataFrames, Pandas will give them unique names by appending <code>_x</code> to the columns from the first argument and <code>_y</code> to the columns from the second argument.</p>
-<p>It's also possible to use list of column names for the <code>left_on</code> and <code>right_on</code> arguments to join on multiple columns.</p>
+<p>It's also possible to use lists of column names for the <code>left_on</code> and <code>right_on</code> arguments to join on multiple columns.</p>
 <p>For more info on merging see <a href="https://pandas.pydata.org/pandas-docs/stable/merging.html">https://pandas.pydata.org/pandas-docs/stable/merging.html</a></p>
 
 </div>
@@ -9200,9 +9524,9 @@ Name: home.dest, dtype: object</pre>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Ordinal-and-Categorical-Data">Ordinal and Categorical Data<a class="anchor-link" href="exploratory-data-analysis-with-numpy-and-pandas.html#Ordinal-and-Categorical-Data">¶</a>
 </h4>
-<p>So far we have mostly seen numeric, date-related, and "object" or string data. When loading data Pandas will try to infer if it is numeric and then fall back to string/object. Loading functions like <code>read_csv</code> take arguments that can let us explicitly tell Pandas what the type of a column is, or whether it should try to parse the values in a column as dates. However, there are other types that are common where Pandas will need more help.</p>
+<p>So far we have mostly seen numeric, date-related, and "object" or string data. When loading data, Pandas will try to infer if it is numeric, but fall back to string/object. Loading functions like <code>read_csv</code> take arguments that can let us explicitly tell Pandas what the type of a column is, or whether it should try to parse the values in a column as dates. However, there are other types that are common where Pandas will need more help.</p>
 <p><em>Categorical</em> data is data where the values fall into a finite set of non-numeric values. Examples could be month names, department names, or occupations. It's possible to represent these as strings but generally much more space and time efficient to map the values to some more compact underlying representation. <em>Ordinal</em> data is categorical data where the values are also ordered; for example, exam grades like 'A', 'B', 'C', etc, or statements of preference ('Dislike', 'Neutral', 'Like'). In terms of use, the main difference is that it is valid to compare categorical data for equality only, while for ordinal values sorting, or comparing with relational operators like '&gt;', is meaningful (of course in practice we often sort categorical values alphabetically, but that is mostly a convenience and doesn't usually imply relative importance or weight). It's useful to think of ordinal and categorical data as being similar to enumerations in programming languages that support these.</p>
-<p>Let's look at some examples. We will use a dataset with automobile data from the <a href="http://mlr.cs.umass.edu/ml/index.html">UCI Machine Learning Repository</a>. This data has '?' for missing values so we need to specify that to get the right conversion:</p>
+<p>Let's look at some examples. We will use a dataset with automobile data from the <a href="http://mlr.cs.umass.edu/ml/index.html">UCI Machine Learning Repository</a>. This data has '?' for missing values so we need to specify that to get the right conversion. It's also missing a header line so we need to supply names for the columns:</p>
 
 </div>
 </div>
@@ -10137,7 +10461,7 @@ dtype: int8</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To make this into a dataframe:</p>
+<p>To merge this into a dataframe with the <code>make</code>, we can merge with the <code>wheels</code> dataframe on the implicit index field, and then drop the original categorical column:</p>
 
 </div>
 </div>
@@ -10447,8 +10771,8 @@ dtype: int8</pre>
 </h3>
 <p>In exploring the data, we may come up with hypotheses about relationships between different values. We can get an indication of whether our hypothesis is correct or the relationship is coincidental using <a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_testing">tests of statistical significance</a>.</p>
 <p>We may have a simple hypothesis, like "All X are Y". For phenomena in the real world, we usually we can't explore all possible X, and so we can't usually prove all X are Y. To prove the opposite, on the other hand, only requires a single counter-example. The well-known illustration is the <em>black swan</em>: to prove that all swans are white you would have to find every swan that exists (and possibly that has ever existed and may ever exist) and check its color, but to prove not all swans are white you need to find just a single swan that is not white and you can stop there. For these kinds of hypotheses we can often just look at our historical data and try to find a counterexample.</p>
-<p>For most of the phenomena we deal with, however, things are not so simple; we are usually dealing with complex combinations of observable variables rather than just absolute classifications. For example, we may be A/B testing some change on a website, and we want to know if the change we are testing causes an improvement in some metric like conversion. Conversion happens in both cases, so this is a a more nuanced problem than the black swan problem.</p>
-<p>In this case we may have a large number of observations in the test set and a large number of observations in the control set. There are various ways to test whether the differences between these two sets is the result of random variance or is actually meaningful, such as the <a href="https://en.wikipedia.org/wiki/Student%27s_t-test">t-test</a> (when comparing means of populations) or the <a href="https://en.wikipedia.org/wiki/Chi-squared_test">chi-squared test</a> (when comparing categorical data). The details of these tests and which ones to choose are beyond the scope of this notebook.</p>
+<p>Let's say that the conversion is better in the test set. How do we know that the change caused the improvement, and it wasn't just by chance? One way is to combine the observations from both the test and control set, then take random samples, and see what the probability is of a sample showing a similar improvement in conversion. If the probability of a similar improvement from a random sample is very low, then we can conclude that the improvement from the change is statistically significant.</p>
+<p>In practice we may have a large number of observations in the test set and a large number of observations in the control set, and the approach outlined above may be computationally too costly. There are various tests that can give us similar measures at a much lower cost, such as the <a href="https://en.wikipedia.org/wiki/Student%27s_t-test">t-test</a> (when comparing means of populations) or the <a href="https://en.wikipedia.org/wiki/Chi-squared_test">chi-squared test</a> (when comparing categorical data). The details of how these tests work tests and which ones to choose are beyond the scope of this notebook.</p>
 <p>The usual approach is to assume the opposite of what we want to prove; this is called the <a href="https://en.wikipedia.org/wiki/Null_hypothesis">null hypothesis</a> or $H_0$. For our example, the null hypothesis states there is no relationship between our change and conversion on the website. We then calculate the probability that the data supports the null hypothesis rather than just being the result of unrelated variance: this is called the <em>p-value</em>. In general, a p-value of less than 0.05 (5%) is taken to mean that the hypothesis is valid, although this has recently become a <a href="http://www.sciencemag.org/news/2017/07/it-will-be-much-harder-call-new-findings-significant-if-team-gets-its-way">contentious point</a>. We'll set aside that debate for now and stick with 0.05.</p>
 <p>Let's revisit the Titanic data:</p>
 
@@ -10752,7 +11076,12 @@ dtype: int8</pre>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>That's a very small p-value! So we can be sure gender was an issue.</p>
 <p>When running an online experiment, check the p-value periodically and plot the trend. You want to see the p-value gradually converging. If instead it is erratic and showing no sign of conversion, that suggests the experiment is not going to be conclusive.</p>
-
+<p>One last comment: it is often said "correlation does not imply causation". We should be more precise and less flippant than this! If X and Y are correlated, there are only four possibilities:</p>
+<ul>
+<li>this was a chance event. We can determine the probability of that and assess if its a reasonable explanation.</li>
+<li>X causes Y or Y causes X</li>
+<li>X and Y are both caused by some unknown factor Z. This is usually what we are referring to when saying "correlation does not imply causation", but there is still causation!</li>
+</ul>
 </div>
 </div>
 </div>
@@ -15649,10 +15978,10 @@ Name: close, dtype: float64</pre>
 
  
  
-<div id="ebb9d033-ba39-4abb-9246-e1fcfa479f61"></div>
+<div id="ef18c9fd-335c-466e-8eea-0488620e98fe"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#ebb9d033-ba39-4abb-9246-e1fcfa479f61');
+var element = $('#ef18c9fd-335c-466e-8eea-0488620e98fe');
 </script><script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "938b8868a6574d5fb5237018d2318ac8", "version_major": 2, "version_minor": 0}
 </script>
