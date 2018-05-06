@@ -1181,7 +1181,7 @@ Name: species, dtype: object</pre>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Unsupervised-Learning---Clustering-on-Iris-Dataset">Unsupervised Learning - Clustering on Iris Dataset<a class="anchor-link" href="basic-machine-learning.html#Unsupervised-Learning---Clustering-on-Iris-Dataset">¶</a>
 </h3>
-<p>Now let's look at clustering. We'll use [k-means clustering](<a href="https://en.wikipedia.org/wiki/K-means_clustering">https://en.wikipedia.org/wiki/K-means_clustering</a>:</p>
+<p>Now let's look at clustering. We'll use <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a>:</p>
 
 </div>
 </div>
@@ -2211,7 +2211,7 @@ X = Imputer(strategy='mean').fit_transform(X)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [32]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Set up the Iris dataset again</span>
@@ -2226,14 +2226,14 @@ X = Imputer(strategy='mean').fit_transform(X)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [33]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">ExtraTreesClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">ExtraTreesClassifier</span><span class="p">()</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)))</span>
 </pre></div>
 
 </div>
@@ -2250,7 +2250,7 @@ X = Imputer(strategy='mean').fit_transform(X)
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[ 0.14633015  0.04641191  0.39778407  0.40947387]
+<pre>[('sepal_length', 0.085566168783038479), ('sepal_width', 0.082330226795640796), ('petal_length', 0.31086514147664623), ('petal_width', 0.52123846294467469)]
 </pre>
 </div>
 </div>
@@ -2272,18 +2272,17 @@ X = Imputer(strategy='mean').fit_transform(X)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [34]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">RFE</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegression</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
-<span class="n">rfe</span> <span class="o">=</span> <span class="n">RFE</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">rfe</span> <span class="o">=</span> <span class="n">RFE</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># Reduce to top 3</span>
 <span class="n">fit</span> <span class="o">=</span> <span class="n">rfe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Num Features: </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="n">fit</span><span class="o">.</span><span class="n">n_features_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Selected Features: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">fit</span><span class="o">.</span><span class="n">support_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Feature Ranking: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">fit</span><span class="o">.</span><span class="n">ranking_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"Feature Ranking: </span><span class="si">{fit.ranking_}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"Selected Features: </span><span class="si">{X.columns[fit.support_]}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2300,9 +2299,8 @@ X = Imputer(strategy='mean').fit_transform(X)
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Num Features: 3
-Selected Features: [False  True  True  True]
-Feature Ranking: [2 1 1 1]
+<pre>Feature Ranking: [2 1 1 1]
+Selected Features: Index(['sepal_width', 'petal_length', 'petal_width'], dtype='object')
 </pre>
 </div>
 </div>
