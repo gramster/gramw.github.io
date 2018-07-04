@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Jupyter)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/jupyter.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 07 May 2018 00:18:14 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Basic Machine Learning with SciKit-Learn</title><link>https://www.grahamwheeler.com/posts/basic-machine-learning.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Jupyter)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/jupyter.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 04 Jul 2018 04:18:39 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Basic Machine Learning with SciKit-Learn</title><link>https://www.grahamwheeler.com/posts/basic-machine-learning.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
     &lt;div class="container" id="notebook-container"&gt;
 
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
@@ -9,7 +9,7 @@
 &lt;p&gt;&lt;em&gt;This is the fourth post in a series based off my &lt;a href="https://www.grahamwheeler.com/posts/(https:/github.com/gramster/pythonbootcamp"&gt;Python for Data Science bootcamp&lt;/a&gt; I run at eBay occasionally. The other posts are:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;&lt;a href="https://www.grahamwheeler.com/posts/python-crash-course.html"&gt;a Python crash course&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&lt;a href="http://localhost:8888/notebooks/using-jupyter.ipynb"&gt;using Jupyter&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;a href="https://www.grahamwheeler.com/posts/using-jupyter.ipynb"&gt;using Jupyter&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;&lt;a href="https://www.grahamwheeler.com/posts/exploratory-data-analysis-with-numpy-and-pandas.html"&gt;exploratory data analysis&lt;/a&gt;.&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -41,7 +41,7 @@
 &lt;p&gt;&lt;em&gt;This is the third post in a series based off my &lt;a href="https://github.com/gramster/pythonbootcamp"&gt;Python for Data Science bootcamp&lt;/a&gt; I run at eBay occasionally. The other posts are:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;&lt;a href="https://www.grahamwheeler.com/posts/python-crash-course.html"&gt;a Python crash course&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&lt;a href="http://localhost:8888/notebooks/using-jupyter.ipynb"&gt;using Jupyter&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;a href="https://www.grahamwheeler.com/posts/using-jupyter.ipynb"&gt;using Jupyter&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;&lt;a href="https://www.grahamwheeler.com/posts/basic-machine-learning.html"&gt;introductory machine learning&lt;/a&gt;.&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 

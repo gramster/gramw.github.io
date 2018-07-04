@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Programming)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/programming.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 07 May 2018 00:18:15 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>A Python Crash Course</title><link>https://www.grahamwheeler.com/posts/python-crash-course.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graham Wheeler's Random Forest (Posts about Programming)</title><link>https://www.grahamwheeler.com/</link><description></description><atom:link href="https://www.grahamwheeler.com/categories/programming.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 04 Jul 2018 04:18:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>A Python Crash Course</title><link>https://www.grahamwheeler.com/posts/python-crash-course.html</link><dc:creator>Graham Wheeler</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
     &lt;div class="container" id="notebook-container"&gt;
 
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
@@ -9,7 +9,7 @@
 &lt;p&gt;I've been teaching &lt;a href="https://github.com/gramster/pythonbootcamp"&gt;a crash course in data science with Python&lt;/a&gt;, which starts off with learning Python itself. The target audience is Java programmers (generally senior level) so its assumed that things like classes and methods are well understood. The focus is mostly on what is different with Python. I teach it using Jupyter notebooks but the content is useful as a blog post too so here we go.&lt;/p&gt;
 &lt;p&gt;The other parts are:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;em&gt;&lt;a href="http://localhost:8888/notebooks/using-jupyter.ipynb"&gt;using Jupyter&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;a href="https://www.grahamwheeler.com/posts/using-jupyter.ipynb"&gt;using Jupyter&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;&lt;a href="https://www.grahamwheeler.com/posts/exploratory-data-analysis-with-numpy-and-pandas.html"&gt;exploratory data analysis&lt;/a&gt;.&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;&lt;a href="https://www.grahamwheeler.com/posts/basic-machine-learning.html"&gt;introductory machine learning&lt;/a&gt;.&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
