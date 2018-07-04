@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Managing Engineering and Data Science Agile Teams | Graham Wheeler's Random Forest</title>
+<link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/custom.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/GrahamWheelersRandomForest">
+<link rel="canonical" href="https://www.grahamwheeler.com/posts/managing-data-science-and-engineering.html">
+<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]--><meta name="author" content="Graham Wheeler">
+<link rel="prev" href="basic-machine-learning.html" title="Basic Machine Learning with SciKit-Learn" type="text/html">
+<meta property="og:site_name" content="Graham Wheeler's Random Forest">
+<meta property="og:title" content="Managing Engineering and Data Science Agile Teams">
+<meta property="og:url" content="https://www.grahamwheeler.com/posts/managing-data-science-and-engineering.html">
+<meta property="og:description" content="It is very common in modern software engineering organizations to use agile approaches to managing teamwork. At both Microsoft and eBay teams I have managed have used Scrum, which is a reasonably simp">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2018-07-03T21:53:00-07:00">
+<meta property="article:tag" content="Data Science">
+<meta property="article:tag" content="Management">
+</head>
+<body class="nav-closed">
+
+<div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+<li class="nav-opened" role="presentation">
+            <a href="../index.html">Home</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="../archive.html">Archives</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="../categories/index.html">Tags</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="../rss.xml">RSS</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://twitter.com/gramnix">My Twitter</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://github.com/gramster">My Github</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="https://www.linkedin.com/in/grahamwheeler">My LinkedIn</a>
+        </li>
+    
+    
+    </ul>
+</div>
+<span class="nav-cover"></span>
+
+<div class="site-wrapper">
+    <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://www.grahamwheeler.com/"><img src="https://getnikola.com/assets/img/logo.svg" alt="Blog Logo"></a>
+            <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
+        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">Managing Engineering and Data Science Agile Teams</h1>
+        <section class="post-meta"> by
+            Graham Wheeler
+            on
+                <a href="../categories/data-science.html">#Data Science</a>,
+                <a href="../categories/management.html">#Management</a>,
+            <time class="post-date" datetime="2018-07-03T21:53:00-07:00">
+                2018-07-03 21:53
+            </time></section></header><section class="post-content"><div>
+<p>It is very common in modern software engineering organizations to use agile approaches to managing teamwork. At both Microsoft and eBay teams I have managed have used Scrum, which is a reasonably simple and effective approach that offers a number of benefits, such as timeboxing, regular deployments (not necessarily continuous but at least periodic), a buffer between the team and unplanned work, an iterative continuous improvement process through retrospectives, and metrics that can quickly show whether the team is on track or not.</p>
+<p>Data science work does not fit quite as well into the Scrum approach. I've heard of people advocating for its use, and even at my current team we initially tried to use Scrum for data science, but there are significant challenges. In particular, I like my Scrum teams to break work down to user stories to a size where the effort involved is under two days (ideally closer to half a day). Yes, we use story points, but once the team is calibrated fairly well its still easy to aim for this. Trying to do this for data science work is much harder, especially when it is research work in building new models which is very open-ended.</p>
+<p>The approach I have taken with my team is an interesting hybrid that seems to be working quite well and is worth sharing.
+<!-- TEASER_END -->
+My team is actually three teams - a data science team, and two engineering teams. The engineering teams are responsible for the services that consume the models produced by the data science team (although these services add a lot of functionality beyond the models - for example, we have delivery estimate models that predict seller handling time and shipping transit time in business days, but the services implement logic to convert these to calendar days, taking into account everything from seller and carrier working days to severe weather events and postal strikes).</p>
+<p>The engineering teams follow a pretty standard Scrum process. As we typically like to do production deployments at the end of sprints and don't want to do those on Fridays, we end sprints on Wednesdays; we'll usually do a deployment on a Tuesday afternoon then do sprint retrospectives and planning on Wednesday (we do sprint demos on a different cadence as those have a broader audience). </p>
+<p>Each team has an agile lead. During engineering team sprint planning meetings, the data science agile lead will attend. He may have some asks of the engineering team, like pushing a new model to production. These asks may go to the backlog but a new model is usually something we want to release fast so it will typically make it straight into the next sprint. Sometimes the engineering team will have asks of the data science team. In this case the data science lead will assign a member of the data science team to this task and they will be "on loan" for the sprint to the engineering team; they will attend stand-ups and other meetings and the work item they are tasked with will be tracked as just another "engineering" work item in the sprint.</p>
+<p>The rest of the time the data science team has available is dedicated to exploratory work building new models or the like. This work is tracked on a separate Kanban board by the data science team. Tasks on that board can be updated at any time by the team members and they do a weekly team meeting as well to update the Kanban board collectively. This allows the team to have more time flxibility for their tasks but we pay attention to how long work items on the board remain in "in-progress" state and if that starts being too long we will break the task down further or reprioritize it. We use work-in-progress limits on this board too to avoid too much multitasking.</p>
+<p>We've been using this approach for a little under a year now and so far it has been working well - certainly much better than when we tried to use Scrum which was frustrating for both the team and for me. Give it a try!</p>
+</div>
+    </section><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="randomforest",
+            disqus_url="https://www.grahamwheeler.com/posts/managing-data-science-and-engineering.html",
+        disqus_title="Managing Engineering and Data Science Agile Teams",
+        disqus_identifier="cache/posts/managing-data-science-and-engineering.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section></footer></article><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+</div>
+
+    <script type="text/javascript" src="../assets/js/jquery.js"></script><script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../assets/js/index.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67535606-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
