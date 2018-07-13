@@ -5,7 +5,7 @@
 .. comments: enabled
 
 
-Jerry Muller recently wrote a popular book titled ["The Tyranny of Metrics"](https://www.amazon.com/gp/product/0691174954/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0691174954&linkCode=as2&tag=grahamwheel0b-20&linkId=422584911cb379756c20185a4cfb7103) (affiliate link). He makes a number of good arguments for why metrics, if not used properly, can have unintended consequences. For example, the _body count_ metric that the US military optimized for in the Vietnam war caused enormous damage while losing the hearts and minds of the populace and resulting in an ignominious defeat. Muller argues that metrics are too often used as a substitute for good judgment. The book is an excellent read.
+Jerry Muller recently wrote a popular book titled ["The Tyranny of Metrics"](https://www.amazon.com/gp/product/0691174954/). He makes a number of good arguments for why metrics, if not used properly, can have unintended consequences. For example, the _body count_ metric that the US military optimized for in the Vietnam war caused enormous damage while losing the hearts and minds of the populace and resulting in an ignominious defeat. Muller argues that metrics are too often used as a substitute for good judgment. The book is an excellent read.
 
 So should we be ignoring metrics? Clearly not, but we need to be cognizant of what metrics we choose and how we use them. We should also distinguish between things which can meaningfully be measured quantitatively versus things that are more suited to qualitative analyses. And we should be wary of metrics being used as an instrument of control by those far removed from the "trenches", so to speak.
 
@@ -22,4 +22,5 @@ Assuming that we have a problem that can meaningfully be measured in a quantitat
 - you need to know when a deviation in a metric is a cause for concern. A good general guideline is that if a metric deviates more than two standard deviations from the mean over some defined period, you should start paying attention, and more than three standard deviations you should be alarmed.
 
 Thanks to [Saujanya Shrivastava](https://www.linkedin.com/in/saujanya/) for many fruitful discussions over our metrics from which these guidelines emerged.
+
 
