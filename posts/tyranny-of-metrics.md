@@ -4,7 +4,7 @@
 .. category: Management
 .. comments: enabled
 
-[![image](/images/metrics-dashboard.jpg)](/images/metrics-dashboard.jpg)
+![Photo by Carlos Muza on Unsplash](/images/metrics-dashboard.jpg)
 
 Jerry Muller recently wrote a popular book titled ["The Tyranny of Metrics"](https://www.amazon.com/gp/product/0691174954/). He makes a number of good arguments for why metrics, if not used properly, can have unintended consequences. For example, the _body count_ metric that the US military optimized for in the Vietnam war caused enormous damage while losing the hearts and minds of the populace and resulting in an ignominious defeat. Muller argues that metrics are too often used as a substitute for good judgment. The book is an excellent read.
 
