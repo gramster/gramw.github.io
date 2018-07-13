@@ -19,7 +19,7 @@ Assuming that we have a problem that can meaningfully be measured in a quantitat
 - good metrics make up a _hierarchy_: your team's metrics should roll up to your larger division's metrics which should roll up to top-level business metrics.
 - metrics should be _in tension_: you should try to find metrics that cannot be easily gamed without detrimentally affecting other metrics. Let's say I have a credit risk prediction model and my metric is the number of customers I predict are not credit risks but that default on their debt. I can just predict that every customer is high risk and my metric will look great, but that's bad for the business. So I need another metric that is in tension with this, such as the number of good customers I deny credit to, which must be minimized. More generally in prediction models we use the combination of [_precision_ and _recall_](https://en.wikipedia.org/wiki/Precision_and_recall).
 - metrics should _capture different classes of attributes_ such as quality and throughput.
-- you need to know when a deviation in a metric is a cause for concern. A good general guideline is that if a metric deviates more than two standard deviations from the mean over some defined period, you should be paying close attention.
+- you need to know when a deviation in a metric is a cause for concern. A good general guideline is that if a metric deviates more than two standard deviations from the mean over some defined period, you should start paying attention, and more than three standard deviations you should be alarmed.
 
 Thanks to [Saujanya Shrivastava](https://www.linkedin.com/in/saujanya/) for many fruitful discussions over our metrics from which these guidelines emerged.
 
