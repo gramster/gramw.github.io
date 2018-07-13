@@ -43,11 +43,11 @@
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/2018/index.html</loc>
-  <lastmod>2018-07-04T04:57:00Z</lastmod>
+  <lastmod>2018-07-13T01:04:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/archive.html</loc>
-  <lastmod>2018-07-04T04:55:00Z</lastmod>
+  <lastmod>2018-07-13T01:04:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/categories/cat_computers.html</loc>
@@ -63,7 +63,7 @@
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/categories/cat_management.html</loc>
-  <lastmod>2018-07-04T04:57:00Z</lastmod>
+  <lastmod>2018-07-13T01:04:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/categories/cat_math.html</loc>
@@ -91,7 +91,7 @@
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/categories/index.html</loc>
-  <lastmod>2018-07-04T04:55:00Z</lastmod>
+  <lastmod>2018-07-13T01:04:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/categories/jupyter.html</loc>
@@ -155,11 +155,11 @@
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/index-7.html</loc>
-  <lastmod>2018-07-04T04:55:00Z</lastmod>
+  <lastmod>2018-07-13T01:04:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/index.html</loc>
-  <lastmod>2018-07-04T04:57:00Z</lastmod>
+  <lastmod>2018-07-13T01:04:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/listings/index.html</loc>
@@ -267,7 +267,7 @@
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/posts/managing-data-science-and-engineering.html</loc>
-  <lastmod>2018-07-04T04:57:00Z</lastmod>
+  <lastmod>2018-07-13T01:04:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/posts/maslow-team.html</loc>
@@ -380,6 +380,10 @@
  <url>
   <loc>https://www.grahamwheeler.com/posts/this-is-s-o-o-o-true.html</loc>
   <lastmod>2018-04-30T00:13:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://www.grahamwheeler.com/posts/tyranny-of-metrics.html</loc>
+  <lastmod>2018-07-13T01:04:00Z</lastmod>
  </url>
  <url>
   <loc>https://www.grahamwheeler.com/posts/using-jupyter-as-a-music-notebook.html</loc>
