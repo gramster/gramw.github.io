@@ -1,7 +1,7 @@
 README
 cache/*
 output
-themes/*
+themes/zen*
 *.pyc
 *.db
 __pycache__
