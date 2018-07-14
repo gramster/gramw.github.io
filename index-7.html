@@ -78,7 +78,34 @@
     </header><main id="content" class="content" role="main"><div class="postindex">
 
 
-<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-10.html">Building a Zite Replacement (Part 10)</a></h2>
+<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/using-jupyter-as-a-music-notebook.html">Using Jupyter as a Music Notebook</a></h2>
+    </header><section class="post-excerpt"><div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I recently started playing guitar again after a long absence and wanted to start making some notes in a digital form. Unfortunately, I didn't find any good tools. There is TeX of course, which can do anything, but I was hoping for something a bit more WYSIWYGy. There are some very good tools available for musical scores (MuseScore, Frescobaldi), but I want something that is more like a traditional notebook with lots of notes interspersed with occasional musical notation (in both traditional and tablature forms).</p>
+<p>So an obvious potential candidate is Jupyter (nee IPython), but it has no support for musical notation out of the box. But it is doable and in this post I'll walk through how I got it to work on my Mac. This is also my first attempt at using a Jupyter notebook as my blog post in Nikola so I'm kiling two birds with one stone.
+</p>
+<p class="more"><a href="posts/using-jupyter-as-a-music-notebook.html">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </section><footer class="post-meta">
+                Graham Wheeler
+
+        on
+                <a href="categories/jupyter.html">#Jupyter</a>,
+                <a href="categories/python.html">#Python</a>,
+
+        <time class="post-date" datetime="2016-02-27T20:00:00Z">
+            2016-02-27 20:00
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/zite-replacement-10.html">Building a Zite Replacement (Part 10)</a></h2>
     </header><section class="post-excerpt"><div>
 <p>I've spent the past few days refining the web server, largely for diagnostic
 purposes, so it can replace the old TkInter app. I can seen articles for 
@@ -192,7 +219,19 @@ which uses a binary form of JSON.
             <li class="next">
                 <a href="index-6.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+        </ul></nav><script>var disqus_shortname="randomforest";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+    },
+    displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    }
+});
+</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:gram@geekraver.com">Graham Wheeler</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
 
     <script type="text/javascript" src="assets/js/jquery.js"></script><script type="text/javascript" src="assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="assets/js/index.js"></script><script>
